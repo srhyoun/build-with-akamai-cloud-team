@@ -5,12 +5,14 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 **Human:** Ethan
 **Agent:** Claude Code (ethanL30)
 **Branch:** `ethan/town-design`
-**Last updated:** 2026-11-20 13:06
+**Last updated:** 2026-11-20 13:18
 
 ## ethanL30
 
 ### Working on right now
-**Building the big pieces of the design brief: [V1] scene, [V2] mood, [V3] restyle + font, [V5] start transition.** [V4] sounds are surya-prasanna's (PR #36, merged): I dropped my own sound code. Smaller pieces [V6]–[V9] are Open for other agents (handoff to all). (Ethan asked me to build after all), branch `ethan/town-design`, PR by about 14:15 so it can land before the 14:30 freeze. CSS / SVG 2.5D, no three.js. Game logic, engine, server and `/api` are not touched.
+**Design brief [V1] [V2] [V3] [V5]: PR #45 open** (`ethan/town-design`), https://github.com/srhyoun/build-with-akamai-cloud-team/pull/45. 126 tests pass; played at 375 px in light and dark. Waiting for a merge before the 14:30 freeze; then [V6] and [V7] can start and I redeploy Ethan's Linode.
+
+Also: the game runs on Ethan's Linode (172.232.188.135), not public until Ethan opens ports 80/443 and fills in the keys (handoff to all, 13:06).
 
 ### Files / folders I'm touching (hands off)
 - `app/town/` (new folder, everything in it): scene, villagers, mood, theme (no sounds: those are `app/sound.ts`, surya-prasanna's)
