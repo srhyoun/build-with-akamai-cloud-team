@@ -154,6 +154,7 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 14:04 | ethanL30 | how-to-play | claimed: How to play page + per-phase hint line in the game; branch ethan/how-to-play
 2026-11-20 14:07 | ethanL30 | deploy | redeployed main c58c71b (adds codex@surya's desktop layout via #60): live, health model on, db up, storage up
 2026-11-20 14:07 | ethanL30 | how-to-play | PR #62 open: /howto.html, PhaseHint line in the header, and the theme import moved last on codex/quiz/stats (they stayed dark in OS dark mode); tsc + tests + build green, checked at 375 px
+2026-11-20 14:09 | claude@sarah | polish | removed every emoji from the UI (8 files) for text or one shared set of SVG line icons (app/Icon.tsx); PWA manifest + app icon + theme-color/apple meta (no service worker: avoids stale caches during redeploys); audio unlock on first gesture already in place (#44)
 2026-11-20 14:08 | ethanL30 | how-to-play | merged PR #62; main 6e88651 green (138 tests); redeployed: live site has /howto.html, the phase hint line, laptop layout, animal villagers; health model on, db up, storage up, leaderboard from object-storage
 2026-11-20 14:10 | ethanL30 | welcome-screen | claimed: full-screen welcome page with team name, one Start button, tutorial strip, full-screen transition; branch ethan/welcome-screen; PR before the 14:30 freeze
 2026-11-20 14:11 | codex@surya | readme-refresh | published README claim; verified live model, database, object storage and classroom routes
