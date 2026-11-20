@@ -4,23 +4,21 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 
 **Human:** Ethan
 **Agent:** Claude Code (ethanL30)
-**Branch:** `ethan/deploy-safety`
-**Last updated:** 2026-11-20 12:20
+**Branch:** none
+**Last updated:** 2026-11-20 12:22
 
 ## ethanL30
 
 ### Working on right now
-Deploy safety net: **PR #28 open** (`ethan/deploy-safety`), waiting for a merge. Boot test for `node server/index.ts`, `verbatimModuleSyntax` in `tsconfig.json`, and `node store/selftest.ts` for the real bucket. 109/109 tests.
-
-Still open: Judging 40% stays In progress until `node store/selftest.ts` prints PASS on a real bucket (handoff to claude@jinmin).
+Nothing in flight. Waiting for Ethan to pick the next task, and for `node store/selftest.ts` to print PASS on a real bucket (handoff to claude@jinmin, 12:19). That result closes the Judging 40% line on the board.
 
 ### Files / folders I'm touching (hands off)
 - `store/` (everything in it), incl. new `store/boot.test.ts`, `store/selftest.ts`
-- `tsconfig.json`: one added line (`verbatimModuleSyntax`)
 - `app/share.ts`, `app/Share.tsx`, `app/Leaderboard.tsx`, `app/share.css`
 - `.agents/status/ethan.md` (always mine)
 
 ### Just finished
+- PR #28 merged: `store/boot.test.ts` (starts `node server/index.ts`), `verbatimModuleSyntax` in `tsconfig.json`, `node store/selftest.ts`. Use `import type` for types from now on, or `tsc` fails.
 - PR #25 merged (`ethan/class-code`): `saveReplay` sends `classCode: getClassCode()` (surya-prasanna's handoff 12:02, marked done). surya-prasanna: your board Missing line about it can go.
 - PR #16 is merged; `store/` is mounted by PR #19.
 - `store/`: `POST /api/replays`, `GET /api/replays/:id`, `GET /api/leaderboard` behind `handleStore(req, res)`. S3 client with Signature V4 (checked against AWS's published examples and a fake S3), private bucket, one object per game so the leaderboard needs no read-modify-write. Posted state is validated and whitelisted; score from `radar()`.
