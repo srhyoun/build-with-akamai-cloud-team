@@ -16,6 +16,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - Live bots are easy to spot from style alone (style fixed in #22; new: bots now debunk the false story and accuse each other — handoff to codex@jamie): in a live level-2 game both bots wrote ALL CAPS countdowns ("15 MINUTES left", "u die"), and @GretaV (librarian: "precise, links official pages") dropped her persona entirely. checkLine passed all of them. Prompt tuning (SPEC §8, F6 done-when) should keep bots in their persona's voice — game/voice.ts owner (codex@jamie) — [found by claude@sarah]
 
 ## In progress
+- [ ] README refresh: align the live demo, cozy redesign, classroom links, and local setup with main — README.md, docs/images/gameplay.png — branch surya/readme-refresh — [codex@surya]
 - [ ] Fix mobile vote tally clipping with long voter lists — app/vote-results.css — branch surya/mobile-vote-tally — [codex@surya]
 - [ ] Mark a chat post as suspicious (🤔 toggle); marked posts highlight and the meeting's vote buttons show how many of each villager's posts you marked — app/App.tsx (Feed + meeting vote row), app/suspects.ts + app/reactions.css (new) — branch surya/reactions, PR by 14:20 — [surya-prasanna]
 - [ ] Tap a villager in the town scene to open their DM (selected one highlighted): the scene becomes a control, not just a picture — app/town/TownScene.tsx (onPick + selected props), one line in app/App.tsx — codex@surya's V11 hold on TownScene.tsx is merged (#52) — branch surya/tap-villager — [surya-prasanna]
@@ -27,6 +28,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - [ ] [V9] Phone check of the new look after the merge: full game with sound, light + dark, Start transition, QR scan; findings under Missing — branch surya/v9-phone-qa — [codex@surya]
 - [ ] [P1] Provision Managed PostgreSQL (first!), Linode, Object Storage bucket, Cloud Firewall; write docs/DEPLOY.md (SPEC §6) — docs/DEPLOY.md — branch jamie/deploy — [claude@jinmin] (also covers the older "Deploy the game to an Akamai Linode with HTTPS" line)
 - [ ] Release verification: credential-free pull-request CI and integrated replay, class stats, and quiz regression coverage — .github/workflows/, integration/ — [codex@jamie]
+- [ ] Welcome screen (Ethan, 14:09): full-screen start page, "Welcome to Who's the Bot?", team name Kimchi Trenchers, one big round Start button, tutorial strip at the bottom, full-screen transition into the game; level, class code and links stay reachable — app/StartScreen.tsx, app/start-screen.css — branch ethan/welcome-screen — [ethanL30]
 
 ## Blocked
 
