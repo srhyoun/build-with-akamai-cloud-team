@@ -6,13 +6,17 @@ Format: `- [ ] task — area/folder — [agent@human]`
 ## Open
 
 - [ ] Add Sarah's full design doc as docs/GAME_DESIGN.md (check the MVP list against what's built) — docs/
-- [ ] [V7] Chat avatars match the villagers: swap the `Crew` pebble for `<Villager>` in feed, cast row, votes — app/App.tsx (`Crew`) — needs ethan/town-design merged — suggested: claude@sarah — skip if it risks the layout
+- [ ] [V7] Chat avatars match the villagers: swap the `Crew` pebble for `<Villager>` in feed, cast row, votes — app/App.tsx (`Crew`) — ethan/town-design is merged — suggested: surya-prasanna (claude@sarah has not picked it up) — skip if it risks the layout
+- [ ] [L1] Check the live site on a real phone: full game on https://172-232-188-135.sslip.io (transition, sound, bubble, vote, ejection, reveal, Save & share, QR from a second phone, /stats.html); findings under Missing — suggested: codex@surya (extends V9) — from ethanL30's handoff to surya-prasanna
+- [ ] [V10] DM open on a phone leaves ~3 lines of chat: shrink the town scene to a strip while a DM is open — app/App.tsx (header class), app/town/town.css — suggested: surya-prasanna
+- [ ] [V11] Scene polish: fit long handles on the name tags, keep a short post's bubble over its own villager, look at a win (full sunshine) in the browser — app/town/ — suggested: surya-prasanna
+- [ ] [V12] Live URL at the top of README.md and in docs/PITCH.md, with one honest line on what is live — suggested: surya-prasanna
 
 ## Missing / needed
 <!-- anything an agent noticed is missing, broken, or needed by someone else -->
 <!-- - thing — who needs it — [found by agent@human] -->
 - Phone check (375×812 emulated, main before the town design): header is 182 px during "Breaking news" vs 154 px during Investigate — the longer label pushes the 🔊 button to a 2nd row, so the chat jumps at every round start. Fix: shorter label (e.g. "News") or let the toggle shrink — App.tsx header, claude@sarah or ethanL30's restyle — [found by surya-prasanna]
-- Phone layout: with a DM open, pinned header + DM panel + composer + meeting button leave ~3 lines of public chat visible at 375×812 — worth keeping in mind for the V3 restyle — ethanL30 — [found by surya-prasanna]
+- Phone layout: with a DM open, pinned header + DM panel + composer + meeting button leave ~3 lines of public chat visible at 375×812 — worth keeping in mind for the V3 restyle — now Open task [V10], handed back to surya-prasanna — [found by surya-prasanna]
 - **Live: https://172-232-188-135.sslip.io** (Ethan's Linode, 172.232.188.135, main at 5605b2b, HTTPS works). Still missing there: the keys in `/etc/whosthebot.env` — inference key (characters are scripted), PG* (database off), OBJ_* (replays on the server's disk, not in a bucket). A human with the keys fills them in on the server — whole team — [found by ethanL30]
 - Run the quiz on 5–10 real people (pre → play → post) once the DB is live, then put the real n in the pitch — humans — [found by surya-prasanna]
 - Object Storage bucket in Chicago + an access key limited to it, as `S3_*` env vars on the Linode — ethanL30 needs it to verify PR #16 against real Object Storage — [found by ethanL30]

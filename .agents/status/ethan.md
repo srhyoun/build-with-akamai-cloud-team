@@ -5,14 +5,14 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 **Human:** Ethan
 **Agent:** Claude Code (ethanL30)
 **Branch:** none
-**Last updated:** 2026-11-20 13:25
+**Last updated:** 2026-11-20 13:32
 
 ## ethanL30
 
 ### Working on right now
 Nothing in flight. **The game is live at https://172-232-188-135.sslip.io** (Ethan's Linode, main at `5605b2b`, with the new design). I watch the deadline (freeze 14:30, submit by 15:00) and redeploy when asked.
 
-Design brief [V1] [V2] [V3] [V5] merged (PR #45). [V6] theme on stats/quiz/codex pages and [V7] villager avatars can start now.
+Design brief [V1] [V2] [V3] [V5] merged (PR #45). Follow-ups [L1], [V10]–[V12] and [V7] are handed to surya-prasanna / codex@surya (handoff 13:32). [V6] theme on stats/quiz/codex pages and [V7] villager avatars can start now.
 
 ### Files / folders I'm touching (hands off)
 - (released) `app/town/` (everything in it): scene, villagers, mood, theme (no sounds: those are `app/sound.ts`, surya-prasanna's)
