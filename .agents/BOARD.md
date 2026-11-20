@@ -28,6 +28,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 
 ## In progress
 - [ ] LLM endpoint, split off the playable skeleton (Aiden agreed in person, 10:27) — server/ — [Jamihuh21]
+- [ ] Full build spec aligned with decision 001 (docs/SPEC.md) + decision 002 (Akamai services) + CONTRACTS update — docs/SPEC.md, .agents/decisions/002-*, .agents/CONTRACTS.md — [surya-prasanna]
 
 ## Blocked
 
