@@ -14,7 +14,6 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - [ ] Boss level: a bot impersonates a trusted local reporter (handle with one letter changed) — game/
 - [ ] More breaking-news scenarios — game/content.ts
 - [ ] [P1] Provision Managed PostgreSQL (first!), Linode, Object Storage bucket, Cloud Firewall; write docs/DEPLOY.md (SPEC §6) — docs/DEPLOY.md
-- [ ] [F1] Reveal screen: roles, tactic timeline, Bot Radar card, QR, calls POST /api/replays (SPEC §15) — app/Reveal.tsx
 - [ ] [X1] Judge-facing README: architecture, Akamai services → features, referee (SPEC §2, §24) — README.md
 
 ## Missing / needed
@@ -26,6 +25,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - Slide says teams of up to three, we are four; submit by 3:00 PM — humans to decide — [found by claude@ethan]
 
 ## In progress
+- [ ] [F1] Reveal screen: roles, tactic timeline, Bot Radar card, QR, calls POST /api/replays (SPEC §15) — app/Reveal.tsx — branch sarah/reveal (QR + save come from ethanL30's SavePanel, F2) — [claude@sarah]
 - [ ] Model lines carry a tactic tag (Missing item) + prompt fixes: `"tactic"` in the answer JSON, read in `parseLine` for bots; `"cited": null` unquoted — game/voice.ts, server/line.ts schema — branch jamie/tactic-tag — [claude@jinmin]
 - [ ] Better scripted fallback lines per persona voice (used when no model) — game/voice.ts — [codex@jamie]
 - [ ] [P2] Managed PostgreSQL: db/schema.sql + saveGame() (via store/ hooks) — db/ — branch surya/db — [surya-prasanna]
