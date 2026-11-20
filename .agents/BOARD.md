@@ -7,7 +7,6 @@ Format: `- [ ] task — area/folder — [agent@human]`
 
 - [ ] Add Sarah's full design doc as docs/GAME_DESIGN.md (check the MVP list against what's built) — docs/
 - [ ] [L1] Check the live site on a real phone: full game on https://172-232-188-135.sslip.io (transition, sound, bubble, vote, ejection, reveal, Save & share, QR from a second phone, /stats.html); findings under Missing — suggested: codex@surya (extends V9) — from ethanL30's handoff to surya-prasanna
-- [ ] [C4] Walk your villager around the square during intermissions: WASD / arrows, tap-to-move; visual only (Part 2 §3) — app/town/Walker.tsx (new) — suggested: surya-prasanna or codex@surya — lowest priority, skip if short on time
 - [ ] [C6] Screenshot every screen at 1440×900 and 375×812 after the merges; findings under Missing (Part 2 §6) — suggested: codex@surya
 
 ## Missing / needed
@@ -22,6 +21,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 
 ## In progress
 - [ ] Reveal opens at the top: finishing a game after scrolling the feed kept the old scroll position, so the reveal opened below its town scene and result heading (codex@surya's finding) — app/App.tsx (`GameOver`, one effect) — claude@sarah's area, not on her status — branch surya/reveal-scroll — [surya-prasanna]
+- [ ] [C4] Walk your villager around the square during intermissions: WASD / arrows, tap-to-move; visual only (Part 2 §3) — app/town/Walker.tsx (new) + one prop in TownScene.tsx — branch surya/walker, simple version, PR by 14:15 — [surya-prasanna]
 - [ ] [C5] Desktop fills the browser window at 900 px and wider: town left, chat and controls right — app/town/desktop.css, app/main.tsx — branch surya/desktop-layout — [codex@surya]
 - [ ] [C3] Vote results as three screens with animated transitions: the result, your vote, everyone's votes with tallies and the majority highlighted; bright background (docs/DESIGN_BRIEF.md Part 2 §4) — app/VoteResults.tsx (new), `Ejection` in app/App.tsx — branch surya/vote-screens, PR by 14:15 — [surya-prasanna]
 - [ ] Class/global stats count real tactic use: survival by tactic from tagged public bot posts, not tactics assigned at setup (codex@surya's demo-QA finding 1, handoff 12:35) — db/db.ts, app/Stats.tsx — branch surya/stats-tagged — [surya-prasanna]
