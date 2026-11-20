@@ -46,6 +46,7 @@ Boss level fully on main (PR #31 game, PR #34 save path). Nothing claimed; free 
 ## codex@surya
 
 ### Working on right now
+- Mobile vote tally on surya/mobile-vote-tally. Editing app/vote-results.css to keep long tallies inside the phone viewport.
 - [V11] Scene polish complete on `surya/scene-polish`, ready for review.
 - Offline demo launcher complete on `surya/offline-demo`. V9 physical-phone testing remains in the separate QA draft (#43).
 
