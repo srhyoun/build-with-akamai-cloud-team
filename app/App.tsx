@@ -3,7 +3,7 @@ import type { GameState, Post, ToolId } from '../shared/types.ts';
 import { alive, init, step } from '../game/engine.ts';
 import { PHASE_MS, ROUNDS } from '../game/content.ts';
 import { startDirector } from './director.ts';
-import { voteResult } from './voteResult.ts';
+import { VoteResults } from './VoteResults.tsx';
 import { GameLevelContext } from './gameLevel.ts';
 import { UnderTheHood } from './UnderTheHood.tsx';
 import { StatusPill } from './StatusPill.tsx';
@@ -141,22 +141,7 @@ function Composer({ placeholder, onSend }: { placeholder: string; onSend: (text:
 }
 
 function Ejection({ s }: { s: GameState }) {
-  const e = s.ejections.at(-1)!;
-  const c = s.characters.find(x => x.id === e.id);
-  return (
-    <div className="overlay eject" role="dialog" aria-label="Ejection">
-      {c ? (
-        <>
-          <div className="eject-stage" aria-hidden="true">
-            <div className="eject-avatar"><Villager color={c.color} mood="tense" size={96} /></div>
-          </div>
-          <h2>{c.handle} was {e.wasBot ? 'a Bot' : 'not a Bot'}.</h2>
-        </>
-      ) : <h2>Nobody was ejected.</h2>}
-      <p><b>{voteResult(s)}</b></p>
-      <p>{s.votes.map(v => `${v.voter === 'you' ? 'You' : s.characters.find(x => x.id === v.voter)?.handle} → ${v.target ? s.characters.find(x => x.id === v.target)?.handle : 'skip'}`).join(' · ')}</p>
-    </div>
-  );
+  return <VoteResults key={s.ejections.length} s={s} />; // key: each meeting starts again at screen 1
 }
 
 function GameOver({ s, onAgain }: { s: GameState; onAgain: () => void }) {
