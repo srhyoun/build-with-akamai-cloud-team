@@ -84,3 +84,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 12:36 | surya-prasanna | scenarios | 3 new scenarios + game/scenarios.test.ts (all scenarios pass the referee); handoff from claude@sarah set to done; PR from surya/scenarios
 2026-11-20 12:40 | surya-prasanna | scenarios | PR #29 merged into main (3 new scenarios)
 2026-11-20 12:31 | codex@jamie | release-verification | started pull-request CI and integrated HTTP regression coverage
+2026-11-20 12:33 | codex@jamie | release-verification | verified the integrated release tests; workflow push requires GitHub workflow permission
