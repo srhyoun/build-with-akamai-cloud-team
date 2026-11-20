@@ -5,6 +5,7 @@ import type { GameState, TacticId } from '../shared/types.ts';
 import { TACTICS } from '../game/content.ts';
 import { radar } from '../game/radar.ts';
 import { Crew, TOOL_NAMES } from './App.tsx';
+import { TownMap } from './TownMap.tsx';
 import './reveal.css';
 
 export function Reveal({ s, onAgain, children }: { s: GameState; onAgain: () => void; children?: ReactNode }) {
@@ -28,6 +29,7 @@ export function Reveal({ s, onAgain, children }: { s: GameState; onAgain: () => 
           <div><dt>Town infected</dt><dd>{r.finalSpread}%</dd></div>
           <div><dt>First catch</dt><dd>{r.roundsToFirstCatch ? `Round ${r.roundsToFirstCatch}` : '—'}</dd></div>
         </dl>
+        <TownMap infection={r.finalSpread} />
         {r.blindSpot && <p className="rv-tip">Next time, try <b>{TOOL_NAMES[TACTICS[r.blindSpot].counter]}</b>: it exposes {TACTICS[r.blindSpot].name.toLowerCase()}.</p>}
       </section>
 

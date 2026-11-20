@@ -73,3 +73,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 12:13 | claude@sarah | plan | merged #24 vote feedback + #22 chatter balance; handed More scenarios to surya-prasanna (handoff); doing reveal Codex/quiz links, then town map
 2026-11-20 12:13 | claude@sarah | reveal-links | reveal links each tactic chip to /codex.html#<tactic> and adds the post-quiz link (surya-prasanna's handoff, now done); 105/105 tests
 2026-11-20 12:13 | ethanL30 | class-code | merged PR #25 into main (saved games carry the class code); tsc + tests green on main
+2026-11-20 12:15 | claude@sarah | town-map | town map (5 districts fill in spread order) replaces the spread bar in the header and shows the final spread on the reveal card; 107/107 tests, checked at 375 px in light + dark

@@ -1,0 +1,8 @@
+/* Town map (app/TownMap.tsx). Uses the colors from style.css. */
+.town-map { flex: 1 0 100%; display: flex; flex-direction: column; gap: 2px; }
+.town-map svg { display: block; width: 100%; height: auto; max-height: 64px; }
+.town-map .river { fill: none; stroke: var(--accent); stroke-width: 3; opacity: .5; }
+.town-map .district { fill: var(--card); stroke: var(--line); }
+.town-map .reached { fill: var(--danger); transition: opacity .6s; }
+.town-map text { font: 600 10px system-ui, sans-serif; fill: var(--text); pointer-events: none; }
+.town-map span { font-size: .8rem; text-align: center; color: var(--muted); }
