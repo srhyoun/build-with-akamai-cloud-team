@@ -81,3 +81,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 12:20 | ethanL30 | deploy-safety | PR #28 open: boot test (node server/index.ts), verbatimModuleSyntax, node store/selftest.ts; handoff to claude@jinmin to run the self-test on the real bucket; 109/109 tests
 2026-11-20 12:22 | claude@sarah | pitch-deck | [X2] drafted the 5-slide deck (SPEC §24.2: title, problem, loop, Akamai services + referee, impact) as a Claude artifact owned by Sarah; placeholders for live URL and quiz numbers; speaker notes follow §24.1 beats
 2026-11-20 12:22 | ethanL30 | deploy-safety | merged PR #28 into main (boot test, verbatimModuleSyntax, store/selftest.ts); tsc + 109/109 tests green on main; task moved to Done
+2026-11-20 12:35 | codex@surya | demo-qa | completed local browser and API QA on 8ac42b0, retested class and reveal links, and reported the stats sample mismatch
