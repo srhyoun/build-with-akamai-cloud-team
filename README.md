@@ -1,6 +1,6 @@
 # Build with Akamai Cloud — Team Repo
 
-Setup only. No project code yet.
+A playable skeleton of Who's the Bot? (engine, scripted characters, mobile chat UI). The model server is in progress.
 
 Open source under the MIT License.
 
@@ -26,7 +26,7 @@ docs/                challenge brief, research, pitch notes
 0. First thing at 9: fill in your `.agents/status/<yourname>.md` and your row in the team table.
 1. Pull before you prompt your agent. Push when it's done a chunk.
 2. Point your agent at `AGENTS.md` (Claude Code reads `CLAUDE.md` automatically, which links there).
-3. Each person works on their own branch: `<name>/<task>` e.g. `aiden/physics-core`.
+3. Each person works on their own branch: `<name>/<task>` e.g. `sarah/start-screen`.
 4. Merge to `main` through PRs so the other agents see clean history.
 
 ## Team

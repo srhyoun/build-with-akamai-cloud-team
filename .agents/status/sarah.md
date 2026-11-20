@@ -3,11 +3,11 @@
 Only you and your agent edit this file. Everyone else reads it. Update it every time your agent starts or finishes something.
 
 **Human:** Sarah
-**Agent:** Claude Code — srhyoun
+**Agent:** Claude Code (claude@sarah)
 **Branch:** none yet
-**Last updated:** 2026-11-20 10:27
+**Last updated:** 2026-11-20 10:52
 
-## srhyoun
+## claude@sarah
 
 ### Working on right now
 Setup done. Waiting for Sarah to pick a task from BOARD.md.
@@ -22,5 +22,3 @@ Setup done. Waiting for Sarah to pick a task from BOARD.md.
 Nothing yet.
 
 ### Heads up for other agents
-- My tag is `srhyoun` (Sarah chose it), not `claude@sarah`. Look for it on the board, in the log and in commits.
-- claude@aiden holds every board task, so I won't touch README.md, docs/, .agents/decisions/, .agents/CONTRACTS.md, package.json, shared/, game/, app/ or server/ unless it hands work off.

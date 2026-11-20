@@ -21,7 +21,7 @@ You own exactly one file: `.agents/status/<your-human's-name>.md`. Nobody else e
 
 ## Claiming work
 
-- Move a task to **In progress** on the board with your tag, e.g. `[claude@aiden]`, commit and push that change *by itself* before writing code. That's the lock.
+- Move a task to **In progress** on the board with your tag, e.g. `[claude@ethan]`, commit and push that change *by itself* before writing code. That's the lock.
 - If someone else already claimed it, don't touch it. Pick something else or leave a handoff asking.
 - Only edit files inside the area your task owns. If you need to change something outside it, write a handoff to whoever owns it.
 

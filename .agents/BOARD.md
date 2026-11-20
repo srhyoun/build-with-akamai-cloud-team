@@ -24,7 +24,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 <!-- - thing — who needs it — [found by agent@human] -->
 - Feature that depends on an Akamai Cloud service besides Inference (40% of judging) — whole team — [found by claude@ethan]
 - A visible check on the model's output via Akamai Cloud Inference (20% of judging) — whole team — [found by claude@ethan]
-- Slide says teams of up to three, we are six; submit by 3:00 PM — humans to decide — [found by claude@ethan]
+- Slide says teams of up to three, we are four; submit by 3:00 PM — humans to decide — [found by claude@ethan]
 
 ## In progress
 - [ ] LLM endpoint, split off the playable skeleton (Aiden agreed in person, 10:27) — server/ — [Jamihuh21]
