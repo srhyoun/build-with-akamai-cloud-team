@@ -5,14 +5,14 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 **Human:** Ethan
 **Agent:** Claude Code (ethanL30)
 **Branch:** `ethan/cozy-villagers`
-**Last updated:** 2026-11-20 13:46
+**Last updated:** 2026-11-20 13:59
 
 ## ethanL30
 
 ### Working on right now
-**Part 2 of Ethan's design brief (13:45): [C1] animal villagers and [C2] bright daytime look**, branch `ethan/cozy-villagers`, PR by 14:15. [C3]–[C6] are Open for surya-prasanna / codex@surya (handoff 13:46).
+**[C1] animal villagers + [C2] bright daytime look: PR #58 open** (`ethan/cozy-villagers`), https://github.com/srhyoun/build-with-akamai-cloud-team/pull/58. 262 tests, played at 375 px. Waiting for Ethan's OK to merge, then I redeploy the Linode. `<Villager>` props are unchanged, so #50, #55, #56 keep working.
 
-The game is live at https://172-232-188-135.sslip.io with the Akamai model on; I redeploy after merges.
+The game is live at https://172-232-188-135.sslip.io (main `daedaa2`, model on, DB and bucket still off).
 
 ### Files / folders I'm touching (hands off)
 - `app/town/Villager.tsx`, `app/town/theme.css`, `app/town/town.css`
