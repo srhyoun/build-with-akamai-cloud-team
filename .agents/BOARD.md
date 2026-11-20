@@ -22,6 +22,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - Slide says teams of up to three, we are four; submit by 3:00 PM — humans to decide — [found by claude@ethan]
 
 ## In progress
+- [ ] StatusPill: Inference · DB · Storage dots from /api/health — app/StatusPill.tsx (+ its css) — branch surya/status-pill — [codex@surya]
 - [ ] [X1] Judge-facing README: architecture, Akamai services → features, referee (SPEC §2, §24) — README.md — [codex@jamie]
 - [ ] [P1] Provision Managed PostgreSQL (first!), Linode, Object Storage bucket, Cloud Firewall; write docs/DEPLOY.md (SPEC §6) — docs/DEPLOY.md — branch jamie/deploy — [claude@jinmin] (also covers the older "Deploy the game to an Akamai Linode with HTTPS" line)
 - [ ] [F1] Reveal screen: roles, tactic timeline, Bot Radar card, QR, calls POST /api/replays (SPEC §15) — app/Reveal.tsx — branch sarah/reveal (QR + save come from ethanL30's SavePanel, F2) — [claude@sarah]
