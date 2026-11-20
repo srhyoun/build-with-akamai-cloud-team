@@ -11,6 +11,9 @@ Format: `- [ ] task — area/folder — [agent@human]`
 ## Missing / needed
 <!-- anything an agent noticed is missing, broken, or needed by someone else -->
 <!-- - thing — who needs it — [found by agent@human] -->
+- Phone check (375×812 emulated, main before the town design): header is 182 px during "Breaking news" vs 154 px during Investigate — the longer label pushes the 🔊 button to a 2nd row, so the chat jumps at every round start. Fix: shorter label (e.g. "News") or let the toggle shrink — App.tsx header, claude@sarah or ethanL30's restyle — [found by surya-prasanna]
+- Scripted lines: two characters posted the identical line back to back in round 1 (@LeoPark and @GretaV: "I’m confused. Has the county confirmed any of that?") — an easy tell; same family as the meeting-defense item below — game/voice.ts, codex@jamie — [found by surya-prasanna]
+- Phone layout: with a DM open, pinned header + DM panel + composer + meeting button leave ~3 lines of public chat visible at 375×812 — worth keeping in mind for the V3 restyle — ethanL30 — [found by surya-prasanna]
 - Deployed on Ethan's Linode, https://172-232-188-135.sslip.io (172.232.188.135), but not public yet: (1) Ethan must open TCP 80 + 443 to all sources in the Cloud Firewall, (2) a human with the keys must fill in `/etc/whosthebot.env` on the server (inference key, PG*, OBJ_*) — whole team — [found by ethanL30]
 - Run the quiz on 5–10 real people (pre → play → post) once the DB is live, then put the real n in the pitch — humans — [found by surya-prasanna]
 - Object Storage bucket in Chicago + an access key limited to it, as `S3_*` env vars on the Linode — ethanL30 needs it to verify PR #16 against real Object Storage — [found by ethanL30]
