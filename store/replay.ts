@@ -8,11 +8,11 @@ export interface ReplayPost { author: string; text: string; round: number; tacti
 export interface Replay {
   v: 1; id: string; at: string;            // ISO time, set by the server
   playerName: string | null;                // <= 24 chars, or null
-  level: 1 | 2; result: 'won' | 'lost'; infection: number; score: number;
+  level: GameState['level']; result: 'won' | 'lost'; infection: number; score: number;
   rounds: { alert: string; truth: string; falseStory: string }[]; // only the rounds that were played
   characters: ReplayCharacter[]; posts: ReplayPost[]; ejections: Ejection[]; radar: BotRadar;
 }
-export interface LeaderboardEntry { id: string; name: string; score: number; result: 'won' | 'lost'; level: 1 | 2; infection: number; at: string } // name is "Anonymous" when no player name
+export interface LeaderboardEntry { id: string; name: string; score: number; result: 'won' | 'lost'; level: GameState['level']; infection: number; at: string } // name is "Anonymous" when no player name
 export type StorageSource = 'object-storage' | 'local';
 export interface SaveResponse { id: string; shareUrl: string | null; score: number }
 export interface ReplayResponse { replay: Replay; source: StorageSource }
@@ -35,7 +35,7 @@ export function toReplay(body: unknown, id: string, at: string): Replay {
   if (s.phase !== 'over') throw bad('the game is not over');
   const { result, level, infection, round } = s;
   if (result !== 'won' && result !== 'lost') throw bad('bad result');
-  if (level !== 1 && level !== 2) throw bad('bad level');
+  if (level !== 1 && level !== 2 && level !== 3) throw bad('bad level'); // 3 = boss level (decision 003)
   if (typeof infection !== 'number' || !(infection >= 0 && infection <= 100)) throw bad('bad infection');
   if (typeof round !== 'number' || !Number.isInteger(round) || round < 1 || round > 10) throw bad('bad round');
 

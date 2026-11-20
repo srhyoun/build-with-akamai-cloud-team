@@ -147,8 +147,8 @@ describe('fileStorage', () => {
 });
 
 // A finished level-1 game from the real engine, with one tagged bot post, one DM and one player post.
-function play(seed: number, voteBot: boolean): GameState {
-  let s = step(init(seed, 1), { type: 'tick', dt: PHASE_MS.event });
+function play(seed: number, voteBot: boolean, level: GameState['level'] = 1): GameState {
+  let s = step(init(seed, level), { type: 'tick', dt: PHASE_MS.event });
   const bot = aliveBots(s)[0];
   s = step(s, { type: 'say', author: bot.id, text: 'Roads close in 20 min, share now', tactic: 'fake_urgency' });
   s = step(s, { type: 'say', author: bot.id, text: 'DM-SECRET', to: bot.id });
@@ -213,13 +213,23 @@ describe('the store over HTTP', () => {
     expect(b.shareUrl).toBe(`${proxied.url.replace('http:', 'https:')}/?replay=${b.id}`);
   });
 
+  it('saves a boss-level game (level 3, decision 003) with its level on the replay and the leaderboard', async () => {
+    const { save, url } = await serve();
+    const saved = await save({ state: play(12, true, 3) });
+    const { replay } = await (await fetch(`${url}/api/replays/${saved.id}`)).json() as ReplayResponse;
+    expect(replay.level).toBe(3);
+    expect(replay.characters.map(c => c.handle)).toEqual(expect.arrayContaining(['@DanaReports', '@DanaRep0rts']));
+    const { entries } = await (await fetch(`${url}/api/leaderboard`)).json() as LeaderboardResponse;
+    expect(entries.find(e => e.id === saved.id)?.level).toBe(3);
+  });
+
   it('rejects bad requests', async () => {
     const { url, post } = await serve();
     const over = play(11, true);
     expect((await post({ state: init(1) })).status).toBe(400);
     expect((await post('not json')).status).toBe(400);
     for (const body of [null, [], 7, {}, { state: 'x' }, { state: [] }]) expect((await post(body)).status).toBe(400);
-    const res = await post({ state: { ...over, level: 3 } });
+    const res = await post({ state: { ...over, level: 4 } });
     expect(res.status).toBe(400);
     expect(await res.json()).toEqual({ error: 'bad level' });
     expect((await post({ state: over, pad: 'x'.repeat(1_100_000) })).status).toBe(413);

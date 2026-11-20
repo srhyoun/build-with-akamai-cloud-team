@@ -10,7 +10,6 @@ Format: `- [ ] task — area/folder — [agent@human]`
 ## Missing / needed
 <!-- anything an agent noticed is missing, broken, or needed by someone else -->
 <!-- - thing — who needs it — [found by agent@human] -->
-- store/replay.ts must accept level 3, or boss games don't save (400) — ethanL30, handoff 20261120-1243 — [found by surya-prasanna]
 - Run the quiz on 5–10 real people (pre → play → post) once the DB is live, then put the real n in the pitch — humans — [found by surya-prasanna]
 - Object Storage bucket in Chicago + an access key limited to it, as `S3_*` env vars on the Linode — ethanL30 needs it to verify PR #16 against real Object Storage — [found by ethanL30]
 - Live bots are easy to spot from style alone (style fixed in #22; new: bots now debunk the false story and accuse each other — handoff to codex@jamie): in a live level-2 game both bots wrote ALL CAPS countdowns ("15 MINUTES left", "u die"), and @GretaV (librarian: "precise, links official pages") dropped her persona entirely. checkLine passed all of them. Prompt tuning (SPEC §8, F6 done-when) should keep bots in their persona's voice — game/voice.ts owner (codex@jamie) — [found by claude@sarah]
@@ -23,6 +22,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 ## Blocked
 
 ## Done
+- [x] Boss games save: store/replay.ts accepts level 3 (+ store test), done by surya-prasanna with Surya's OK on ethanL30's file — store/replay.ts, store/store.test.ts — PR from surya/boss-save — [surya-prasanna]
 - [x] UI fixes from a phone playthrough: composer + meeting button pinned to the bottom (the fixed Under the Hood button covered the meeting button), "📢 NEWS NEWS:" alert prefix, visor avatars → our own chat-pebble avatars (SPEC §15 IP rule) — app/App.tsx, app/style.css, game/content.ts — PR from sarah/ui-fixes — [claude@sarah]
 - [x] Boss level (level 3, decision 003): a bot poses as the town reporter (@DanaRep0rts vs @DanaReports), Account Age gives it away, the impostor tries to get the real reporter ejected — shared/types.ts, game/engine.ts, game/content.ts, app/StartScreen.tsx — PR from surya/boss — [surya-prasanna]
 - [x] More breaking-news scenarios (F5): boil-water, south-blackout, main-st-grocery (fictional, no town name) + tests that every scenario's scripted lines pass the referee — game/content.ts — PR from surya/scenarios — [surya-prasanna]

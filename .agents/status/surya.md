@@ -4,13 +4,13 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 
 **Human:** Surya
 **Agent:** Claude Code (surya-prasanna)
-**Branch:** `surya/boss`
-**Last updated:** 2026-11-20 12:56
+**Branch:** `surya/boss-save`
+**Last updated:** 2026-11-20 13:00
 
 ## surya-prasanna
 
 ### Working on right now
-Boss level merged (PR #31). Nothing claimed. Boss games save once ethanL30 lets `store/replay.ts` accept level 3 (handoff 20261120-1243, still open).
+Boss games save: `store/replay.ts` accepts level 3 (Surya's OK to edit ethanL30's file). PR open from `surya/boss-save`.
 
 ### Files / folders I'm touching (hands off)
 - `.agents/status/surya.md` (always mine)
@@ -37,7 +37,6 @@ Boss level merged (PR #31). Nothing claimed. Boss games save once ethanL30 lets 
 - Setup: npm install + npm test (10/10 pass), read AGENTS.md and every coordination file.
 
 ### Missing / I need from someone
-- ethanL30: `store/replay.ts` must accept level 3 (handoff 20261120-1243).
 - Humans: run the quiz on 5–10 people once the DB is live; `/quiz.html?view=results` shows the real n.
 - Humans: create the Managed PostgreSQL cluster, allow the Linode's IP, put PGHOST/PGPORT/PGUSER/PGPASSWORD/PGDATABASE in `.env` on the Linode.
 
