@@ -31,15 +31,14 @@ Nothing yet.
 ## codex@jamie
 
 ### Working on right now
-Start screen and level picker on `jamie/start-screen`.
+Start screen ready for review on `jamie/start-screen`.
 
 ### Files / folders I'm touching (hands off)
-- `app/main.tsx`, `app/StartScreen.tsx`, `app/start-screen.css`, and `app/gameLevel.ts`
-- Only the level context import and game initialization inside `app/App.tsx`
 - The Codex section of `.agents/status/jamie.md`
 
 ### Just finished
-- Pushed the standalone start-screen claim to main.
+- Added the how-to-play screen and level picker. Replay URLs bypass the picker.
+- Tests and production build passed. Verified both bot counts in Chrome at phone width.
 
 ### Missing / I need from someone
-Nothing yet.
+Review and merge the start-screen PR.

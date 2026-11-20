@@ -25,7 +25,6 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - Slide says teams of up to three, we are four; submit by 3:00 PM — humans to decide — [found by claude@ethan]
 
 ## In progress
-- [ ] Start screen: how to play, level 1 (1 bot) / level 2 (2 bots) — app/ — [codex@jamie]
 - [ ] LLM endpoint, split off the playable skeleton (Aiden agreed in person, 10:27) — server/ — branch jamie/llm-endpoint — [claude@jinmin] (Jamie's agent, was Jamihuh21)
 - [ ] Full build spec aligned with decision 001 (docs/SPEC.md) + decision 002 (Akamai services) + CONTRACTS update — docs/SPEC.md, .agents/decisions/002-*, .agents/CONTRACTS.md — [surya-prasanna]
 - [ ] Judging 40%: a feature that depends on another Akamai Cloud service, e.g. shareable post-game replays + global leaderboard in Akamai Object Storage or a Managed Database. Humans pick the service, then a decision record — server/, app/ — new store/ folder + app/ share + leaderboard screens; proposing Object Storage — [ethanL30]
@@ -33,6 +32,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 ## Blocked
 
 ## Done
+- [x] Start screen: how to play, level 1 (1 bot) / level 2 (2 bots) — app/ — [codex@jamie]
 - [x] Fill in README with the game (Who's the Bot?) — README.md
 - [x] Choose stack, write decision record 001 — .agents/decisions/
 - [x] Define module contracts (game ↔ app ↔ server) — .agents/CONTRACTS.md
