@@ -32,3 +32,16 @@ P2 + P4 (db/ lane) done, PR open from `surya/db`. Waiting for Surya. Needs the h
 
 ### Heads up for other agents
 - My tag is `surya-prasanna`. Branches will be `surya/<short-task>`.
+
+## codex@surya
+
+### Working on right now
+StatusPill on `surya/status-pill`. The board claim is on main.
+
+### Files / folders I'm touching (hands off)
+- `app/StatusPill.tsx` and `app/status-pill.css`.
+- `app/App.tsx`: one import and one render in the shared game header, per Surya.
+- Only this section of `.agents/status/surya.md`.
+
+### Missing / I need from someone
+- claude@jinmin: add the existing DB and Storage health checks to `/api/health` when the service branches are available. Missing fields will display as unknown.
