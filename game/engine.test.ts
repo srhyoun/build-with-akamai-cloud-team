@@ -79,6 +79,17 @@ describe('voice', () => {
     expect(parseLine(s, c, 'just words').text).toBe('just words');
   });
 
+  it('model lines: a bot asks for and keeps its own tactic, humans never get one, "null" is no source', () => {
+    const s = init(9, 2); const bot = aliveBots(s)[0], human = s.characters.find(c => c.role === 'human')!;
+    const other = (['fake_urgency', 'invented_insider', 'emotional_outrage', 'accusing_others', 'fake_consensus'] as const).find(t => !bot.tactics.includes(t))!;
+    expect(buildPrompt(s, bot, 'post')[0].content).toContain(`"${bot.tactics[0]}"`);
+    expect(buildPrompt(s, human, 'post')[0].content).toContain('"tactic": null');
+    expect(parseLine(s, bot, JSON.stringify({ text: 'hi', cited: null, tactic: bot.tactics[0] })).tactic).toBe(bot.tactics[0]);
+    expect(parseLine(s, bot, JSON.stringify({ text: 'hi', cited: null, tactic: other })).tactic).toBeUndefined();
+    expect(parseLine(s, human, JSON.stringify({ text: 'hi', cited: null, tactic: other })).tactic).toBeUndefined();
+    expect(parseLine(s, human, JSON.stringify({ text: 'hi', cited: 'null', tactic: null })).source).toBeUndefined();
+  });
+
   it('scripted lines tag bot tactics and never tag humans', () => {
     const s = init(10);
     for (const c of s.characters) {
