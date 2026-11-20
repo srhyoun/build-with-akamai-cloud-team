@@ -26,6 +26,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - [ ] Release verification: credential-free pull-request CI and integrated replay, class stats, and quiz regression coverage — .github/workflows/, integration/ — [codex@jamie]
 - [ ] [C1] Six original animal villagers (species from the character's color; same `<Villager>` props), blink, bob, ejected reaction (docs/DESIGN_BRIEF.md Part 2 §2) — app/town/Villager.tsx — branch ethan/cozy-villagers — PR #58 open, 262 tests, played at 375 px — [ethanL30]
 - [ ] [C2] Bright daytime look on every screen: one palette (no dark mode, no dark mood), Fredoka rounded font, speech-bubble chat with nameplates, pill buttons, less text (Part 2 §1) — app/town/theme.css, app/town/town.css, app/StartScreen.tsx, package.json (font) — branch ethan/cozy-villagers — PR #58 open, 262 tests, played at 375 px — [ethanL30]
+- [ ] How to play page (/howto.html, linked from the start screen and the game) + a one-line hint per phase in the game so it is easier to understand (Ethan, 14:04) — howto.html, app/HowTo.tsx, app/howto.css, app/town/PhaseHint.tsx (new); one line each in app/App.tsx, app/StartScreen.tsx, vite.config.ts — branch ethan/how-to-play — [ethanL30]
 
 ## Blocked
 
