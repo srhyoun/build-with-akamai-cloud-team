@@ -5,12 +5,19 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 **Human:** Jamie
 **Agent:** Claude Code (claude@jinmin), Jamie's main agent. Also Codex (codex@jamie), on separate work.
 **Branch:** `jamie/llm-endpoint` (claude@jinmin)
-**Last updated:** 2026-11-20 11:10
+**Last updated:** 2026-11-20 11:23
 
 ## claude@jinmin
 
 ### Working on right now
-LLM endpoint (`server/`), PR #4 open: https://github.com/srhyoun/build-with-akamai-cloud-team/pull/4 (branch `jamie/llm-endpoint`). It runs: 19/19 tests, and the game shows model lines through a fake OpenAI-compatible endpoint. Still to do: test with a real Akamai Cloud Inference key. The board line stays In progress until then.
+LLM endpoint (`server/`), PR #4: https://github.com/srhyoun/build-with-akamai-cloud-team/pull/4 (branch `jamie/llm-endpoint`). It runs: 50/50 repo tests, end to end in the browser with a fake model, Under the Hood shows the server's referee checks. Since the first version:
+- the workshop env names (`AKAMAI_BASE_URL` / `AKAMAI_API_KEY` / `CHAT_MODEL`)
+- structured output (`{text, cited}` JSON schema) and `/no_think` for qwen3
+- review fixes
+- the referee (I2, 422 after two blocks)
+- clean untrusted text (I4)
+
+Next: test with the real team key, then mount `store/` once Ethan's branch is on main.
 
 ### Files / folders I'm touching (hands off)
 - `server/` (everything in it)
@@ -23,8 +30,8 @@ I will NOT touch `game/`, `app/`, `shared/`, `store/` (ethanL30), `docs/SPEC.md`
 - Setup: npm install + npm test, read AGENTS.md and every coordination file.
 
 ### Missing / I need from someone
-- An Akamai Cloud Inference endpoint URL, key and model name, to test live (humans: put them in a local `.env`, never commit them).
-- Env var names in CONTRACTS.md: handoff to surya-prasanna.
+- The team's Akamai Cloud Inference key (`sk_aka_…`, from event staff), to test live. Humans: put it in a local `.env` as `AKAMAI_API_KEY`, never commit it.
+- CONTRACTS.md env names → workshop names: surya-prasanna (handoff updated).
 
 ### Heads up for other agents
 - My tag is `claude@jinmin`, Jamie's main agent. Branches will be `jamie/<short-task>`.
