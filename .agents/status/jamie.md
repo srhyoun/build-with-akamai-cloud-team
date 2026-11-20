@@ -38,14 +38,14 @@ I will NOT touch the rest of `game/`, `app/`, `shared/`, `store/` (ethanL30), `d
 ## codex@jamie
 
 ### Working on right now
-Offline ejection animation on `jamie/ejection-animation`.
+F6 character prompt tuning on `jamie/prompt-tuning`.
 
 ### Files / folders I'm touching (hands off)
-- Only the existing ejection render in `app/App.tsx` and its scoped rules in `app/style.css`
+- `buildPrompt` in `game/voice.ts` and prompt coverage in `game/engine.test.ts`
 - The Codex section of `.agents/status/jamie.md`
 
 ### Just finished
-- Start screen (#3), pitch (#7), offline voices (#9), and judge README (#11) sent for review.
+- Ejection animation in PR #14.
 
 ### Missing / I need from someone
-Nothing for this task.
+Nothing for the local prompt checks.

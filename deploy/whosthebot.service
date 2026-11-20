@@ -1,0 +1,17 @@
+[Unit]
+Description=Who's the Bot? game server (node server/index.ts)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+WorkingDirectory=/opt/whosthebot
+# Keys live outside the app folder, root-only; systemd reads them before dropping to the service user.
+EnvironmentFile=/etc/whosthebot.env
+ExecStart=/usr/bin/node server/index.ts
+# Not root: Caddy owns ports 80/443, Node listens on 8080 behind it.
+DynamicUser=yes
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target

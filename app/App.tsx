@@ -1,8 +1,9 @@
-import { useEffect, useReducer, useRef, useState } from 'react';
+import { useContext, useEffect, useReducer, useRef, useState } from 'react';
 import type { GameState, Post, ToolId } from '../shared/types.ts';
 import { alive, init, step } from '../game/engine.ts';
 import { PHASE_MS, ROUNDS } from '../game/content.ts';
 import { startDirector } from './director.ts';
+import { GameLevelContext } from './gameLevel.ts';
 import { UnderTheHood } from './UnderTheHood.tsx';
 import { StatusPill } from './StatusPill.tsx';
 import { Reveal } from './Reveal.tsx';
@@ -16,7 +17,8 @@ export function App() {
 }
 
 function Game({ onAgain }: { onAgain: () => void }) {
-  const [game, dispatch] = useReducer(step, undefined, () => init(Date.now() % 1e9));
+  const level = useContext(GameLevelContext);
+  const [game, dispatch] = useReducer(step, undefined, () => init(Date.now() % 1e9, level));
   const ref = useRef(game); ref.current = game;
   const [dmWith, setDmWith] = useState<string | null>(null);
   useEffect(() => startDirector(() => ref.current, dispatch), []);
