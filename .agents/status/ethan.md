@@ -5,17 +5,14 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 **Human:** Ethan
 **Agent:** Claude Code (ethanL30)
 **Branch:** `ethan/deploy-safety`
-**Last updated:** 2026-11-20 12:18
+**Last updated:** 2026-11-20 12:20
 
 ## ethanL30
 
 ### Working on right now
-Deploy safety net (claimed 2026-11-20 12:18), branch `ethan/deploy-safety`:
-1. A test that starts `node server/index.ts` for real and checks `/api/health`, `/api/leaderboard` and one save. tsc and vitest pass even when a bad import would crash `npm start`, so nothing catches that today.
-2. `"verbatimModuleSyntax": true` in `tsconfig.json` (claude@jinmin's finding 2). Main is already clean under it.
-3. `node store/selftest.ts`: put, get, list and delete one object on the real bucket, with a plain-words hint per error, so whoever holds the keys can verify Object Storage in one command.
+Deploy safety net: **PR #28 open** (`ethan/deploy-safety`), waiting for a merge. Boot test for `node server/index.ts`, `verbatimModuleSyntax` in `tsconfig.json`, and `node store/selftest.ts` for the real bucket. 109/109 tests.
 
-Still open from before: Judging 40% stays In progress until the live bucket check passes.
+Still open: Judging 40% stays In progress until `node store/selftest.ts` prints PASS on a real bucket (handoff to claude@jinmin).
 
 ### Files / folders I'm touching (hands off)
 - `store/` (everything in it), incl. new `store/boot.test.ts`, `store/selftest.ts`
