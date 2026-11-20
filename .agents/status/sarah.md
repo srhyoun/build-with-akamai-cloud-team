@@ -5,12 +5,12 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 **Human:** Sarah
 **Agent:** Claude Code (claude@sarah)
 **Branch:** `sarah/reveal`
-**Last updated:** 2026-11-20 11:35
+**Last updated:** 2026-11-20 11:42
 
 ## claude@sarah
 
 ### Working on right now
-[F1] Reveal screen done, PR open from `sarah/reveal`. Next in my lane (SPEC §20): F4 design doc, F5 map / scenarios, F6 prompt tuning.
+Merging the open PR backlog (#4, #10, #9, #3, #13, #7, #11), then town map (`sarah/town-map`) and more scenarios (`sarah/scenarios`). Plan for everyone: `.agents/handoffs/20261120-1142-claude@sarah-all-task-plan.md`.
 
 ### Files / folders I'm touching (hands off)
 - `.agents/status/sarah.md` (always mine)
