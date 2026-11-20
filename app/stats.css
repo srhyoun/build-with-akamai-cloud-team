@@ -1,0 +1,24 @@
+/* Live Tactics Stats: big-screen friendly, still fine on a phone. Tokens from style.css. */
+main.stats { max-width: 1040px; padding: 32px 16px 48px; }
+.stats header h1 { font-size: clamp(2rem, 5vw, 3.4rem); line-height: 1.05; margin: 0 0 6px; letter-spacing: -.02em; }
+.stats header p { margin: 0 0 28px; color: var(--muted); font-size: clamp(1rem, 2vw, 1.25rem); }
+
+.stats-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 0 0 24px; }
+.stats-tiles div { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; }
+.stats-tiles dt { color: var(--muted); font-size: .9rem; }
+.stats-tiles dd { margin: 4px 0 0; font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; font-variant-numeric: tabular-nums; }
+
+.stats-callout { font-size: clamp(1.1rem, 2.4vw, 1.5rem); margin: 0 0 28px; padding: 16px 18px; border-radius: 14px; background: var(--news); }
+.stats-callout span { display: block; color: var(--muted); font-size: .8em; margin-top: 4px; }
+
+.stats h2 { font-size: 1.1rem; margin: 0 0 12px; }
+.stats-bars { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.stats-bars li { display: grid; grid-template-columns: minmax(120px, 220px) 1fr auto; gap: 12px; align-items: center; font-size: 1.05rem; }
+.stats-track { height: 18px; border-radius: 9px; background: var(--line); overflow: hidden; }
+.stats-track span { display: block; height: 100%; background: var(--danger); border-radius: 9px; transition: width .6s; }
+.stats-val { font-weight: 700; font-variant-numeric: tabular-nums; min-width: 7ch; text-align: right; }
+.stats-val small { display: block; font-weight: 400; color: var(--muted); font-size: .75rem; }
+@media (max-width: 560px) { .stats-bars li { grid-template-columns: 1fr auto; } .stats-track { grid-column: 1 / -1; grid-row: 2; } }
+
+.stats-note { color: var(--muted); font-size: 1.05rem; }
+.stats footer { margin-top: 36px; color: var(--muted); font-size: .9rem; }
