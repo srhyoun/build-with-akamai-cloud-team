@@ -19,15 +19,25 @@ const human = state.characters.find(c => c.role === 'human')!;
 const env = { AKAMAI_BASE_URL: 'https://api.akamai-inference.com/v1', AKAMAI_API_KEY: 'sk_aka_abc', CHAT_MODEL: 'qwen3-8-27b' };
 
 type Answer = string | ((init: RequestInit) => Response | Promise<Response>);
-// A fake Akamai Cloud Inference endpoint that records what it was sent.
+const PASS = JSON.stringify({ pass: true, issues: [], scores: { botSubtlety: 4, humanRealism: 3, tacticClarity: 5 } });
+const reply = (a: Answer, init: RequestInit) =>
+  typeof a === 'string' ? Response.json({ choices: [{ message: { role: 'assistant', content: a }, finish_reason: 'stop' }] }) : a(init);
+// A fake Akamai Cloud Inference endpoint. Character-line calls get `answers` in turn (the last repeats);
+// referee-model calls (system prompt "You are the Referee") get `referee` in turn, a passing verdict by default.
 function fakeModel(...answers: Answer[]) {
   const calls: { url: string; init: RequestInit; body: Record<string, unknown> }[] = [];
+  const refereeCalls: Record<string, unknown>[] = [];
+  let referee: Answer[] = [PASS];
   const impl = (async (url: string, init: RequestInit) => {
-    calls.push({ url, init, body: JSON.parse(String(init.body)) });
-    const a = answers[Math.min(calls.length, answers.length) - 1];
-    return typeof a === 'string' ? Response.json({ choices: [{ message: { role: 'assistant', content: a }, finish_reason: 'stop' }] }) : a(init);
+    const body = JSON.parse(String(init.body));
+    if (String(body.messages?.[0]?.content).startsWith('You are the Referee')) {
+      refereeCalls.push(body);
+      return reply(referee[Math.min(refereeCalls.length, referee.length) - 1], init);
+    }
+    calls.push({ url, init, body });
+    return reply(answers[Math.min(calls.length, answers.length) - 1], init);
   }) as unknown as typeof fetch;
-  return { impl, calls };
+  return { impl, calls, refereeCalls, referee: (...r: Answer[]) => { referee = r; } };
 }
 const line = (text: string, cited: string | null = null) => JSON.stringify({ text, cited });
 
@@ -156,6 +166,31 @@ describe('handleLine (POST /api/line)', () => {
     expect(modelConfig({ AKAMAI_INFERENCE_URL: 'https://x/v1', AKAMAI_INFERENCE_KEY: 'k', AKAMAI_INFERENCE_MODEL: 'm' })).toMatchObject({ url: 'https://x/v1/chat/completions', model: 'm' });
   });
 
+  it('referee model (I3): scores a passing line, and its block triggers the retry', async () => {
+    const m = fakeModel(line('my cousin at the county says get out NOW'), line('they said the north district has to leave, move'));
+    const r1 = await handleLine({ state, charId: bot.id, kind: 'post' }, cfgFor(), m.impl);
+    expect(r1).toMatchObject({ status: 200, body: { check: { pass: true, scores: { botSubtlety: 4, humanRealism: 3, tacticClarity: 5 } } } });
+    expect(m.refereeCalls[0].messages).toEqual(expect.arrayContaining([expect.objectContaining({ content: expect.stringContaining('ROLE: bot') })]));
+
+    const m2 = fakeModel(line('first try'), line('second try'));
+    m2.referee(JSON.stringify({ pass: false, issues: [{ rule: 'role_leak', severity: 'block', detail: 'admits the story is fake' }], scores: { botSubtlety: 1, humanRealism: 1, tacticClarity: 1 } }), PASS);
+    const r2 = await handleLine({ state, charId: bot.id, kind: 'post' }, cfgFor(), m2.impl);
+    expect(r2).toMatchObject({ status: 200, body: { text: 'second try', check: { attempt: 2, pass: true } } });
+  });
+
+  it('referee model: DMs are logged only, and a failed referee call never costs the line', async () => {
+    const m = fakeModel(line('huh? no'));
+    m.referee(JSON.stringify({ pass: false, issues: [{ rule: 'STYLE_TELL', severity: 'block', detail: 'too formal' }], scores: { botSubtlety: 2, humanRealism: 2, tacticClarity: 2 } }));
+    const r = await handleLine({ state, charId: human.id, kind: 'reply', to: human.id }, cfgFor(), m.impl);
+    expect(r).toMatchObject({ status: 200, body: { check: { pass: true, issues: [{ rule: 'MODEL_STYLE_TELL', severity: 'warn' }] } } });
+
+    const down = fakeModel(line('my cousin at the county says get out NOW'));
+    down.referee(() => new Response('budget', { status: 429 }));
+    const spy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    expect(await handleLine({ state, charId: bot.id, kind: 'post' }, cfgFor(), down.impl)).toMatchObject({ status: 200, body: { check: { pass: true } } });
+    spy.mockRestore();
+  });
+
   it('never logs the key', async () => {
     const spy = vi.spyOn(console, 'error').mockImplementation(() => {});
     await handleLine({ state, charId: bot.id, kind: 'post' }, cfgFor(), fakeModel(() => { throw new Error('bad header: Bearer sk_aka_test'); }).impl);
@@ -191,7 +226,18 @@ describe('server (createApp)', () => {
     expect((await post('/api/line', '{not json')).status).toBe(400);
     expect((await post('/api/line', JSON.stringify({ pad: 'x'.repeat(1_100_000) }))).status).toBe(413);
     expect((await fetch(`${base}/api/line`)).status).toBe(405);
-    expect(await (await fetch(`${base}/api/health`)).json()).toEqual({ ok: true, model: null });
+    expect(await (await fetch(`${base}/api/health`)).json()).toMatchObject({ ok: true, model: null, db: 'off' });
+  });
+
+  it('mounts store/ and db/ routes, and rate-limits /api/line per player IP', async () => {
+    expect((await fetch(`${base}/api/leaderboard`)).status).toBe(200);
+    expect((await fetch(`${base}/api/stats/global`)).status).toBe(503); // no database configured
+    const limited = createApp({ cfg: null, dist, linesPerMinute: 2 });
+    await new Promise<void>(r => limited.listen(0, '127.0.0.1', r));
+    const url = `http://127.0.0.1:${(limited.address() as AddressInfo).port}/api/line`;
+    const hit = (ip: string) => fetch(url, { method: 'POST', headers: { 'x-forwarded-for': `6.6.6.6, ${ip}` }, body: '{}' }).then(r => r.status);
+    expect([await hit('1.1.1.1'), await hit('1.1.1.1'), await hit('1.1.1.1'), await hit('2.2.2.2')]).toEqual([400, 400, 429, 400]);
+    limited.close();
   });
 
   it('serves the built game from dist/, with index.html for client routes', async () => {

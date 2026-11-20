@@ -5,6 +5,7 @@
 import type { Character, GameState, Post, RefereeCheck } from '../shared/types.ts';
 import { buildPrompt, parseLine, type LineKind, type Say } from '../game/voice.ts';
 import { blocked, checkLine, toCheck } from '../game/referee.ts';
+import { refereeModel } from './refereeModel.ts';
 import { badAnswer, complete, isBadAnswer, type JsonSchema, type Message, type ModelConfig } from './inference.ts';
 
 export interface Reply { status: number; body: unknown }
@@ -94,8 +95,11 @@ export async function handleLine(body: unknown, cfg: ModelConfig | null, fetchIm
       return { status: 502, body: { error: 'model call failed' } };
     }
     // The referee (Judging 20%): deterministic rules from game/referee.ts on every model line.
-    const issues = checkLine(state, c, say, kind);
-    check = toCheck(state, c.id, kind, issues, attempt, Date.now() - t0, cfg.model);
+    let issues = checkLine(state, c, say, kind), stage: RefereeCheck['stage'] | undefined, scores;
+    // Rules passed: the referee model grades the line too (I3). It can block posts and defenses.
+    const verdict = blocked(issues) ? null : await refereeModel(cfg, state, c, say, kind, fetchImpl);
+    if (verdict) { issues = [...issues, ...verdict.issues]; scores = verdict.scores; if (blocked(verdict.issues)) stage = 'model'; }
+    check = { ...toCheck(state, c.id, kind, issues, attempt, Date.now() - t0, cfg.model, stage), ...(scores && { scores }) };
     if (!blocked(issues)) {
       if (issues.some(i => i.rule === 'R_LENGTH')) say.text = shorten(say.text, MAX_LEN[kind]);
       return { status: 200, body: { ...say, check } };
