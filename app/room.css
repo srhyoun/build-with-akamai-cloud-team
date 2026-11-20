@@ -21,3 +21,6 @@
 .rm-open, .rm-panel button { font: inherit; font-weight: 600; min-height: 44px; padding: 8px 18px; border: 2px solid #7a4e2b; border-radius: 999px; background: #fff; color: #3b2a1a; cursor: pointer; }
 .rm-open { margin-top: 10px; }
 .rm-panel button:disabled { opacity: .6; cursor: default; }
+
+/* shared live game */
+.rm-voted { margin: 10px 0 0; font-weight: 600; text-align: center; }
