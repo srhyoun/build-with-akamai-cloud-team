@@ -4,6 +4,8 @@
 
 Who’s the Bot? gives high-school media-literacy teachers a fictional town chat where students can practice investigating a rumor before they share it. Two of the six accounts in Level 2 are bots. Students compare stories, spend limited Fact-Check Tokens, and vote on who to eject. The vote gives the class a concrete decision to discuss. What evidence changed your mind, and would you have trusted it in your own group chat?
 
+The town itself shows the stakes: as the rumor spreads, the sunny square clouds over, the villagers grow worried, and the music slows. Every picture and sound is original and generated in code (SVG, CSS, Web Audio), with one openly licensed font.
+
 ## 30-second demo
 
 | Time | Show | Say |

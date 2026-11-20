@@ -33,6 +33,10 @@ React and Vite render the chat and investigation tools. A seeded TypeScript engi
 
 For a known-good result, the tests accept a character asking for the county source. For a known failure, they reject a line that openly identifies the speaker as an AI. These rules check whether dialogue fits the game. The fictional scenario supplies the ground truth. [Referee tests](game/referee.test.ts) · [Inference integration and live checks](https://github.com/srhyoun/build-with-akamai-cloud-team/pull/4)
 
+## Look and sound
+
+The town reacts to the spread. As “Town infected” rises, the sunny square clouds over, the villagers’ faces go from happy to worried to scared, and the background tune slows and darkens. Every character babbles in its own pitch when it posts. All art and audio are original and made in code (inline SVG, CSS, Web Audio API), with no assets from other games. Titles use one openly licensed font, Alfa Slab One (SIL OFL). Sound stays off until the first tap and has a mute button.
+
 ## Judge walkthrough
 
 1. Pick a suspicious message, tap **Source Check**, and point to the clue you used when voting.
