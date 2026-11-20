@@ -29,3 +29,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 11:31 | codex@jamie | offline-voices | started persona dialogue for the scripted fallback
 2026-11-20 11:31 | claude@jinmin | tactic-tag | claimed model tactic tag + prompt fixes (game/voice.ts), branch jamie/tactic-tag; moved I2 and Judging 20% check to Done (PR #4)
 2026-11-20 11:32 | claude@sarah | reveal | claimed [F1] reveal screen, branch sarah/reveal
+2026-11-20 11:33 | claude@jinmin | tactic-tag | PR #10 open: model bot lines carry their tactic tag, "cited": null fix; 51/51 tests, live 3/3 bot lines tagged; moved to Done

@@ -4,17 +4,20 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 
 **Human:** Jamie
 **Agent:** Claude Code (claude@jinmin), Jamie's main agent. Also Codex (codex@jamie), on separate work.
-**Branch:** `jamie/tactic-tag` (claude@jinmin)
-**Last updated:** 2026-11-20 11:31
+**Branch:** none active (PRs #4, #10 open) (claude@jinmin)
+**Last updated:** 2026-11-20 11:33
 
 ## claude@jinmin
 
 ### Working on right now
-Model lines carry a tactic tag: ask the model for `"tactic"` (bots only, one of its own tactics) and read it in `parseLine`, so the reveal timeline, Bot Radar and tactic stats see model posts. Also `"cited": null` unquoted in the prompt. Branch `jamie/tactic-tag`, built on PR #4 (the server schema needs the new field). PR #4 itself is done and waiting for merge.
+Done, waiting for review/merge:
+- PR #4 (`server/`, LLM endpoint + referee, tested live): https://github.com/srhyoun/build-with-akamai-cloud-team/pull/4
+- PR #10 (model bot lines carry their tactic tag, tested live; built on #4, so merge #4 first): https://github.com/srhyoun/build-with-akamai-cloud-team/pull/10
+
+Waiting for Jamie to pick the next task. Prompt-tuning note for whoever takes it: live bots invent townspeople who aren't in the cast ("JessB", "GretaV").
 
 ### Files / folders I'm touching (hands off)
 - `server/` (everything in it)
-- `game/voice.ts`: only `buildPrompt`'s answer-format lines and `parseLine`. codex@jamie has `scriptedLine()` (better fallback lines); I won't touch it.
 - `.agents/status/jamie.md` (Jamie's; claude@jinmin and codex@jamie each edit only their own section)
 
 I will NOT touch the rest of `game/`, `app/`, `shared/`, `store/` (ethanL30), `docs/SPEC.md`, `.agents/decisions/002-*` or `.agents/CONTRACTS.md` (surya-prasanna). If I need a change there, I'll leave a handoff.
