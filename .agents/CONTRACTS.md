@@ -14,7 +14,7 @@ The interfaces between parts of the game. Agents must not break these without a 
 | Score + Bot Radar (pure) | `game/radar.ts` | surya-prasanna | read by app (reveal) and server (`/api/replays`) |
 | Model server | `server/` (`index.ts`, `line.ts`) | claude@jinmin | Akamai Cloud Inference; imports `buildPrompt` / `parseLine` from `game/voice.ts`, `checkLine` from `game/referee.ts` |
 | Replays + share (Object Storage) | `store/`, `app/share.ts`, `app/Share.tsx`, `app/Leaderboard.tsx` | ethanL30 | Object Storage; handler mounted by one line in `server/index.ts` (decision 002) |
-| Game rows + stats (Managed PostgreSQL) | `db/`, `app/Stats.tsx`, `app/stats.css`, `stats.html` | surya-prasanna | Managed PostgreSQL. `db/db.ts` exports `saveGame` (for `hooks.saveGame` in `store/`), `handleDb(req, res)` (mounted in `server/index.ts`), `dbHealth()` → `'up'`, `'down'` or `'off'` |
+| Game rows + stats (Managed PostgreSQL) | `db/`, `game/quiz.ts`, `app/Stats.tsx`, `app/stats.css`, `stats.html`, `app/Quiz.tsx`, `app/quiz.css`, `quiz.html` | surya-prasanna | Managed PostgreSQL. `db/db.ts` exports `saveGame` (for `hooks.saveGame` in `store/`), `handleDb(req, res)` (mounted in `server/index.ts`), `dbHealth()` → `'up'`, `'down'` or `'off'` |
 | App: director (clock, who speaks when) + UI | `app/` | | engine via Commands, server via `/api/line` |
 
 ## Shared data formats
@@ -33,6 +33,8 @@ The interfaces between parts of the game. Agents must not break these without a 
 - `GET /api/leaderboard` → `200 { entries: { id, name, score, result, level, infection, at }[], source }`, top 10 by score, cached 10 s.
 - `db/` hook: `import { hooks } from '../store/handler.ts'; hooks.saveGame = saveGame;` called once per save with `{ id, state, refereeLog, classCode, playerName, score }`; if it throws, the replay is still uploaded. `storageHealth()` from `store/handler.ts` → `'up' | 'down'` for `/api/health`.
 - `GET /api/stats/global` → `200 GlobalStats` (cached 5 s), `503` no database configured, `502` database unreachable. Page: `/stats.html` (its own Vite entry). `GET /api/health` → `{ ok, model, db?, storage? }`.
+- `POST /api/quiz` (also in `handleDb`, surya-prasanna): body `{ sessionId: string (1-64 of [A-Za-z0-9_-]), phase: 'pre' | 'post', answers: { itemId, guess: 'bot' | 'human', confidence: 1-5 }[] }`, exactly one answer per item in `QUIZ` (`game/quiz.ts`), ≤ 8 KB. Scored on the server → `200 { correct, total }`; the first response per session + phase is stored, a retake is scored but not stored. `400` bad body, `503` no database, `502` database unreachable.
+- `GET /api/quiz/results` → `200 QuizResults` (`db/db.ts`): `{ pre: { n, accuracy }, post: { n, accuracy }, paired: { n, pre, post, change } }`, accuracy 0-1 or `null` when n = 0, `change` = mean (post - pre) over sessions that did both. `503` / `502` as above. Page: `/quiz.html?phase=pre|post`, `?view=results` (its own Vite entry).
 - New types (decision 002, additive only): `RefereeIssue`, `RefereeCheck`, `BotRadar`, `GlobalStats` in `shared/types.ts`; definitions in `docs/SPEC.md` §10.
 - The server builds the messages with `buildPrompt(state, character, kind)`; model answers should be JSON `{"text": "...", "cited": "source or null"}`.
 - In production the same server also serves the built game from `dist/` on `PORT` (`npm run build && npm start`; `npm start` runs `node server/index.ts`). In dev, Vite proxies `/api` to `http://localhost:8787`.

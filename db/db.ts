@@ -7,6 +7,7 @@ import pg from 'pg';
 import type { GameState, GlobalStats, RefereeCheck, TacticId } from '../shared/types.ts';
 import { TACTICS } from '../game/content.ts';
 import { radar } from '../game/radar.ts';
+import { scoreQuiz, type QuizAnswer } from '../game/quiz.ts';
 
 export interface Queryable { query(text: string, params?: unknown[]): Promise<{ rows: any[] }> }
 
@@ -118,15 +119,75 @@ export async function dbHealth(): Promise<'up' | 'down' | 'off'> {
   try { const q = await get(); if (!q) return 'off'; await q.query('SELECT 1'); return 'up'; } catch { return 'down'; }
 }
 
-// Mounted by server/index.ts: `if (await handleDb(req, res)) return;` Handles GET /api/stats/global only.
+// Pre/post quiz (SPEC §16). Validates and scores server-side; throws Error('bad: …') on a bad body.
+export type QuizPhase = 'pre' | 'post';
+export function parseQuiz(body: any): { sessionId: string; phase: QuizPhase; answers: QuizAnswer[] } {
+  const { sessionId, phase, answers } = body ?? {};
+  if (typeof sessionId !== 'string' || !/^[\w-]{1,64}$/.test(sessionId)) throw new Error('bad: sessionId must be 1-64 letters, digits, - or _');
+  if (phase !== 'pre' && phase !== 'post') throw new Error('bad: phase must be pre or post');
+  try { scoreQuiz(answers); } catch (e) { throw new Error(`bad: ${(e as Error).message}`); }
+  return { sessionId, phase, answers: answers.map((a: QuizAnswer) => ({ itemId: a.itemId, guess: a.guess, confidence: a.confidence })) };
+}
+
+// The first response per session and phase counts; a retake returns its score but isn't stored.
+export async function saveQuiz(sessionId: string, phase: QuizPhase, answers: QuizAnswer[]): Promise<{ correct: number; total: number } | null> {
+  const score = scoreQuiz(answers);
+  const q = await get();
+  if (!q) return null;
+  await q.query(`INSERT INTO quiz_responses (session_id, phase, correct, total, answers) VALUES ($1, $2, $3, $4, $5::jsonb)
+    ON CONFLICT (session_id, phase) DO NOTHING`, [sessionId, phase, score.correct, score.total, JSON.stringify(answers)]);
+  return score;
+}
+
+// Accuracy is a share of items right (0-1); null when n = 0. change = post - pre for sessions that did both.
+export interface QuizResults { pre: { n: number; accuracy: number | null }; post: { n: number; accuracy: number | null }; paired: { n: number; pre: number | null; post: number | null; change: number | null } }
+const QUIZ_RESULTS = `
+WITH r AS (SELECT session_id, phase, correct::float / total AS acc FROM quiz_responses),
+p AS (SELECT a.acc AS pre, b.acc AS post FROM r a JOIN r b ON a.session_id = b.session_id AND a.phase = 'pre' AND b.phase = 'post')
+SELECT
+  (SELECT count(*)::int FROM r WHERE phase = 'pre') AS pre_n, (SELECT avg(acc) FROM r WHERE phase = 'pre') AS pre_acc,
+  (SELECT count(*)::int FROM r WHERE phase = 'post') AS post_n, (SELECT avg(acc) FROM r WHERE phase = 'post') AS post_acc,
+  (SELECT count(*)::int FROM p) AS paired_n, (SELECT avg(pre) FROM p) AS paired_pre, (SELECT avg(post) FROM p) AS paired_post,
+  (SELECT avg(post - pre) FROM p) AS paired_change`;
+
+export async function quizResults(): Promise<QuizResults | null> {
+  const q = await get();
+  if (!q) return null;
+  const [r] = (await q.query(QUIZ_RESULTS)).rows;
+  const num = (x: unknown) => x == null ? null : Number(x);
+  return {
+    pre: { n: r.pre_n, accuracy: num(r.pre_acc) }, post: { n: r.post_n, accuracy: num(r.post_acc) },
+    paired: { n: r.paired_n, pre: num(r.paired_pre), post: num(r.paired_post), change: num(r.paired_change) },
+  };
+}
+
+async function readJson(req: IncomingMessage, limit = 8192): Promise<unknown> {
+  let raw = '';
+  for await (const chunk of req) { raw += chunk; if (raw.length > limit) throw new Error('bad: body too large'); }
+  try { return JSON.parse(raw); } catch { throw new Error('bad: body is not JSON'); }
+}
+
+// Mounted by server/index.ts: `if (await handleDb(req, res)) return;`
+// Handles GET /api/stats/global, POST /api/quiz, GET /api/quiz/results.
 export async function handleDb(req: IncomingMessage, res: ServerResponse): Promise<boolean> {
-  if (req.method !== 'GET' || new URL(req.url ?? '/', 'http://x').pathname !== '/api/stats/global') return false;
+  const path = new URL(req.url ?? '/', 'http://x').pathname;
+  const route = `${req.method} ${path}`;
+  if (route !== 'GET /api/stats/global' && route !== 'POST /api/quiz' && route !== 'GET /api/quiz/results') return false;
   const send = (status: number, body: unknown) => { res.writeHead(status, { 'content-type': 'application/json' }); res.end(JSON.stringify(body)); };
+  const off = { error: 'no database configured (set PGHOST… or DATABASE_URL)' };
   try {
-    const stats = await globalStats();
-    send(stats ? 200 : 503, stats ?? { error: 'no database configured (set PGHOST… or DATABASE_URL)' });
+    if (route === 'POST /api/quiz') {
+      const { sessionId, phase, answers } = parseQuiz(await readJson(req));
+      const score = await saveQuiz(sessionId, phase, answers);
+      send(score ? 200 : 503, score ?? off);
+    } else {
+      const body = route === 'GET /api/quiz/results' ? await quizResults() : await globalStats();
+      send(body ? 200 : 503, body ?? off);
+    }
   } catch (e) {
-    console.error('[db] stats:', e instanceof Error ? e.message : e);
+    const msg = e instanceof Error ? e.message : String(e);
+    if (msg.startsWith('bad: ')) return send(400, { error: msg.slice(5) }), true;
+    console.error(`[db] ${route}:`, msg);
     send(502, { error: 'database unavailable' });
   }
   return true;

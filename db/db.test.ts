@@ -4,7 +4,11 @@ import { createServer } from 'node:http';
 import { beforeEach, describe, expect, it } from 'vitest';
 import type { GameState } from '../shared/types.ts';
 import { init } from '../game/engine.ts';
-import { dbHealth, globalStats, handleDb, saveGame, toRows, useDb } from './db.ts';
+import { QUIZ } from '../game/quiz.ts';
+import { dbHealth, globalStats, handleDb, parseQuiz, quizResults, saveGame, saveQuiz, toRows, useDb } from './db.ts';
+
+// k right answers (first k items), the rest wrong.
+const answers = (k: number) => QUIZ.map((q, i) => ({ itemId: q.id, guess: i < k ? q.answer : q.answer === 'bot' ? 'human' as const : 'bot' as const, confidence: 3 }));
 
 // A finished level-2 game: bot 0 ejected in round `catchRound` (or never), plus one bot post and one DM.
 function finished(seed: number, catchRound: number | null, result: 'won' | 'lost', infection: number): GameState {
@@ -102,6 +106,51 @@ describe('handleDb', () => {
       expect((await fetch(`http://localhost:${port}/api/line`)).status).toBe(404);
       useDb(null);
       expect((await fetch(`http://localhost:${port}/api/stats/global`)).status).toBe(503);
+    } finally { srv.close(); }
+  });
+});
+
+describe('quiz', () => {
+  beforeEach(fresh);
+
+  it('parseQuiz rejects bad ids, phases and answers, and drops extra fields', () => {
+    const ok = { sessionId: 's-1', phase: 'pre', answers: answers(6) };
+    expect(parseQuiz({ ...ok, answers: [...answers(5).slice(1), { ...answers(6)[0], extra: 'x' }] }).answers.every(a => !('extra' in a))).toBe(true);
+    for (const bad of [{ ...ok, sessionId: 'x'.repeat(65) }, { ...ok, sessionId: '' }, { ...ok, sessionId: 'a b' }, { ...ok, phase: 'mid' },
+                       { ...ok, answers: answers(6).slice(1) }, { ...ok, answers: 'no' }, null])
+      expect(() => parseQuiz(bad)).toThrow(/^bad: /);
+  });
+
+  it('results: pre and post accuracy with n, paired change only for sessions that did both, first answer counts', async () => {
+    expect(await quizResults()).toEqual({ pre: { n: 0, accuracy: null }, post: { n: 0, accuracy: null }, paired: { n: 0, pre: null, post: null, change: null } });
+    expect(await saveQuiz('a', 'pre', answers(3))).toEqual({ correct: 3, total: 6 });
+    await saveQuiz('a', 'post', answers(6));
+    await saveQuiz('a', 'post', answers(0)); // retake: ignored
+    await saveQuiz('b', 'pre', answers(6));
+    await saveQuiz('c', 'post', answers(3));
+    const r = (await quizResults())!;
+    expect(r.pre).toEqual({ n: 2, accuracy: 0.75 });
+    expect(r.post).toEqual({ n: 2, accuracy: 0.75 });
+    expect(r.paired).toEqual({ n: 1, pre: 0.5, post: 1, change: 0.5 });
+  });
+
+  it('routes: POST /api/quiz scores server-side, 400 on bad body, results readable, 503 without a DB', async () => {
+    const srv = createServer(async (req, res) => { if (!(await handleDb(req, res))) { res.writeHead(404); res.end(); } });
+    await new Promise<void>(r => srv.listen(0, r));
+    const url = `http://localhost:${(srv.address() as { port: number }).port}/api/quiz`;
+    const post = (body: unknown) => fetch(url, { method: 'POST', body: typeof body === 'string' ? body : JSON.stringify(body) });
+    try {
+      const ok = await post({ sessionId: 'z', phase: 'pre', answers: answers(4), correct: 6 });
+      expect(ok.status).toBe(200);
+      expect(await ok.json()).toEqual({ correct: 4, total: 6 });
+      expect((await post({ sessionId: 'z', phase: 'pre', answers: [] })).status).toBe(400);
+      expect((await post('{not json')).status).toBe(400);
+      expect((await post('x'.repeat(9000))).status).toBe(400);
+      expect((await fetch(url)).status).toBe(404); // GET /api/quiz is not a route
+      expect((await (await fetch(`${url}/results`)).json()).pre).toEqual({ n: 1, accuracy: 4 / 6 });
+      useDb(null);
+      expect((await post({ sessionId: 'z', phase: 'post', answers: answers(4) })).status).toBe(503);
+      expect((await fetch(`${url}/results`)).status).toBe(503);
     } finally { srv.close(); }
   });
 });

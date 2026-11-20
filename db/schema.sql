@@ -44,3 +44,14 @@ CREATE TABLE IF NOT EXISTS referee_checks (
   issues     jsonb NOT NULL DEFAULT '[]',
   latency_ms int, model text
 );
+
+-- Pre/post quiz (SPEC §16): one row per session and phase; the first answer counts.
+CREATE TABLE IF NOT EXISTS quiz_responses (
+  session_id text NOT NULL,
+  phase      text NOT NULL CHECK (phase IN ('pre','post')),
+  created_at timestamptz NOT NULL DEFAULT now(),
+  correct    int  NOT NULL,
+  total      int  NOT NULL,
+  answers    jsonb NOT NULL,                   -- [{ itemId, guess, confidence }], scored server-side
+  PRIMARY KEY (session_id, phase)
+);
