@@ -10,6 +10,7 @@ import { StatusPill } from './StatusPill.tsx';
 import { Reveal } from './Reveal.tsx';
 import { TownMap } from './TownMap.tsx';
 import { Icon } from './Icon.tsx';
+import { PhaseHint } from './town/PhaseHint.tsx';
 import { SavePanel, ShareView } from './Share.tsx';
 import { replayIdFromUrl } from './share.ts';
 import { getRefereeLog } from './refereeLog.ts';
@@ -53,6 +54,7 @@ function Game({ onAgain }: { onAgain: () => void }) {
         <span>{PHASE_NAMES[s.phase]} · {Math.floor(secs / 60)}:{String(secs % 60).padStart(2, '0')}</span>
         <span title="Fact-Check Tokens left this round" aria-label={`${s.tokens} Fact-Check Tokens left`}><Icon name="search" /> {s.tokens}</span>
         <SoundToggle />
+        <PhaseHint s={s} />
       </header>
       <TownMap infection={s.infection} />
 

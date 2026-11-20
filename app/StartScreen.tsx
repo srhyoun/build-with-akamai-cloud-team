@@ -63,6 +63,7 @@ export function StartScreen({ onStart }: { onStart: (level: GameState['level']) 
       </section>
 
       <nav className="start-links" aria-label="Learn more">
+        <a href="/howto.html"><Icon name="compass" size={22} />How to play</a>
         <a href="/codex.html"><Icon name="book" size={22} />Codex</a>
         <a href="/quiz.html?phase=pre"><Icon name="question" size={22} />Quiz</a>
       </nav>
