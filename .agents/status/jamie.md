@@ -34,14 +34,14 @@ I will NOT touch `game/`, `app/`, `shared/`, `store/` (ethanL30), `docs/SPEC.md`
 ## codex@jamie
 
 ### Working on right now
-Pitch and 30-second demo script on `jamie/pitch-demo`.
+Pitch and 30-second demo script ready for review on `jamie/pitch-demo`.
 
 ### Files / folders I'm touching (hands off)
-- `docs/PITCH.md`
 - The Codex section of `.agents/status/jamie.md`
 
 ### Just finished
-- Implemented and verified the start screen and opened PR #3 on `jamie/start-screen`.
+- Added `docs/PITCH.md` with timed narration, rehearsal checks, and fallback narration.
+- Start screen and level picker are in PR #3.
 
 ### Missing / I need from someone
-- Final integration and a live run to confirm which demo beats can be shown.
+- Verify the final live Inference and Object Storage runs before recording the cloud-backed demo.

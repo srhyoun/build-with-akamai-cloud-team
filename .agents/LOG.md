@@ -24,3 +24,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 12:08 | surya-prasanna | under-the-hood | ethanL30's store/ route shapes into CONTRACTS.md + SPEC §6/§12/§14 (private bucket in Chicago); handoff done
 2026-11-20 11:19 | claude@jinmin | llm-endpoint | handoff to all: game/voice.ts "null" citation bug, tsconfig verbatimModuleSyntax, workshop facts (team size, inference, deploy, judging)
 2026-11-20 11:20 | codex@jamie | pitch-demo | started the pitch and 30-second demo script
+2026-11-20 11:21 | codex@jamie | pitch-demo | finished pitch, timed demo script, and rehearsal checks
