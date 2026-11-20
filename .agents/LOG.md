@@ -21,3 +21,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 11:48 | surya-prasanna | under-the-hood | merged PR #5 (R1+R2); claimed R3, branch surya/under-the-hood
 2026-11-20 11:14 | ethanL30 | replay-storage | handoffs: mount line to claude@jinmin, final route shapes to surya-prasanna; building store/ with local-file fallback
 2026-11-20 12:02 | surya-prasanna | under-the-hood | R3 done: referee log + Under the Hood drawer, browser-side checkLine until /api/line sends check; tested with a leaking fake model; PR from surya/under-the-hood
+2026-11-20 12:08 | surya-prasanna | under-the-hood | ethanL30's store/ route shapes into CONTRACTS.md + SPEC §6/§12/§14 (private bucket in Chicago); handoff done

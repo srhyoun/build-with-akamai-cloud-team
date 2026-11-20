@@ -155,7 +155,7 @@ Design rules:
 
 ## 6. Akamai Cloud services
 
-> Confirm at the workshop / in Cloud Manager: which services the event account can create, the Inference base URL + model names, and the region (Seattle `us-sea` is closest). Record what you learn in `docs/DEPLOY.md` and the env-var list in CONTRACTS.md.
+> Confirm at the workshop / in Cloud Manager: which services the event account can create, the Inference base URL + model names, and the region. Per the workshop, the Object Storage bucket must be in **Chicago** (`us-ord-10`); put the Linode and DB near it (Chicago) unless told otherwise. Record what you learn in `docs/DEPLOY.md` and the env-var list in CONTRACTS.md.
 
 | Service | Use | Feature that depends on it (say it in the demo) | Start when | Fallback |
 |---|---|---|---|---|
@@ -167,7 +167,7 @@ Design rules:
 
 Gotchas:
 - Managed PostgreSQL: add the **Linode's public IP to the DB's allowed IPs**, connect with SSL (`sslmode=require`; download the CA cert from Cloud Manager if the client insists on verifying).
-- Object Storage is S3-compatible (`@aws-sdk/client-s3`): endpoint `https://<region>.linodeobjects.com`, objects under `replays/` and `share/` uploaded with ACL `public-read`, bucket **CORS** allows `GET` from any origin.
+- Object Storage is S3-compatible: endpoint `https://us-ord-10.linodeobjects.com` (Chicago, per the workshop). The bucket stays **private** (workshop advice): the server reads replays and passes them on, so no public-read ACL or CORS is needed.
 - Everything secret goes in `.env` on the Linode. **Never commit `.env`.**
 
 ---
@@ -303,8 +303,8 @@ Bot Radar:
 | Method & path | Body | Answer | Owner |
 |---|---|---|---|
 | `POST /api/line` | `{ state, charId, kind, to? }` (existing) | `200 { ...say, check: RefereeCheck }`; `422 { check }` when blocked twice; `503` no model | Jamie |
-| `POST /api/replays` | `{ state: GameState, refereeLog: RefereeCheck[], classCode?: string, playerName?: string }` — only when `state.phase === "over"`; body ≤ 1 MB. Uploads the replay **and** calls `db/`'s `saveGame()` (skipped if no DB). Final shape: ethanL30's handoff. | `200 { id, shareUrl }` | ethanL30 (`store/`) |
-| `GET /api/replays/:id`, `GET /api/leaderboard` | — | replay JSON; leaderboard (Ethan's design) | ethanL30 (`store/`) |
+| `POST /api/replays` | `{ state: GameState, refereeLog: RefereeCheck[], classCode?: string, playerName?: string }` — only when `state.phase === "over"`; body ≤ 1 MB. Uploads the replay **and** calls `db/`'s `saveGame()` (skipped if no DB). Calls `db/` via `hooks.saveGame`. | `200 { id, shareUrl, score }`; `400` / `413` / `429` | ethanL30 (`store/`) |
+| `GET /api/replays/:id`, `GET /api/leaderboard` | — | `{ replay, source }`; `{ entries, source }` top 10 (CONTRACTS.md) | ethanL30 (`store/`) |
 | `GET /api/stats/global` | — | `GlobalStats`, cached 5 s | Database (`db/`) |
 | `GET /api/health` | — | `{ ok, inference, db, storage: "up" \| "down" }` | Database (`db/`) |
 | `GET /api/stats/class/:code` (P1) | — | `GlobalStats & { players: { name, score, result }[] }` | Database |
@@ -397,7 +397,7 @@ Display: "Bots using **Invented insider** survived **68%** of rounds (n = 41)." 
 
 ## 14. Object Storage
 
-Owner: ethanL30 (`store/`, claimed). Bucket `whos-the-bot-<suffix>`; `replays/` public-read. Details are Ethan's call; this is the shape the rest of the spec assumes.
+Owner: ethanL30 (`store/`, claimed). Private bucket in Chicago (`us-ord-10`); the server reads objects and serves them through `GET /api/replays/:id`. Objects: `replays/{id}.json` and `scores/{rank-key}-{id}.json` (one per game, so the leaderboard needs no read-modify-write).
 
 | Key | Content | Written |
 |---|---|---|
@@ -513,7 +513,7 @@ Cross-lane edits go through a handoff.
 |---|---|---|---|
 | P1 | **Provision Managed PostgreSQL first**, then Linode, bucket, firewall; write `docs/DEPLOY.md`; env var names in CONTRACTS.md | humans + Deploy | all three reachable from the Linode |
 | P2 | `db/schema.sql` applied; `saveGame()` writes rows; `store/`'s save handler calls it | Database | a finished game appears in the DB |
-| P3 | `POST /api/replays`: replay JSON to Object Storage, returns `shareUrl`; `?replay=<id>` view; bucket CORS/public-read | ethanL30 (claimed) | QR opens the card on a phone |
+| P3 | `POST /api/replays`: replay JSON to Object Storage, returns `shareUrl`; `?replay=<id>` view; private bucket | ethanL30 (claimed) | QR opens the card on a phone |
 | P4 | `/api/stats/global` (cached) + `app/Stats.tsx`; `/api/health` + `StatusPill` | Database | stats page shows real games |
 | P5 | Deploy: Node 23.6+ on the Linode, `npm run build && npm start` under systemd/pm2, Caddy for HTTPS (`<ip>.sslip.io` if no domain) | Deploy | public HTTPS URL plays a live game (existing board task "Deploy…") |
 | P6 (P1) | Class code endpoint + view | Database | per-class data shows |
@@ -583,7 +583,7 @@ Cross-lane edits go through a handoff.
   PORT=8080
   INFERENCE_BASE_URL=   INFERENCE_API_KEY=   INFERENCE_MODEL=   REFEREE_MODEL=
   DATABASE_URL=postgres://user:pass@host:port/db?sslmode=require
-  S3_ENDPOINT=https://<region>.linodeobjects.com   S3_REGION=<region>   S3_BUCKET=
+  S3_ENDPOINT=https://us-ord-10.linodeobjects.com   S3_BUCKET=
   S3_ACCESS_KEY=   S3_SECRET_KEY=
   PUBLIC_APP_URL=https://<host>
   ```
