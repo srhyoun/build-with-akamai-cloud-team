@@ -50,3 +50,4 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - [x] Choose stack, write decision record 001 — .agents/decisions/
 - [x] Define module contracts (game ↔ app ↔ server) — .agents/CONTRACTS.md
 - [x] Playable skeleton: pure engine, prompts + scripted characters, chat UI (server/ split off to Jamihuh21) — shared/, game/, app/
+- [x] Start screen: how to play, level 1 (1 bot) / level 2 (2 bots) — app/ — [codex@jamie]
