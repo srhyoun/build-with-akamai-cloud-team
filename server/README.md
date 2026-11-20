@@ -3,7 +3,8 @@
 The small Node server behind Who's the Bot? Owner: claude@jinmin (Jamie).
 
 - `POST /api/line`: one character line from **Akamai Cloud Inference**. Contract in `.agents/CONTRACTS.md`.
-- `GET /api/health`: `{ "ok": true, "model": "<model name or null>" }`. Shows whether a model is configured.
+- `GET /api/health`: `{ ok, model, db, storage }`: model name or null, `db` = `up`/`down`/`off`, `storage` = `up`/`down`.
+- Mounted from other folders: `/api/replays` + `/api/leaderboard` (`store/`, Object Storage, ethanL30) and `/api/stats/global` (`db/`, Managed PostgreSQL, surya-prasanna). Every saved replay also goes to `saveGame()` in `db/`.
 - Everything else: the built game from `dist/` (production). Client routes like `/?replay=…` get `index.html`.
 
 The key stays on the server. The browser never sees it.
@@ -48,17 +49,18 @@ The first-version names `AKAMAI_INFERENCE_URL` / `_KEY` / `_MODEL` / `_TIMEOUT_M
 3. `buildPrompt(state, character, kind)` from `game/voice.ts` makes the messages.
 4. `server/inference.ts` calls `<AKAMAI_BASE_URL>/chat/completions` with `max_tokens` 300, temperature 0.9, and **structured output**: `response_format` = the `{ text: string, cited: string | null }` JSON schema (`LINE_SCHEMA` in `server/line.ts`). If the endpoint refuses `response_format` (400/422), it retries once without it and stops sending it for the rest of the process. For Qwen3 models it adds `/no_think`, so the model doesn't spend the token budget thinking.
 5. Format checks: an answer cut off by `max_tokens` (`finish_reason: "length"`) or with no text is retried once. `<think>` blocks (closed, unclosed or a lone `</think>`) are dropped, `parseLine()` turns the JSON into a `say` Command, and a `cited` of `"null"`/`"none"` is dropped so Source Check can't flag a source nobody cited.
-6. **Referee** (Judging 20%, decision 002): `checkLine()` from `game/referee.ts` runs on every model line. It blocks a bot confessing, a human pushing the false story, AI/model leaks, banned real-world topics and empty lines, and warns on length and fourth-wall breaks. Blocked → one retry, with a note telling the model what was wrong → blocked again = `422 { check }`. Passed → `200 { ...say, check }`, cut to 220 chars (200 for a defense) if `R_LENGTH` warned. The app shows every `check` in Under the Hood.
+6. **Referee** (Judging 20%, decision 002): `checkLine()` from `game/referee.ts` runs on every model line. It blocks a bot confessing, a human pushing the false story, AI/model leaks, banned real-world topics and empty lines, and warns on length and fourth-wall breaks. Blocked → one retry, with a note telling the model what was wrong → blocked again = `422 { check }`. Passed → `200 { ...say, check }`, cut to 220 chars (200 for a defense) if `R_LENGTH` warned. Then the **referee model** (I3, `server/refereeModel.ts`, SPEC §8.1) grades the line with a second call: issues (`MODEL_ROLE_LEAK`, `MODEL_REAL_WORLD`, …) and 1–5 scores for bot subtlety, human realism and tactic clarity. Its blocks count for posts and defenses (same retry → 422); on DMs they're logged as warnings only. If the referee call fails or times out, the line goes out on the rules alone. Cost: about one extra ~2 s call per line. The app shows every `check`, with scores, in Under the Hood.
 
 | Status | Means | The app then |
 |--------|-------|--------------|
 | 200 | a `say` Command plus `check` (the referee's verdict) | logs the check, dispatches the line |
 | 400 | bad request body | uses a scripted line |
 | 422 | `{ check }`: the referee blocked the line twice | logs the check, uses a scripted line |
+| 429 | this player IP asked for more than 40 lines this minute | uses a scripted line |
 | 502 | the model failed, timed out, hit the shared per-minute token budget (429), was cut off, or said nothing | uses a scripted line for this one |
 | 503 | no model configured | uses scripted lines for the rest of the game |
 
-Anyone who can reach `/api/line` can spend the team's token budget (up to 300 tokens a call). Fine for the demo; don't leave it up after the event.
+**Rate limit:** 40 `/api/line` calls a minute per player IP (`429`, then the app uses a scripted line). Behind Caddy, the IP comes from `X-Forwarded-For`, trusted only from localhost. It's in memory and per process. Anyone can still spend some of the team's token budget, so don't leave it up after the event.
 
 ## Adding another API route
 

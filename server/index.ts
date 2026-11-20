@@ -8,6 +8,16 @@ import { extname, join, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { handleLine } from './line.ts';
 import { configProblem, modelConfig, type ModelConfig } from './inference.ts';
+import type { RefereeCheck } from '../shared/types.ts';
+import { handleStore, hooks, storageHealth } from '../store/handler.ts';
+import { dbHealth, handleDb, saveGame } from '../db/db.ts';
+
+// Every saved replay also becomes a row in Managed PostgreSQL (a no-op with no DB). The referee log comes from the
+// player's browser, so only object entries go on; one bad entry would otherwise lose the whole row.
+hooks.saveGame = g => saveGame({
+  ...g, classCode: g.classCode ?? undefined, playerName: g.playerName ?? undefined,
+  refereeLog: g.refereeLog.filter((c): c is RefereeCheck => typeof c === 'object' && c !== null && !Array.isArray(c)),
+});
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const MAX_BODY = 1024 * 1024; // a full GameState is a few KB
@@ -17,7 +27,26 @@ const TYPES: Record<string, string> = {
   '.webp': 'image/webp', '.gif': 'image/gif', '.ico': 'image/x-icon', '.woff2': 'font/woff2', '.txt': 'text/plain; charset=utf-8',
 };
 
-export interface AppOptions { cfg: ModelConfig | null; dist?: string; fetchImpl?: typeof fetch }
+export interface AppOptions { cfg: ModelConfig | null; dist?: string; fetchImpl?: typeof fetch; linesPerMinute?: number }
+
+// Who's asking: behind Caddy (same machine) the client is the last X-Forwarded-For hop; never trust the header otherwise.
+function clientIp(req: IncomingMessage) {
+  const peer = req.socket.remoteAddress ?? '';
+  const fwd = String(req.headers['x-forwarded-for'] ?? '').split(',').pop()?.trim();
+  return fwd && /^(127\.|::1$|::ffff:127\.)/.test(peer) ? fwd : peer;
+}
+
+// /api/line spends the team's shared per-minute token budget: cap each player. A game asks ~10-15 lines a minute.
+// shortcut: in-memory fixed window, resets on restart; fine for one Linode, needs a shared store if we scale out.
+function rateLimiter(perMinute: number) {
+  const seen = new Map<string, { start: number; count: number }>();
+  return (ip: string, now = Date.now()) => {
+    if (seen.size > 10_000) seen.clear(); // bounded memory under a flood
+    const w = seen.get(ip);
+    if (!w || now - w.start >= 60_000) { seen.set(ip, { start: now, count: 1 }); return true; }
+    return ++w.count <= perMinute;
+  };
+}
 
 function send(res: ServerResponse, status: number, body: unknown) {
   res.writeHead(status, { 'content-type': 'application/json', 'cache-control': 'no-store' }).end(JSON.stringify(body));
@@ -56,21 +85,28 @@ async function serveStatic(dist: string, pathname: string, res: ServerResponse) 
   }).end(data);
 }
 
-export function createApp({ cfg, dist = join(ROOT, 'dist'), fetchImpl = fetch }: AppOptions): Server {
+export function createApp({ cfg, dist = join(ROOT, 'dist'), fetchImpl = fetch, linesPerMinute = 40 }: AppOptions): Server {
   const distDir = resolve(dist);
+  const allowLine = rateLimiter(linesPerMinute);
   return createServer(async (req, res) => {
     try {
       let pathname: string;
       try { ({ pathname } = new URL(req.url ?? '/', 'http://localhost')); } catch { return send(res, 400, { error: 'bad request target' }); }
       if (pathname === '/api/line') {
         if (req.method !== 'POST') return send(res, 405, { error: 'POST only' });
+        if (!allowLine(clientIp(req))) return send(res, 429, { error: 'too many lines this minute' }); // app uses a scripted line
         let body: unknown;
         try { body = await readJson(req); }
         catch (e) { return send(res, (e as { status?: number }).status ?? 400, { error: (e as Error).message }); }
         const r = await handleLine(body, cfg, fetchImpl);
         return send(res, r.status, r.body);
       }
-      if (pathname === '/api/health') return send(res, 200, { ok: true, model: cfg?.model ?? null });
+      if (pathname === '/api/health') {
+        const [db, storage] = await Promise.all([dbHealth(), storageHealth()]);
+        return send(res, 200, { ok: true, model: cfg?.model ?? null, db, storage });
+      }
+      if (await handleStore(req, res)) return; // /api/replays, /api/leaderboard (Object Storage)
+      if (await handleDb(req, res)) return;    // /api/stats/global (Managed PostgreSQL)
       if (pathname.startsWith('/api/')) return send(res, 404, { error: 'no such API route' });
       if (req.method !== 'GET' && req.method !== 'HEAD') return send(res, 405, { error: 'GET only' });
       await serveStatic(distDir, pathname, res);
