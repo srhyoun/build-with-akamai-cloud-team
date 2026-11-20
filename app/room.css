@@ -1,0 +1,23 @@
+/* "Play together" rooms: the lobby on the start screen and the scoreboard on the game-over screen. */
+.rm-panel { display: grid; gap: 8px; justify-items: center; width: min(100%, 340px); margin: 12px auto; padding: 14px; border: 2px solid #7a4e2b; border-radius: 18px; background: rgb(255 246 220 / .95); color: #3b2a1a; text-align: center; overflow-wrap: anywhere; }
+.rm-panel p, .rm-panel h2, .rm-panel h3 { margin: 0; }
+.rm-panel label { font-weight: 600; }
+.rm-panel input { font: inherit; width: 100%; min-height: 44px; padding: 8px 14px; border: 2px solid #7a4e2b; border-radius: 999px; background: #fff; color: #3b2a1a; text-align: center; }
+.rm-row { display: flex; gap: 6px; width: 100%; }
+.rm-row input { flex: 1; min-width: 0; }
+.rm-codein, .rm-code { font-family: ui-monospace, Menlo, monospace; letter-spacing: .25em; text-transform: uppercase; }
+.rm-code { font-size: 2.4rem; font-weight: 700; line-height: 1; padding-left: .25em; }
+.rm-qr { display: block; width: 180px; max-width: 100%; }
+.rm-foot { color: #6b5340; font-size: .85rem; }
+.rm-foot:empty { margin: 0; } /* not display:none: a hidden live region is not announced when its text arrives */
+.rm-invite { display: grid; gap: 6px; justify-items: center; }
+.rm-players, .rm-board { list-style: none; margin: 0; padding: 0; width: 100%; display: flex; gap: 6px; }
+.rm-players { flex-wrap: wrap; justify-content: center; }
+.rm-players li { padding: 4px 12px; border-radius: 999px; background: #fff; border: 1px solid #e3c9a0; }
+.rm-board { flex-direction: column; text-align: left; }
+.rm-board li { display: flex; align-items: baseline; gap: 8px; padding: 6px 10px; border-radius: 10px; background: #fff; border: 1px solid #e3c9a0; }
+.rm-name { flex: 1; min-width: 0; }
+.rm-panel [aria-current='true'] { background: #fff0b8; border-color: #7a4e2b; font-weight: 700; }
+.rm-open, .rm-panel button { font: inherit; font-weight: 600; min-height: 44px; padding: 8px 18px; border: 2px solid #7a4e2b; border-radius: 999px; background: #fff; color: #3b2a1a; cursor: pointer; }
+.rm-open { margin-top: 10px; }
+.rm-panel button:disabled { opacity: .6; cursor: default; }

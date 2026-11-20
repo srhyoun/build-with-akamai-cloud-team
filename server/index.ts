@@ -11,6 +11,7 @@ import { configProblem, modelConfig, type ModelConfig } from './inference.ts';
 import type { RefereeCheck } from '../shared/types.ts';
 import { handleStore, hooks, storageHealth } from '../store/handler.ts';
 import { dbHealth, handleDb, saveGame } from '../db/db.ts';
+import { handleRooms } from '../rooms/rooms.ts';
 
 // Every saved replay also becomes a row in Managed PostgreSQL (a no-op with no DB). The referee log comes from the
 // player's browser, so only object entries go on; one bad entry would otherwise lose the whole row.
@@ -107,6 +108,7 @@ export function createApp({ cfg, dist = join(ROOT, 'dist'), fetchImpl = fetch, l
       }
       if (await handleStore(req, res)) return; // /api/replays, /api/leaderboard (Object Storage)
       if (await handleDb(req, res)) return;    // /api/stats/global (Managed PostgreSQL)
+      if (await handleRooms(req, res)) return; // /api/rooms (play-together rooms, in memory)
       if (pathname.startsWith('/api/')) return send(res, 404, { error: 'no such API route' });
       if (req.method !== 'GET' && req.method !== 'HEAD') return send(res, 405, { error: 'GET only' });
       await serveStatic(distDir, pathname, res);
