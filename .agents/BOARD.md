@@ -15,7 +15,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - [QA final sweep] Model defenses come back tagged with a tactic (live: defense tagged emotional_outrage), while scripted defenses are left untagged on purpose so the reveal's blind spot is not skewed. Low priority; drop the tag for kind 'defense' in server/line.ts or parseLine after the freeze — [found by claude@surya-prasanna]
 <!-- anything an agent noticed is missing, broken, or needed by someone else -->
 <!-- - thing — who needs it — [found by agent@human] -->
-- **Live: https://172-232-188-135.sslip.io** (Ethan's Linode, main at 6e88651). **All three Akamai services are on (checked 14:02):** `/api/health` → model `qwen3-8-27b`, `db: up`, `storage: up`; Managed PostgreSQL serves `/api/stats/global` (1 game); Object Storage holds replays and the leaderboard. Redeploys go through ethanL30 — whole team — [found by ethanL30]
+- **Live: https://172-232-188-135.sslip.io** (Ethan's Linode, main at 1cc6033). **All three Akamai services are on (checked 14:02):** `/api/health` → model `qwen3-8-27b`, `db: up`, `storage: up`; Managed PostgreSQL serves `/api/stats/global` (1 game); Object Storage holds replays and the leaderboard. Redeploys go through ethanL30 — whole team — [found by ethanL30]
 - Run the quiz on 5–10 real people (pre → play → post) once the DB is live, then put the real n in the pitch — humans — [found by surya-prasanna]
 - Live bots are easy to spot from style alone (style fixed in #22; new: bots now debunk the false story and accuse each other — handoff to codex@jamie): in a live level-2 game both bots wrote ALL CAPS countdowns ("15 MINUTES left", "u die"), and @GretaV (librarian: "precise, links official pages") dropped her persona entirely. checkLine passed all of them. Prompt tuning (SPEC §8, F6 done-when) should keep bots in their persona's voice — game/voice.ts owner (codex@jamie) — [found by claude@sarah]
 
@@ -26,11 +26,11 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - [ ] [V9] Phone check of the new look after the merge: full game with sound, light + dark, Start transition, QR scan; findings under Missing — branch surya/v9-phone-qa — [codex@surya]
 - [ ] [P1] Provision Managed PostgreSQL (first!), Linode, Object Storage bucket, Cloud Firewall; write docs/DEPLOY.md (SPEC §6) — docs/DEPLOY.md — branch jamie/deploy — [claude@jinmin] (also covers the older "Deploy the game to an Akamai Linode with HTTPS" line)
 - [ ] Release verification: credential-free pull-request CI and integrated replay, class stats, and quiz regression coverage — .github/workflows/, integration/ — [codex@jamie]
-- [ ] Welcome screen (Ethan, 14:09): full-screen start page, "Welcome to Who's the Bot?", team name Kimchi Trenchers, one big round Start button, tutorial strip at the bottom, full-screen transition into the game; level, class code and links stay reachable — app/StartScreen.tsx, app/start-screen.css — branch ethan/welcome-screen — PR #64 open, fits 375x812 and 1440x900 — [ethanL30]
 
 ## Blocked
 
 ## Done
+- [x] Welcome screen (Ethan, 14:09): full-screen start page, "Welcome to Who's the Bot?", team name Kimchi Trenchers, one big round Start button, tutorial strip at the bottom, full-screen transition into the game; level, class code and links stay reachable — app/StartScreen.tsx, app/start-screen.css — branch ethan/welcome-screen — PR #64 merged, live — [ethanL30]
 - [x] Mobile vote tally fits the phone viewport with long voter lists — app/vote-results.css — branch surya/mobile-vote-tally — [codex@surya]
 - [x] Tap a villager in the town scene to open their DM (selected one highlighted): the scene becomes a control, not just a picture — app/town/TownScene.tsx (onPick + selected props), one line in app/App.tsx — codex@surya's V11 hold on TownScene.tsx is merged (#52) — PR from surya/tap-villager: 1 test, checked at 375×812 with the animal villagers (tap opens, tap again closes, ring on the selected one) — [surya-prasanna]
 - [x] [V7] Chat avatars match the villagers: swap the `Crew` pebble for `<Villager>` in feed, cast row, votes — app/App.tsx (`Crew`) — ethan/town-design is merged — suggested: surya-prasanna (claude@sarah has not picked it up) — skip if it risks the layout — branch surya/v7-avatars — [surya-prasanna] (PR #50 merged)
