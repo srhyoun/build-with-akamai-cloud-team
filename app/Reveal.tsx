@@ -17,7 +17,7 @@ export function Reveal({ s, onAgain, children }: { s: GameState; onAgain: () => 
 
   return (
     <main className="rv">
-      <h1>{s.result === 'won' ? '✅ You found every bot!' : '❌ The false story reached the town.'}</h1>
+      <h1>{s.result === 'won' ? 'You found every bot.' : 'The false story reached the town.'}</h1>
       <p className="rv-headline">{r.headline}</p>
 
       <section className="rv-card" aria-labelledby="rv-radar">

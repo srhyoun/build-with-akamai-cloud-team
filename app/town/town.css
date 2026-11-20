@@ -101,3 +101,9 @@
 @keyframes tw-v-blink { 0%, 93%, 100% { transform: scaleY(1); } 96% { transform: scaleY(.1); } }
 @keyframes tw-v-bounce { 0%, 100% { transform: translateY(0) scaleY(1); } 50% { transform: translateY(-5%) scaleY(1.03); } }
 @keyframes tw-v-tear { 0%, 20% { translate: 0 0; opacity: 1; } 100% { translate: 0 9px; opacity: 0; } }
+
+/* phase hint: its own full row at the bottom of the header */
+.tw-hint { flex: 1 0 100%; display: flex; align-items: center; gap: 8px; margin: 0; padding: 4px 6px 4px 12px; border-radius: 999px; background: #fff8e8; color: #3b2a1a; font-size: .85rem; line-height: 1.25; }
+.tw-hint span { flex: 1; min-width: 0; }
+.tw-hint a { flex: none; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: #3f7d2c; color: #fff; font-weight: 700; text-decoration: none; }
+.bar.dm .tw-hint { display: none; } /* the DM strip keeps the header short */

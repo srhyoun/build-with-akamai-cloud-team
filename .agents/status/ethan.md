@@ -4,25 +4,24 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 
 **Human:** Ethan
 **Agent:** Claude Code (ethanL30)
-**Branch:** `ethan/cozy-villagers`
-**Last updated:** 2026-11-20 13:59
+**Branch:** none
+**Last updated:** 2026-11-20 14:08
 
 ## ethanL30
 
 ### Working on right now
-**[C1] animal villagers + [C2] bright daytime look: PR #58 open** (`ethan/cozy-villagers`), https://github.com/srhyoun/build-with-akamai-cloud-team/pull/58. 262 tests, played at 375 px. Waiting for Ethan's OK to merge, then I redeploy the Linode. `<Villager>` props are unchanged, so #50, #55, #56 keep working.
+Nothing in flight. I redeploy Ethan's Linode after merges and once more right after the 14:30 freeze, and watch the deadline (submit by 15:00).
 
-The game is live at https://172-232-188-135.sslip.io (main `daedaa2`, model on, DB and bucket still off).
+**Live: https://172-232-188-135.sslip.io** at main `6e88651`: model `qwen3-8-27b`, Managed PostgreSQL up, Object Storage up.
 
 ### Files / folders I'm touching (hands off)
-- `app/town/Villager.tsx`, `app/town/theme.css`, `app/town/town.css`
-- `app/StartScreen.tsx`, `app/start-screen.css` (less text)
-- `package.json` + lockfile: `@fontsource/fredoka` in, `@fontsource/alfa-slab-one` out
 - `.agents/status/ethan.md` (always mine)
 
-Not touching: `.eject` / `Ejection` (goes with [C3]), `TownScene.tsx` layout, `app/sound.ts`.
+Released: everything in `app/town/`, `app/HowTo.tsx`, `app/howto.css`, `howto.html`, `store/`, the share screens.
 
 ### Just finished
+- Merged today after 14:00: #58 animal villagers + daytime look, #60 laptop layout (codex@surya's CSS), #62 How to play page + phase hint line + theme import fix on codex/quiz/stats.
+- Judging 40% verified on the real bucket (`node store/selftest.ts` PASS on the Linode).
 - **Deployed main on Ethan's Linode** (172.232.188.135, https://172-232-188-135.sslip.io): service + Caddy running, no keys yet, HTTPS waiting on the firewall rule for 80/443. Details in my handoff to all.
 - Put Ethan's design brief in the repo as `docs/DESIGN_BRIEF.md` and as Open board tasks [V1]–[V5]. Nobody owns them yet.
 - Handed the last step of Judging 40% (live bucket check) to claude@jinmin.

@@ -7,7 +7,7 @@ import { QUIZ, scoreQuiz, type Guess, type QuizAnswer } from '../game/quiz.ts';
 import type { QuizResults } from '../db/db.ts';
 import './style.css';
 import './quiz.css';
-import.meta.glob('./town/theme.css', { eager: true }); // [V6] town theme, loaded last; matches nothing until ethan/town-design merges
+import './town/theme.css'; // the town theme, loaded last so it wins over the page's own stylesheet
 
 const SMALL_N = 30; // below this every number carries "small sample"
 const pct = (x: number) => `${Math.round(x * 100)}%`;
@@ -52,7 +52,7 @@ function Take({ phase }: { phase: 'pre' | 'post' }) {
       </article>
       <div className="quiz-pick" role="group" aria-label="Bot or human?">
         {(['bot', 'human'] as const).map(g => (
-          <button key={g} aria-pressed={guess === g} onClick={() => setGuess(g)}>{g === 'bot' ? '🤖 Bot' : '🙂 Human'}</button>
+          <button key={g} aria-pressed={guess === g} onClick={() => setGuess(g)}>{g === 'bot' ? 'Bot' : 'Human'}</button>
         ))}
       </div>
       {guess && (
@@ -83,7 +83,7 @@ function Take({ phase }: { phase: 'pre' | 'post' }) {
             {QUIZ.map(q => (
               <li key={q.id} className={mine.get(q.id) === q.answer ? 'right' : 'wrong'}>
                 <span className="quiz-tag">{q.answer === 'bot' ? `BOT · ${TACTICS[q.tactic!].name}` : 'HUMAN'}</span>
-                <b>{q.handle}</b> <span className="quiz-you">{mine.get(q.id) === q.answer ? '✓ you got it' : `✗ you said ${mine.get(q.id)}`}</span>
+                <b>{q.handle}</b> <span className="quiz-you">{mine.get(q.id) === q.answer ? 'Correct' : `You said ${mine.get(q.id)}`}</span>
                 <p>{q.text}</p>
                 <p className="quiz-why">{q.why}</p>
               </li>

@@ -33,7 +33,7 @@ export function UnderTheHood({ s }: { s: GameState }) {
   return (
     <>
       <button className="uth-toggle" aria-expanded={open} aria-controls="uth" onClick={() => setOpen(!open)}>
-        🔬 Under the Hood <span>{log.length}</span>
+        Under the Hood <span>{log.length}</span>
       </button>
       {open && (
         <aside id="uth" className="uth" aria-label="Under the Hood: referee log">
@@ -68,7 +68,7 @@ function Row({ c, over, handle }: { c: RefereeCheck; over: boolean; handle: (id:
   return (
     <li className={`uth-row ${verdict}`}>
       <div className="uth-line">
-        <span className={`uth-badge ${verdict}`}>{verdict === 'pass' ? '✓ PASS' : verdict === 'block' ? '✗ BLOCK' : '↺ SCRIPTED'}</span>
+        <span className={`uth-badge ${verdict}`}>{verdict === 'pass' ? 'PASS' : verdict === 'block' ? 'BLOCK' : 'SCRIPTED'}</span>
         <span>R{c.round} · {over ? <b>{handle(c.charId)}</b> : 'a character'} · {KINDS[c.kind]}{c.attempt > 1 ? ` · attempt ${c.attempt}` : ''}</span>
         <span className="uth-meta">{c.stage === 'fallback' ? '' : `${c.latencyMs} ms · `}{c.model}</span>
       </div>

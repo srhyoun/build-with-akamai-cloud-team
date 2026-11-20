@@ -1,5 +1,6 @@
 // [V4] Original sounds, all synthesized with the Web Audio API (no audio files).
 // Silent until the player's first tap or key (browser autoplay rules), and safe when AudioContext is missing (tests, old browsers).
+import { Icon } from './Icon.tsx';
 import { createElement, useEffect, useRef, useState } from 'react';
 import type { GameState } from '../shared/types.ts';
 
@@ -137,5 +138,5 @@ export function SoundToggle() {
   return createElement('button', {
     className: 'sound-toggle', 'aria-pressed': m, 'aria-label': m ? 'Unmute sound' : 'Mute sound', title: m ? 'Unmute sound' : 'Mute sound',
     onClick: () => { setMuted(!m); setM(!m); unlock(); },
-  }, m ? '🔇' : '🔊');
+  }, createElement(Icon, { name: m ? 'mute' : 'sound', size: 22 }));
 }

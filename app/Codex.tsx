@@ -6,7 +6,7 @@ import type { TacticId, ToolId } from '../shared/types.ts';
 import { TACTICS } from '../game/content.ts';
 import './style.css';
 import './codex.css';
-import.meta.glob('./town/theme.css', { eager: true }); // [V6] town theme, loaded last; matches nothing until ethan/town-design merges
+import './town/theme.css'; // the town theme, loaded last so it wins over the page's own stylesheet
 
 // Player-facing copy. TACTICS[t].prompt is written for the bots, so it isn't shown here.
 const SPOT: Record<TacticId, string> = {
@@ -41,7 +41,7 @@ export function Codex() {
               <h2>{t.name}</h2>
               <p className="codex-example">“{t.example}”</p>
               <p><b>How to spot it:</b> {SPOT[id]}</p>
-              <p className="codex-tool"><b>🔍 {tool.name}</b> {tool.does}</p>
+              <p className="codex-tool"><b>{tool.name}</b> {tool.does}</p>
             </li>
           );
         })}

@@ -6,5 +6,5 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   server: { proxy: { '/api': 'http://localhost:8787' } },
-  build: { rollupOptions: { input: { main: 'index.html', stats: 'stats.html', quiz: 'quiz.html', codex: 'codex.html' } } },
+  build: { rollupOptions: { input: { main: 'index.html', stats: 'stats.html', quiz: 'quiz.html', codex: 'codex.html', howto: 'howto.html' } } },
 });
