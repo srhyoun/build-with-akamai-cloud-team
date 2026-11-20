@@ -48,4 +48,4 @@ Offline ejection animation on `jamie/ejection-animation`.
 - Start screen (#3), pitch (#7), offline voices (#9), and judge README (#11) sent for review.
 
 ### Missing / I need from someone
-Nothing for this task.
+Review and merge the offline voices PR.
