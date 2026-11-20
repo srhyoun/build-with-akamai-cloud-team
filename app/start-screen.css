@@ -67,3 +67,4 @@
 .start-class small { font-weight: 400; color: var(--muted); }
 .start-class input { font: inherit; min-height: 44px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); color: var(--text); text-transform: uppercase; }
 .start-class a { color: var(--accent); min-height: 44px; display: flex; align-items: center; }
+.start-levels .start-boss { grid-column: 1 / -1; }

@@ -43,7 +43,7 @@ export interface Scenario {
 
 export interface GameState {
   seed: number;
-  level: 1 | 2;
+  level: 1 | 2 | 3;   // 3 = boss level: a bot poses as the town reporter (decision 003)
   scenario: Scenario;
   round: number;          // 1..ROUNDS
   phase: Phase;

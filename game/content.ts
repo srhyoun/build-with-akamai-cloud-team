@@ -4,7 +4,11 @@ import type { Persona, Scenario, TacticId, ToolId } from '../shared/types.ts';
 export const ROUNDS = 3;
 export const TOKENS_PER_ROUND = 2;
 export const CAST_SIZE = 6;
-export const BOTS = { 1: 1, 2: 2 } as const;               // level → bot count
+export const BOTS = { 1: 1, 2: 2, 3: 2 } as const;         // level → bot count; 3 = boss level
+
+// Boss level (decision 003): the town's real reporter (always human) and a bot copying them, one letter changed.
+export const REPORTER: Persona = { handle: '@DanaReports', bio: 'Reporter for the town paper', quirks: 'Short factual posts, always names the source', color: '#0d74ce' };
+export const IMPOSTOR: Persona = { ...REPORTER, handle: '@DanaRep0rts', quirks: 'Poses as the town reporter; "exclusive" scoops, never a link' };
 export const PHASE_MS = { event: 10_000, discussion: 120_000, meeting: 30_000, ejection: 10_000 }; // discussion includes the investigate minute
 export const SPREAD = { perBot: 20, wrongEjection: 10 };     // infection added after each round; 100 = whole town
 
