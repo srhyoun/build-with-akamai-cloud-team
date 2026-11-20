@@ -3,6 +3,7 @@ import type { CSSProperties, ReactNode } from 'react';
 import { moodOf } from './mood.ts';
 import { Villager } from './Villager.tsx';
 import './town.css';
+import './scene-labels.css';
 
 export interface SceneVillager { id: string; handle: string; color: string; ejected?: boolean }
 
@@ -10,6 +11,11 @@ const BUBBLE_MAX = 60;
 const clamp = (n: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, n));
 // Two staggered rows, so a long handle never runs into its neighbour's name tag.
 const spot = (i: number, n: number) => ({ x: n < 2 ? 50 : 11 + (i * 78) / (n - 1), y: i % 2 ? 3 : 15 });
+
+function sceneEdge(x: number, inset: number) {
+  if (x < inset) return 'left';
+  if (x > 100 - inset) return 'right';
+}
 
 const tree = (x: number, y: number, s = 1) => (
   <g transform={`translate(${x} ${y}) scale(${s})`}>
@@ -140,15 +146,25 @@ export function TownScene({ cast, infection, speaking, view = 'ground', sunny, c
               : (
                 <div key={c.id} className={`tw-spot${i === talker ? ' tw-talking' : ''}`} style={{ left: `${x}%`, bottom: `${y}%`, zIndex: y > 10 ? 1 : 2, animationDelay: `${i * -0.37}s` }}>
                   <span className="tw-fig"><Villager color={c.color} mood={mood} talking={i === talker} size={46} /></span>
-                  <span className="tw-name">{c.handle}</span>
+                  <span className="tw-name" data-edge={sceneEdge(x, 15)}>{c.handle}</span>
                 </div>
               );
           })}
         </div>
         {speaking && at && (
-          <div key={speaking.id + speaking.text} className="tw-say" aria-hidden="true" style={{ bottom: `calc(${at.y}% + 58px * var(--tw-vs))`, transformOrigin: `${at.x}% 100%` }}>
-            <span className="tw-tail" style={{ left: `${at.x}%` }} />
-            <p className="tw-bubble" style={{ left: `${clamp(at.x, 30, 70)}%` }}>
+          <div
+            key={speaking.id + speaking.text}
+            className="tw-say"
+            data-edge={sceneEdge(at.x, 30)}
+            aria-hidden="true"
+            style={{
+              '--tw-speaker-x': `${at.x}%`,
+              bottom: `calc(${at.y}% + 58px * var(--tw-vs))`,
+              transformOrigin: `${at.x}% 100%`,
+            } as CSSProperties}
+          >
+            <span className="tw-tail" />
+            <p className="tw-bubble">
               {speaking.text.length > BUBBLE_MAX ? `${speaking.text.slice(0, BUBBLE_MAX).trimEnd()}…` : speaking.text}
             </p>
           </div>

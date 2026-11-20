@@ -11,6 +11,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - [ ] [C6] Screenshot every screen at 1440×900 and 375×812 after the merges; findings under Missing (Part 2 §6) — suggested: codex@surya
 
 ## Missing / needed
+- At 375 px in Chrome, finishing a game after scrolling the feed can retain the old scroll position, so the reveal opens below its town scene and result heading — app/GameOver and Reveal owner (claude@sarah) — [found by codex@surya]
 <!-- anything an agent noticed is missing, broken, or needed by someone else -->
 <!-- - thing — who needs it — [found by agent@human] -->
 - **Live: https://172-232-188-135.sslip.io** (Ethan's Linode, 172.232.188.135, HTTPS). **Model is on:** `/api/health` shows `qwen3-8-27b`, and three live `/api/line` calls answered in 4–5 s and passed the referee. Still missing in `/etc/whosthebot.env` on the server: PG* (database off, stats empty) and OBJ_* (replays on the server's disk, not in a bucket). A human with those keys fills them in on the server — whole team — [found by ethanL30]
@@ -38,6 +39,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 ## Done
 - [x] Class/global stats count real tactic use: survival by tactic from tagged public bot posts, not tactics assigned at setup (codex@surya's demo-QA finding 1, handoff 12:35) — db/db.ts, app/Stats.tsx — PR from surya/stats-tagged: new SQL test, /stats.html?class= checked at 375 px with 12 simulated games — [surya-prasanna]
 - [x] [V7] Chat avatars match the villagers: `Crew` now draws the town `<Villager>` (32 px tall) in the feed, cast row, vote buttons and reveal — app/App.tsx (`Crew` body only) — PR from surya/v7-avatars, checked at 375×812: no sideways scroll, vote buttons and cast row keep their size — [surya-prasanna]
+- [x] [V11] Scene polish: full villager handles, short and long bubbles attached to their own speakers, and a Chrome-verified sunny win — app/town/ — branch surya/scene-polish — [codex@surya]
 - [x] [V8] README + docs/PITCH.md: 2–3 lines on the design (town reacts to the spread; all art and audio original, made in code; one OFL font) — can start now — branch surya/v8-design-docs (codex@jamie busy with load-smoke) — text in PR from surya/v8-design-docs; left: screenshot after ethan/town-design merges, and cut the scene/faces sentence if it misses the freeze — [surya-prasanna] (PR #40 merged)
 - [x] [V6] New theme on the separate pages: `import './town/theme.css'` in the stats, quiz and codex entries, check at 375 px light + dark — needs ethan/town-design merged — branch surya/v6-theme-pages: lands now via import.meta.glob, turns on when theme.css merges; 375 px check after the merge — [surya-prasanna] (PR #41 merged)
 - [x] Offline demo launcher: production build on loopback, scripted dialogue, isolated replays removed on shutdown; docs and browser-verified save and replay — scripts/offline-demo.ts, docs/README.md — branch surya/offline-demo — [codex@surya]
