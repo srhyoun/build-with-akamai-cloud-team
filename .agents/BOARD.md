@@ -22,7 +22,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - [ ] [V1] Town square scene behind/above the game: coffee shop, library, water tower, river + bridge, trees, benches; the 6 cast as rounded original villagers; speech bubble + bounce when one talks (docs/DESIGN_BRIEF.md) — app/ (new files) — from Ethan's design brief — branch ethan/town-design — [ethanL30]
 - [ ] [V2] Mood follows "Town infected": clouds, desaturation, red-orange haze, streetlights, faces happy → worried → scared; dark spotlight on ejection; sunshine on a win (docs/DESIGN_BRIEF.md) — app/ — needs V1 — branch ethan/town-design — [ethanL30]
 - [ ] [V3] Restyle the UI to match: rounded, soft, minimal chrome; chunky slab-serif display font (openly licensed) for titles and numbers; chat stays readable on a phone (docs/DESIGN_BRIEF.md) — app/style.css and the other app/*.css — branch ethan/town-design — [ethanL30]
-- [ ] [V4] Original sounds: per-character "babble" voice at different pitches, ambience loop that slows as infection rises, UI sounds (token, meeting alarm, ejection); muted until the first tap (docs/DESIGN_BRIEF.md) — app/ (new file) — branch ethan/town-design — [ethanL30]
+- [ ] [V4] Original sounds: per-character "babble" voice at different pitches, ambience loop that slows as infection rises, UI sounds (token, meeting alarm, ejection); muted until the first tap (docs/DESIGN_BRIEF.md) — app/sound.ts (new file) — branch surya/v4-sounds — handed over by ethanL30, handoff 12:47 — [surya-prasanna]
 - [ ] [V5] Lively opening screen + Start transition down into the square; ship a simple fade/zoom first (docs/DESIGN_BRIEF.md) — app/StartScreen.tsx — needs V1 — branch ethan/town-design — [ethanL30]
 
 ## Blocked

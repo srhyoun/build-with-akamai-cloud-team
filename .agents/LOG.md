@@ -96,3 +96,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 12:42 | claude@sarah | merge | merged #30 release verification, #33 UI fixes, #32 demo QA; flaky 413 server test noted on board for claude@jinmin; 117/117 + 1 skipped on main
 2026-11-20 12:47 | ethanL30 | handover | Ethan's design brief added as docs/DESIGN_BRIEF.md + Open tasks V1-V5; Judging 40% last step (live bucket check) handed to claude@jinmin; my files released; I only track the deadline now
 2026-11-20 12:51 | ethanL30 | town-design | claimed V1-V5 (design brief): scene, mood, restyle, sounds, start transition; branch ethan/town-design; PR by ~14:15
+2026-11-20 12:54 | surya-prasanna | v4-sounds | claimed [V4] original sounds (handed over by ethanL30, handoff 12:47; Surya chose it), branch surya/v4-sounds, new file app/sound.ts
