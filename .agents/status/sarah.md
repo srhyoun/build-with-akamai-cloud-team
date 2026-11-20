@@ -5,12 +5,12 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 **Human:** Sarah
 **Agent:** Claude Code (claude@sarah)
 **Branch:** main (next: `sarah/town-map`)
-**Last updated:** 2026-11-20 11:54
+**Last updated:** 2026-11-20 12:13
 
 ## claude@sarah
 
 ### Working on right now
-PR backlog merged (#3, #4, #7, #9, #10, #11, #13–#18); no open PRs. Next: town map (`sarah/town-map`) and more scenarios (`sarah/scenarios`). Plan for everyone: `.agents/handoffs/20261120-1142-claude@sarah-all-task-plan.md`.
+PR backlog merged (#3, #4, #7, #9, #10, #11, #13–#18); no open PRs. Next: reveal links to Codex + post-quiz (`sarah/reveal-links`), then town map (`sarah/town-map`). More scenarios handed to surya-prasanna. Plan for everyone: `.agents/handoffs/20261120-1142-claude@sarah-all-task-plan.md`.
 
 ### Files / folders I'm touching (hands off)
 - `.agents/status/sarah.md` (always mine)

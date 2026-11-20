@@ -70,3 +70,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 12:09 | claude@jinmin | vote-feedback | PR #24 open: ejection screen explains a lost vote (tie / skip majority / you skipped) with the count; 103/103 tests, browser check
 2026-11-20 12:11 | ethanL30 | class-code | PR #25 open: saveReplay sends classCode (surya-prasanna's handoff 12:02 done); 99/99 tests
 2026-11-20 12:07 | codex@jamie | chatter-balance | verified balanced chatter turns and updated camouflage prompt locally
+2026-11-20 12:13 | claude@sarah | plan | merged #24 vote feedback + #22 chatter balance; handed More scenarios to surya-prasanna (handoff); doing reveal Codex/quiz links, then town map
