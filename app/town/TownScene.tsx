@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import type { CSSProperties, ReactNode } from 'react';
 import { moodOf } from './mood.ts';
 import { Villager } from './Villager.tsx';
+import { Walker } from './Walker.tsx';
 import './town.css';
 import './scene-labels.css';
 
@@ -117,9 +118,9 @@ const art = (
   </svg>
 );
 
-export function TownScene({ cast, infection, speaking, view = 'ground', sunny, children }: {
+export function TownScene({ cast, infection, speaking, view = 'ground', sunny, walk, children }: {
   cast: SceneVillager[]; infection: number; speaking?: { id: string; text: string } | null;
-  view?: 'ground' | 'aerial'; sunny?: boolean; children?: ReactNode;
+  view?: 'ground' | 'aerial'; sunny?: boolean; walk?: boolean; children?: ReactNode;
 }) {
   const level = sunny ? 0 : clamp(infection, 0, 100);
   const mood = moodOf(level);
@@ -151,6 +152,7 @@ export function TownScene({ cast, infection, speaking, view = 'ground', sunny, c
               );
           })}
         </div>
+        {walk && <Walker />}
         {speaking && at && (
           <div
             key={speaking.id + speaking.text}

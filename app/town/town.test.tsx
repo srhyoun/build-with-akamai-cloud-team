@@ -2,6 +2,7 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
 import { moodOf } from './mood.ts';
 import { TownScene } from './TownScene.tsx';
+import { clampPos, stepPos } from './Walker.tsx';
 
 const cast = ['Ann', 'Bo', 'Cy', 'Di', 'Ed', 'Flo'].map((n, i) => ({ id: n.toLowerCase(), handle: `@${n}`, color: '#3e63dd', ejected: i === 5 }));
 const tags = (html: string) => html.match(/class="tw-name"/g)?.length ?? 0;
@@ -41,5 +42,22 @@ describe('town scene', () => {
   it('forces sunshine on a win, whatever the infection', () => {
     expect(renderToStaticMarkup(<TownScene cast={cast} infection={90} />)).toContain('data-mood="tense"');
     expect(renderToStaticMarkup(<TownScene cast={cast} infection={90} sunny />)).toContain('data-mood="sunny"');
+  });
+});
+
+describe('Walker (C4)', () => {
+  it('arrows and WASD move by a step, stay on the plaza, other keys do nothing', () => {
+    expect(stepPos({ x: 50, y: 6 }, 'ArrowRight')).toEqual({ x: 54, y: 6 });
+    expect(stepPos({ x: 50, y: 6 }, 'W')).toEqual({ x: 50, y: 10 });
+    expect(stepPos({ x: 6, y: 1 }, 'a')).toEqual({ x: 5, y: 1 });
+    expect(stepPos({ x: 50, y: 0 }, 'ArrowDown')).toEqual({ x: 50, y: 0 });
+    expect(stepPos({ x: 50, y: 6 }, 'Enter')).toBeNull();
+    expect(clampPos({ x: 120, y: 80 })).toEqual({ x: 95, y: 30 });
+  });
+
+  it('the scene shows the walker only when asked', () => {
+    const cast = [{ id: 'a', handle: '@A', color: '#c33' }];
+    expect(renderToStaticMarkup(<TownScene cast={cast} infection={0} walk />)).toContain('tw-me');
+    expect(renderToStaticMarkup(<TownScene cast={cast} infection={0} />)).not.toContain('tw-me');
   });
 });
