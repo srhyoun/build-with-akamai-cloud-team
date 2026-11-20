@@ -38,6 +38,10 @@ export function StartScreen({ onStart }: { onStart: (level: GameState['level']) 
               <span>{BOTS[level]} {BOTS[level] === 1 ? 'bot' : 'bots'}</span>
             </button>
           ))}
+          <button type="button" className="start-boss" onClick={() => onStart(3)}>
+            <strong>Boss level</strong>
+            <span>{BOTS[3]} bots, and one poses as the town reporter</span>
+          </button>
         </div>
       </section>
 

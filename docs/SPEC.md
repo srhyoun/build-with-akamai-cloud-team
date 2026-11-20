@@ -70,7 +70,7 @@ This spec started as a fresh-build plan (Fastify monorepo, server-held game, thr
 - More scenarios (e.g. Cedar Falls boil-water notice, §4.4).
 
 ### P2 — stretch
-Whole-round generation, model-generated scenarios, Model League, boss level, multiplayer.
+Whole-round generation, model-generated scenarios, Model League, boss level (built as level 3, decision 003), multiplayer.
 
 **Never cut:** the referee + Under the Hood, the stats page, the reveal.
 **Cut order:** P2 → class dashboard → quiz → town map animation (keep the meter).
