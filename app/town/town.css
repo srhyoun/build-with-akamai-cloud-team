@@ -7,7 +7,7 @@
 @media (min-width: 600px) { .tw-scene { --tw-vs: 1.35; } }
 
 .tw-camera { position: absolute; inset: 0; transform: perspective(600px) rotateX(0deg) scale(1) translateY(0); }
-.tw-scene[data-view='aerial'] .tw-camera { transform: perspective(600px) rotateX(38deg) scale(.62) translateY(-8%); }
+.tw-scene[data-view='aerial'] .tw-camera { transform: perspective(600px) rotateX(34deg) scale(.8) translateY(-4%); }
 .tw-art {
   position: absolute; inset: 0; overflow: hidden;
   filter: saturate(calc(1 - var(--tw-mood) * .6)) brightness(calc(1 - var(--tw-mood) * .22));

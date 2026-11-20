@@ -48,7 +48,10 @@ button { border-radius: 14px; }
 .composer input { border-radius: 14px; padding: 12px 14px; }
 .meeting { border-radius: 999px; box-shadow: 0 3px 0 #7d151c; }
 .bar { padding: 14px 0 10px; }
-.bar strong { font-size: 1.1rem; }
+.bar { gap: 6px 8px; }
+.bar strong { font-size: .95rem; }
+/* The phase label gives way before the row wraps, so the sound button stays on this line. */
+.bar > strong + span { flex: 1 1 0; min-width: 0; font-size: .93rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 .eject .eject-avatar { animation: none; } /* stay in the spotlight: the old fly-out left the stage empty */
 .eject { background: radial-gradient(ellipse at 50% 0, #2a2540, #0b0a12 70%); }

@@ -8,7 +8,7 @@ const tags = (html: string) => html.match(/class="tw-name"/g)?.length ?? 0;
 
 describe('town scene', () => {
   it('maps infection to three moods', () => {
-    expect([0, 19, 20, 39, 40, 100].map(moodOf)).toEqual(['sunny', 'sunny', 'uneasy', 'uneasy', 'tense', 'tense']);
+    expect([0, 19, 20, 59, 60, 100].map(moodOf)).toEqual(['sunny', 'sunny', 'uneasy', 'uneasy', 'tense', 'tense']);
   });
 
   it('draws a name tag per living villager and leaves an ejected one out', () => {
