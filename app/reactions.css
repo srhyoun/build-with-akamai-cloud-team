@@ -1,0 +1,7 @@
+/* Post reactions: town "like" / "suspicious" counts and the player's own "suspicious" toggle. */
+.rx { display: inline-flex; flex-wrap: wrap; gap: 6px; margin-left: 6px; vertical-align: middle; }
+.rx-chip { white-space: nowrap; display: inline-flex; align-items: center; gap: 3px; min-height: 26px; padding: 1px 9px; border-radius: 999px; border: 1px solid rgb(0 0 0 / .12); background: rgb(255 255 255 / .6); font-size: .8rem; line-height: 1.6; color: inherit; }
+.rx-btn { cursor: pointer; min-width: 44px; justify-content: center; }
+.rx-chip.on { background: #ffe08a; border-color: #e0a92a; font-weight: 700; }
+.feed li.rx-marked { box-shadow: inset 4px 0 0 #e0a92a; }
+.rx-count { margin-left: 6px; white-space: nowrap; padding: 0 7px; border-radius: 999px; background: #ffe08a; color: #3a2a1a; font-size: .78rem; font-weight: 700; }
