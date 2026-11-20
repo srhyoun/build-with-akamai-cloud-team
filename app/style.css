@@ -45,6 +45,3 @@ h2 small { display: block; font-weight: 400; color: var(--muted); }
 .votes button { display: flex; align-items: center; gap: 6px; }
 .eject { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; background: #0b0d12; color: #fff; }
 .eject p { color: #aab; max-width: 480px; }
-.over { text-align: center; padding-top: 32px; }
-.reveal { list-style: none; padding: 0; text-align: left; display: flex; flex-direction: column; gap: 6px; }
-.reveal li { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
