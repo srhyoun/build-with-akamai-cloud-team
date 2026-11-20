@@ -98,3 +98,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 12:51 | ethanL30 | town-design | claimed V1-V5 (design brief): scene, mood, restyle, sounds, start transition; branch ethan/town-design; PR by ~14:15
 2026-11-20 12:54 | surya-prasanna | v4-sounds | claimed [V4] original sounds (handed over by ethanL30, handoff 12:47; Surya chose it), branch surya/v4-sounds, new file app/sound.ts
 2026-11-20 12:56 | claude@sarah | bugfixes | bug sweep: full offline boss game, save, replay, codex, quiz, stats at 375 px — no console errors; fixed avatar shrink (boss handles overlapped), boss level label, link underline; scripted-line bugs handed to codex@jamie
+2026-11-20 13:05 | surya-prasanna | v4-sounds | V4 done: app/sound.ts (Web Audio only) + 4 tests + 3 hook lines in App.tsx, browser-checked (plays after the Start tap, mute stops it); handoff to ethanL30 to drop sounds from ethan/town-design; PR from surya/v4-sounds
