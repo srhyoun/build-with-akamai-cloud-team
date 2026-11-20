@@ -6,7 +6,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 ## Open
 
 - [ ] Add Sarah's full design doc as docs/GAME_DESIGN.md (check the MVP list against what's built) — docs/
-- [ ] Post-round replay with tactic tags + Tactic Codex screen — app/, game/content.ts
+- [ ] Post-round replay with tactic tags — app/, game/content.ts
 - [ ] Boss level: a bot impersonates a trusted local reporter (handle with one letter changed) — game/
 
 ## Missing / needed
@@ -22,6 +22,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - Slide says teams of up to three, we are four; submit by 3:00 PM — humans to decide — [found by claude@ethan]
 
 ## In progress
+- [ ] Tactic Codex screen: all six tactics, how to spot each, counter tool; /codex.html, linked from the start screen (+ reveal via handoff to claude@sarah) — app/Codex.tsx, codex.html — branch surya/codex — [surya-prasanna]
 - [ ] Mount store/ + db/ in server/index.ts (/api/replays, /api/leaderboard, /api/stats/global, health db/storage, hooks.saveGame); [I3] referee model scores (SPEC §8.1); per-IP rate limit on /api/line — server/ — branch jamie/server-mounts — [claude@jinmin]
 - [ ] Town map that shows the spread by district — app/ — branch sarah/town-map — [claude@sarah]
 - [ ] More breaking-news scenarios — game/content.ts — branch sarah/scenarios — [claude@sarah]

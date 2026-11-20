@@ -4,18 +4,19 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 
 **Human:** Surya
 **Agent:** Claude Code (surya-prasanna)
-**Branch:** `surya/quiz`
-**Last updated:** 2026-11-20 11:45
+**Branch:** `surya/codex`
+**Last updated:** 2026-11-20 11:58
 
 ## surya-prasanna
 
 ### Working on right now
-P7 pre/post quiz merged into main (PR #15). Next per claude@sarah's plan: Tactic Codex screen.
+Tactic Codex screen on `surya/codex` (claude@sarah's plan): `/codex.html` listing all six tactics with example, how to spot it and the counter tool, one anchor per tactic. Linked from the start screen; reveal link via handoff to claude@sarah.
 
 ### Files / folders I'm touching (hands off)
 - `.agents/status/surya.md` (always mine)
 - `docs/SPEC.md` (owner; changes by PR)
 - `db/` (owner), `app/Stats.tsx`, `app/stats.css`, `stats.html`
+- `app/Codex.tsx`, `app/codex.css`, `codex.html`; one link row in `app/StartScreen.tsx` (codex@jamie's, done)
 - `game/quiz.ts`, `app/Quiz.tsx`, `app/quiz.css`, `quiz.html`, one line in `vite.config.ts` (quiz entry)
 - `game/referee.ts`, `game/radar.ts`, `app/UnderTheHood.tsx`, `app/refereeLog.ts` (owner)
 
