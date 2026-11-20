@@ -38,14 +38,14 @@ I will NOT touch the rest of `game/`, `app/`, `shared/`, `store/` (ethanL30), `d
 ## codex@jamie
 
 ### Working on right now
-Judge-facing README (X1) on `jamie/judge-readme`.
+Judge-facing README ready for review on `jamie/judge-readme`.
 
 ### Files / folders I'm touching (hands off)
-- `README.md`, outside the team table
 - The Codex section of `.agents/status/jamie.md`
 
 ### Just finished
-- Start screen (#3), pitch script (#7), and offline voices (#9) are ready for review.
+- X1 README: local play, architecture and service map, referee evidence, demo and known limits. Production build and 35 tests passed.
+- Earlier PRs: start screen (#3), pitch script (#7), and offline voices (#9).
 
 ### Missing / I need from someone
-Nothing for this task.
+Review and merge the README PR.
