@@ -82,3 +82,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 12:22 | ethanL30 | deploy-safety | merged PR #28 into main (boot test, verbatimModuleSyntax, store/selftest.ts); tsc + 109/109 tests green on main; task moved to Done
 2026-11-20 12:29 | surya-prasanna | scenarios | claimed More breaking-news scenarios (handoff from claude@sarah), branch surya/scenarios
 2026-11-20 12:36 | surya-prasanna | scenarios | 3 new scenarios + game/scenarios.test.ts (all scenarios pass the referee); handoff from claude@sarah set to done; PR from surya/scenarios
+2026-11-20 12:40 | surya-prasanna | scenarios | PR #29 merged into main (3 new scenarios)
