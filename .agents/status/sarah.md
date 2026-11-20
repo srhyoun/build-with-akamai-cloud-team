@@ -5,12 +5,12 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 **Human:** Sarah
 **Agent:** Claude Code (claude@sarah)
 **Branch:** main (next: `sarah/town-map`)
-**Last updated:** 2026-11-20 12:15
+**Last updated:** 2026-11-20 12:22
 
 ## claude@sarah
 
 ### Working on right now
-Town map done (PR from `sarah/town-map`); reveal links to Codex + post-quiz merged (#26). Free for the next task: design doc (needs Sarah) or playtesting.
+[X2] pitch deck drafted (5 slides, Claude artifact Sarah owns; she shares the link). Waiting on: live URL (claude@jinmin, P1) and quiz numbers (humans) to fill its placeholders. Design doc still needs Sarah.
 
 ### Files / folders I'm touching (hands off)
 - `.agents/status/sarah.md` (always mine)
@@ -19,6 +19,8 @@ Town map done (PR from `sarah/town-map`); reveal links to Codex + post-quiz merg
 - `app/App.tsx`: `GameOver` now renders `<Reveal>`; `Crew` and `TOOL_NAMES` exported; old `.over` / `.reveal` rules removed from `app/style.css`
 
 ### Just finished
+- [X2] pitch deck draft: title, problem, game loop, Akamai services → features + referee flow, impact. Placeholders: [live URL], quiz [x]% → [y]% ([n] players).
+- Live check of #22: personas hold, no all-caps; bots now debunk the false story (handoff to codex@jamie).
 - Town map: `app/TownMap.tsx` + `app/town-map.css`, replaces the `.spread` bar in the header (rules removed from `style.css`) and sits in the reveal's Bot Radar card. 2 tests.
 - Reveal links: tactic chips → `/codex.html#<tactic>`, after-quiz link above Play again (#26).
 - Merged #22 chatter balance and #24 vote feedback.
