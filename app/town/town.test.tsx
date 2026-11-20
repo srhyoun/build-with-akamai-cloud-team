@@ -79,3 +79,13 @@ describe('Walker (C4)', () => {
     expect(renderToStaticMarkup(<TownScene cast={cast} infection={0} />)).not.toContain('tw-me');
   });
 });
+
+describe('tap a villager (pick)', () => {
+  it('marks villagers pickable only with onPick, and rings the selected one', () => {
+    const cast = [{ id: 'a', handle: '@A', color: '#c33' }, { id: 'b', handle: '@B', color: '#33c' }];
+    expect(renderToStaticMarkup(<TownScene cast={cast} infection={0} />)).not.toContain('tw-pickable');
+    const html = renderToStaticMarkup(<TownScene cast={cast} infection={0} onPick={() => {}} selected="b" />);
+    expect(html.match(/tw-pickable/g)).toHaveLength(2);
+    expect(html.match(/tw-picked/g)).toHaveLength(1);
+  });
+});

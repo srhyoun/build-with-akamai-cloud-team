@@ -41,7 +41,7 @@ export function Codex() {
               <h2>{t.name}</h2>
               <p className="codex-example">“{t.example}”</p>
               <p><b>How to spot it:</b> {SPOT[id]}</p>
-              <p className="codex-tool"><b>🔍 {tool.name}</b> {tool.does}</p>
+              <p className="codex-tool"><b>{tool.name}</b> {tool.does}</p>
             </li>
           );
         })}

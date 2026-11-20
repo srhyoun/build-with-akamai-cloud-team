@@ -8,11 +8,11 @@ import './howto.css';
 import './town/theme.css'; // the town theme, loaded last so it wins over the page's own stylesheet
 
 const STEPS = [
-  { icon: '📰', title: 'News breaks', text: `Something happens in town and the group chat fills up. Most villagers are honest. ${BOTS[1]} or ${BOTS[2]} are bots pushing a false story.` },
-  { icon: '💬', title: 'Read and ask', text: 'Read the chat. Tap a villager to message them in private and compare what they say.' },
-  { icon: '🔍', title: 'Fact-check', text: `You get ${TOKENS_PER_ROUND} checks each round. Spend them on the villagers or posts you doubt.` },
-  { icon: '🚨', title: 'Meet and vote', text: `Call an emergency meeting, or it starts by itself after ${PHASE_MS.discussion / 1000} seconds. Everyone votes, you too. The most votes is ejected. A tie ejects nobody.` },
-  { icon: '🏘️', title: 'The story spreads', text: `After each round the town gets ${SPREAD.perBot}% more infected for every bot still in it, and ${SPREAD.wrongEjection}% more if you ejected a human.` },
+  { title: 'News breaks', text: `Something happens in town and the group chat fills up. Most villagers are honest. ${BOTS[1]} or ${BOTS[2]} are bots pushing a false story.` },
+  { title: 'Read and ask', text: 'Read the chat. Tap a villager to message them in private and compare what they say.' },
+  { title: 'Fact-check', text: `You get ${TOKENS_PER_ROUND} checks each round. Spend them on the villagers or posts you doubt.` },
+  { title: 'Meet and vote', text: `Call an emergency meeting, or it starts by itself after ${PHASE_MS.discussion / 1000} seconds. Everyone votes, you too. The most votes is ejected. A tie ejects nobody.` },
+  { title: 'The story spreads', text: `After each round the town gets ${SPREAD.perBot}% more infected for every bot still in it, and ${SPREAD.wrongEjection}% more if you ejected a human.` },
 ];
 
 const TOOLS = [
@@ -33,9 +33,9 @@ export function HowTo() {
       </header>
 
       <ol className="howto-steps">
-        {STEPS.map(s => (
+        {STEPS.map((s, i) => (
           <li key={s.title}>
-            <span className="howto-icon" aria-hidden="true">{s.icon}</span>
+            <span className="howto-icon" aria-hidden="true">{i + 1}</span>
             <div><h2>{s.title}</h2><p>{s.text}</p></div>
           </li>
         ))}
@@ -43,13 +43,13 @@ export function HowTo() {
 
       <section aria-labelledby="howto-tools">
         <h2 id="howto-tools">Your three checks</h2>
-        <ul className="howto-chips">{TOOLS.map(t => <li key={t.name}><b>🔍 {t.name}</b>{t.text}</li>)}</ul>
+        <ul className="howto-chips">{TOOLS.map(t => <li key={t.name}><b>{t.name}</b>{t.text}</li>)}</ul>
       </section>
 
       <section className="howto-ends" aria-labelledby="howto-ends">
         <h2 id="howto-ends">How it ends</h2>
-        <p><b>✅ You win</b> when every bot is ejected within {ROUNDS} rounds.</p>
-        <p><b>❌ You lose</b> if a bot is still in town after round {ROUNDS}, or the town reaches 100%.</p>
+        <p><b>You win</b> when every bot is ejected within {ROUNDS} rounds.</p>
+        <p><b>You lose</b> if a bot is still in town after round {ROUNDS}, or the town reaches 100%.</p>
         <p><b>⭐ Score:</b> 100 for each bot caught, minus 75 for each human ejected, plus 100 minus the town’s infection.</p>
       </section>
 
@@ -74,7 +74,7 @@ export function HowTo() {
 
       <nav className="howto-nav" aria-label="Next">
         <a className="howto-cta" href="/">Play</a>
-        <a href="/codex.html">📖 The bots’ 6 tricks</a>
+        <a href="/codex.html">The bots’ 6 tricks</a>
       </nav>
     </main>
   );
