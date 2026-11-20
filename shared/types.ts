@@ -67,3 +67,23 @@ export type Command =
   | { type: 'use_tool'; tool: ToolId; target: string }                            // target: character id, or post id for source_check
   | { type: 'call_meeting' }
   | { type: 'vote'; target: string | null };
+
+// Decision 002: the referee's verdict on one character line, and the reveal / stats shapes.
+export interface RefereeIssue { rule: string; severity: 'block' | 'warn'; detail: string }
+export interface RefereeCheck {
+  round: number; charId: string; kind: 'post' | 'reply' | 'defense';
+  attempt: number;                                  // 1, or 2 after a blocked first try
+  stage: 'rules' | 'model' | 'pass' | 'fallback';   // where it stopped
+  pass: boolean; issues: RefereeIssue[];
+  scores?: { botSubtlety: number; humanRealism: number; tacticClarity: number }; // referee model only
+  latencyMs: number; model: string;                 // "scripted" for fallback lines
+}
+export interface BotRadar {
+  botsCaught: number; humansEjected: number; finalSpread: number; score: number;
+  tacticsSeen: TacticId[]; blindSpot: TacticId | null; roundsToFirstCatch: number | null; headline: string;
+}
+export interface GlobalStats {
+  gamesPlayed: number; winRate: number; avgSpread: number; humanFalseAccusationRate: number;
+  tactics: { id: TacticId; name: string; uses: number; survivalRate: number }[]; // desc by survivalRate
+  updatedAt: string;
+}

@@ -17,3 +17,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 11:14 | surya-prasanna | spec | realigned spec to ethanL30's store/ claim (Object Storage) + new db/ lane (Managed PostgreSQL), tags updated to claude@jinmin
 2026-11-20 11:10 | claude@jinmin | llm-endpoint | server/ done on jamie/llm-endpoint, PR #4 open (19/19 tests, tested with a fake model); needs a real Akamai Inference key to test live
 2026-11-20 11:22 | surya-prasanna | referee | merged PR #2 (spec + decision 002); claimed R1 + R2, branch surya/referee
+2026-11-20 11:38 | surya-prasanna | referee | R1 checkLine + R2 radar with 17 tests (27/27 total), decision-002 types, CONTRACTS env vars from claude@jinmin; PR from surya/referee
