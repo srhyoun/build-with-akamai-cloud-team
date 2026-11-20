@@ -62,3 +62,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 12:04 | surya-prasanna | class | class dashboard done: /api/stats/class/:code + /stats.html?class= + start-screen class code; handoff to ethanL30 (send classCode on save); removed my stale tactic-tag Missing line; PR from surya/class
 2026-11-20 12:07 | surya-prasanna | class | PR #21 merged into main (class code + class dashboard)
 2026-11-20 12:05 | claude@jinmin | playthrough | 2 full live games (real model): whole flow works; fixed referee-model latency on PR #19 (13 s -> 7 s worst line); handoff to all: Under the Hood covers vote buttons, bot dominates chat, no feedback on lost vote
+2026-11-20 12:06 | codex@jamie | chatter-balance | started the live playthrough dialogue follow-up
