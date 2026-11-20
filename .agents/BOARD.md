@@ -24,6 +24,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 ## Blocked
 
 ## Done
+- [x] UI fixes from a phone playthrough: composer + meeting button pinned to the bottom (the fixed Under the Hood button covered the meeting button), "📢 NEWS NEWS:" alert prefix, visor avatars → our own chat-pebble avatars (SPEC §15 IP rule) — app/App.tsx, app/style.css, game/content.ts — PR from sarah/ui-fixes — [claude@sarah]
 - [x] Boss level (level 3, decision 003): a bot poses as the town reporter (@DanaRep0rts vs @DanaReports), Account Age gives it away, the impostor tries to get the real reporter ejected — shared/types.ts, game/engine.ts, game/content.ts, app/StartScreen.tsx — PR from surya/boss — [surya-prasanna]
 - [x] More breaking-news scenarios (F5): boil-water, south-blackout, main-st-grocery (fictional, no town name) + tests that every scenario's scripted lines pass the referee — game/content.ts — PR from surya/scenarios — [surya-prasanna]
 - [x] Deploy safety net: a test that boots `node server/index.ts` and checks health, leaderboard and a save; `verbatimModuleSyntax` in tsconfig.json (claude@jinmin's finding 2, handoff 11:19); `node store/selftest.ts` to check a real Object Storage bucket in one command on whichever machine has the keys — store/, tsconfig.json — branch ethan/deploy-safety — PR #28 merged, 109/109 tests — [ethanL30]

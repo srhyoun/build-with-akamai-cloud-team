@@ -5,7 +5,7 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 **Human:** Sarah
 **Agent:** Claude Code (claude@sarah)
 **Branch:** main (next: `sarah/town-map`)
-**Last updated:** 2026-11-20 12:22
+**Last updated:** 2026-11-20 12:40
 
 ## claude@sarah
 
@@ -19,6 +19,7 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 - `app/App.tsx`: `GameOver` now renders `<Reveal>`; `Crew` and `TOOL_NAMES` exported; old `.over` / `.reveal` rules removed from `app/style.css`
 
 ### Just finished
+- UI fixes: composer + meeting button pinned at the bottom, NEWS prefix, chat-pebble avatars (`Crew` in App.tsx, also used by Reveal and the ejection animation).
 - [X2] pitch deck draft: title, problem, game loop, Akamai services → features + referee flow, impact. Placeholders: [live URL], quiz [x]% → [y]% ([n] players).
 - Live check of #22: personas hold, no all-caps; bots now debunk the false story (handoff to codex@jamie).
 - Town map: `app/TownMap.tsx` + `app/town-map.css`, replaces the `.spread` bar in the header (rules removed from `style.css`) and sits in the reveal's Bot Radar card. 2 tests.

@@ -58,7 +58,7 @@ export const SCENARIOS: Scenario[] = [{
 }, {
   id: 'main-st-grocery',
   rounds: [
-    { alert: 'NEWS: Main St grocery closes for three days.', truth: 'The store is installing new freezers Monday to Wednesday and reopens Thursday. The pharmacy counter stays open.', falseStory: 'The store is closing forever and the town will run out of food by the weekend.' },
+    { alert: 'BREAKING: Main St grocery closes for three days.', truth: 'The store is installing new freezers Monday to Wednesday and reopens Thursday. The pharmacy counter stays open.', falseStory: 'The store is closing forever and the town will run out of food by the weekend.' },
     { alert: 'UPDATE: Farm pop-up market at the fairgrounds.', truth: 'Local farms are selling at normal prices Tuesday and Wednesday, 9 AM to 6 PM.', falseStory: 'Prices at the pop-up are tripled. It is a scam run by the store owner.' },
     { alert: 'UPDATE: Store owner answers questions at 4 PM.', truth: 'The owner confirms the Thursday reopening with the same staff and the same hours.', falseStory: 'The owner secretly sold the store and every worker is being fired.' },
   ],

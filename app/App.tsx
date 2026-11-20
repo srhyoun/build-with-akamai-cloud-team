@@ -69,8 +69,10 @@ function Game({ onAgain }: { onAgain: () => void }) {
 
       <section aria-label="Town group chat">
         <Feed s={s} posts={publicFeed} onCheck={canInvestigate ? id => dispatch({ type: 'use_tool', tool: 'source_check', target: id }) : undefined} />
-        <Composer placeholder="Post to the town chat…" onSend={text => dispatch({ type: 'post', text })} />
-        {s.phase === 'discussion' && <button className="meeting" onClick={() => dispatch({ type: 'call_meeting' })}>🚨 Call emergency meeting</button>}
+        <div className="actions">
+          <Composer placeholder="Post to the town chat…" onSend={text => dispatch({ type: 'post', text })} />
+          {s.phase === 'discussion' && <button className="meeting" onClick={() => dispatch({ type: 'call_meeting' })}>🚨 Call emergency meeting</button>}
+        </div>
       </section>
 
       {s.phase === 'meeting' && (
@@ -111,7 +113,7 @@ function Feed({ s, posts, onCheck }: { s: GameState; posts: Post[]; onCheck?: (i
           </li>
         );
       })}
-      <div ref={end} />
+      <div ref={end} className="feed-end" />
     </ol>
   );
 }
@@ -153,13 +155,14 @@ function GameOver({ s, onAgain }: { s: GameState; onAgain: () => void }) {
   return <Reveal s={s} onAgain={onAgain}><SavePanel s={s} refereeLog={getRefereeLog()} /></Reveal>;
 }
 
-// Our own crewmate-style avatar: a rounded body with a visor. Not any existing game's character.
+// Our own avatar: a colored "chat pebble" with dot eyes (SPEC §15: no crewmate shapes or visors).
 export function Crew({ color, big }: { color: string; big?: boolean }) {
   const size = big ? 96 : 32;
   return (
     <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden="true">
-      <rect x="7" y="4" width="18" height="24" rx="9" fill={color} />
-      <rect x="14" y="9" width="12" height="7" rx="3.5" fill="#cfe8ff" stroke="#0005" />
+      <path d="M16 4c7.2 0 12 4.6 12 10.6S23.2 25 16 25c-1.5 0-2.9-.2-4.2-.6L6 28l1.3-5.4C5.2 20.7 4 18 4 14.6 4 8.6 8.8 4 16 4z" fill={color} />
+      <circle cx="12" cy="14" r="2.2" fill="#fff" /><circle cx="20" cy="14" r="2.2" fill="#fff" />
+      <circle cx="12.6" cy="14.4" r="1" fill="#14171f" /><circle cx="20.6" cy="14.4" r="1" fill="#14171f" />
     </svg>
   );
 }
