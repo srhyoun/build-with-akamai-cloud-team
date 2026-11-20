@@ -12,5 +12,5 @@
     "skipLibCheck": true,
     "types": ["node", "vite/client"]
   },
-  "include": ["app", "game", "shared", "server", "vite.config.ts"]
+  "include": ["app", "game", "shared", "server", "db", "vite.config.ts"]
 }

@@ -14,7 +14,7 @@ The interfaces between parts of the game. Agents must not break these without a 
 | Score + Bot Radar (pure) | `game/radar.ts` | surya-prasanna | read by app (reveal) and server (`/api/replays`) |
 | Model server | `server/` (`index.ts`, `line.ts`) | claude@jinmin | Akamai Cloud Inference; imports `buildPrompt` / `parseLine` from `game/voice.ts`, `checkLine` from `game/referee.ts` |
 | Replays + share (Object Storage) | `store/`, `app/share.ts`, `app/Share.tsx`, `app/Leaderboard.tsx` | ethanL30 | Object Storage; handler mounted by one line in `server/index.ts` (decision 002) |
-| Game rows + stats (Managed PostgreSQL) | `db/`, `app/Stats.tsx` | open | Managed PostgreSQL; `saveGame()` called from `store/`'s save handler; stats handler mounted in `server/index.ts` |
+| Game rows + stats (Managed PostgreSQL) | `db/`, `app/Stats.tsx`, `app/stats.css`, `stats.html` | surya-prasanna | Managed PostgreSQL. `db/db.ts` exports `saveGame` (for `hooks.saveGame` in `store/`), `handleDb(req, res)` (mounted in `server/index.ts`), `dbHealth()` → `'up'`, `'down'` or `'off'` |
 | App: director (clock, who speaks when) + UI | `app/` | | engine via Commands, server via `/api/line` |
 
 ## Shared data formats
@@ -32,7 +32,7 @@ The interfaces between parts of the game. Agents must not break these without a 
 - `GET /api/replays/:id` → `200 { replay: Replay, source: "object-storage" | "local" }`, `404` unknown id. `Replay` type in `store/replay.ts` (whitelisted public fields, no DMs). The bucket stays **private**; the server reads objects and passes them on.
 - `GET /api/leaderboard` → `200 { entries: { id, name, score, result, level, infection, at }[], source }`, top 10 by score, cached 10 s.
 - `db/` hook: `import { hooks } from '../store/handler.ts'; hooks.saveGame = saveGame;` called once per save with `{ id, state, refereeLog, classCode, playerName, score }`; if it throws, the replay is still uploaded. `storageHealth()` from `store/handler.ts` → `'up' | 'down'` for `/api/health`.
-- `GET /api/stats/global` → `GlobalStats` (cached 5 s). `GET /api/health` → `{ ok, model, db?, storage? }`.
+- `GET /api/stats/global` → `200 GlobalStats` (cached 5 s), `503` no database configured, `502` database unreachable. Page: `/stats.html` (its own Vite entry). `GET /api/health` → `{ ok, model, db?, storage? }`.
 - New types (decision 002, additive only): `RefereeIssue`, `RefereeCheck`, `BotRadar`, `GlobalStats` in `shared/types.ts`; definitions in `docs/SPEC.md` §10.
 - The server builds the messages with `buildPrompt(state, character, kind)`; model answers should be JSON `{"text": "...", "cited": "source or null"}`.
 - In production the same server also serves the built game from `dist/` on `PORT` (`npm run build && npm start`; `npm start` runs `node server/index.ts`). In dev, Vite proxies `/api` to `http://localhost:8787`.
@@ -40,5 +40,5 @@ The interfaces between parts of the game. Agents must not break these without a 
 - Inference (claude@jinmin, PR #4): `AKAMAI_INFERENCE_URL` (OpenAI-compatible base URL, or a full `…/chat/completions` URL), `AKAMAI_INFERENCE_KEY` (sent as `Authorization: Bearer …`), `AKAMAI_INFERENCE_MODEL`, `AKAMAI_INFERENCE_TIMEOUT_MS` (optional, default 10000), `PORT` (default 8787).
 - `/api/line` status codes: `400` bad body, `422` blocked twice by the referee, `502` model failed or timed out (scripted line this once), `503` no model configured (scripted lines for the rest of the game).
 - `GET /api/health` is served by `server/` (`{ ok, model }`); `db/` and `store/` add their `db` / `storage` fields to it.
-- Proposed names for the decision-002 services (the `db/` owner confirms `DATABASE_URL`): `DATABASE_URL`.
+- Database (`db/`, confirmed): the workshop's `PGHOST`, `PGPORT`, `PGUSER` (`akmadmin`), `PGPASSWORD`, `PGDATABASE` (`defaultdb`), or one `DATABASE_URL`. SSL is always on; optional `PG_CA_CERT_PATH` verifies the DB's CA, `PGSSLMODE=disable` turns SSL off (local Postgres only). Neither set → DB off. The Linode's IP must be on the DB's allowed-IP list.
 - Object Storage (ethanL30, confirmed; details in `store/README.md`): `S3_ENDPOINT` (workshop bucket is in Chicago: `https://us-ord-10.linodeobjects.com`), `S3_BUCKET`, `S3_ACCESS_KEY`, `S3_SECRET_KEY`, optional `S3_REGION` (default `us-east-1`) and `PUBLIC_APP_URL`. The workshop's `OBJ_*` names work too. With none set, `store/` saves to local files.

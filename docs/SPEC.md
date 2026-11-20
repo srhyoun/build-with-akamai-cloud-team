@@ -314,84 +314,14 @@ Trust boundary: `/api/replays` takes the client's final state, so a cheater coul
 
 ---
 
-## 13. Database (`db/schema.sql`)
+## 13. Database (`db/`, surya-prasanna)
 
-```sql
-CREATE EXTENSION IF NOT EXISTS pgcrypto;
+Schema: `db/schema.sql`, applied automatically on the first query (no psql needed). Tables: `games` (one row per finished game, full final state as jsonb), `characters` (role, assigned tactics, round ejected), `posts` (character posts and DMs with tactic tags), `referee_checks` (the Under the Hood log).
 
-CREATE TABLE games (
-  id            uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  created_at    timestamptz NOT NULL DEFAULT now(),
-  level         int  NOT NULL,
-  scenario_id   text NOT NULL,
-  result        text NOT NULL CHECK (result IN ('won','lost')),
-  final_spread  int  NOT NULL,
-  rounds_played int  NOT NULL,
-  score         int  NOT NULL,
-  class_code    text,
-  player_name   text,              -- ≤ 24 chars, optional
-  state         jsonb NOT NULL,    -- full final GameState
-  share_url     text
-);
-CREATE INDEX games_class_idx ON games(class_code);
-
-CREATE TABLE posts (
-  game_id  uuid REFERENCES games(id) ON DELETE CASCADE,
-  id       text NOT NULL,
-  round    int  NOT NULL,
-  author   text NOT NULL,          -- character id ('you' and 'news' rows are skipped)
-  role     text NOT NULL CHECK (role IN ('human','bot')),
-  tactic   text,
-  is_dm    boolean NOT NULL,
-  text     text NOT NULL,
-  PRIMARY KEY (game_id, id)
-);
-
-CREATE TABLE ejections (
-  game_id  uuid REFERENCES games(id) ON DELETE CASCADE,
-  round    int  NOT NULL,
-  char_id  text,                   -- null = nobody ejected
-  was_bot  boolean NOT NULL,
-  PRIMARY KEY (game_id, round)
-);
-
-CREATE TABLE clues (
-  game_id  uuid REFERENCES games(id) ON DELETE CASCADE,
-  round    int  NOT NULL,
-  tool     text NOT NULL,
-  target   text NOT NULL
-);
-
-CREATE TABLE referee_checks (
-  game_id    uuid REFERENCES games(id) ON DELETE CASCADE,
-  round      int, char_id text, kind text, attempt int, stage text,
-  pass       boolean NOT NULL,
-  issues     jsonb NOT NULL DEFAULT '[]',
-  scores     jsonb, latency_ms int, model text
-);
-
-CREATE TABLE quiz_responses (      -- P1
-  id bigserial PRIMARY KEY, session_id text NOT NULL,
-  phase text NOT NULL CHECK (phase IN ('pre','post')),
-  at timestamptz NOT NULL DEFAULT now(),
-  correct int NOT NULL, total int NOT NULL, answers jsonb NOT NULL
-);
-```
-
-**Tactic survival** ("a bot used the tactic in a round and wasn't ejected that round") — powers the stats page:
-```sql
-WITH bot_rounds AS (
-  SELECT DISTINCT game_id, author, round, tactic
-  FROM posts WHERE role = 'bot' AND tactic IS NOT NULL AND NOT is_dm
-)
-SELECT br.tactic, count(*) AS uses,
-       avg(CASE WHEN e.char_id = br.author THEN 0 ELSE 1 END)::float AS survival_rate
-FROM bot_rounds br
-LEFT JOIN ejections e ON e.game_id = br.game_id AND e.round = br.round
-GROUP BY br.tactic
-ORDER BY survival_rate DESC;
-```
-Display: "Bots using **Invented insider** survived **68%** of rounds (n = 41)." Hide tactics with n < 3. **Never fabricate stats** — play ≥ 10 real games before submitting and always show n.
+- `saveGame({ id, state, refereeLog, classCode, playerName })` writes a whole game in **one SQL statement** (atomic; a repeat id is ignored). Called by `store/` through `hooks.saveGame` on every `POST /api/replays`.
+- `GET /api/stats/global` → `GlobalStats`, cached 5 s, page at `/stats.html`.
+- **Tactic survival** = a bot that was *assigned* the tactic was alive in a round and not ejected at its end (assigned tactics, because model lines carry no per-post tag yet). Display: "Bots using **Invented insider** survived **68%** of rounds (n = 41)." Tactics with n < 3 show "not enough data yet". **Never fabricate stats**: play ≥ 10 real games before submitting.
+- Config: the workshop's `PG*` env vars or `DATABASE_URL`; with neither the DB is off (save no-op, stats 503). SSL is always on; set `PG_CA_CERT_PATH` to verify the managed DB's CA.
 
 ---
 

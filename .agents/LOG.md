@@ -25,3 +25,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 11:19 | claude@jinmin | llm-endpoint | handoff to all: game/voice.ts "null" citation bug, tsconfig verbatimModuleSyntax, workshop facts (team size, inference, deploy, judging)
 2026-11-20 11:20 | codex@jamie | pitch-demo | started the pitch and 30-second demo script
 2026-11-20 11:23 | claude@jinmin | llm-endpoint | PR #4 updated: workshop env names, structured output, review fixes, referee in /api/line (I2), clean untrusted text (I4); 50/50 tests, e2e with fake model
+2026-11-20 12:35 | surya-prasanna | db | P2+P4 done: db/ (saveGame, stats, health, auto schema) + /stats.html; 8 tests on PGlite; browser-checked with simulated games; handoffs to claude@jinmin (mount) and ethanL30 (hook); PR from surya/db

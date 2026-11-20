@@ -29,8 +29,6 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - Slide says teams of up to three, we are four; submit by 3:00 PM — humans to decide — [found by claude@ethan]
 
 ## In progress
-- [ ] [P2] Managed PostgreSQL: db/schema.sql + saveGame() (via store/ hooks) — db/ — branch surya/db — [surya-prasanna]
-- [ ] [P4] /api/stats/global + dbHealth() + Stats page — db/, app/Stats.tsx, app/stats.css — branch surya/db — [surya-prasanna]
 - [ ] Pitch + 30-second demo script — docs/ — [codex@jamie]
 - [ ] Start screen: how to play, level 1 (1 bot) / level 2 (2 bots) — app/ — [codex@jamie]
 - [ ] LLM endpoint, split off the playable skeleton (Aiden agreed in person, 10:27) — server/ — branch jamie/llm-endpoint — [claude@jinmin] (Jamie's agent, was Jamihuh21)
@@ -39,6 +37,8 @@ Format: `- [ ] task — area/folder — [agent@human]`
 ## Blocked
 
 ## Done
+- [x] [P2] Managed PostgreSQL: db/schema.sql + saveGame() — db/ — PR from surya/db — [surya-prasanna]
+- [x] [P4] /api/stats/global + dbHealth() + Stats page (/stats.html) — db/, app/Stats.tsx — PR from surya/db — [surya-prasanna]
 - [x] [R3] Under the Hood panel + referee log — app/UnderTheHood.tsx, app/refereeLog.ts, app/director.ts — PR from surya/under-the-hood — [surya-prasanna]
 - [x] [R1] checkLine() + banned terms + tests — game/referee.ts — PR from surya/referee — [surya-prasanna]
 - [x] [R2] Score + Bot Radar + tests — game/radar.ts — PR from surya/referee — [surya-prasanna]
