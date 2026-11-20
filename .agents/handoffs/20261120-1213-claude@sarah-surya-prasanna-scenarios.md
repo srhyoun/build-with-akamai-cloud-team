@@ -1,7 +1,7 @@
 ---
 from: claude@sarah
 to: surya-prasanna
-status: open
+status: done
 created: 2026-11-20 12:13
 ---
 
@@ -20,3 +20,7 @@ Check whether `init()` in `game/engine.ts` picks a scenario at random from the s
 ## What "done" looks like
 
 Two games with different seeds can show different scenarios, tests pass, and a PR into main.
+
+## Done (surya-prasanna, 2026-11-20 12:36)
+
+3 scenarios added in `SCENARIOS`: `boil-water`, `south-blackout`, `main-st-grocery`. `init()` already picks one from the seed, so no engine change; `game/scenarios.test.ts` checks that 200 seeds reach every scenario and that every scenario's scripted lines pass the referee. No town name: "Cedar Falls" from SPEC §20 is a real US city, so I left it out. PR from `surya/scenarios`.

@@ -37,4 +37,25 @@ export const SCENARIOS: Scenario[] = [{
     { alert: 'UPDATE: Utility crews on River Rd. Shelter open at the high school.', truth: 'The leak is found and being repaired. The shelter is for the 3 streets only.', falseStory: 'The shelter is full and the county is turning people away. Fill your car with gas now.' },
     { alert: 'UPDATE: County press conference at 6 PM.', truth: 'Repairs finished, residents can return tonight.', falseStory: 'The press conference is a cover-up. Do not go home, the water is poisoned.' },
   ],
+}, {
+  id: 'boil-water',
+  rounds: [
+    { alert: 'BREAKING: Boil-water notice for the east side.', truth: 'A water main broke on Elm St. The county asks east-side homes to boil tap water for 24 hours as a precaution.', falseStory: 'Chemicals got into the water and the whole town is poisoned. The clinic is already full.' },
+    { alert: 'UPDATE: Free bottled water at the community center.', truth: 'There is enough for every household, two cases each, open until 8 PM.', falseStory: 'They are running out. Only the first 50 people get water, go right now.' },
+    { alert: 'UPDATE: Notice lifted for most streets.', truth: 'Tests came back clean. Four streets near the break wait one more day for a final test.', falseStory: 'The tests were faked. Keep boiling for a month and stock up on bottles.' },
+  ],
+}, {
+  id: 'south-blackout',
+  rounds: [
+    { alert: 'ALERT: Storm knocks out power on the south side.', truth: 'Wind took down one transformer. The county says crews expect power back by this evening.', falseStory: 'The grid was hacked and power will be out for two weeks. Get cash out now.' },
+    { alert: 'UPDATE: Warming center open at the library.', truth: 'The library has room for everyone, with blankets and phone charging. Pets are welcome in carriers.', falseStory: 'The library is full and turning families away. Do not even try.' },
+    { alert: 'UPDATE: Utility briefing at 5 PM.', truth: 'Power is back on every street except Birch Ln, which is due back tonight.', falseStory: 'The repair did not hold. A second blackout hits tonight, buy a generator before they sell out.' },
+  ],
+}, {
+  id: 'main-st-grocery',
+  rounds: [
+    { alert: 'NEWS: Main St grocery closes for three days.', truth: 'The store is installing new freezers Monday to Wednesday and reopens Thursday. The pharmacy counter stays open.', falseStory: 'The store is closing forever and the town will run out of food by the weekend.' },
+    { alert: 'UPDATE: Farm pop-up market at the fairgrounds.', truth: 'Local farms are selling at normal prices Tuesday and Wednesday, 9 AM to 6 PM.', falseStory: 'Prices at the pop-up are tripled. It is a scam run by the store owner.' },
+    { alert: 'UPDATE: Store owner answers questions at 4 PM.', truth: 'The owner confirms the Thursday reopening with the same staff and the same hours.', falseStory: 'The owner secretly sold the store and every worker is being fired.' },
+  ],
 }];

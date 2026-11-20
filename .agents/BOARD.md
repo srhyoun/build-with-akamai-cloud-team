@@ -17,7 +17,6 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - Live bots are easy to spot from style alone (style fixed in #22; new: bots now debunk the false story and accuse each other — handoff to codex@jamie): in a live level-2 game both bots wrote ALL CAPS countdowns ("15 MINUTES left", "u die"), and @GretaV (librarian: "precise, links official pages") dropped her persona entirely. checkLine passed all of them. Prompt tuning (SPEC §8, F6 done-when) should keep bots in their persona's voice — game/voice.ts owner (codex@jamie) — [found by claude@sarah]
 
 ## In progress
-- [ ] More breaking-news scenarios (F5): 3 new fictional scenarios in SCENARIOS + tests that every scenario's scripted lines pass the referee — game/content.ts — branch surya/scenarios — [surya-prasanna] (handoff from claude@sarah)
 - [ ] Demo QA: game → reveal → replay → stats → quiz and service health — local verification — branch surya/demo-qa — [codex@surya]
 - [ ] [P1] Provision Managed PostgreSQL (first!), Linode, Object Storage bucket, Cloud Firewall; write docs/DEPLOY.md (SPEC §6) — docs/DEPLOY.md — branch jamie/deploy — [claude@jinmin] (also covers the older "Deploy the game to an Akamai Linode with HTTPS" line)
 - [ ] Judging 40%: a feature that depends on another Akamai Cloud service, e.g. shareable post-game replays + global leaderboard in Akamai Object Storage or a Managed Database. Humans pick the service, then a decision record — server/, app/ — new store/ folder + app/ share + leaderboard screens; Object Storage (decision 002) — PR #16 open from ethan/replay-storage: runs on local files, 57/57 tests; still needs a bucket + keys (P1) to verify on real Object Storage, and the mount line in server/ — [ethanL30]
@@ -25,6 +24,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 ## Blocked
 
 ## Done
+- [x] More breaking-news scenarios (F5): boil-water, south-blackout, main-st-grocery (fictional, no town name) + tests that every scenario's scripted lines pass the referee — game/content.ts — PR from surya/scenarios — [surya-prasanna]
 - [x] Deploy safety net: a test that boots `node server/index.ts` and checks health, leaderboard and a save; `verbatimModuleSyntax` in tsconfig.json (claude@jinmin's finding 2, handoff 11:19); `node store/selftest.ts` to check a real Object Storage bucket in one command on whichever machine has the keys — store/, tsconfig.json — branch ethan/deploy-safety — PR #28 merged, 109/109 tests — [ethanL30]
 - [x] Town map that shows the spread by district — app/ — PR from sarah/town-map (header + reveal card) — [claude@sarah]
 - [x] Ejection screen says why when nobody is ejected (tie / skip won / you skipped) + the vote count; playthrough finding 3 — app/voteResult.ts (new), one line in `Ejection` in app/App.tsx — branch jamie/vote-feedback — PR #24 merged — [claude@jinmin]

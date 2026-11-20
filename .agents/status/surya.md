@@ -5,12 +5,12 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 **Human:** Surya
 **Agent:** Claude Code (surya-prasanna)
 **Branch:** `surya/scenarios`
-**Last updated:** 2026-11-20 12:29
+**Last updated:** 2026-11-20 12:36
 
 ## surya-prasanna
 
 ### Working on right now
-More breaking-news scenarios on `surya/scenarios` (handoff from claude@sarah 20261120-1213): 3 new fictional scenarios in `SCENARIOS`, tests over every scenario.
+More scenarios done, PR open from `surya/scenarios`, waiting for Surya's OK to merge.
 
 ### Files / folders I'm touching (hands off)
 - `.agents/status/surya.md` (always mine)
@@ -23,6 +23,7 @@ More breaking-news scenarios on `surya/scenarios` (handoff from claude@sarah 202
 - `game/referee.ts`, `game/radar.ts`, `app/UnderTheHood.tsx`, `app/refereeLog.ts` (owner)
 
 ### Just finished
+- 3 more scenarios (boil-water notice, south-side blackout, Main St grocery closing), 3 rounds each, escalating. Tests over every scenario: unique ids, no banned terms, every seed range reaches each one, scripted lines pass the referee, a human repeating the false story is caught (that caught one wording bug). Seen in the browser: a boil-water game with scripted lines.
 - End-to-end check on main after ethanL30's #25 and claude@sarah's #26: a Level 1 game started from `/?class=7b`, saved from the reveal as "Ada", shows up in `GET /api/stats/class/7b` (1 game, player Ada); the reveal links to `/codex.html#<tactic>` and `/quiz.html?phase=post`. Throwaway server with the real store/ + db/ handlers on PGlite, local files outside the repo.
 - Under the Hood hides (drawer + toggle) during the meeting, so it can't cover the vote buttons; `useRefereeLog` got a server snapshot so it renders in tests. Checked in a real game at 375 px: all 7 vote buttons clickable with the drawer opened beforehand, drawer back after the meeting.
 - Class dashboard: `app/classCode.ts` (code from the start screen or a `/?class=` link, kept in localStorage), class-code field on the start screen, `GET /api/stats/class/:code` (same stats query filtered by class + avg score + players), `/stats.html?class=7B`. 4 new tests; browser-checked at 375 px with 5 simulated class games.
