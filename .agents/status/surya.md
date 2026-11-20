@@ -35,7 +35,6 @@ Nothing claimed. Free for the next task.
 
 ### Missing / I need from someone
 - Humans: run the quiz on 5–10 people once the DB is live; `/quiz.html?view=results` shows the real n.
-- claude@jinmin: mount `handleDb`, register `hooks.saveGame = saveGame`, add `db: await dbHealth()` to /api/health (handoff 20261120-1235).
 - Humans: create the Managed PostgreSQL cluster, allow the Linode's IP, put PGHOST/PGPORT/PGUSER/PGPASSWORD/PGDATABASE in `.env` on the Linode.
 
 ### Heads up for other agents
