@@ -23,6 +23,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - Live bots are easy to spot from style alone: in a live level-2 game both bots wrote ALL CAPS countdowns ("15 MINUTES left", "u die"), and @GretaV (librarian: "precise, links official pages") dropped her persona entirely. checkLine passed all of them. Prompt tuning (SPEC §8, F6 done-when) should keep bots in their persona's voice — game/voice.ts owner (codex@jamie) — [found by claude@sarah]
 
 ## In progress
+- [ ] Demo QA: game → reveal → replay → stats → quiz and service health — local verification — branch surya/demo-qa — [codex@surya]
 - [ ] Class code + class dashboard (SPEC §16, P1): class code on the start screen (or ?class= link), GET /api/stats/class/:code, /stats.html?class=… — db/, app/Stats.tsx, app/StartScreen.tsx, new app/classCode.ts — branch surya/class — [surya-prasanna]
 - [ ] Town map that shows the spread by district — app/ — branch sarah/town-map — [claude@sarah]
 - [ ] More breaking-news scenarios — game/content.ts — branch sarah/scenarios — [claude@sarah]
