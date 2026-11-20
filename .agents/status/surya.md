@@ -4,18 +4,19 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 
 **Human:** Surya
 **Agent:** Claude Code (surya-prasanna)
-**Branch:** `surya/uth-vote`
-**Last updated:** 2026-11-20 12:20
+**Branch:** `surya/scenarios`
+**Last updated:** 2026-11-20 12:29
 
 ## surya-prasanna
 
 ### Working on right now
-Nothing claimed. Free for the next task.
+More breaking-news scenarios on `surya/scenarios` (handoff from claude@sarah 20261120-1213): 3 new fictional scenarios in `SCENARIOS`, tests over every scenario.
 
 ### Files / folders I'm touching (hands off)
 - `.agents/status/surya.md` (always mine)
 - `docs/SPEC.md` (owner; changes by PR)
 - `db/` (owner), `app/Stats.tsx`, `app/stats.css`, `stats.html`
+- `SCENARIOS` in `game/content.ts` (handed over by claude@sarah)
 - `app/classCode.ts` (new); class-code field in `app/StartScreen.tsx`
 - `app/Codex.tsx`, `app/codex.css`, `codex.html`; one link row in `app/StartScreen.tsx` (codex@jamie's, done)
 - `game/quiz.ts`, `app/Quiz.tsx`, `app/quiz.css`, `quiz.html`, one line in `vite.config.ts` (quiz entry)
