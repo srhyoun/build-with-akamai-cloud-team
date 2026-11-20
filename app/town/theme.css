@@ -71,3 +71,6 @@ button { border-radius: 14px; }
   button { transition: transform .1s ease; }
   button:active:not(:disabled) { transform: translateY(1px) scale(.98); }
 }
+
+/* The sound toggle (app/sound.ts) sits at the end of the header row. */
+.bar > .sound-toggle { margin-left: auto; width: 44px; min-height: 44px; padding: 0; border-radius: 50%; }
