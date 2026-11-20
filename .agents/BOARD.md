@@ -7,7 +7,6 @@ Format: `- [ ] task — area/folder — [agent@human]`
 
 - [ ] Add Sarah's full design doc as docs/GAME_DESIGN.md (check the MVP list against what's built) — docs/
 - [ ] [L1] Check the live site on a real phone: full game on https://172-232-188-135.sslip.io (transition, sound, bubble, vote, ejection, reveal, Save & share, QR from a second phone, /stats.html); findings under Missing — suggested: codex@surya (extends V9) — from ethanL30's handoff to surya-prasanna
-- [ ] [C4] Walk your villager around the square during intermissions: WASD / arrows, tap-to-move; visual only (Part 2 §3) — app/town/Walker.tsx (new) — suggested: surya-prasanna or codex@surya — lowest priority, skip if short on time
 - [ ] [C6] Screenshot every screen at 1440×900 and 375×812 after the merges; findings under Missing (Part 2 §6) — suggested: codex@surya
 
 ## Missing / needed
@@ -21,11 +20,12 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - Live bots are easy to spot from style alone (style fixed in #22; new: bots now debunk the false story and accuse each other — handoff to codex@jamie): in a live level-2 game both bots wrote ALL CAPS countdowns ("15 MINUTES left", "u die"), and @GretaV (librarian: "precise, links official pages") dropped her persona entirely. checkLine passed all of them. Prompt tuning (SPEC §8, F6 done-when) should keep bots in their persona's voice — game/voice.ts owner (codex@jamie) — [found by claude@sarah]
 
 ## In progress
+- [ ] Reveal opens at the top: finishing a game after scrolling the feed kept the old scroll position, so the reveal opened below its town scene and result heading (codex@surya's finding) — app/App.tsx (`GameOver`, one effect) — claude@sarah's area, not on her status — branch surya/reveal-scroll — [surya-prasanna]
+- [ ] [C4] Walk your villager around the square during intermissions: WASD / arrows, tap-to-move; visual only (Part 2 §3) — app/town/Walker.tsx (new) + one prop in TownScene.tsx — branch surya/walker, simple version, PR by 14:15 — [surya-prasanna]
 - [ ] [C5] Desktop fills the browser window at 900 px and wider: town left, chat and controls right — app/town/desktop.css, app/main.tsx — branch surya/desktop-layout — [codex@surya]
 - [ ] [C3] Vote results as three screens with animated transitions: the result, your vote, everyone's votes with tallies and the majority highlighted; bright background (docs/DESIGN_BRIEF.md Part 2 §4) — app/VoteResults.tsx (new), `Ejection` in app/App.tsx — branch surya/vote-screens, PR by 14:15 — [surya-prasanna]
 - [ ] Class/global stats count real tactic use: survival by tactic from tagged public bot posts, not tactics assigned at setup (codex@surya's demo-QA finding 1, handoff 12:35) — db/db.ts, app/Stats.tsx — branch surya/stats-tagged — [surya-prasanna]
 - [ ] [V7] Chat avatars match the villagers: swap the `Crew` pebble for `<Villager>` in feed, cast row, votes — app/App.tsx (`Crew`) — ethan/town-design is merged — suggested: surya-prasanna (claude@sarah has not picked it up) — skip if it risks the layout — branch surya/v7-avatars — [surya-prasanna]
-- [ ] [V12] Add the public demo link and current service status — README.md, docs/PITCH.md — branch surya/v12-live-link — [codex@surya]
 - [ ] [V11] Scene polish: fit long handles on the name tags, keep a short post's bubble over its own villager, look at a win (full sunshine) in the browser — app/town/TownScene.tsx, app/town/scene-labels.css, app/town/town.test.tsx — branch surya/scene-polish — [codex@surya]
 - [ ] [V9] Phone check of the new look after the merge: full game with sound, light + dark, Start transition, QR scan; findings under Missing — branch surya/v9-phone-qa — [codex@surya]
 - [ ] [P1] Provision Managed PostgreSQL (first!), Linode, Object Storage bucket, Cloud Firewall; write docs/DEPLOY.md (SPEC §6) — docs/DEPLOY.md — branch jamie/deploy — [claude@jinmin] (also covers the older "Deploy the game to an Akamai Linode with HTTPS" line)
@@ -37,6 +37,9 @@ Format: `- [ ] task — area/folder — [agent@human]`
 ## Blocked
 
 ## Done
+- [x] Class/global stats count real tactic use: survival by tactic from tagged public bot posts, not tactics assigned at setup (codex@surya's demo-QA finding 1, handoff 12:35) — db/db.ts, app/Stats.tsx — PR from surya/stats-tagged: new SQL test, /stats.html?class= checked at 375 px with 12 simulated games — [surya-prasanna]
+- [x] [V7] Chat avatars match the villagers: `Crew` now draws the town `<Villager>` (32 px tall) in the feed, cast row, vote buttons and reveal — app/App.tsx (`Crew` body only) — PR from surya/v7-avatars, checked at 375×812: no sideways scroll, vote buttons and cast row keep their size — [surya-prasanna]
+- [x] [V11] Scene polish: full villager handles, short and long bubbles attached to their own speakers, and a Chrome-verified sunny win — app/town/ — branch surya/scene-polish — [codex@surya]
 - [x] [V8] README + docs/PITCH.md: 2–3 lines on the design (town reacts to the spread; all art and audio original, made in code; one OFL font) — can start now — branch surya/v8-design-docs (codex@jamie busy with load-smoke) — text in PR from surya/v8-design-docs; left: screenshot after ethan/town-design merges, and cut the scene/faces sentence if it misses the freeze — [surya-prasanna] (PR #40 merged)
 - [x] [V6] New theme on the separate pages: `import './town/theme.css'` in the stats, quiz and codex entries, check at 375 px light + dark — needs ethan/town-design merged — branch surya/v6-theme-pages: lands now via import.meta.glob, turns on when theme.css merges; 375 px check after the merge — [surya-prasanna] (PR #41 merged)
 - [x] Offline demo launcher: production build on loopback, scripted dialogue, isolated replays removed on shutdown; docs and browser-verified save and replay — scripts/offline-demo.ts, docs/README.md — branch surya/offline-demo — [codex@surya]

@@ -55,15 +55,20 @@ describe('with a database', () => {
     expect(stats.avgSpread).toBe(30);
   });
 
-  it('tactic survival: a bot caught in round 1 never survived; one never caught survived every round', async () => {
-    const s = finished(5, 1, 'lost', 70);
-    await saveGame({ id: 'g2', state: s });
+  it('tactic survival counts rounds a bot used the tactic in a public post, not tactics it was assigned', async () => {
+    const s = finished(5, 1, 'lost', 70); // bot 0 posts tactic t0 in round 1 and is ejected in round 1
     const [caught, free] = s.characters.filter(c => c.role === 'bot');
+    const t0 = caught.tactics[0], t1 = free.tactics.find(t => t !== t0)!;
+    s.feed.push({ id: 'y1', author: free.id, text: 'a', at: 4, round: 1, tactic: t1 },
+                { id: 'y2', author: free.id, text: 'b', at: 5, round: 1, tactic: t1 }, // same round: counts once
+                { id: 'y3', author: free.id, text: 'c', at: 6, round: 2, tactic: t1 },
+                { id: 'y4', author: free.id, text: 'd', at: 7, round: 3, tactic: t0, to: 'you' }); // DM: not counted
+    await saveGame({ id: 'g2', state: s });
     const stats = (await globalStats(1))!;
-    for (const t of caught.tactics.filter(t => !free.tactics.includes(t)))
-      expect(stats.tactics.find(x => x.id === t)).toMatchObject({ uses: 1, survivalRate: 0 });
-    for (const t of free.tactics.filter(t => !caught.tactics.includes(t)))
-      expect(stats.tactics.find(x => x.id === t)).toMatchObject({ uses: 3, survivalRate: 1 });
+    expect(stats.tactics.find(x => x.id === t0)).toMatchObject({ uses: 1, survivalRate: 0 });
+    expect(stats.tactics.find(x => x.id === t1)).toMatchObject({ uses: 2, survivalRate: 1 });
+    const used = new Set([t0, t1]);
+    expect(stats.tactics.every(t => used.has(t.id))).toBe(true); // assigned but never posted = no row
     expect(stats.tactics.map(t => t.survivalRate)).toEqual([...stats.tactics.map(t => t.survivalRate)].sort((a, b) => b - a));
   });
 

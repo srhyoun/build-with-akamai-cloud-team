@@ -163,14 +163,7 @@ function GameOver({ s, onAgain }: { s: GameState; onAgain: () => void }) {
   return <><div className="tw-over"><TownScene cast={s.characters} infection={s.infection} sunny={s.result === 'won'} /></div><Reveal s={s} onAgain={onAgain}><SavePanel s={s} refereeLog={getRefereeLog()} /></Reveal></>;
 }
 
-// Our own avatar: a colored "chat pebble" with dot eyes (SPEC §15: no crewmate shapes or visors).
+// Avatars are the town's own villagers, so the chat matches the scene (SPEC §15: original art).
 export function Crew({ color, big }: { color: string; big?: boolean }) {
-  const size = big ? 96 : 32;
-  return (
-    <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden="true">
-      <path d="M16 4c7.2 0 12 4.6 12 10.6S23.2 25 16 25c-1.5 0-2.9-.2-4.2-.6L6 28l1.3-5.4C5.2 20.7 4 18 4 14.6 4 8.6 8.8 4 16 4z" fill={color} />
-      <circle cx="12" cy="14" r="2.2" fill="#fff" /><circle cx="20" cy="14" r="2.2" fill="#fff" />
-      <circle cx="12.6" cy="14.4" r="1" fill="#14171f" /><circle cx="20.6" cy="14.4" r="1" fill="#14171f" />
-    </svg>
-  );
+  return <Villager color={color} size={big ? 96 : 32} />;
 }
