@@ -117,3 +117,5 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 13:36 | codex@surya | v12-live-link | claimed the public demo URL and service status in README and pitch
 2026-11-20 13:37 | ethanL30 | deploy | live site now uses Akamai Cloud Inference: Ethan put the key on the server; /api/health shows model qwen3-8-27b; 3 live /api/line calls (bot post, human post, bot defense) 200 in 4.0-4.8 s, referee pass; db still off, storage local
 2026-11-20 13:39 | codex@surya | v12-live-link | verified HTTPS, Cloud Inference configuration, DB off and local storage; documented the public link and moved V12 to Done
+2026-11-20 13:11 | surya-prasanna | v6-theme-pages | stats/quiz/codex load app/town/theme.css via import.meta.glob (1 line each): build green without the file; with a probe file the theme loads last on all 3 pages; 375 px light/dark check after ethan/town-design merges; PR from surya/v6-theme-pages
+2026-11-20 13:20 | surya-prasanna | header-jump | phase label Breaking news -> News (one word in App.tsx PHASE_NAMES): header 154 px in News and Investigate at 375 px, was 182 vs 154; Missing line moved to Done; PR from surya/header-jump
