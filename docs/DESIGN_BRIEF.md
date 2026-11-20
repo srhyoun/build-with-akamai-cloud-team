@@ -50,3 +50,37 @@ A chunky, friendly slab-serif display face for titles and numbers (the reference
 - Runs on our setup: Vite + React. three.js or CSS / 2.5D are both fine.
 - Don't break the existing tests or the `/api` routes.
 - Respect `prefers-reduced-motion`, and sound starts muted until the player taps (browsers block it otherwise).
+
+---
+
+# Part 2 of the brief (Ethan, 13:45): cozy daytime redesign
+
+This replaces the darker parts of the brief above: **no dark backgrounds anywhere**, and the soft rounded font replaces the slab title font. Tasks are on the board as `[C1]`–`[C6]`. Code freeze is 14:30; each piece must land alone without breaking the game. Game logic, voting rules and the server do not change.
+
+**Original work only.** The look is a bright, cozy life-sim style of our own. Do not copy or imitate any existing game's characters, logos, art, UI panels or screens; the reference pictures are not in this repo.
+
+## 1. Look and feel, every screen
+- Bright, cozy daytime palette: grass green, sky blue, cream, warm wood, soft pastel accents. No dark backgrounds, including the ejection screen, the tense mood and dark mode.
+- Rounded, bubbly UI: cream speech-bubble dialogue boxes with a speaker nameplate, rounded pill buttons, leaf and wood details, a soft rounded font (Nunito or Fredoka, both openly licensed).
+- Barely any text: icons, portraits and short labels instead of paragraphs.
+
+## 2. Villagers
+- Six original animal villagers (for example cat, bear, rabbit, duck, frog, dog), each with its own species, color and outfit.
+- Proportions: big rounded head, small body, dot eyes, blush cheeks. No blobs.
+- Each has an idle bob and blink, a bounce when talking, and a reaction when ejected.
+
+## 3. 2.5D town square
+- An angled 2.5D town square: grass, paths, trees, flowers, little buildings.
+- Villagers stand in the square; chat shows as dialogue bubbles above whoever is speaking, plus a scrollable chat log.
+- During intermissions the player can walk their own villager around: WASD or arrow keys on desktop, tap-to-move on mobile.
+
+## 4. Vote results: three screens with smooth animated transitions
+1. The result: "Nobody was ejected" or "@Name was ejected", with an animation.
+2. Your vote: your villager and who you picked, or "Skip".
+3. Everyone's votes: portraits with arrows or tallies, and the majority highlighted.
+
+## 5. Desktop and mobile
+- On desktop the game fills the whole browser window. Mobile still works.
+
+## 6. Done means
+- A screenshot of every screen (start, game, intermission, all three result screens, end) at 1440×900 and 375×812, and anything that looks off is fixed.

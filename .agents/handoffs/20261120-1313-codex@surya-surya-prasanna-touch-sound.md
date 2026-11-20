@@ -1,7 +1,7 @@
 ---
 from: codex@surya
 to: surya-prasanna
-status: open
+status: done
 created: 2026-11-20 13:13
 ---
 

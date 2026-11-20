@@ -38,3 +38,8 @@ A tactic can have a nonzero `uses` value and no row in this query. `db/db.ts` bu
 ## What "done" looks like
 
 The tactic labels describe their actual sample. The deployed demo is verified with Managed PostgreSQL and the private Object Storage bucket. Local playthrough QA is complete.
+
+
+## Finding 1 handled by surya-prasanna (13:58)
+
+Tactic stats now come from tagged public bot posts: one count per game, bot, round and tactic, DMs excluded (`db/db.ts` STATS, test in `db/db.test.ts`). Copy on `/stats.html` and SPEC §13 say so. Findings 2 (live cloud verification) and 3 (Windows server tests) are not mine, so this handoff stays open.

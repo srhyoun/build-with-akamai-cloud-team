@@ -3,7 +3,7 @@ import type { GameState, Post, ToolId } from '../shared/types.ts';
 import { alive, init, step } from '../game/engine.ts';
 import { PHASE_MS, ROUNDS } from '../game/content.ts';
 import { startDirector } from './director.ts';
-import { voteResult } from './voteResult.ts';
+import { VoteResults } from './VoteResults.tsx';
 import { GameLevelContext } from './gameLevel.ts';
 import { UnderTheHood } from './UnderTheHood.tsx';
 import { StatusPill } from './StatusPill.tsx';
@@ -13,9 +13,12 @@ import { SavePanel, ShareView } from './Share.tsx';
 import { replayIdFromUrl } from './share.ts';
 import { getRefereeLog } from './refereeLog.ts';
 import { SoundToggle, useGameSounds } from './sound.ts';
+import { TownScene } from './town/TownScene.tsx';
+import { Villager } from './town/Villager.tsx';
+import { useSpeaking } from './town/useSpeaking.ts';
 
 export const TOOL_NAMES: Record<ToolId, string> = { account_age: 'Account Age', source_check: 'Source Check', posting_pattern: 'Posting Pattern' };
-const PHASE_NAMES = { event: 'Breaking news', discussion: 'Investigate', meeting: 'Emergency meeting', ejection: 'Ejection', over: 'Game over' };
+const PHASE_NAMES = { event: 'News', discussion: 'Investigate', meeting: 'Emergency meeting', ejection: 'Ejection', over: 'Game over' };
 
 export function App() {
   const [n, setN] = useState(0); // a new key = a fresh game
@@ -31,6 +34,7 @@ function Game({ onAgain }: { onAgain: () => void }) {
   const [dmWith, setDmWith] = useState<string | null>(null);
   useEffect(() => startDirector(() => ref.current, dispatch), []);
   useGameSounds(game);
+  const speaking = useSpeaking(game);
 
   const s = game;
   const who = (id: string) => s.characters.find(c => c.id === id);
@@ -42,13 +46,14 @@ function Game({ onAgain }: { onAgain: () => void }) {
 
   return (
     <main>
-      <header className="bar">
+      <header className={dmWith ? 'bar dm' : 'bar'}>
+        <TownScene cast={s.characters} infection={s.infection} speaking={speaking} walk={s.phase === 'event'} />
         <strong>Round {s.round}/{ROUNDS}</strong>
         <span>{PHASE_NAMES[s.phase]} · {Math.floor(secs / 60)}:{String(secs % 60).padStart(2, '0')}</span>
         <span title="Fact-Check Tokens left this round">🔍 {s.tokens}</span>
         <SoundToggle />
-        <TownMap infection={s.infection} />
       </header>
+      <TownMap infection={s.infection} />
 
       <nav className="cast" aria-label="Characters">
         {s.characters.map(c => (
@@ -136,36 +141,15 @@ function Composer({ placeholder, onSend }: { placeholder: string; onSend: (text:
 }
 
 function Ejection({ s }: { s: GameState }) {
-  const e = s.ejections.at(-1)!;
-  const c = s.characters.find(x => x.id === e.id);
-  return (
-    <div className="overlay eject" role="dialog" aria-label="Ejection">
-      {c ? (
-        <>
-          <div className="eject-stage" aria-hidden="true">
-            <div className="eject-avatar"><Crew color={c.color} big /></div>
-          </div>
-          <h2>{c.handle} was {e.wasBot ? 'a Bot' : 'not a Bot'}.</h2>
-        </>
-      ) : <h2>Nobody was ejected.</h2>}
-      <p><b>{voteResult(s)}</b></p>
-      <p>{s.votes.map(v => `${v.voter === 'you' ? 'You' : s.characters.find(x => x.id === v.voter)?.handle} → ${v.target ? s.characters.find(x => x.id === v.target)?.handle : 'skip'}`).join(' · ')}</p>
-    </div>
-  );
+  return <VoteResults key={s.ejections.length} s={s} />; // key: each meeting starts again at screen 1
 }
 
 function GameOver({ s, onAgain }: { s: GameState; onAgain: () => void }) {
-  return <Reveal s={s} onAgain={onAgain}><SavePanel s={s} refereeLog={getRefereeLog()} /></Reveal>;
+  useEffect(() => window.scrollTo(0, 0), []); // the feed may have left the page scrolled down
+  return <><div className="tw-over"><TownScene cast={s.characters} infection={s.infection} sunny={s.result === 'won'} /></div><Reveal s={s} onAgain={onAgain}><SavePanel s={s} refereeLog={getRefereeLog()} /></Reveal></>;
 }
 
-// Our own avatar: a colored "chat pebble" with dot eyes (SPEC §15: no crewmate shapes or visors).
+// Avatars are the town's own villagers, so the chat matches the scene (SPEC §15: original art).
 export function Crew({ color, big }: { color: string; big?: boolean }) {
-  const size = big ? 96 : 32;
-  return (
-    <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden="true">
-      <path d="M16 4c7.2 0 12 4.6 12 10.6S23.2 25 16 25c-1.5 0-2.9-.2-4.2-.6L6 28l1.3-5.4C5.2 20.7 4 18 4 14.6 4 8.6 8.8 4 16 4z" fill={color} />
-      <circle cx="12" cy="14" r="2.2" fill="#fff" /><circle cx="20" cy="14" r="2.2" fill="#fff" />
-      <circle cx="12.6" cy="14.4" r="1" fill="#14171f" /><circle cx="20.6" cy="14.4" r="1" fill="#14171f" />
-    </svg>
-  );
+  return <Villager color={color} size={big ? 96 : 32} />;
 }

@@ -1,0 +1,103 @@
+.tw-scene {
+  --tw-mood: 0; --tw-vs: 1;
+  position: relative; width: 100%; aspect-ratio: 16 / 9; max-height: 34vh; min-height: 150px;
+  border-radius: 18px; overflow: hidden; isolation: isolate;
+  background: radial-gradient(ellipse at 50% 40%, #dff4ff, #a5d8f3);
+}
+@media (min-width: 600px) { .tw-scene { --tw-vs: 1.35; } }
+
+.tw-camera { position: absolute; inset: 0; transform: perspective(600px) rotateX(0deg) scale(1) translateY(0); }
+.tw-scene[data-view='aerial'] .tw-camera { transform: perspective(600px) rotateX(34deg) scale(.8) translateY(-4%); }
+.tw-art {
+  position: absolute; inset: 0; overflow: hidden;
+  filter: saturate(calc(1 - var(--tw-mood) * .22)); /* overcast, never dark */
+}
+/* From above the town reads as a toy diorama board. */
+.tw-scene[data-view='aerial'] .tw-art { border-radius: 26px; box-shadow: 0 30px 36px rgb(122 78 43 / .22); }
+.tw-svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+/* Mood 0 -> 1: a sunny day -> a hazy, overcast afternoon. CSS fills override the SVG's darker ones. */
+.tw-overcast { fill: #cfdbe6; opacity: calc(var(--tw-mood) * .9); }
+.tw-haze { fill: #ffd6b8; opacity: calc(var(--tw-mood) * .4); }
+.tw-dusk { display: none; }
+.tw-sun { opacity: calc(1 - var(--tw-mood) * .6); }
+/* a few flowers on the grass, laid over the same 16:9 box the SVG is sliced from */
+.tw-art::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0; aspect-ratio: 16 / 9; pointer-events: none;
+  background:
+    radial-gradient(circle at 3.7% 65.5%, #ff9fc0 0 2px, transparent 2.6px),
+    radial-gradient(circle at 6.5% 69%, #fff 0 2px, transparent 2.6px),
+    radial-gradient(circle at 2% 62%, #ffe066 0 2px, transparent 2.6px),
+    radial-gradient(circle at 75.6% 67%, #fff 0 2px, transparent 2.6px),
+    radial-gradient(circle at 78.8% 63.5%, #ff9fc0 0 2px, transparent 2.6px),
+    radial-gradient(circle at 73.5% 70%, #ffe066 0 2px, transparent 2.6px);
+}
+.tw-cloud > g { transform-box: fill-box; transform-origin: center; transform: scale(calc(1 + var(--tw-mood) * .7)); fill: color-mix(in srgb, #fff, #dfe5ec calc(var(--tw-mood) * 100%)); }
+.tw-storm { opacity: var(--tw-mood); }
+.tw-window { fill: color-mix(in srgb, #bfe9ff, #ffcf5e calc(var(--tw-mood) * 100%)); }
+.tw-bulb { fill: color-mix(in srgb, #eef1f6, #ffd36b clamp(0%, calc((var(--tw-mood) - .4) * 500%), 100%)); }
+.tw-glow { opacity: clamp(0, calc((var(--tw-mood) - .4) * 3), .6); }
+
+.tw-spot { position: absolute; width: 0; display: flex; flex-direction: column; align-items: center; transform: scale(var(--tw-vs)); transform-origin: 50% 100%; }
+.tw-fig { display: block; line-height: 0; transform-origin: 50% 100%; }
+.tw-fig svg { display: block; }
+.tw-name {
+  margin-top: -3px; max-width: 76px; padding: 0 5px; border-radius: 8px;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font: 700 10px/14px system-ui, sans-serif; color: #2a2233; background: rgb(255 255 255 / .92);
+}
+.tw-gone { width: 26px; height: 9px; margin: 0 0 14px -13px; border: 1.5px dashed rgb(42 34 51 / .4); border-radius: 50%; transform: none; }
+.tw-scene[data-view='aerial'] .tw-name { display: none; }
+
+.tw-say { position: absolute; left: 0; right: 0; height: 0; z-index: 3; }
+.tw-bubble {
+  position: absolute; bottom: 5px; margin: 0; transform: translateX(-50%); width: max-content; max-width: 56%;
+  padding: 5px 9px; border-radius: 12px; background: #fff; color: #1b1030;
+  font: 600 11px/1.25 system-ui, sans-serif; overflow-wrap: anywhere; box-shadow: 0 3px 8px rgb(122 78 43 / .25);
+}
+.tw-tail { position: absolute; bottom: 1px; width: 10px; height: 10px; margin-left: -5px; background: #fff; transform: rotate(45deg); }
+
+.tw-overlay { position: absolute; top: 8px; right: 8px; z-index: 4; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .tw-camera { transition: transform 1.2s cubic-bezier(.2, .7, .2, 1); }
+  .tw-art { transition: filter 1.5s ease, border-radius 1.2s ease, box-shadow 1.2s ease; }
+  .tw-overcast, .tw-haze, .tw-sun, .tw-storm, .tw-glow { transition: opacity 1.5s ease; }
+  .tw-cloud > g { transition: transform 1.5s ease, fill 1.5s ease; }
+  .tw-window, .tw-bulb { transition: fill 1.5s ease; }
+  .tw-drift { animation: tw-drift 26s ease-in-out infinite alternate; }
+  .tw-drift:nth-of-type(even) { animation-duration: 34s; animation-direction: alternate-reverse; }
+  .tw-flicker { animation: tw-flicker 3.7s linear infinite; }
+  .tw-talking .tw-fig { animation: tw-hop .45s ease-out 3; }
+  .tw-scene[data-view='aerial'] .tw-spot { animation: tw-bob 2.2s ease-in-out infinite; }
+  .tw-say { animation: tw-pop .28s cubic-bezier(.3, 1.5, .5, 1) both; }
+}
+@keyframes tw-drift { from { transform: translateX(-10px); } to { transform: translateX(22px); } }
+@keyframes tw-flicker { 0%, 61%, 65%, 82%, 100% { opacity: 1; } 63% { opacity: .55; } 84% { opacity: .7; } }
+@keyframes tw-hop { 0%, 100% { transform: translateY(0) scaleY(1); } 15% { transform: translateY(0) scaleY(.92); } 50% { transform: translateY(-9px) scaleY(1.04); } }
+@keyframes tw-bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 -3px; } }
+@keyframes tw-pop { from { transform: scale(.4); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+/* In the sticky game header: a full row, short enough that the header stays under ~40% of a phone screen. */
+.bar > .tw-scene { flex: 1 0 100%; max-height: 19vh; min-height: 110px; }
+/* A DM open on a phone: the scene shrinks to a strip so the DM and the chat keep the room (V10). */
+.bar.dm > .tw-scene { max-height: 96px; min-height: 0; }
+/* In the strip a bubble above a back-row villager would leave the top: pin it to the top edge, 2 lines, no tail (the talker hops). */
+.bar.dm .tw-say { top: 6px; bottom: auto !important; }
+.bar.dm .tw-bubble { top: 0; bottom: auto; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+.bar.dm .tw-tail { display: none; }
+.tw-over { max-width: 640px; margin: 0 auto; padding: 16px 16px 0; }
+
+/* villagers */
+@media (prefers-reduced-motion: no-preference) {
+  .tw-v-head, .tw-v-eyes, .tw-v-fig, .tw-v-tear { transform-box: fill-box; transform-origin: 50% 100%; }
+  .tw-v-head { animation: tw-v-bob 2.6s ease-in-out infinite; animation-delay: var(--tw-blink, 0s); }
+  .tw-v-eyes { transform-origin: center; animation: tw-v-blink 4.2s infinite; animation-delay: var(--tw-blink, 0s); }
+  .tw-v-talk .tw-v-fig { animation: tw-v-bounce .5s ease-in-out infinite; }
+  .tw-v-talk .tw-v-head, .tw-v-out .tw-v-head { animation: none; }
+  .tw-v-out .tw-v-tear { transform-origin: 50% 0; animation: tw-v-tear 1.8s ease-in infinite; }
+}
+@keyframes tw-v-bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 1.5px; } }
+@keyframes tw-v-blink { 0%, 93%, 100% { transform: scaleY(1); } 96% { transform: scaleY(.1); } }
+@keyframes tw-v-bounce { 0%, 100% { transform: translateY(0) scaleY(1); } 50% { transform: translateY(-5%) scaleY(1.03); } }
+@keyframes tw-v-tear { 0%, 20% { translate: 0 0; opacity: 1; } 100% { translate: 0 9px; opacity: 0; } }

@@ -4,25 +4,23 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 
 **Human:** Ethan
 **Agent:** Claude Code (ethanL30)
-**Branch:** `ethan/town-design`
-**Last updated:** 2026-11-20 13:18
+**Branch:** `ethan/cozy-villagers`
+**Last updated:** 2026-11-20 13:59
 
 ## ethanL30
 
 ### Working on right now
-**Design brief [V1] [V2] [V3] [V5]: PR #45 open** (`ethan/town-design`), https://github.com/srhyoun/build-with-akamai-cloud-team/pull/45. 126 tests pass; played at 375 px in light and dark. Waiting for a merge before the 14:30 freeze; then [V6] and [V7] can start and I redeploy Ethan's Linode.
+**[C1] animal villagers + [C2] bright daytime look: PR #58 open** (`ethan/cozy-villagers`), https://github.com/srhyoun/build-with-akamai-cloud-team/pull/58. 262 tests, played at 375 px. Waiting for Ethan's OK to merge, then I redeploy the Linode. `<Villager>` props are unchanged, so #50, #55, #56 keep working.
 
-Also: the game runs on Ethan's Linode (172.232.188.135), not public until Ethan opens ports 80/443 and fills in the keys (handoff to all, 13:06).
+The game is live at https://172-232-188-135.sslip.io (main `daedaa2`, model on, DB and bucket still off).
 
 ### Files / folders I'm touching (hands off)
-- `app/town/` (new folder, everything in it): scene, villagers, mood, theme (no sounds: those are `app/sound.ts`, surya-prasanna's)
-- `app/StartScreen.tsx`, `app/start-screen.css`: opening screen + Start transition
-- `app/App.tsx`: a few mount lines only (scene above the game, sound hook). I keep everyone else's lines.
-- `app/main.tsx`: one import for the theme stylesheet
-- `package.json` + lockfile: one font package (openly licensed)
+- `app/town/Villager.tsx`, `app/town/theme.css`, `app/town/town.css`
+- `app/StartScreen.tsx`, `app/start-screen.css` (less text)
+- `package.json` + lockfile: `@fontsource/fredoka` in, `@fontsource/alfa-slab-one` out
 - `.agents/status/ethan.md` (always mine)
 
-I restyle through a new stylesheet loaded last (`app/town/theme.css`), so I do NOT edit `app/style.css`, `reveal.css`, `town-map.css` or anyone's component files. If you are about to change `StartScreen.tsx` or the game header in `App.tsx`, tell me in a handoff first.
+Not touching: `.eject` / `Ejection` (goes with [C3]), `TownScene.tsx` layout, `app/sound.ts`.
 
 ### Just finished
 - **Deployed main on Ethan's Linode** (172.232.188.135, https://172-232-188-135.sslip.io): service + Caddy running, no keys yet, HTTPS waiting on the firewall rule for 80/443. Details in my handoff to all.

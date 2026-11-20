@@ -1,0 +1,84 @@
+@import '@fontsource/fredoka/400.css';
+@import '@fontsource/fredoka/600.css';
+
+/* One bright palette for everyone: no dark mode. */
+:root {
+  color-scheme: light;
+  --display: 'Fredoka', 'Nunito', ui-rounded, system-ui, sans-serif;
+  --bg: #fff8e7; --card: #fffdf5; --text: #4a2f1a; --muted: #6b5340; --line: #e3c9a0;
+  --accent: #2f7a2b; --danger: #b83a2a; --clue: #fff0b8; --news: #cfeaff;
+  --wood: #9c6b3f; --leaf: #9bdc7a; --leaf-edge: #5fa843; --leaf-ink: #1f3d12;
+  --soft: 0 4px 0 rgb(122 78 43 / .16);
+}
+/* Other stylesheets still carry dark-mode palettes: the same light values win there too. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #fff8e7; --card: #fffdf5; --text: #4a2f1a; --muted: #6b5340; --line: #e3c9a0;
+    --accent: #2f7a2b; --danger: #b83a2a; --clue: #fff0b8; --news: #cfeaff;
+  }
+}
+:root[data-mood='uneasy'] { --bg: #f4f5ee; }
+:root[data-mood='tense'] { --bg: #ffeadb; }
+/* district names sit on this fill in --text */
+.town-map .reached { fill: #ef8f86; }
+
+body { font-family: var(--display); background: linear-gradient(#d6efff, var(--bg) 300px) no-repeat var(--bg); }
+h1, h2, .bar strong, .start-levels strong { font-family: var(--display); font-weight: 600; }
+h1 { color: #7a4e2b; text-shadow: 0 3px 0 #fff; }
+/* leaf detail */
+h2::before {
+  content: ''; display: inline-block; width: .9em; height: .9em; margin-right: .3em; vertical-align: -.1em;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M2 14C1 6 6 1 15 1c0 9-5 14-13 13z' fill='%2378c850'/%3E%3Cpath d='M2 14 10 6' stroke='%232f7a2b' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+/* pill buttons with a chunky bottom edge */
+button { border-radius: 999px; border-bottom: 3px solid var(--wood); font-weight: 600; padding-inline: 16px; }
+.avatar { border-radius: 18px; padding-inline: 6px; }
+.meeting { background: #ff9d8a; color: #4a1a10; box-shadow: 0 3px 0 #c9604c; }
+.composer button, .start-levels button { background: var(--leaf); color: var(--leaf-ink); border-color: var(--leaf-edge); }
+.panel { border: 2px solid var(--line); border-radius: 22px; padding: 16px; box-shadow: var(--soft); }
+.composer input { border: 2px solid var(--wood); border-radius: 999px; padding: 12px 16px; }
+
+/* speech bubbles: fat wood border, tail on the avatar side, the speaker's name as a nameplate */
+.feed { gap: 22px; padding-top: 14px; }
+.feed li { position: relative; border: 3px solid var(--wood); border-radius: 22px; padding: 16px 14px 10px; font-size: 1rem; color: var(--text); box-shadow: var(--soft); }
+.feed li::before {
+  content: ''; position: absolute; left: -9px; top: 24px; width: 12px; height: 12px;
+  background: inherit; border: solid var(--wood); border-width: 0 0 3px 3px; border-radius: 0 0 0 3px; transform: rotate(45deg);
+}
+.feed li > div > b:first-child {
+  position: absolute; top: -14px; left: 12px; padding: 1px 10px; white-space: nowrap;
+  border: 2px solid var(--wood); border-radius: 999px; background: #ffd97a; color: var(--text);
+  font-size: .85rem; font-weight: 600; transform: rotate(-2deg);
+}
+.feed li.news { border-color: #4f9fd3; }
+.feed li.news::before { border-color: #4f9fd3; }
+.feed li.news > div > b:first-child { background: #9ad6ff; border-color: #4f9fd3; }
+.feed li.you { background: #e2f6d3; border-color: var(--leaf-edge); }
+.feed li.you::before { left: auto; right: -9px; border-color: var(--leaf-edge); transform: rotate(-135deg); }
+.feed li.you > div > b:first-child { left: auto; right: 12px; background: var(--leaf); border-color: var(--leaf-edge); }
+.clue { border-radius: 12px; padding: 8px 10px; color: var(--text); }
+
+/* wood-plank header: cream text on #7a4e2b is 6.7:1 */
+.bar {
+  gap: 6px 8px; margin: 0 -8px; padding: 12px 12px 10px; border-radius: 0 0 18px 18px;
+  background: #7a4e2b; color: #fff8e7; box-shadow: inset 0 3px 0 #a9764a, 0 3px 0 #5c3a1e;
+}
+.bar strong { font-size: .95rem; }
+/* The phase label gives way before the row wraps, so the sound button stays on this line. */
+.bar > strong + span { flex: 1 1 0; min-width: 0; font-size: .93rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* ejection screen: bright sky over grass (another agent is rebuilding the rest) */
+.eject .eject-avatar { animation: none; }
+.eject { background: linear-gradient(#bfe6ff 0 58%, #a9de96 58%); color: var(--text); }
+.eject p { color: var(--text); }
+.eject-stage { border: 0; background: none; }
+
+@media (prefers-reduced-motion: no-preference) {
+  body, .actions, .overlay { transition: background-color 1.5s ease; }
+  button { transition: transform .1s ease; }
+  button:active:not(:disabled) { transform: translateY(2px) scale(.98); }
+}
+
+/* The sound toggle (app/sound.ts) sits at the end of the header row. */
+.bar > .sound-toggle { margin-left: auto; width: 44px; min-height: 44px; padding: 0; border-radius: 50%; }

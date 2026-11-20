@@ -8,6 +8,7 @@ import type { ClassStats } from '../db/db.ts';
 import { TACTICS } from '../game/content.ts';
 import './style.css';
 import './stats.css';
+import.meta.glob('./town/theme.css', { eager: true }); // [V6] town theme, loaded last; matches nothing until ethan/town-design merges
 
 const MIN_N = 3; // below this a tactic shows "not enough data yet"
 const pct = (x: number) => `${Math.round(x * 100)}%`;
@@ -61,13 +62,14 @@ function Board({ s }: { s: GlobalStats | ClassStats }) {
 
       {top && (
         <p className="stats-callout">
-          Most effective tactic: <b>{top.name}</b>. Bots using it survived <b>{pct(top.survivalRate)}</b> of rounds (n = {top.uses}).
+          Most effective tactic: <b>{top.name}</b>. Bots that posted it survived <b>{pct(top.survivalRate)}</b> of those rounds (n = {top.uses} bot rounds).
           <span>{TACTICS[top.id].example ? `e.g. “${TACTICS[top.id].example}”` : ''}</span>
         </p>
       )}
 
       <section aria-label="Bot survival by tactic">
-        <h2>How often a bot survived the round, by tactic</h2>
+        <h2>How often a bot survived a round it used the tactic in</h2>
+        <p className="stats-note">n = rounds where a bot posted the tactic in the town chat (tagged posts; DMs not counted).</p>
         {enough.length === 0 ? <p className="stats-note">Not enough rounds per tactic yet (need {MIN_N}).</p> : (
           <ol className="stats-bars">
             {enough.map(t => (

@@ -1,0 +1,46 @@
+/* [C3] Vote results: bright daytime screens (not the old dark spotlight). */
+.overlay.vr {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;
+  background: radial-gradient(ellipse at 50% 0, #fff6d6, #ffe2b8 45%, #ffcfa3); color: #3a2a1a; cursor: pointer;
+}
+.vr h2 { margin: 6px 0 0; font-size: 1.6rem; color: #3a2a1a; }
+.vr p { margin: 0; max-width: 420px; color: #5b4632; }
+.vr-screen { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; max-width: 440px; animation: vr-in .45s cubic-bezier(.3, 1.3, .5, 1) both; }
+
+.vr-dots { display: flex; gap: 8px; list-style: none; margin: 0; padding: 0; }
+.vr-dots li { width: 9px; height: 9px; border-radius: 50%; background: #e7b98a; transition: background .3s, transform .3s; }
+.vr-dots li.on { background: #e26b3a; transform: scale(1.3); }
+.vr-hint { font-size: .82rem; opacity: .7; }
+
+.vr-out { animation: vr-float 1.6s ease-in-out .2s both; }
+.vr-empty { font-size: 64px; animation: vr-pop .5s cubic-bezier(.3, 1.5, .5, 1) both; }
+.vr-verdict { padding: 6px 16px; border-radius: 999px; font-weight: 700; color: #fff !important; animation: vr-pop .5s cubic-bezier(.3, 1.5, .5, 1) .5s both; }
+.vr-verdict.bot { background: #2f9e5b; }
+.vr-verdict.human { background: #d0573a; }
+
+.vr-pick { display: flex; align-items: center; gap: 14px; }
+.vr-you { padding: 10px 16px; border-radius: 999px; background: #fff; font-weight: 700; box-shadow: 0 3px 10px rgb(150 90 40 / .2); }
+.vr-arrow { font-size: 1.6rem; color: #e26b3a; animation: vr-nudge 1s ease-in-out infinite; }
+.vr-target { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 14px; border-radius: 18px; background: #fff; box-shadow: 0 3px 10px rgb(150 90 40 / .2); animation: vr-pop .45s cubic-bezier(.3, 1.5, .5, 1) .15s both; }
+.vr-skip { min-width: 72px; padding: 22px 14px; }
+
+.vr-tally { list-style: none; margin: 0; padding: 0; width: 100%; display: grid; gap: 8px; }
+.vr-tally li {
+  display: flex; align-items: center; gap: 10px; padding: 6px 12px; border-radius: 16px; background: rgb(255 255 255 / .7); text-align: left;
+  animation: vr-in .4s ease-out both;
+}
+.vr-tally li:nth-child(2) { animation-delay: .08s; } .vr-tally li:nth-child(3) { animation-delay: .16s; } .vr-tally li:nth-child(n+4) { animation-delay: .24s; }
+.vr-tally li.top { background: #fff; outline: 3px solid #e26b3a; box-shadow: 0 4px 14px rgb(226 107 58 / .3); }
+.vr-who { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+.vr-who small { color: #7a644e; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.vr-n { font-size: 1.4rem; font-weight: 800; color: #e26b3a; }
+.vr-skipdot { width: 30px; text-align: center; font-size: 22px; }
+
+@keyframes vr-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes vr-pop { from { opacity: 0; transform: scale(.5); } to { opacity: 1; transform: scale(1); } }
+@keyframes vr-float { 0% { transform: translateY(0) rotate(0); } 60% { transform: translateY(-14px) rotate(-6deg); } 100% { transform: translateY(-6px) rotate(-3deg); } }
+@keyframes vr-nudge { 50% { transform: translateX(4px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .vr *, .vr-screen { animation: none !important; transition: none !important; }
+}

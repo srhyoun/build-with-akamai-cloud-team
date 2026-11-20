@@ -8,13 +8,13 @@ import { logCheck, resetRefereeLog } from './refereeLog.ts';
 import { createChatterOrder } from './chatter.ts';
 
 const TICK_MS = 250;
-let model = true; // flips off after the first failure, so an offline game stays snappy
+let off = ''; // why the model was switched off after a failure (so an offline game stays snappy); '' = still trying
 
 // Every line goes through the referee and into the Under the Hood log. Nothing unchecked reaches the player.
 async function line(s: GameState, charId: string, kind: LineKind, to?: string) {
   const c = s.characters.find(x => x.id === charId)!;
-  let why = 'no model configured';
-  if (model) {
+  let why = off;
+  if (!off) {
     const t0 = performance.now();
     try {
       const res = await fetch('/api/line', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ state: s, charId, kind, to }) });
@@ -29,9 +29,10 @@ async function line(s: GameState, charId: string, kind: LineKind, to?: string) {
       } else {
         if (res.status === 422 && body.check) logCheck(body.check);
         why = res.status === 422 ? 'blocked twice by the referee' : `model error ${res.status}`;
-        if (res.status === 503 || res.status === 404) model = false;
+        if (res.status === 503) off = why = 'no model configured';
+        if (res.status === 404) off = why = 'no game server (404)';
       }
-    } catch { model = false; why = 'model unreachable'; }
+    } catch { off = why = 'model unreachable'; }
   }
   const say = scriptedLine(s, c, kind, to); // scripted lines always pass checkLine (game/referee.test.ts)
   logCheck(toCheck(s, charId, kind, [...checkLine(s, c, say, kind), { rule: 'FALLBACK', severity: 'warn', detail: why }], 1, 0, 'scripted', 'fallback'));

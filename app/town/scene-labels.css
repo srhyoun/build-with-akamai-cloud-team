@@ -1,0 +1,26 @@
+/* Let edge badges grow inward while keeping their short side next to the villager. */
+.tw-name {
+  --tw-badge-outset: min(29px, 9vw);
+  width: max-content;
+  max-width: none;
+  font-size: clamp(8px, 2.4vw, 10px);
+}
+.tw-name[data-edge='left'] { translate: max(0px, calc(50% - var(--tw-badge-outset))); }
+.tw-name[data-edge='right'] { translate: min(0px, calc(var(--tw-badge-outset) - 50%)); }
+
+.tw-tail { left: var(--tw-speaker-x); }
+.tw-bubble {
+  left: var(--tw-speaker-x);
+  min-width: 30px;
+  text-align: center;
+}
+/* Leave the tail under the rounded box even when the message is only one word. */
+.tw-say[data-edge='left'] .tw-bubble {
+  left: calc(var(--tw-speaker-x) - 14px);
+  transform: none;
+}
+.tw-say[data-edge='right'] .tw-bubble {
+  left: auto;
+  right: calc(100% - var(--tw-speaker-x) - 14px);
+  transform: none;
+}
