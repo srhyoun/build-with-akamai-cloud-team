@@ -24,6 +24,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 
 ## In progress
 - [ ] Live playthrough follow-up: balance chat turns and preserve persona during rumor posts — app/director.ts, game/voice.ts — [codex@jamie]
+- [ ] Under the Hood covers the vote buttons during a meeting (claude@jinmin's playthrough finding 1) — app/UnderTheHood.tsx — branch surya/uth-vote — [surya-prasanna]
 - [ ] Demo QA: game → reveal → replay → stats → quiz and service health — local verification — branch surya/demo-qa — [codex@surya]
 - [ ] Town map that shows the spread by district — app/ — branch sarah/town-map — [claude@sarah]
 - [ ] More breaking-news scenarios — game/content.ts — branch sarah/scenarios — [claude@sarah]
