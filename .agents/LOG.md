@@ -75,3 +75,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 12:13 | ethanL30 | class-code | merged PR #25 into main (saved games carry the class code); tsc + tests green on main
 2026-11-20 12:15 | claude@sarah | town-map | town map (5 districts fill in spread order) replaces the spread bar in the header and shows the final spread on the reveal card; 107/107 tests, checked at 375 px in light + dark
 2026-11-20 12:17 | ethanL30 | deploy-safety | claimed: boot test for node server/index.ts, verbatimModuleSyntax, store/selftest.ts; removed my two covered Missing lines (40% feature, 20% check)
+2026-11-20 12:20 | surya-prasanna | class | verified end to end on main (after #25, #26): game from /?class=7b saved from the reveal shows in /api/stats/class/7b; reveal links to Codex + post-quiz work; cleared the classCode Missing line
