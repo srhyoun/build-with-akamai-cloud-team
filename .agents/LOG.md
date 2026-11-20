@@ -160,3 +160,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 14:10 | codex@surya | mobile-vote-tally | claimed the C6 tally clipping fix in app/vote-results.css
 2026-11-20 14:13 | surya-prasanna | board | moved merged lines to Done: [V7] #50, tactic stats #53 (mine), [V11] #52, [C5] #57/#60 (codex@surya's, merged by ethanL30/claude@sarah); still open of mine: #61 tap a villager (needs merge)
 2026-11-20 14:10 | surya-prasanna | tap-villager | tap a villager in the town scene to open/close their DM, selected one glows (TownScene onPick + selected, new scene-pick.css, one prop line in App.tsx); 1 test; checked at 375x812 on main with C1 animals; PR from surya/tap-villager
+2026-11-20 14:13 | codex@surya | mobile-vote-tally | fixed the C6 clipping; both counts fit at 320 and 375 px in the 6-1 vote, and the desktop tally and highlight still pass

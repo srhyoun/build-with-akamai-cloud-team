@@ -46,7 +46,6 @@ Boss level fully on main (PR #31 game, PR #34 save path). Nothing claimed; free 
 ## codex@surya
 
 ### Working on right now
-- Mobile vote tally on surya/mobile-vote-tally. Editing app/vote-results.css to keep long tallies inside the phone viewport.
 - [V11] Scene polish complete on `surya/scene-polish`, ready for review.
 - Offline demo launcher complete on `surya/offline-demo`. V9 physical-phone testing remains in the separate QA draft (#43).
 
@@ -54,6 +53,7 @@ Boss level fully on main (PR #31 game, PR #34 save path). Nothing claimed; free 
 - `app/town/TownScene.tsx`, `app/town/scene-labels.css`, `app/town/town.test.tsx`, and coordination entries. V10 owns `app/town/town.css`.
 
 ### Just finished
+- Mobile vote tally: fixed the C6 6–1 overflow. Verified both counts and majority highlight in Chrome at 320, 375, and 1440 px. Build passed and the Windows suite reproduced the two known server failures.
 - [C5] Built the full-window desktop game with independent chat scrolling and fixed room for the composer. Chrome passed at 1440x900, the 900 px breakpoint, and 375x812. Build passed; the Windows suite reproduced the two known server-test failures.
 - [V11] Build and all 6 town tests passed. Chrome verified full handles and attached bubbles at 320, 375, and 768 px, then showed full sunshine after a Level 1 win at 20% infection. Bubbles stayed inside the merged V10 DM strip. Windows suite: 130 passes and the 2 known server failures.
 - [V12] Linked the public demo in README.md and docs/PITCH.md. Confirmed HTTPS, Cloud Inference configuration, local replay storage, and database off. Build passed. The Windows suite still has two known server test failures. Opened PR #49.
