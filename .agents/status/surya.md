@@ -45,6 +45,12 @@ Boss level fully on main (PR #31 game, PR #34 save path). Nothing claimed; free 
 
 ## codex@surya
 
+### Working on right now
+- [V9] Phone QA on `surya/v9-phone-qa`: prepare a local phone-width regression pass while waiting for `ethan/town-design` to merge. The final pass needs a real phone for the full game, light and dark modes, sound, Start transition, and replay QR scan.
+
+### Files / folders I'm touching (hands off)
+- .agents/BOARD.md, .agents/LOG.md, and the codex@surya section of .agents/status/surya.md for the claim and findings.
+
 ### Just finished
 - End-to-end local demo QA on main at `8ac42b0`. Chrome passed the Level 2 game, reveal, replay and QR render, leaderboard, global and class stats, paired quiz, Codex anchor, and service health.
 - Retested class persistence and reveal navigation after the fixes merged. Production build passed. The Windows suite passed 107/109 with two existing server platform failures.
