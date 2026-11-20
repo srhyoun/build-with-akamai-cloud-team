@@ -7,6 +7,7 @@ import { QUIZ, scoreQuiz, type Guess, type QuizAnswer } from '../game/quiz.ts';
 import type { QuizResults } from '../db/db.ts';
 import './style.css';
 import './quiz.css';
+import.meta.glob('./town/theme.css', { eager: true }); // [V6] town theme, loaded last; matches nothing until ethan/town-design merges
 
 const SMALL_N = 30; // below this every number carries "small sample"
 const pct = (x: number) => `${Math.round(x * 100)}%`;
