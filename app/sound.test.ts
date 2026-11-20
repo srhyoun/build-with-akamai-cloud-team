@@ -26,10 +26,13 @@ describe('sound', () => {
     b.feed.push({ id: 'y', author: 'news', text: 'BREAKING', at: 1, round: 1 });
     b.tokens--;
     b.phase = 'meeting';
-    expect(soundEvents(a, b)).toEqual([{ kind: 'babble', who, syllables: 2 }, { kind: 'token' }, { kind: 'alarm' }]);
+    expect(soundEvents(a, b)).toEqual([{ kind: 'babble', who, syllables: 2 }, { kind: 'news' }, { kind: 'token' }, { kind: 'alarm' }]);
     const c = clone(b); c.phase = 'ejection';
     expect(soundEvents(b, c)).toEqual([{ kind: 'eject' }]);
     expect(soundEvents(c, c)).toEqual([]);
+    const d = clone(c); d.phase = 'over'; d.result = 'won';
+    expect(soundEvents(c, d)).toEqual([{ kind: 'won' }]);
+    expect(soundEvents(d, clone(d))).toEqual([]);
   });
 
   it('stays silent and never throws without AudioContext or before the first tap', () => {

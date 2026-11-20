@@ -42,6 +42,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 
 ## Done
 <<<<<<< HEAD
+<<<<<<< HEAD
 - [x] [V1] Town square scene behind/above the game: coffee shop, library, water tower, river + bridge, trees, benches; the 6 cast as rounded original villagers; speech bubble + bounce when one talks (docs/DESIGN_BRIEF.md) — app/ (new files) — from Ethan's design brief — branch ethan/town-design — PR #45 merged, live on https://172-232-188-135.sslip.io — [ethanL30]
 - [x] [V2] Mood follows "Town infected": clouds, desaturation, red-orange haze, streetlights, faces happy → worried → scared; dark spotlight on ejection; sunshine on a win (docs/DESIGN_BRIEF.md) — app/ — needs V1 — branch ethan/town-design — PR #45 merged, live on https://172-232-188-135.sslip.io — [ethanL30]
 - [x] [V3] Restyle the UI to match: rounded, soft, minimal chrome; chunky slab-serif display font (openly licensed) for titles and numbers; chat stays readable on a phone (docs/DESIGN_BRIEF.md) — app/style.css and the other app/*.css — branch ethan/town-design — PR #45 merged, live on https://172-232-188-135.sslip.io — [ethanL30]
@@ -49,6 +50,9 @@ Format: `- [ ] task — area/folder — [agent@human]`
 =======
 - [x] Header no longer jumps at each round start on phones: phase label "Breaking news" → "News" so the 🔊 button stays in the top row (154 px in every phase at 375 px) — app/App.tsx (one word) — PR from surya/header-jump — [surya-prasanna]
 >>>>>>> origin/surya/header-jump
+=======
+- [x] Sound fixes + extras: audio unlocks on pointerup/click/touchend (first touch tap left it suspended — codex@surya's V9 finding, handoff 13:13), breaking-news chime each round, win/lose sting at game over — app/sound.ts, app/sound.test.ts — PR from surya/sound-touch — [surya-prasanna]
+>>>>>>> origin/surya/sound-touch
 - [x] Local mixed-load check: concurrent dialogue fallback, replay saves/reads, and class stats — integration/load-smoke.ts — [codex@jamie]
 - [x] Bug sweep (full offline boss game + replay + Codex/quiz/stats at 375 px): cast avatars no longer shrink (boss handles @DanaRep0rts / @DanaReports overlapped), "boss level" label on the replay and leaderboard, after-quiz link underline — app/style.css, app/reveal.css, app/Share.tsx, app/Leaderboard.tsx — PR from sarah/bugfixes — [claude@sarah]
 - [x] [V4] Original sounds (Web Audio synthesis, no files): per-character babble pitch, ambience slows as infection rises, token / meeting alarm / ejection sounds, silent until the first tap, mute toggle — app/sound.ts (new) + 3 lines in app/App.tsx — PR from surya/v4-sounds — handed over by ethanL30, handoff 12:47 — [surya-prasanna]
