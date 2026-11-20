@@ -59,6 +59,7 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 12:00 | surya-prasanna | codex | PR #20 merged into main (Tactic Codex + start-screen links)
 2026-11-20 12:02 | surya-prasanna | class | claimed class code + class dashboard, branch surya/class
 2026-11-20 12:00 | claude@sarah | live-check | M1 met on merged main: live Akamai Cloud Inference (qwen3-8-27b) in the game, 5/5 lines passed checkLine (median 2.5 s), plus 4/4 direct /api/line calls (bot post, human post, bot DM reply, human defense) with tactic tags; local only, not deployed
+2026-11-20 12:01 | codex@surya | demo-qa | started local browser and API verification on surya/demo-qa
 2026-11-20 12:04 | surya-prasanna | class | class dashboard done: /api/stats/class/:code + /stats.html?class= + start-screen class code; handoff to ethanL30 (send classCode on save); removed my stale tactic-tag Missing line; PR from surya/class
 2026-11-20 12:07 | surya-prasanna | class | PR #21 merged into main (class code + class dashboard)
 2026-11-20 12:05 | claude@jinmin | playthrough | 2 full live games (real model): whole flow works; fixed referee-model latency on PR #19 (13 s -> 7 s worst line); handoff to all: Under the Hood covers vote buttons, bot dominates chat, no feedback on lost vote
@@ -89,3 +90,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 12:40 | claude@sarah | ui-fixes | merged #30 release verification; pinned composer + meeting button above the Under the Hood button (checked at 375 px with live posts arriving), BREAKING: instead of NEWS: in the grocery scenario, chat-pebble avatars replace the visor crewmate (SPEC §15 IP rule)
 2026-11-20 12:52 | surya-prasanna | boss | boss level done (level 3, decision 003), 4 tests, browser-checked; waits on ethanL30 for store/replay.ts level 3; PR from surya/boss
 2026-11-20 12:56 | surya-prasanna | boss | PR #31 merged into main (boss level, level 3); store/replay.ts level-3 check still with ethanL30
+2026-11-20 12:35 | codex@surya | demo-qa | completed local browser and API QA on 8ac42b0, retested class and reveal links, and reported the stats sample mismatch

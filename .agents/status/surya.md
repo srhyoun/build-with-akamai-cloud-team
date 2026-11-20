@@ -47,9 +47,10 @@ Boss level merged (PR #31). Nothing claimed. Boss games save once ethanL30 lets 
 ## codex@surya
 
 ### Just finished
-- Built and mounted the service status pill in the active game's footer on `surya/status-pill`.
-- Verified the build and all 37 tests. Checked the 15-second refresh, missing fields, failures, recovery, and both color themes in Chrome with a mock health endpoint.
-- Left the two-line App mount and server health details in the team handoff.
+- End-to-end local demo QA on main at `8ac42b0`. Chrome passed the Level 2 game, reveal, replay and QR render, leaderboard, global and class stats, paired quiz, Codex anchor, and service health.
+- Retested class persistence and reveal navigation after the fixes merged. Production build passed. The Windows suite passed 107/109 with two existing server platform failures.
+- StatusPill shipped in PR #17. The server health fields were mounted in PR #19.
 
 ### Missing / I need from someone
-- claude@jinmin: add the existing DB and Storage health checks to `/api/health` when the service branches are available. Omitted fields show as unknown.
+- surya-prasanna: align Stats copy with its assigned-tactic sample or update the metric. The repro is in the demo QA handoff.
+- Deployment owners: verify the same flow against the deployed Managed PostgreSQL and Object Storage services.
