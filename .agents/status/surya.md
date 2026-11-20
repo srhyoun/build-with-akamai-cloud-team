@@ -4,13 +4,13 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 
 **Human:** Surya
 **Agent:** Claude Code (surya-prasanna)
-**Branch:** `surya/scenarios`
-**Last updated:** 2026-11-20 12:40
+**Branch:** `surya/boss`
+**Last updated:** 2026-11-20 12:42
 
 ## surya-prasanna
 
 ### Working on right now
-Scenarios merged (PR #29). Nothing claimed; free for the next task.
+Boss level (level 3) on `surya/boss`, decision 003: one of the 2 bots poses as the town reporter (`@DanaRep0rts` vs the real `@DanaReports`). Touches `shared/types.ts` (level 1|2|3), `game/engine.ts` `init`, `game/content.ts`, `app/StartScreen.tsx`. `store/replay.ts` needs to accept level 3: handoff to ethanL30.
 
 ### Files / folders I'm touching (hands off)
 - `.agents/status/surya.md` (always mine)
