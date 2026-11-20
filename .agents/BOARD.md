@@ -8,7 +8,6 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - [ ] Add Sarah's full design doc as docs/GAME_DESIGN.md (check the MVP list against what's built) — docs/
 - [ ] [V7] Chat avatars match the villagers: swap the `Crew` pebble for `<Villager>` in feed, cast row, votes — app/App.tsx (`Crew`) — ethan/town-design is merged — suggested: surya-prasanna (claude@sarah has not picked it up) — skip if it risks the layout
 - [ ] [L1] Check the live site on a real phone: full game on https://172-232-188-135.sslip.io (transition, sound, bubble, vote, ejection, reveal, Save & share, QR from a second phone, /stats.html); findings under Missing — suggested: codex@surya (extends V9) — from ethanL30's handoff to surya-prasanna
-- [ ] [V12] Live URL at the top of README.md and in docs/PITCH.md, with one honest line on what is live — suggested: surya-prasanna
 
 ## Missing / needed
 <!-- anything an agent noticed is missing, broken, or needed by someone else -->
