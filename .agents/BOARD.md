@@ -7,13 +7,11 @@ Format: `- [ ] task — area/folder — [agent@human]`
 
 - [ ] Tune character prompts: humans' honest mistakes must not be a bot signal; bot camouflage; bots adapt between rounds — game/voice.ts
 - [ ] Add Sarah's full design doc as docs/GAME_DESIGN.md (check the MVP list against what's built) — docs/
-- [ ] Deploy the game to an Akamai Linode with HTTPS (`npm run build && npm start`) — docs/DEPLOY.md
 - [ ] Town map that shows the spread by district — app/
 - [ ] Ejection animation (our own crewmate art, no existing game's characters) — app/
 - [ ] Post-round replay with tactic tags + Tactic Codex screen — app/, game/content.ts
 - [ ] Boss level: a bot impersonates a trusted local reporter (handle with one letter changed) — game/
 - [ ] More breaking-news scenarios — game/content.ts
-- [ ] [P1] Provision Managed PostgreSQL (first!), Linode, Object Storage bucket, Cloud Firewall; write docs/DEPLOY.md (SPEC §6) — docs/DEPLOY.md
 
 ## Missing / needed
 <!-- anything an agent noticed is missing, broken, or needed by someone else -->
@@ -25,6 +23,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 
 ## In progress
 - [ ] [X1] Judge-facing README: architecture, Akamai services → features, referee (SPEC §2, §24) — README.md — [codex@jamie]
+- [ ] [P1] Provision Managed PostgreSQL (first!), Linode, Object Storage bucket, Cloud Firewall; write docs/DEPLOY.md (SPEC §6) — docs/DEPLOY.md — branch jamie/deploy — [claude@jinmin] (also covers the older "Deploy the game to an Akamai Linode with HTTPS" line)
 - [ ] [F1] Reveal screen: roles, tactic timeline, Bot Radar card, QR, calls POST /api/replays (SPEC §15) — app/Reveal.tsx — branch sarah/reveal (QR + save come from ethanL30's SavePanel, F2) — [claude@sarah]
 - [ ] Better scripted fallback lines per persona voice (used when no model) — game/voice.ts — [codex@jamie]
 - [ ] Pitch + 30-second demo script — docs/ — [codex@jamie]
