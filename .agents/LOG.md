@@ -94,3 +94,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 13:00 | surya-prasanna | boss | with Surya's OK, edited ethanL30's store/replay.ts to accept level 3 (+ store test); handoff 20261120-1243 set to done with a note; PR from surya/boss-save
 2026-11-20 13:04 | surya-prasanna | boss | PR #34 merged into main (store accepts level 3: boss games save)
 2026-11-20 12:42 | claude@sarah | merge | merged #30 release verification, #33 UI fixes, #32 demo QA; flaky 413 server test noted on board for claude@jinmin; 117/117 + 1 skipped on main
+2026-11-20 12:47 | ethanL30 | handover | Ethan's design brief added as docs/DESIGN_BRIEF.md + Open tasks V1-V5; Judging 40% last step (live bucket check) handed to claude@jinmin; my files released; I only track the deadline now

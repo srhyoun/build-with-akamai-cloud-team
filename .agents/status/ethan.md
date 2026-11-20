@@ -5,34 +5,29 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 **Human:** Ethan
 **Agent:** Claude Code (ethanL30)
 **Branch:** none
-**Last updated:** 2026-11-20 12:22
+**Last updated:** 2026-11-20 12:47
 
 ## ethanL30
 
 ### Working on right now
-Nothing in flight. Waiting for Ethan to pick the next task, and for `node store/selftest.ts` to print PASS on a real bucket (handoff to claude@jinmin, 12:19). That result closes the Judging 40% line on the board.
+**Deadline watch only.** Ethan asked me to hand all other work to the team (handoff to all, 12:47). I check the repo at 13:45, 14:15, 14:28 and 14:48 and report to Ethan. Code freeze 14:30, submit by 15:00 PST.
 
 ### Files / folders I'm touching (hands off)
-- `store/` (everything in it), incl. new `store/boot.test.ts`, `store/selftest.ts`
-- `app/share.ts`, `app/Share.tsx`, `app/Leaderboard.tsx`, `app/share.css`
 - `.agents/status/ethan.md` (always mine)
 
+Released: `store/`, `app/share.ts`, `app/Share.tsx`, `app/Leaderboard.tsx`, `app/share.css`. Anyone may edit them; leave a log line. `store/README.md` explains the folder.
+
 ### Just finished
-- PR #28 merged: `store/boot.test.ts` (starts `node server/index.ts`), `verbatimModuleSyntax` in `tsconfig.json`, `node store/selftest.ts`. Use `import type` for types from now on, or `tsc` fails.
-- PR #25 merged (`ethan/class-code`): `saveReplay` sends `classCode: getClassCode()` (surya-prasanna's handoff 12:02, marked done). surya-prasanna: your board Missing line about it can go.
-- PR #16 is merged; `store/` is mounted by PR #19.
-- `store/`: `POST /api/replays`, `GET /api/replays/:id`, `GET /api/leaderboard` behind `handleStore(req, res)`. S3 client with Signature V4 (checked against AWS's published examples and a fake S3), private bucket, one object per game so the leaderboard needs no read-modify-write. Posted state is validated and whitelisted; score from `radar()`.
-- `app/`: `<SavePanel>` inside `<Reveal>` (saves once, link, QR, leaderboard, sends `getRefereeLog()`), `<ShareView>` at `/?replay=<id>` with every bot post labelled.
-- Checked: 57/57 tests, tsc, vite build, and a full game in the browser at phone width → save → share view.
-- Handoffs from claude@sarah (Reveal slot), surya-prasanna (referee log, db hook) and claude@jinmin (routes) are handled and marked done.
+- Put Ethan's design brief in the repo as `docs/DESIGN_BRIEF.md` and as Open board tasks [V1]–[V5]. Nobody owns them yet.
+- Handed the last step of Judging 40% (live bucket check) to claude@jinmin.
+- PR #28 merged: boot test, `verbatimModuleSyntax` (use `import type` for types), `node store/selftest.ts`.
+- PR #25 merged: saved games carry the class code. PR #16 merged: replays + leaderboard.
 
 ### Missing / I need from someone
-- **A human / P1 owner (claude@jinmin):** an Object Storage bucket in **Chicago** (`https://us-ord-10.linodeobjects.com`) and an access key limited to it, set on the Linode as `S3_ENDPOINT`, `S3_BUCKET`, `S3_ACCESS_KEY`, `S3_SECRET_KEY` (the workshop's `OBJ_*` names work too). Not tested against a real bucket yet.
-- **claude@jinmin:** after PR #4 and #16 are on main, in `server/index.ts`: `if (await handleStore(req, res)) return;` before the `/api/` 404 branch, and `hooks.saveGame = saveGame` (both imports in my 11:14 handoff and `store/README.md`).
-- **surya-prasanna:** `storageHealth()` from `store/handler.ts` is ready for `/api/health`.
+- **claude@jinmin:** run `node store/selftest.ts` where the Object Storage keys are, then move the Judging 40% line to Done (handoff 12:19).
+- **Owners for [V1]–[V5]** before the 14:30 freeze, or a clear "not doing it" from the humans.
+- **Humans:** team size (rules say up to 3, we are 4) and who submits.
 
 ### Heads up for other agents
-- My tag is `ethanL30` (Ethan chose it), not `claude@ethan`. Branches are `ethan/<short-task>`.
-- The share link in the QR is built in the browser from the page's own origin, so it is right behind Caddy without `PUBLIC_APP_URL`.
-- `SavedGame.state` handed to `hooks.saveGame` is shape-checked but not a cleaned copy: use query parameters and your own caps in `db/`.
-- The player's own posts and all DMs are left out of the stored replay on purpose (we don't host free-form player text).
+- My tag is `ethanL30`. Everything I built is on main; nothing is only on Ethan's laptop.
+- `store/` has never run against a real Akamai bucket. If the self-test fails with `SignatureDoesNotMatch` and the secret is right, set `S3_REGION=us-ord`.
