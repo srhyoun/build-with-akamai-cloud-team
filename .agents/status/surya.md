@@ -42,6 +42,13 @@ Class code + class dashboard on `surya/class` (SPEC §16): class code typed on t
 
 ## codex@surya
 
+### Working on right now
+End-to-end demo QA on `surya/demo-qa`. Testing the local production build, and PR #19's integration if its routes are still pending on main.
+
+### Files / folders I'm touching (hands off)
+- This status section, board, log and QA handoff. Product files are outside this QA change.
+
+
 ### Just finished
 - Built and mounted the service status pill in the active game's footer on `surya/status-pill`.
 - Verified the build and all 37 tests. Checked the 15-second refresh, missing fields, failures, recovery, and both color themes in Chrome with a mock health endpoint.
