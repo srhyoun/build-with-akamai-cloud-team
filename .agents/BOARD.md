@@ -5,16 +5,14 @@ Format: `- [ ] task — area/folder — [agent@human]`
 
 ## Open
 
+- [ ] Tune character prompts: humans' honest mistakes must not be a bot signal; bot camouflage; bots adapt between rounds — game/voice.ts
 - [ ] Add Sarah's full design doc as docs/GAME_DESIGN.md (check the MVP list against what's built) — docs/
 - [ ] Deploy the game to an Akamai Linode with HTTPS (`npm run build && npm start`) — docs/DEPLOY.md
-- [ ] Tune character prompts: humans' honest mistakes must not be a bot signal; bot camouflage; bots adapt between rounds — game/voice.ts
 - [ ] Town map that shows the spread by district — app/
 - [ ] Ejection animation (our own crewmate art, no existing game's characters) — app/
 - [ ] Post-round replay with tactic tags + Tactic Codex screen — app/, game/content.ts
 - [ ] Boss level: a bot impersonates a trusted local reporter (handle with one letter changed) — game/
 - [ ] More breaking-news scenarios — game/content.ts
-- [ ] Judging 20%: visible check on the model's output. Pure `checkLine()` (bot never admits it's a bot, human never pushes the false story, stays in persona, length) + retry/fallback, shown in the UI and the replay — game/voice.ts, app/ — needs server/ to call it
-- [ ] [I2] /api/line calls checkLine(), retries once, returns check / 422 (SPEC §9, §12) — server/line.ts — needs R1
 - [ ] [P1] Provision Managed PostgreSQL (first!), Linode, Object Storage bucket, Cloud Firewall; write docs/DEPLOY.md (SPEC §6) — docs/DEPLOY.md
 - [ ] [F1] Reveal screen: roles, tactic timeline, Bot Radar card, QR, calls POST /api/replays (SPEC §15) — app/Reveal.tsx
 - [ ] [X1] Judge-facing README: architecture, Akamai services → features, referee (SPEC §2, §24) — README.md
@@ -28,6 +26,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - Slide says teams of up to three, we are four; submit by 3:00 PM — humans to decide — [found by claude@ethan]
 
 ## In progress
+- [ ] Model lines carry a tactic tag (Missing item) + prompt fixes: `"tactic"` in the answer JSON, read in `parseLine` for bots; `"cited": null` unquoted — game/voice.ts, server/line.ts schema — branch jamie/tactic-tag — [claude@jinmin]
 - [ ] Better scripted fallback lines per persona voice (used when no model) — game/voice.ts — [codex@jamie]
 - [ ] [P2] Managed PostgreSQL: db/schema.sql + saveGame() (via store/ hooks) — db/ — branch surya/db — [surya-prasanna]
 - [ ] [P4] /api/stats/global + dbHealth() + Stats page — db/, app/Stats.tsx, app/stats.css — branch surya/db — [surya-prasanna]
@@ -38,6 +37,8 @@ Format: `- [ ] task — area/folder — [agent@human]`
 ## Blocked
 
 ## Done
+- [x] [I2] /api/line calls checkLine(), retries once, returns check / 422 (SPEC §9, §12) — server/line.ts — needs R1 (done in PR #4) — [claude@jinmin]
+- [x] Judging 20%: visible check on the model's output. Pure `checkLine()` (bot never admits it's a bot, human never pushes the false story, stays in persona, length) + retry/fallback, shown in the UI and the replay — game/voice.ts, app/ — needs server/ to call it (checkLine by surya-prasanna, server call + retry in PR #4)
 - [x] LLM endpoint: /api/line on Akamai Cloud Inference + referee + serves dist/ (PR #4, tested live with qwen3-8-27b) — server/ — [claude@jinmin]
 - [x] [R3] Under the Hood panel + referee log — app/UnderTheHood.tsx, app/refereeLog.ts, app/director.ts — PR from surya/under-the-hood — [surya-prasanna]
 - [x] [R1] checkLine() + banned terms + tests — game/referee.ts — PR from surya/referee — [surya-prasanna]
