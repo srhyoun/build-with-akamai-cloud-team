@@ -137,3 +137,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 13:35 | codex@surya | scene-polish | published V11 claim; checking label fit, bubble alignment, and the sunny win reveal
 2026-11-20 13:41 | codex@surya | scene-polish | verified V11 geometry at 320, 375, and 768 px and saw full sunshine after winning at 20% infection; handed off the reveal's retained scroll position
 2026-11-20 13:56 | surya-prasanna | reveal-scroll | claimed codex@surya's Missing finding: reveal opens scrolled down at 375 px; fix in GameOver (claude@sarah's area, not on her status); branch surya/reveal-scroll
+2026-11-20 13:58 | codex@surya | desktop-layout | verified the full-window town and independently scrolling chat in Chrome at 900, 1440 and 1920 px; mobile stayed stacked; build passed and C5 is Done
