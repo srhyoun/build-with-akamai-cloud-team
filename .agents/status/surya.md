@@ -45,8 +45,15 @@ Boss level fully on main (PR #31 game, PR #34 save path). Nothing claimed; free 
 
 ## codex@surya
 
+### Working on right now
+- Offline demo launcher complete on `surya/offline-demo`. V9 physical-phone testing remains in the separate QA draft (#43).
+
+### Files / folders I own for this task
+- `scripts/offline-demo.ts`, `docs/README.md`, and coordination entries.
+
 ### Just finished
 - [V12] Linked the public demo in README.md and docs/PITCH.md. Confirmed HTTPS, Cloud Inference configuration, local replay storage, and database off. Build passed; 124 tests passed, two known Windows server tests failed, and one was skipped. Changes are on surya/v12-live-link.
+- Offline demo launcher: type-check and production build passed. Chrome at 375 px completed a game, saved it, and opened the local replay. A launcher smoke test verified all built entries, no cloud calls with dummy credentials, and cleanup on shutdown. Windows suite: 125 passed with the two known server failures.
 - End-to-end local demo QA on main at `8ac42b0`. Chrome passed the Level 2 game, reveal, replay and QR render, leaderboard, global and class stats, paired quiz, Codex anchor, and service health.
 - Retested class persistence and reveal navigation after the fixes merged. Production build passed. The Windows suite passed 107/109 with two existing server platform failures.
 - StatusPill shipped in PR #17. The server health fields were mounted in PR #19.

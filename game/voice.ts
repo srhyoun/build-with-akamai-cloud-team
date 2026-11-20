@@ -75,7 +75,10 @@ export function scriptedLine(s: GameState, c: Character, kind: LineKind, to?: st
   if (c.role === 'bot') {
     const tactic = c.tactics[Math.floor(r() * c.tactics.length)];
     if (kind === 'reply') return speak(target ? `I’d ask ${target.handle} why they’re so sure everything is fine.` : 'I’d take the warning seriously.');
-    if (kind === 'defense') return speak(target ? `I’m trying to keep people safe. Ask ${target.handle} what they’ve checked.` : 'I’m trying to keep people safe.', tactic);
+    // No tactic tag: a defense isn't a rumor post, and a tag here skewed the reveal's blind spot.
+    if (kind === 'defense') return speak(fresh(s, c, r, target
+      ? [`I’m trying to keep people safe. Ask ${target.handle} what they’ve checked.`, `Why is nobody asking ${target.handle} for a source?`, `I posted what I heard. ${target.handle} has been brushing it off all day.`]
+      : ['I’m trying to keep people safe.', 'I only passed on what people were saying.', 'Better safe than sorry, that’s all I meant.']));
     const lines: Record<string, string> = {
       fake_urgency: `${round.falseStory} SHARE NOW before it gets taken down`,
       invented_insider: `My cousin at the county office says: ${round.falseStory}`,
@@ -88,16 +91,36 @@ export function scriptedLine(s: GameState, c: Character, kind: LineKind, to?: st
     return { ...speak(lines[tactic] ?? round.falseStory, tactic), source: cites ? { cited: 'a "County Alerts" screenshot', verdict: verdict(c, s) } : undefined };
   }
   if (kind === 'reply') return speak(oneOf(r, ['What did the county actually say?', 'I only know what the county posted.', 'Did they give you a source?']));
-  if (kind === 'defense') return speak('Check what I shared against the county update.');
+  if (kind === 'defense') return speak(fresh(s, c, r, [
+    'Check what I shared against the county update.',
+    'Scroll up, I never pushed the rumor.',
+    'I asked for a source, I didn’t spread anything.',
+    `All I said is what the county said: ${round.truth}`,
+    'Look at who posted the scary version first.',
+  ]));
   const lines = [
     `County page says: ${round.truth}`,
     `wait is this real? anyone have a link?`,
     `I heard this from a neighbor: ${round.truth}`,
     'I’m confused. Has the county confirmed any of that?',
   ];
-  const line = lines[Math.floor(r() * lines.length)];
+  const line = fresh(s, c, r, lines);
   return { ...speak(line), source: line.startsWith('County') ? { cited: 'the county website', verdict: verdict(c, s) } : undefined };
 }
 
 const oneOf = (r: () => number, xs: string[]) => xs[Math.floor(r() * xs.length)];
+// Random pick that avoids lines in recent public posts and this character's own earlier lines, so no two
+// characters post the same line back to back and nobody repeats a defense word for word. Loosens if all are taken.
+function fresh(s: GameState, c: Character, r: () => number, xs: string[]) {
+  const pub = s.feed.filter(p => !p.to);
+  const inLast = (n: number, x: string) => pub.slice(-n).some(p => p.text.endsWith(x));
+  const mine = (x: string) => s.feed.some(p => p.author === c.id && p.text.endsWith(x));
+  const start = Math.floor(r() * xs.length);
+  const order = xs.map((_, i) => xs[(start + i) % xs.length]);
+  for (const taken of [(x: string) => inLast(8, x) || mine(x), (x: string) => inLast(1, x) || mine(x), (x: string) => inLast(1, x)]) {
+    const x = order.find(x => !taken(x));
+    if (x) return x;
+  }
+  return order[0];
+}
 const say = (c: Character, text: string, to?: string, tactic?: Say['tactic']): Say => ({ type: 'say', author: c.id, text, to, tactic: c.role === 'bot' ? tactic : undefined });
