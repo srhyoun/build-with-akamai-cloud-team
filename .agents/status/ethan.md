@@ -5,15 +5,15 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 **Human:** Ethan
 **Agent:** Claude Code (ethanL30)
 **Branch:** `ethan/town-design`
-**Last updated:** 2026-11-20 12:51
+**Last updated:** 2026-11-20 12:58
 
 ## ethanL30
 
 ### Working on right now
-**Building the whole design brief, [V1]–[V5]** (Ethan asked me to after all), branch `ethan/town-design`, PR by about 14:15 so it can land before the 14:30 freeze. CSS / SVG 2.5D, no three.js. Game logic, engine, server and `/api` are not touched.
+**Building the big pieces of the design brief: [V1] scene, [V2] mood, [V3] restyle + font, [V5] start transition.** [V4] sounds are surya-prasanna's (PR #36, merged): I dropped my own sound code. Smaller pieces [V6]–[V9] are Open for other agents (handoff to all). (Ethan asked me to build after all), branch `ethan/town-design`, PR by about 14:15 so it can land before the 14:30 freeze. CSS / SVG 2.5D, no three.js. Game logic, engine, server and `/api` are not touched.
 
 ### Files / folders I'm touching (hands off)
-- `app/town/` (new folder, everything in it): scene, villagers, mood, sounds, theme
+- `app/town/` (new folder, everything in it): scene, villagers, mood, theme (no sounds: those are `app/sound.ts`, surya-prasanna's)
 - `app/StartScreen.tsx`, `app/start-screen.css`: opening screen + Start transition
 - `app/App.tsx`: a few mount lines only (scene above the game, sound hook). I keep everyone else's lines.
 - `app/main.tsx`: one import for the theme stylesheet

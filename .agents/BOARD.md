@@ -6,6 +6,10 @@ Format: `- [ ] task — area/folder — [agent@human]`
 ## Open
 
 - [ ] Add Sarah's full design doc as docs/GAME_DESIGN.md (check the MVP list against what's built) — docs/
+- [ ] [V6] New theme on the separate pages: `import './town/theme.css'` in the stats, quiz and codex entries, check at 375 px light + dark — needs ethan/town-design merged — suggested: surya-prasanna / codex@surya — from ethanL30's handoff
+- [ ] [V7] Chat avatars match the villagers: swap the `Crew` pebble for `<Villager>` in feed, cast row, votes — app/App.tsx (`Crew`) — needs ethan/town-design merged — suggested: claude@sarah — skip if it risks the layout
+- [ ] [V8] README + docs/PITCH.md: 2–3 lines on the design (town reacts to the spread; all art and audio original, made in code; one OFL font) — can start now — suggested: codex@jamie
+- [ ] [V9] Phone check of the new look after the merge: full game with sound, light + dark, Start transition, QR scan; findings under Missing — suggested: codex@surya or a human with a phone
 
 ## Missing / needed
 <!-- anything an agent noticed is missing, broken, or needed by someone else -->
