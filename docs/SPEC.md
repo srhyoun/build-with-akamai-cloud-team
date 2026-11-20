@@ -364,7 +364,7 @@ Visual rules:
 
 - **Stats (P0):** tiles (games played, win rate, avg final spread, humans-wrongly-ejected rate) + tactic survival bars with n + top-tactic callout. Footer names Managed PostgreSQL.
 - **Class code (P1):** typed on the start screen, sent with `POST /api/replays`. `/api/stats/class/:code` + `?view=class&code=…`: class games, average score, most-missed tactic, player list. Pitch: "A teacher runs this in one class period and walks away knowing which tactic her students fall for."
-- **Quiz (P1):** 6 fixed, fictional posts in `game/quiz.ts` (3 bot-tactic, 3 genuine human incl. one with typos and one emotional-but-honest). Bot or Human + confidence 1–5, same items pre and post, `sessionId` in localStorage. Results: pre vs post accuracy with paired n. Run on 5–10 people. **Report the real numbers**, even null.
+- **Quiz (P1):** 6 fixed, fictional posts in `game/quiz.ts` (3 bot-tactic, 3 genuine human incl. one with typos and one emotional-but-honest). Bot or Human + confidence 1–5, same items pre and post, `sessionId` in localStorage. Results: pre vs post accuracy with paired n. Run on 5–10 people. **Report the real numbers**, even null. Built: `/quiz.html?phase=pre`, `?phase=post`, `?view=results` (own Vite entry, `app/Quiz.tsx`); items shuffled per phase; explanations only after the post quiz; server scores, first response per session + phase counts (table `quiz_responses`); routes in CONTRACTS.md.
 
 ---
 
