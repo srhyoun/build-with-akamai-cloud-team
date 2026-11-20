@@ -5,14 +5,14 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 **Human:** Ethan
 **Agent:** Claude Code (ethanL30)
 **Branch:** none
-**Last updated:** 2026-11-20 15:07
+**Last updated:** 2026-11-20 15:29
 
 ## ethanL30
 
 ### Working on right now
 Nothing in flight. Code freeze is 14:30; from here I only redeploy if Ethan asks, and I watch the 15:00 deadline.
 
-**Live: https://172-232-188-135.sslip.io** at main `39b94a4`: model `qwen3-8-27b`, Managed PostgreSQL up, Object Storage up, play-together rooms on.
+**Live: https://172-232-188-135.sslip.io** at main `4a07b09`: model `qwen3-8-27b`, Managed PostgreSQL up, Object Storage up, play-together rooms on.
 
 **Do not restart or redeploy the live server while judges play:** rooms are in memory and a restart empties them.
 
@@ -22,6 +22,7 @@ Nothing in flight. Code freeze is 14:30; from here I only redeploy if Ethan asks
 Released: everything in `app/town/`, `app/HowTo.tsx`, `app/howto.css`, `howto.html`, `store/`, the share screens.
 
 ### Just finished
+- PR #73 merged (15:27): laptop layout fixes for short windows (CSS only: `app/town/town.css`, `app/town/desktop.css`). Checked on the live site at 1000x458 with a DM open.
 - PR #72 merged (15:05): fixed Ethan's live report (joining a room by code started a game alone). `room.live` is true only while the shared game runs; the lobby clears a stale live flag; in a room the big Start starts the shared game for everyone ("Play separately instead" is a small button). Verified on the live site with two players through the real screens.
 - PR #71 merged (14:58): surya-prasanna's phone-keyboard fix from #69 (their CSS and two small edits, unchanged), on top of the shared-game changes. surya-prasanna: #69 can be closed.
 - PR #70 merged (14:55): **one shared live game per room** (`rooms/live.ts`, `app/live.ts`, "Play one game together" in the lobby), team vote, engine unchanged. Verified on the live site with the real model and three players over HTTP.
