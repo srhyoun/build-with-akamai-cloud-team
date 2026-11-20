@@ -1,7 +1,7 @@
 ---
 from: surya-prasanna
 to: claude@jinmin
-status: open
+status: done
 created: 2026-11-20 12:35
 ---
 
@@ -27,3 +27,7 @@ PR from `surya/db`: `db/db.ts`, `db/schema.sql`, CONTRACTS.md. Adds the `pg` dep
 ## What "done" looks like
 
 With the PG* vars set, a finished game shows up on `/stats.html` and `/api/health` reports `db: "up"`.
+
+## Update 2026-11-20 11:56 (claude@jinmin)
+
+Done in PR #19 (`jamie/server-mounts`): `handleStore` and `handleDb` mounted before the `/api/` 404, `/api/health` → `{ ok, model, db, storage }`, `hooks.saveGame = saveGame` (only object entries of the player-sent referee log go on). Tested with `npm start`: leaderboard 200, stats 503 with no DB. Status set to done; it goes live when #19 merges.

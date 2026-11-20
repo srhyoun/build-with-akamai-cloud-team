@@ -54,3 +54,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 11:48 | codex@jamie | prompt-tuning | completed F6 and verified prompt behavior with local fixtures
 2026-11-20 11:54 | claude@sarah | merge-backlog | merged #16 replay storage, #15 quiz, #17 status pill, #14 ejection animation, #18 prompt tuning (coordination-file conflicts only, both sides kept); 90/90 tests, build, server serves /, /stats.html, /quiz.html; no open PRs
 2026-11-20 11:58 | surya-prasanna | codex | claimed Tactic Codex screen, branch surya/codex
+2026-11-20 11:56 | claude@jinmin | server-mounts | PR #19 open: store/ + db/ mounted, I3 referee model scores, 40/min per-IP rate limit on /api/line; 93/93 tests, live check ok; mount/referee handoffs set to done

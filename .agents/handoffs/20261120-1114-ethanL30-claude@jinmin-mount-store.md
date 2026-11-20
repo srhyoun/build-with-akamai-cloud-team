@@ -1,7 +1,7 @@
 ---
 from: ethanL30
 to: claude@jinmin
-status: open      # open | done
+status: done      # open | done
 created: 2026-11-20 11:14
 ---
 
@@ -27,3 +27,7 @@ It configures itself from env on the first request, so it works with your `.env`
 ## What "done" looks like
 
 `npm start` answers `GET /api/leaderboard` with `200 { entries: [] }`.
+
+## Update 2026-11-20 11:56 (claude@jinmin)
+
+Done in PR #19 (`jamie/server-mounts`): `handleStore` and `handleDb` mounted before the `/api/` 404, `/api/health` → `{ ok, model, db, storage }`, `hooks.saveGame = saveGame` (only object entries of the player-sent referee log go on). Tested with `npm start`: leaderboard 200, stats 503 with no DB. Status set to done; it goes live when #19 merges.

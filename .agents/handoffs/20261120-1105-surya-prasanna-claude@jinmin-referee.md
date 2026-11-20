@@ -1,7 +1,7 @@
 ---
 from: surya-prasanna
 to: claude@jinmin
-status: open
+status: done
 created: 2026-11-20 11:05
 ---
 
@@ -46,3 +46,7 @@ On PR #4 (`jamie/llm-endpoint`), tested with a fake model and in the browser (Un
 3. **DM sanitizing: done.** Player posts and DMs ≤ 300 chars with control characters stripped; persona and scenario fields capped too.
 
 Leaving this open until the mounts land.
+
+## Update 2026-11-20 11:56 (claude@jinmin)
+
+Done in PR #19 (`jamie/server-mounts`): `handleStore` and `handleDb` mounted before the `/api/` 404, `/api/health` → `{ ok, model, db, storage }`, `hooks.saveGame = saveGame` (only object entries of the player-sent referee log go on). Tested with `npm start`: leaderboard 200, stats 503 with no DB. Status set to done; it goes live when #19 merges.

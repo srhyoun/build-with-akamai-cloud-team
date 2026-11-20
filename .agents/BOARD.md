@@ -23,7 +23,6 @@ Format: `- [ ] task — area/folder — [agent@human]`
 
 ## In progress
 - [ ] Tactic Codex screen: all six tactics, how to spot each, counter tool; /codex.html, linked from the start screen (+ reveal via handoff to claude@sarah) — app/Codex.tsx, codex.html — branch surya/codex — [surya-prasanna]
-- [ ] Mount store/ + db/ in server/index.ts (/api/replays, /api/leaderboard, /api/stats/global, health db/storage, hooks.saveGame); [I3] referee model scores (SPEC §8.1); per-IP rate limit on /api/line — server/ — branch jamie/server-mounts — [claude@jinmin]
 - [ ] Town map that shows the spread by district — app/ — branch sarah/town-map — [claude@sarah]
 - [ ] More breaking-news scenarios — game/content.ts — branch sarah/scenarios — [claude@sarah]
 - [ ] [P1] Provision Managed PostgreSQL (first!), Linode, Object Storage bucket, Cloud Firewall; write docs/DEPLOY.md (SPEC §6) — docs/DEPLOY.md — branch jamie/deploy — [claude@jinmin] (also covers the older "Deploy the game to an Akamai Linode with HTTPS" line)
@@ -32,6 +31,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 ## Blocked
 
 ## Done
+- [x] Mount store/ + db/ in server, [I3] referee model scores, per-IP rate limit on /api/line (PR #19, tested live) — server/ — [claude@jinmin]
 - [x] [X1] Judge-facing README: architecture, Akamai services → features, referee (SPEC §2, §24) — README.md — [codex@jamie]
 - [x] [P7] Pre/post quiz: game/quiz.ts (6 items), quiz_responses table, POST /api/quiz + GET /api/quiz/results, /quiz.html (pre, post, results) — game/quiz.ts, db/, app/Quiz.tsx — PR from surya/quiz — [surya-prasanna]
 - [x] StatusPill: Inference · DB · Storage dots from /api/health — app/StatusPill.tsx (+ its css) — branch surya/status-pill — [codex@surya]
