@@ -11,7 +11,7 @@ import { configProblem, modelConfig, type ModelConfig } from './inference.ts';
 import type { RefereeCheck } from '../shared/types.ts';
 import { handleStore, hooks, storageHealth } from '../store/handler.ts';
 import { dbHealth, handleDb, saveGame } from '../db/db.ts';
-import { handleRooms } from '../rooms/rooms.ts';
+import { handleRooms, roomLineKey, sharedRoomLine } from '../rooms/rooms.ts';
 
 // Every saved replay also becomes a row in Managed PostgreSQL (a no-op with no DB). The referee log comes from the
 // player's browser, so only object entries go on; one bad entry would otherwise lose the whole row.
@@ -99,7 +99,8 @@ export function createApp({ cfg, dist = join(ROOT, 'dist'), fetchImpl = fetch, l
         let body: unknown;
         try { body = await readJson(req); }
         catch (e) { return send(res, (e as { status?: number }).status ?? 400, { error: (e as Error).message }); }
-        const r = await handleLine(body, cfg, fetchImpl);
+        const key = roomLineKey(body); // in a play-together room, every player gets the same line for the same slot
+        const r = await (key ? sharedRoomLine(key, () => handleLine(body, cfg, fetchImpl)) : handleLine(body, cfg, fetchImpl));
         return send(res, r.status, r.body);
       }
       if (pathname === '/api/health') {

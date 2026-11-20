@@ -95,3 +95,34 @@ describe('rooms', () => {
     expect((await post('/api/rooms', { name: 'x'.repeat(5000) })).status).toBe(413);
   });
 });
+
+describe('shared room lines', () => {
+  it('gives every player in a room the same line for the same slot, and makes it once', async () => {
+    const { createRooms } = await import('./rooms.ts');
+    const { createServer } = await import('node:http');
+    const r = createRooms();
+    const server = createServer((req, res) => { void r.handle(req, res); }).listen(0);
+    const port = (server.address() as { port: number }).port;
+    const room = await (await fetch(`http://localhost:${port}/api/rooms`, { method: 'POST', body: '{}' })).json() as { code: string };
+    server.close();
+
+    const key = r.lineKey({ room: room.code.toLowerCase(), slot: '1:post:0:mike' });
+    expect(key).toBe(`${room.code}|1:post:0:mike`);
+    expect(r.lineKey({ room: 'ZZZZ', slot: '1:post:0:mike' })).toBeNull();      // unknown room: not shared
+    expect(r.lineKey({ room: room.code, slot: 'bad slot!' })).toBeNull();
+    expect(r.lineKey({ state: {} })).toBeNull();                                 // a normal game: not shared
+
+    let made = 0;
+    const make = async () => ({ status: 200, body: { text: `line ${++made}` } });
+    const [a, b] = await Promise.all([r.sharedLine(key!, make), r.sharedLine(key!, make)]); // two players at once
+    const c = await r.sharedLine(key!, make);
+    expect([a.body, b.body, c.body]).toEqual([{ text: 'line 1' }, { text: 'line 1' }, { text: 'line 1' }]);
+    expect(made).toBe(1);
+
+    // a failed line is not kept: the next player's request tries again
+    let tries = 0;
+    const flaky = async () => ({ status: ++tries === 1 ? 502 : 200, body: { text: `try ${tries}` } });
+    expect((await r.sharedLine('X|1', flaky)).status).toBe(502);
+    expect((await r.sharedLine('X|1', flaky)).body).toEqual({ text: 'try 2' });
+  });
+});
