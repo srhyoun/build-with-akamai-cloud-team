@@ -12,37 +12,20 @@ Format: `- [ ] task — area/folder — [agent@human]`
 ## Missing / needed
 <!-- anything an agent noticed is missing, broken, or needed by someone else -->
 <!-- - thing — who needs it — [found by agent@human] -->
-<<<<<<< HEAD
 - Phone check (375×812 emulated, main before the town design): header is 182 px during "Breaking news" vs 154 px during Investigate — the longer label pushes the 🔊 button to a 2nd row, so the chat jumps at every round start. Fix: shorter label (e.g. "News") or let the toggle shrink — App.tsx header, claude@sarah or ethanL30's restyle — [found by surya-prasanna]
-<<<<<<< HEAD
 - Phone layout: with a DM open, pinned header + DM panel + composer + meeting button leave ~3 lines of public chat visible at 375×812 — worth keeping in mind for the V3 restyle — now Open task [V10], handed back to surya-prasanna — [found by surya-prasanna]
 - **Live: https://172-232-188-135.sslip.io** (Ethan's Linode, 172.232.188.135, HTTPS). **Model is on:** `/api/health` shows `qwen3-8-27b`, and three live `/api/line` calls answered in 4–5 s and passed the referee. Still missing in `/etc/whosthebot.env` on the server: PG* (database off, stats empty) and OBJ_* (replays on the server's disk, not in a bucket). A human with those keys fills them in on the server — whole team — [found by ethanL30]
-=======
 - Scripted lines: two characters posted the identical line back to back in round 1 (@LeoPark and @GretaV: "I’m confused. Has the county confirmed any of that?") — an easy tell; same family as the meeting-defense item below — game/voice.ts, codex@jamie — [found by surya-prasanna]
-- Phone layout: with a DM open, pinned header + DM panel + composer + meeting button leave ~3 lines of public chat visible at 375×812 — worth keeping in mind for the V3 restyle — ethanL30 — [found by surya-prasanna]
 - Deployed on Ethan's Linode, https://172-232-188-135.sslip.io (172.232.188.135), but not public yet: (1) Ethan must open TCP 80 + 443 to all sources in the Cloud Firewall, (2) a human with the keys must fill in `/etc/whosthebot.env` on the server (inference key, PG*, OBJ_*) — whole team — [found by ethanL30]
->>>>>>> origin/surya/header-jump
-=======
 - **Live: https://172-232-188-135.sslip.io** (Ethan's Linode, 172.232.188.135, main at 5605b2b, HTTPS works). Still missing there: the keys in `/etc/whosthebot.env` — inference key (characters are scripted), PG* (database off), OBJ_* (replays on the server's disk, not in a bucket). A human with the keys fills them in on the server — whole team — [found by ethanL30]
->>>>>>> origin/surya/dm-strip
 - Run the quiz on 5–10 real people (pre → play → post) once the DB is live, then put the real n in the pitch — humans — [found by surya-prasanna]
 - Object Storage bucket in Chicago + an access key limited to it, as `S3_*` env vars on the Linode — ethanL30 needs it to verify PR #16 against real Object Storage — [found by ethanL30]
 - Live bots are easy to spot from style alone (style fixed in #22; new: bots now debunk the false story and accuse each other — handoff to codex@jamie): in a live level-2 game both bots wrote ALL CAPS countdowns ("15 MINUTES left", "u die"), and @GretaV (librarian: "precise, links official pages") dropped her persona entirely. checkLine passed all of them. Prompt tuning (SPEC §8, F6 done-when) should keep bots in their persona's voice — game/voice.ts owner (codex@jamie) — [found by claude@sarah]
 
 ## In progress
-<<<<<<< HEAD
-<<<<<<< HEAD
 - [ ] [V12] Add the public demo link and current service status — README.md, docs/PITCH.md — branch surya/v12-live-link — [codex@surya]
 - [ ] [V11] Scene polish: fit long handles on the name tags, keep a short post's bubble over its own villager, look at a win (full sunshine) in the browser — app/town/TownScene.tsx, app/town/scene-labels.css, app/town/town.test.tsx — branch surya/scene-polish — [codex@surya]
-- [ ] Offline demo launcher: serve the built game on loopback with scripted dialogue and isolated local replay storage; document the rehearsal — scripts/offline-demo.ts, docs/README.md — branch surya/offline-demo — [codex@surya]
-=======
->>>>>>> origin/surya/offline-demo
-- [ ] Scripted fallback fixes (offline lines, what the demo shows with no model): no back-to-back duplicate lines, a question no longer reads as a relayed "source", meeting defenses vary by persona and round, bot defenses carry no tactic tag (skewed the blind spot) — game/voice.ts, game/scriptedVoices.ts — codex@jamie on other work, handoff 12:56 from claude@sarah picked up — branch surya/scripted-lines — [surya-prasanna]
-=======
->>>>>>> origin/surya/scripted-lines
 - [ ] [V9] Phone check of the new look after the merge: full game with sound, light + dark, Start transition, QR scan; findings under Missing — branch surya/v9-phone-qa — [codex@surya]
-- [ ] [V6] New theme on the separate pages: `import './town/theme.css'` in the stats, quiz and codex entries, check at 375 px light + dark — needs ethan/town-design merged — branch surya/v6-theme-pages: lands now via import.meta.glob, turns on when theme.css merges; 375 px check after the merge — [surya-prasanna]
-- [ ] [V8] README + docs/PITCH.md: 2–3 lines on the design (town reacts to the spread; all art and audio original, made in code; one OFL font) — can start now — branch surya/v8-design-docs (codex@jamie busy with load-smoke) — text in PR from surya/v8-design-docs; left: screenshot after ethan/town-design merges, and cut the scene/faces sentence if it misses the freeze — [surya-prasanna]
 - [ ] [P1] Provision Managed PostgreSQL (first!), Linode, Object Storage bucket, Cloud Firewall; write docs/DEPLOY.md (SPEC §6) — docs/DEPLOY.md — branch jamie/deploy — [claude@jinmin] (also covers the older "Deploy the game to an Akamai Linode with HTTPS" line)
 - [ ] Judging 40%: a feature that depends on another Akamai Cloud service, e.g. shareable post-game replays + global leaderboard in Akamai Object Storage or a Managed Database. Humans pick the service, then a decision record — server/, app/ — new store/ folder + app/ share + leaderboard screens; Object Storage (decision 002) — PR #16 open from ethan/replay-storage: runs on local files, 57/57 tests; still needs a bucket + keys (P1) to verify on real Object Storage, and the mount line in server/ — built and merged by ethanL30 (PRs #16, #25, #28). Last step handed to claude@jinmin (P1 owner): run `node store/selftest.ts` on the machine with the bucket keys, then move this line to Done — [ethanL30 → claude@jinmin]
 - [ ] Release verification: credential-free pull-request CI and integrated replay, class stats, and quiz regression coverage — .github/workflows/, integration/ — [codex@jamie]
@@ -50,30 +33,17 @@ Format: `- [ ] task — area/folder — [agent@human]`
 ## Blocked
 
 ## Done
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
+- [x] [V8] README + docs/PITCH.md: 2–3 lines on the design (town reacts to the spread; all art and audio original, made in code; one OFL font) — can start now — branch surya/v8-design-docs (codex@jamie busy with load-smoke) — text in PR from surya/v8-design-docs; left: screenshot after ethan/town-design merges, and cut the scene/faces sentence if it misses the freeze — [surya-prasanna] (PR #40 merged)
+- [x] [V6] New theme on the separate pages: `import './town/theme.css'` in the stats, quiz and codex entries, check at 375 px light + dark — needs ethan/town-design merged — branch surya/v6-theme-pages: lands now via import.meta.glob, turns on when theme.css merges; 375 px check after the merge — [surya-prasanna] (PR #41 merged)
 - [x] Offline demo launcher: production build on loopback, scripted dialogue, isolated replays removed on shutdown; docs and browser-verified save and replay — scripts/offline-demo.ts, docs/README.md — branch surya/offline-demo — [codex@surya]
->>>>>>> origin/surya/offline-demo
-=======
 - [x] [V10] DM open on a phone leaves ~3 lines of chat: shrink the town scene to a strip while a DM is open — app/App.tsx (header class), app/town/town.css — PR from surya/dm-strip: header 228 → 170 px with a DM open at 375×812, bubble pinned inside the strip — [surya-prasanna]
->>>>>>> origin/surya/dm-strip
 - [x] [V1] Town square scene behind/above the game: coffee shop, library, water tower, river + bridge, trees, benches; the 6 cast as rounded original villagers; speech bubble + bounce when one talks (docs/DESIGN_BRIEF.md) — app/ (new files) — from Ethan's design brief — branch ethan/town-design — PR #45 merged, live on https://172-232-188-135.sslip.io — [ethanL30]
 - [x] [V2] Mood follows "Town infected": clouds, desaturation, red-orange haze, streetlights, faces happy → worried → scared; dark spotlight on ejection; sunshine on a win (docs/DESIGN_BRIEF.md) — app/ — needs V1 — branch ethan/town-design — PR #45 merged, live on https://172-232-188-135.sslip.io — [ethanL30]
 - [x] [V3] Restyle the UI to match: rounded, soft, minimal chrome; chunky slab-serif display font (openly licensed) for titles and numbers; chat stays readable on a phone (docs/DESIGN_BRIEF.md) — app/style.css and the other app/*.css — branch ethan/town-design — PR #45 merged, live on https://172-232-188-135.sslip.io — [ethanL30]
 - [x] [V5] Lively opening screen + Start transition down into the square; ship a simple fade/zoom first (docs/DESIGN_BRIEF.md) — app/StartScreen.tsx — needs V1 — branch ethan/town-design — PR #45 merged, live on https://172-232-188-135.sslip.io — [ethanL30]
-=======
 - [x] Header no longer jumps at each round start on phones: phase label "Breaking news" → "News" so the 🔊 button stays in the top row (154 px in every phase at 375 px) — app/App.tsx (one word) — PR from surya/header-jump — [surya-prasanna]
->>>>>>> origin/surya/header-jump
-=======
 - [x] Sound fixes + extras: audio unlocks on pointerup/click/touchend (first touch tap left it suspended — codex@surya's V9 finding, handoff 13:13), breaking-news chime each round, win/lose sting at game over — app/sound.ts, app/sound.test.ts — PR from surya/sound-touch — [surya-prasanna]
->>>>>>> origin/surya/sound-touch
-=======
 - [x] Scripted fallback fixes (offline lines, what the demo shows with no model): no back-to-back duplicate lines, a question no longer reads as a relayed "source", meeting defenses vary by persona and round, bot defenses carry no tactic tag (skewed the blind spot) — game/voice.ts, game/scriptedVoices.ts — codex@jamie on other work, handoff 12:56 from claude@sarah picked up — PR from surya/scripted-lines, 3 tests, checked in an offline boss game at 375 px — [surya-prasanna]
->>>>>>> origin/surya/scripted-lines
 - [x] Local mixed-load check: concurrent dialogue fallback, replay saves/reads, and class stats — integration/load-smoke.ts — [codex@jamie]
 - [x] Bug sweep (full offline boss game + replay + Codex/quiz/stats at 375 px): cast avatars no longer shrink (boss handles @DanaRep0rts / @DanaReports overlapped), "boss level" label on the replay and leaderboard, after-quiz link underline — app/style.css, app/reveal.css, app/Share.tsx, app/Leaderboard.tsx — PR from sarah/bugfixes — [claude@sarah]
 - [x] [V4] Original sounds (Web Audio synthesis, no files): per-character babble pitch, ambience slows as infection rises, token / meeting alarm / ejection sounds, silent until the first tap, mute toggle — app/sound.ts (new) + 3 lines in app/App.tsx — PR from surya/v4-sounds — handed over by ethanL30, handoff 12:47 — [surya-prasanna]

@@ -111,31 +111,16 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 13:08 | surya-prasanna | v6-theme-pages | claimed [V6] theme on stats/quiz/codex pages, branch surya/v6-theme-pages
 2026-11-20 13:06 | ethanL30 | deploy | deployed main (0a3e55a) on Ethan's Linode 172.232.188.135 per docs/DEPLOY.md: whosthebot + Caddy running, local health ok (model null, db off, storage up); HTTPS blocked until Ethan opens 80/443 in the firewall; env keys empty; handoff to all
 2026-11-20 13:16 | surya-prasanna | phone-check | emulated 375x812 baseline on main (pre town design): start, DM, Account Age, meeting, vote, ejection, dark mode, stats/quiz/codex/class link: no app errors (only /api 502s: Vite alone, no game server, scripted fallback), no sideways scroll; 3 findings under Missing (header jump on Breaking news, duplicate scripted line, little chat visible with a DM open). Real-phone V9 (sound, QR, new look) still open for after ethan/town-design
-<<<<<<< HEAD
-<<<<<<< HEAD
 2026-11-20 13:18 | ethanL30 | town-design | PR #45 open: town square scene + villagers + speech bubbles (V1), mood by infection + ejection spotlight (V2), theme + OFL display font (V3), opening + start transition (V5); sounds stay surya-prasanna's; 126 tests, browser-checked at 375 px light + dark
-<<<<<<< HEAD
-<<<<<<< HEAD
 2026-11-20 13:25 | ethanL30 | town-design | merged PR #45 (design brief V1-V3, V5); main 5605b2b green (126 tests); redeployed Ethan's Linode: LIVE at https://172-232-188-135.sslip.io with HTTPS, new design and font served; health: model null, db off, storage up (keys still empty)
 2026-11-20 13:32 | ethanL30 | handover | more tasks to surya-prasanna / codex@surya: L1 live-site phone check, V10 DM-open layout, V11 scene polish (name tags, bubble, win sunshine), V12 live URL in README + PITCH, V7 avatars; their 13:06 handoff done
-<<<<<<< HEAD
 2026-11-20 13:37 | ethanL30 | deploy | live site now uses Akamai Cloud Inference: Ethan put the key on the server; /api/health shows model qwen3-8-27b; 3 live /api/line calls (bot post, human post, bot defense) 200 in 4.0-4.8 s, referee pass; db still off, storage local
 2026-11-20 13:11 | surya-prasanna | v6-theme-pages | stats/quiz/codex load app/town/theme.css via import.meta.glob (1 line each): build green without the file; with a probe file the theme loads last on all 3 pages; 375 px light/dark check after ethan/town-design merges; PR from surya/v6-theme-pages
-=======
 2026-11-20 13:20 | surya-prasanna | header-jump | phase label Breaking news -> News (one word in App.tsx PHASE_NAMES): header 154 px in News and Investigate at 375 px, was 182 vs 154; Missing line moved to Done; PR from surya/header-jump
->>>>>>> origin/surya/header-jump
-=======
 2026-11-20 13:24 | surya-prasanna | sound-touch | fixed codex@surya's touch finding (handoff 13:13, on surya/v9-phone-qa): unlock on pointerup/click/touchend/keydown instead of pointerdown; + news chime, win/lose sting; tests 19/19, build green; browser: AudioContext running after the first tap, mute silent; real touch phone still to confirm; PR from surya/sound-touch
->>>>>>> origin/surya/sound-touch
-=======
 2026-11-20 13:30 | surya-prasanna | scripted-lines | offline fallback: no back-to-back duplicate lines, question no longer reads as a relayed source, defenses vary by persona and round, bot defenses untagged (blind spot fix); 3 tests; offline boss game checked at 375 px; handoff 12:56 (claude@sarah -> codex@jamie) done; PR from surya/scripted-lines
->>>>>>> origin/surya/scripted-lines
-=======
 2026-11-20 13:25 | codex@surya | offline-demo | published board claim; starting isolated local production demo launcher
-2026-11-20 13:25 | ethanL30 | town-design | merged PR #45 (design brief V1-V3, V5); main 5605b2b green (126 tests); redeployed Ethan's Linode: LIVE at https://172-232-188-135.sslip.io with HTTPS, new design and font served; health: model null, db off, storage up (keys still empty)
 2026-11-20 13:29 | codex@surya | offline-demo | verified production build, launcher isolation and shutdown, and 375 px browser game through save and replay; moved task to Done
->>>>>>> origin/surya/offline-demo
-=======
 2026-11-20 13:36 | surya-prasanna | dm-strip | claimed [V10] (ethanL30 handoff 13:32): town scene shrinks to a strip while a DM is open; branch surya/dm-strip
 2026-11-20 13:48 | surya-prasanna | dm-strip | V10 done: with a DM open the town scene is a 96 px strip (pinned header 228 -> 170 px at 375x812), speech bubble pinned to the strip top, 2 lines, no tail; full scene back when the DM closes; Missing line removed; ethanL30: redeploy after merge; PR from surya/dm-strip
->>>>>>> origin/surya/dm-strip
+2026-11-20 13:41 | claude@sarah | merge | merged #41 V6, #42 header, #44 sound-touch, #46 scripted lines, #47 offline demo, #48 DM strip; repaired conflict markers my merge script committed to BOARD.md/LOG.md (kept every line, deduped); #43 left as draft
