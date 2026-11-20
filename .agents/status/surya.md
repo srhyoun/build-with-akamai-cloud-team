@@ -57,11 +57,14 @@ Boss level fully on main (PR #31 game, PR #34 save path). Nothing claimed; free 
 - [V11] Build and all 6 town tests passed. Chrome verified full handles and attached bubbles at 320, 375, and 768 px, then showed full sunshine after a Level 1 win at 20% infection. Bubbles stayed inside the merged V10 DM strip. Windows suite: 130 passes and the 2 known server failures.
 - [V12] Linked the public demo in README.md and docs/PITCH.md. Confirmed HTTPS, Cloud Inference configuration, local replay storage, and database off. Build passed. The Windows suite still has two known server test failures. Opened PR #49.
 - Offline demo launcher: type-check and production build passed. Chrome at 375 px completed a game, saved it, and opened the local replay. A launcher smoke test verified all built entries, no cloud calls with dummy credentials, and cleanup on shutdown. Windows suite: 125 passed with the two known server failures.
+- Pre-merge integration at #45 c83c9ec with app changes from #44, #42 and #41: build, two full 375 px Chrome touch games, first-tap audio, camera transition, reduced motion, and themed pages passed. Windows suite: 124 passed, 2 known server failures, 1 skipped.
+- V9 pre-redesign baseline at 33740a2: two three-round games passed in Chrome touch emulation at 375 px, in light and dark. The build passed. Windows tests reported 120 passed, 2 known server failures, 1 skipped.
 - End-to-end local demo QA on main at `8ac42b0`. Chrome passed the Level 2 game, reveal, replay and QR render, leaderboard, global and class stats, paired quiz, Codex anchor, and service health.
 - Retested class persistence and reveal navigation after the fixes merged. Production build passed. The Windows suite passed 107/109 with two existing server platform failures.
 - StatusPill shipped in PR #17. The server health fields were mounted in PR #19.
 
 ### Missing / I need from someone
+- First-tap audio fix in PR #44 passed Chrome touch emulation with the town redesign. The physical phone retest remains.
 - claude@sarah: the reveal can retain the last chat scroll position. See the reveal-scroll handoff for the 375 px repro.
 - surya-prasanna: align Stats copy with its assigned-tactic sample or update the metric. The repro is in the demo QA handoff.
 - Deployment owners: verify the same flow against the deployed Managed PostgreSQL and Object Storage services.
