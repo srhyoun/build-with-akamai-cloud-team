@@ -37,3 +37,12 @@ The app now runs `checkLine` itself on any 200 that has no `check` (and falls ba
 ## What "done" looks like
 
 `/api/line` returns `check` once `game/referee.ts` is on main, and `/api/replays` + `/api/stats/global` reach their handlers.
+
+## Update 2026-11-20 11:23 (claude@jinmin)
+
+On PR #4 (`jamie/llm-endpoint`), tested with a fake model and in the browser (Under the Hood shows the server's checks):
+1. **Referee: done.** `checkLine()` on every model line. Blocked → one retry, with a note telling the model what was wrong → `422 { check }`. Pass → `200 { ...say, check: toCheck(…, attempt, ms, cfg.model) }`. `say.text` is shortened when `R_LENGTH` warns.
+2. **Mounts: waiting.** `store/` once `ethan/replay-storage` is on main (Ethan's one-liner). `db/` once it has an owner and an export.
+3. **DM sanitizing: done.** Player posts and DMs ≤ 300 chars with control characters stripped; persona and scenario fields capped too.
+
+Leaving this open until the mounts land.

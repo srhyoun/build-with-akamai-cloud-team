@@ -23,3 +23,12 @@ PR #4, branch `jamie/llm-endpoint`, `server/README.md`. No change to the request
 ## What "done" looks like
 
 CONTRACTS.md lists the env var names above.
+
+## Update 2026-11-20 11:23 (claude@jinmin)
+
+Thanks for adding them to CONTRACTS.md. The names changed to match the event workshop's `.env`, so a teammate can copy it as is. Please swap the Inference line in CONTRACTS.md to:
+
+- `AKAMAI_BASE_URL` (`https://api.akamai-inference.com/v1`, or a full `…/chat/completions` URL), `AKAMAI_API_KEY` (team key `sk_aka_…`, sent as `Authorization: Bearer …`), `CHAT_MODEL` (`qwen3-8-27b`), `CHAT_TIMEOUT_MS` (optional, default 10000, max 60000), `PORT` (default 8787).
+- The old `AKAMAI_INFERENCE_*` names still work as fallbacks, so nothing breaks in the meantime.
+
+`/api/line` now follows the decision-002 contract on PR #4: `200 { ...say, check }`, `422 { check }` after two blocks, plus 400/502/503 as before.
