@@ -10,21 +10,33 @@
 .tw-scene[data-view='aerial'] .tw-camera { transform: perspective(600px) rotateX(34deg) scale(.8) translateY(-4%); }
 .tw-art {
   position: absolute; inset: 0; overflow: hidden;
-  filter: saturate(calc(1 - var(--tw-mood) * .6)) brightness(calc(1 - var(--tw-mood) * .22));
+  filter: saturate(calc(1 - var(--tw-mood) * .22)); /* overcast, never dark */
 }
 /* From above the town reads as a toy diorama board. */
-.tw-scene[data-view='aerial'] .tw-art { border-radius: 26px; box-shadow: 0 34px 40px rgb(27 16 48 / .3); }
+.tw-scene[data-view='aerial'] .tw-art { border-radius: 26px; box-shadow: 0 30px 36px rgb(122 78 43 / .22); }
 .tw-svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 
-.tw-overcast { opacity: var(--tw-mood); }
-.tw-haze { opacity: calc(var(--tw-mood) * .85); }
-.tw-dusk { opacity: calc(var(--tw-mood) * .3); }
-.tw-sun { opacity: calc(1 - var(--tw-mood) * .8); }
-.tw-cloud > g { transform-box: fill-box; transform-origin: center; transform: scale(calc(1 + var(--tw-mood) * .7)); fill: color-mix(in srgb, #fff, #585c6c calc(var(--tw-mood) * 100%)); }
+/* Mood 0 -> 1: a sunny day -> a hazy, overcast afternoon. CSS fills override the SVG's darker ones. */
+.tw-overcast { fill: #cfdbe6; opacity: calc(var(--tw-mood) * .9); }
+.tw-haze { fill: #ffd6b8; opacity: calc(var(--tw-mood) * .4); }
+.tw-dusk { display: none; }
+.tw-sun { opacity: calc(1 - var(--tw-mood) * .6); }
+/* a few flowers on the grass, laid over the same 16:9 box the SVG is sliced from */
+.tw-art::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0; aspect-ratio: 16 / 9; pointer-events: none;
+  background:
+    radial-gradient(circle at 3.7% 65.5%, #ff9fc0 0 2px, transparent 2.6px),
+    radial-gradient(circle at 6.5% 69%, #fff 0 2px, transparent 2.6px),
+    radial-gradient(circle at 2% 62%, #ffe066 0 2px, transparent 2.6px),
+    radial-gradient(circle at 75.6% 67%, #fff 0 2px, transparent 2.6px),
+    radial-gradient(circle at 78.8% 63.5%, #ff9fc0 0 2px, transparent 2.6px),
+    radial-gradient(circle at 73.5% 70%, #ffe066 0 2px, transparent 2.6px);
+}
+.tw-cloud > g { transform-box: fill-box; transform-origin: center; transform: scale(calc(1 + var(--tw-mood) * .7)); fill: color-mix(in srgb, #fff, #dfe5ec calc(var(--tw-mood) * 100%)); }
 .tw-storm { opacity: var(--tw-mood); }
 .tw-window { fill: color-mix(in srgb, #bfe9ff, #ffcf5e calc(var(--tw-mood) * 100%)); }
 .tw-bulb { fill: color-mix(in srgb, #eef1f6, #ffd36b clamp(0%, calc((var(--tw-mood) - .4) * 500%), 100%)); }
-.tw-glow { opacity: clamp(0, calc((var(--tw-mood) - .4) * 5), 1); }
+.tw-glow { opacity: clamp(0, calc((var(--tw-mood) - .4) * 3), .6); }
 
 .tw-spot { position: absolute; width: 0; display: flex; flex-direction: column; align-items: center; transform: scale(var(--tw-vs)); transform-origin: 50% 100%; }
 .tw-fig { display: block; line-height: 0; transform-origin: 50% 100%; }
@@ -41,7 +53,7 @@
 .tw-bubble {
   position: absolute; bottom: 5px; margin: 0; transform: translateX(-50%); width: max-content; max-width: 56%;
   padding: 5px 9px; border-radius: 12px; background: #fff; color: #1b1030;
-  font: 600 11px/1.25 system-ui, sans-serif; overflow-wrap: anywhere; box-shadow: 0 3px 8px rgb(27 16 48 / .25);
+  font: 600 11px/1.25 system-ui, sans-serif; overflow-wrap: anywhere; box-shadow: 0 3px 8px rgb(122 78 43 / .25);
 }
 .tw-tail { position: absolute; bottom: 1px; width: 10px; height: 10px; margin-left: -5px; background: #fff; transform: rotate(45deg); }
 
@@ -50,7 +62,7 @@
 @media (prefers-reduced-motion: no-preference) {
   .tw-camera { transition: transform 1.2s cubic-bezier(.2, .7, .2, 1); }
   .tw-art { transition: filter 1.5s ease, border-radius 1.2s ease, box-shadow 1.2s ease; }
-  .tw-overcast, .tw-haze, .tw-dusk, .tw-sun, .tw-storm, .tw-glow { transition: opacity 1.5s ease; }
+  .tw-overcast, .tw-haze, .tw-sun, .tw-storm, .tw-glow { transition: opacity 1.5s ease; }
   .tw-cloud > g { transition: transform 1.5s ease, fill 1.5s ease; }
   .tw-window, .tw-bulb { transition: fill 1.5s ease; }
   .tw-drift { animation: tw-drift 26s ease-in-out infinite alternate; }
@@ -75,3 +87,17 @@
 .bar.dm .tw-bubble { top: 0; bottom: auto; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
 .bar.dm .tw-tail { display: none; }
 .tw-over { max-width: 640px; margin: 0 auto; padding: 16px 16px 0; }
+
+/* villagers */
+@media (prefers-reduced-motion: no-preference) {
+  .tw-v-head, .tw-v-eyes, .tw-v-fig, .tw-v-tear { transform-box: fill-box; transform-origin: 50% 100%; }
+  .tw-v-head { animation: tw-v-bob 2.6s ease-in-out infinite; animation-delay: var(--tw-blink, 0s); }
+  .tw-v-eyes { transform-origin: center; animation: tw-v-blink 4.2s infinite; animation-delay: var(--tw-blink, 0s); }
+  .tw-v-talk .tw-v-fig { animation: tw-v-bounce .5s ease-in-out infinite; }
+  .tw-v-talk .tw-v-head, .tw-v-out .tw-v-head { animation: none; }
+  .tw-v-out .tw-v-tear { transform-origin: 50% 0; animation: tw-v-tear 1.8s ease-in infinite; }
+}
+@keyframes tw-v-bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 1.5px; } }
+@keyframes tw-v-blink { 0%, 93%, 100% { transform: scaleY(1); } 96% { transform: scaleY(.1); } }
+@keyframes tw-v-bounce { 0%, 100% { transform: translateY(0) scaleY(1); } 50% { transform: translateY(-5%) scaleY(1.03); } }
+@keyframes tw-v-tear { 0%, 20% { translate: 0 0; opacity: 1; } 100% { translate: 0 9px; opacity: 0; } }
