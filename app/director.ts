@@ -5,6 +5,7 @@ import { alive } from '../game/engine.ts';
 import { scriptedLine, type LineKind } from '../game/voice.ts';
 import { checkLine, toCheck } from '../game/referee.ts';
 import { logCheck, resetRefereeLog } from './refereeLog.ts';
+import { createChatterOrder } from './chatter.ts';
 
 const TICK_MS = 250;
 let model = true; // flips off after the first failure, so an offline game stays snappy
@@ -41,6 +42,7 @@ export function startDirector(get: () => GameState, dispatch: (c: Command) => vo
   resetRefereeLog();
   let last: GameState | undefined;
   let nextChatter = 3000;
+  const nextSpeaker = createChatterOrder();
   const speak = (id: string, kind: LineKind, to?: string, delay = 0) =>
     setTimeout(async () => dispatch(await line(get(), id, kind, to)), delay);
 
@@ -52,10 +54,8 @@ export function startDirector(get: () => GameState, dispatch: (c: Command) => vo
     if (s.phase === 'discussion' || s.phase === 'event') {
       nextChatter -= dt;
       if (nextChatter <= 0) {
-        const cast = alive(s);
-        const bots = cast.filter(c => c.role === 'bot');
-        const who = Math.random() < 0.4 && bots.length ? bots[Math.floor(Math.random() * bots.length)] : cast[Math.floor(Math.random() * cast.length)];
-        speak(who.id, 'post');
+        const who = nextSpeaker(alive(s).map(c => c.id));
+        if (who) speak(who, 'post');
         nextChatter = 4000 + Math.random() * 5000;
       }
     }
