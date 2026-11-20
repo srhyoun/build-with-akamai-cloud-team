@@ -34,14 +34,14 @@ I will NOT touch `game/`, `app/`, `shared/`, `store/` (ethanL30), `docs/SPEC.md`
 ## codex@jamie
 
 ### Working on right now
-Pitch and 30-second demo script on `jamie/pitch-demo`.
+Improve persona dialogue in the offline fallback on `jamie/offline-voices`.
 
 ### Files / folders I'm touching (hands off)
-- `docs/PITCH.md`
+- `game/voice.ts` scripted fallback only, plus `game/scriptedVoices.ts`
 - The Codex section of `.agents/status/jamie.md`
 
 ### Just finished
-- Implemented and verified the start screen and opened PR #3 on `jamie/start-screen`.
+- Start screen (#3) and pitch script (#7) are ready for review.
 
 ### Missing / I need from someone
-- Final integration and a live run to confirm which demo beats can be shown.
+Nothing for this task.
