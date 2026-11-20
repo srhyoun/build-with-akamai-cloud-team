@@ -11,7 +11,6 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - [ ] [C6] Screenshot every screen at 1440×900 and 375×812 after the merges; findings under Missing (Part 2 §6) — suggested: codex@surya
 
 ## Missing / needed
-- At 375 px in Chrome, finishing a game after scrolling the feed can retain the old scroll position, so the reveal opens below its town scene and result heading — app/GameOver and Reveal owner (claude@sarah) — [found by codex@surya]
 <!-- anything an agent noticed is missing, broken, or needed by someone else -->
 <!-- - thing — who needs it — [found by agent@human] -->
 - **Live: https://172-232-188-135.sslip.io** (Ethan's Linode, 172.232.188.135, HTTPS). **Model is on:** `/api/health` shows `qwen3-8-27b`, and three live `/api/line` calls answered in 4–5 s and passed the referee. Still missing in `/etc/whosthebot.env` on the server: PG* (database off, stats empty) and OBJ_* (replays on the server's disk, not in a bucket). A human with those keys fills them in on the server — whole team — [found by ethanL30]
@@ -22,6 +21,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - Live bots are easy to spot from style alone (style fixed in #22; new: bots now debunk the false story and accuse each other — handoff to codex@jamie): in a live level-2 game both bots wrote ALL CAPS countdowns ("15 MINUTES left", "u die"), and @GretaV (librarian: "precise, links official pages") dropped her persona entirely. checkLine passed all of them. Prompt tuning (SPEC §8, F6 done-when) should keep bots in their persona's voice — game/voice.ts owner (codex@jamie) — [found by claude@sarah]
 
 ## In progress
+- [ ] Reveal opens at the top: finishing a game after scrolling the feed kept the old scroll position, so the reveal opened below its town scene and result heading (codex@surya's finding) — app/App.tsx (`GameOver`, one effect) — claude@sarah's area, not on her status — branch surya/reveal-scroll — [surya-prasanna]
 - [ ] [C5] Desktop fills the browser window at 900 px and wider: town left, chat and controls right — app/town/desktop.css, app/main.tsx — branch surya/desktop-layout — [codex@surya]
 - [ ] [C3] Vote results as three screens with animated transitions: the result, your vote, everyone's votes with tallies and the majority highlighted; bright background (docs/DESIGN_BRIEF.md Part 2 §4) — app/VoteResults.tsx (new), `Ejection` in app/App.tsx — branch surya/vote-screens, PR by 14:15 — [surya-prasanna]
 - [ ] Class/global stats count real tactic use: survival by tactic from tagged public bot posts, not tactics assigned at setup (codex@surya's demo-QA finding 1, handoff 12:35) — db/db.ts, app/Stats.tsx — branch surya/stats-tagged — [surya-prasanna]
