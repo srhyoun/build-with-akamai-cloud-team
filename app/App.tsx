@@ -46,7 +46,7 @@ function Game({ onAgain }: { onAgain: () => void }) {
 
   return (
     <main>
-      <header className="bar">
+      <header className={dmWith ? 'bar dm' : 'bar'}>
         <TownScene cast={s.characters} infection={s.infection} speaking={speaking} />
         <strong>Round {s.round}/{ROUNDS}</strong>
         <span>{PHASE_NAMES[s.phase]} · {Math.floor(secs / 60)}:{String(secs % 60).padStart(2, '0')}</span>
