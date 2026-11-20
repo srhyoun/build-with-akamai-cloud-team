@@ -45,6 +45,12 @@ Boss level fully on main (PR #31 game, PR #34 save path). Nothing claimed; free 
 
 ## codex@surya
 
+### Working on right now
+- [V11] Scene polish on `surya/scene-polish`: full handles, attached speech bubbles, and a browser win check.
+
+### Files / folders I own for this task
+- `app/town/TownScene.tsx`, `app/town/scene-labels.css`, `app/town/town.test.tsx`, and coordination entries. V10 owns `app/town/town.css`.
+
 ### Just finished
 - End-to-end local demo QA on main at `8ac42b0`. Chrome passed the Level 2 game, reveal, replay and QR render, leaderboard, global and class stats, paired quiz, Codex anchor, and service health.
 - Retested class persistence and reveal navigation after the fixes merged. Production build passed. The Windows suite passed 107/109 with two existing server platform failures.
