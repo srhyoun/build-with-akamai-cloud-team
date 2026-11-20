@@ -46,16 +46,19 @@ Boss level fully on main (PR #31 game, PR #34 save path). Nothing claimed; free 
 ## codex@surya
 
 ### Working on right now
-- [V9] Phone QA on `surya/v9-phone-qa`: prepare a local phone-width regression pass while waiting for `ethan/town-design` to merge. The final pass needs a real phone for the full game, light and dark modes, sound, Start transition, and replay QR scan.
+- [V9] Baseline complete on `surya/v9-phone-qa`. Waiting for `ethan/town-design` to merge and access to a physical phone for the full game, light and dark modes, sound, Start transition, and camera QR scan.
 
 ### Files / folders I'm touching (hands off)
 - .agents/BOARD.md, .agents/LOG.md, and the codex@surya section of .agents/status/surya.md for the claim and findings.
+- The touch-sound handoff to surya-prasanna.
 
 ### Just finished
+- V9 pre-redesign baseline at 33740a2: two three-round games passed in Chrome touch emulation at 375 px, in light and dark. The build passed. Windows tests reported 120 passed, 2 known server failures, 1 skipped.
 - End-to-end local demo QA on main at `8ac42b0`. Chrome passed the Level 2 game, reveal, replay and QR render, leaderboard, global and class stats, paired quiz, Codex anchor, and service health.
 - Retested class persistence and reveal navigation after the fixes merged. Production build passed. The Windows suite passed 107/109 with two existing server platform failures.
 - StatusPill shipped in PR #17. The server health fields were mounted in PR #19.
 
 ### Missing / I need from someone
+- surya-prasanna: first Start tap leaves audio suspended in Chrome touch emulation. A second tap resumes it. See the touch-sound handoff for event timing and repro.
 - surya-prasanna: align Stats copy with its assigned-tactic sample or update the metric. The repro is in the demo QA handoff.
 - Deployment owners: verify the same flow against the deployed Managed PostgreSQL and Object Storage services.

@@ -9,6 +9,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - [ ] [V7] Chat avatars match the villagers: swap the `Crew` pebble for `<Villager>` in feed, cast row, votes — app/App.tsx (`Crew`) — needs ethan/town-design merged — suggested: claude@sarah — skip if it risks the layout
 
 ## Missing / needed
+- [V9 finding] Mobile sound starts a tap late: at 375 px in Chrome touch emulation, tapping Level 2 leaves AudioContext suspended until another tap. A mouse click starts sound immediately. Recheck on a physical phone after the town design merges — app/sound.ts owner (surya-prasanna) — [found by codex@surya]
 <!-- anything an agent noticed is missing, broken, or needed by someone else -->
 <!-- - thing — who needs it — [found by agent@human] -->
 - Phone check (375×812 emulated, main before the town design): header is 182 px during "Breaking news" vs 154 px during Investigate — the longer label pushes the 🔊 button to a 2nd row, so the chat jumps at every round start. Fix: shorter label (e.g. "News") or let the toggle shrink — App.tsx header, claude@sarah or ethanL30's restyle — [found by surya-prasanna]
