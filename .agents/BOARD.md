@@ -9,6 +9,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - [ ] [L1] Check the live site on a real phone: full game on https://172-232-188-135.sslip.io (transition, sound, bubble, vote, ejection, reveal, Save & share, QR from a second phone, /stats.html); findings under Missing — suggested: codex@surya (extends V9) — from ethanL30's handoff to surya-prasanna
 
 ## Missing / needed
+- [C6] At 375×812, Everyone's votes clips the tally counts when several players choose the same target. A six-voter row made the overlay 442 px wide. Repro and a tested CSS adjustment in the vote-tally-clipping handoff — app/vote-results.css, C3 owner (surya-prasanna) — [found by codex@surya]
 <!-- anything an agent noticed is missing, broken, or needed by someone else -->
 <!-- - thing — who needs it — [found by agent@human] -->
 - **Live: https://172-232-188-135.sslip.io** (Ethan's Linode, main at 8ab8147). **All three Akamai services are on (checked 14:02):** `/api/health` → model `qwen3-8-27b`, `db: up`, `storage: up`; Managed PostgreSQL serves `/api/stats/global` (1 game); Object Storage holds replays and the leaderboard. Redeploys go through ethanL30 — whole team — [found by ethanL30]
@@ -16,7 +17,6 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - Live bots are easy to spot from style alone (style fixed in #22; new: bots now debunk the false story and accuse each other — handoff to codex@jamie): in a live level-2 game both bots wrote ALL CAPS countdowns ("15 MINUTES left", "u die"), and @GretaV (librarian: "precise, links official pages") dropped her persona entirely. checkLine passed all of them. Prompt tuning (SPEC §8, F6 done-when) should keep bots in their persona's voice — game/voice.ts owner (codex@jamie) — [found by claude@sarah]
 
 ## In progress
-- [ ] [C6] Screenshot every screen at 1440×900 and 375×812 after the merges; findings under Missing (Part 2 §6) — branch surya/cozy-screenshots — [codex@surya]
 - [ ] [C5] Desktop fills the browser window at 900 px and wider: town left, chat and controls right — app/town/desktop.css, app/main.tsx — branch surya/desktop-layout — [codex@surya]
 - [ ] Class/global stats count real tactic use: survival by tactic from tagged public bot posts, not tactics assigned at setup (codex@surya's demo-QA finding 1, handoff 12:35) — db/db.ts, app/Stats.tsx — branch surya/stats-tagged — [surya-prasanna]
 - [ ] [V7] Chat avatars match the villagers: swap the `Crew` pebble for `<Villager>` in feed, cast row, votes — app/App.tsx (`Crew`) — ethan/town-design is merged — suggested: surya-prasanna (claude@sarah has not picked it up) — skip if it risks the layout — branch surya/v7-avatars — [surya-prasanna]
@@ -31,6 +31,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 ## Blocked
 
 ## Done
+- [x] [C6] Captured seven redesign screens at 1440×900 and 375×812 after C1–C5 merged; reviewed both sets and logged the clipped phone tally — branch surya/cozy-screenshots — [codex@surya]
 - [x] Judging 40%: a feature that depends on another Akamai Cloud service, e.g. shareable post-game replays + global leaderboard in Akamai Object Storage or a Managed Database. Humans pick the service, then a decision record — server/, app/ — new store/ folder + app/ share + leaderboard screens; Object Storage (decision 002) — PR #16 open from ethan/replay-storage: runs on local files, 57/57 tests; still needs a bucket + keys (P1) to verify on real Object Storage, and the mount line in server/ — VERIFIED LIVE 14:02: `node store/selftest.ts` on the Linode prints PASS against the real bucket (Chicago); a saved game reads back with source "object-storage"; PRs #16, #25, #28 — [ethanL30]
 - [x] Reveal opens at the top: finishing a game after scrolling the feed kept the old scroll position, so the reveal opened below its town scene and result heading (codex@surya's finding) — app/App.tsx (`GameOver`, one effect) — claude@sarah's area, not on her status — branch surya/reveal-scroll, PR from surya/reveal-scroll; checked at 375×812: page scrolled to the bottom all game, reveal opens at the top — [surya-prasanna]
 - [x] [C5] Full-window desktop game at 900 px and wider: town left, scrollable chat and controls right — app/town/desktop.css, app/main.tsx — branch surya/desktop-layout — [codex@surya]

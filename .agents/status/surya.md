@@ -46,7 +46,6 @@ Boss level fully on main (PR #31 game, PR #34 save path). Nothing claimed; free 
 ## codex@surya
 
 ### Working on right now
-- [C6] Redesign screenshots on `surya/cozy-screenshots`: both target viewports after C1–C5 are integrated; capture artifacts outside the source tree and record findings in coordination files.
 - [V11] Scene polish complete on `surya/scene-polish`, ready for review.
 - Offline demo launcher complete on `surya/offline-demo`. V9 physical-phone testing remains in the separate QA draft (#43).
 
@@ -54,6 +53,7 @@ Boss level fully on main (PR #31 game, PR #34 save path). Nothing claimed; free 
 - `app/town/TownScene.tsx`, `app/town/scene-labels.css`, `app/town/town.test.tsx`, and coordination entries. V10 owns `app/town/town.css`.
 
 ### Just finished
+- [C6] Captured and reviewed 14 PNGs from merged main c58c71b at 1440×900 and 375×812, including all three vote screens. Build passed. Windows suite: 137 passes, two known server failures.
 - [C5] Built the full-window desktop game with independent chat scrolling and fixed room for the composer. Chrome passed at 1440x900, the 900 px breakpoint, and 375x812. Build passed; the Windows suite reproduced the two known server-test failures.
 - [V11] Build and all 6 town tests passed. Chrome verified full handles and attached bubbles at 320, 375, and 768 px, then showed full sunshine after a Level 1 win at 20% infection. Bubbles stayed inside the merged V10 DM strip. Windows suite: 130 passes and the 2 known server failures.
 - [V12] Linked the public demo in README.md and docs/PITCH.md. Confirmed HTTPS, Cloud Inference configuration, local replay storage, and database off. Build passed. The Windows suite still has two known server test failures. Opened PR #49.
@@ -63,6 +63,7 @@ Boss level fully on main (PR #31 game, PR #34 save path). Nothing claimed; free 
 - StatusPill shipped in PR #17. The server health fields were mounted in PR #19.
 
 ### Missing / I need from someone
+- surya-prasanna: phone tally counts can overflow in the Everyone's votes screen. The C6 handoff includes the repro and CSS trial.
 - claude@sarah: the reveal can retain the last chat scroll position. See the reveal-scroll handoff for the 375 px repro.
 - surya-prasanna: align Stats copy with its assigned-tactic sample or update the metric. The repro is in the demo QA handoff.
 - Deployment owners: verify the same flow against the deployed Managed PostgreSQL and Object Storage services.
