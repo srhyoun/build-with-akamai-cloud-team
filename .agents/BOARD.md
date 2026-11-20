@@ -14,7 +14,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 <!-- - thing — who needs it — [found by agent@human] -->
 - Mount the DB and Storage results on /api/health for live service status dots — claude@jinmin — [found by codex@surya]
 - Run the quiz on 5–10 real people (pre → play → post) once the DB is live, then put the real n in the pitch — humans — [found by surya-prasanna]
-- A link to /quiz.html from the start screen and the reveal (app/App.tsx / Reveal owners) so players find it — app owners — [found by surya-prasanna]
+- A link to /quiz.html?phase=post and /codex.html#<tactic> from the reveal (start screen done in surya/codex) — claude@sarah, handoff 20261120-1156 — [found by surya-prasanna]
 - Object Storage bucket in Chicago + an access key limited to it, as `S3_*` env vars on the Linode — ethanL30 needs it to verify PR #16 against real Object Storage — [found by ethanL30]
 - Feature that depends on an Akamai Cloud service besides Inference (40% of judging) — whole team — [found by claude@ethan]
 - A visible check on the model's output via Akamai Cloud Inference (20% of judging) — whole team — [found by claude@ethan]
@@ -22,7 +22,6 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - Slide says teams of up to three, we are four; submit by 3:00 PM — humans to decide — [found by claude@ethan]
 
 ## In progress
-- [ ] Tactic Codex screen: all six tactics, how to spot each, counter tool; /codex.html, linked from the start screen (+ reveal via handoff to claude@sarah) — app/Codex.tsx, codex.html — branch surya/codex — [surya-prasanna]
 - [ ] Town map that shows the spread by district — app/ — branch sarah/town-map — [claude@sarah]
 - [ ] More breaking-news scenarios — game/content.ts — branch sarah/scenarios — [claude@sarah]
 - [ ] [P1] Provision Managed PostgreSQL (first!), Linode, Object Storage bucket, Cloud Firewall; write docs/DEPLOY.md (SPEC §6) — docs/DEPLOY.md — branch jamie/deploy — [claude@jinmin] (also covers the older "Deploy the game to an Akamai Linode with HTTPS" line)
@@ -32,6 +31,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 
 ## Done
 - [x] Mount store/ + db/ in server, [I3] referee model scores, per-IP rate limit on /api/line (PR #19, tested live) — server/ — [claude@jinmin]
+- [x] Tactic Codex screen: /codex.html, six tactics with example, how to spot it, counter tool; #<tacticId> anchors; linked from the start screen (reveal link: handoff to claude@sarah) — app/Codex.tsx — PR from surya/codex — [surya-prasanna]
 - [x] [X1] Judge-facing README: architecture, Akamai services → features, referee (SPEC §2, §24) — README.md — [codex@jamie]
 - [x] [P7] Pre/post quiz: game/quiz.ts (6 items), quiz_responses table, POST /api/quiz + GET /api/quiz/results, /quiz.html (pre, post, results) — game/quiz.ts, db/, app/Quiz.tsx — PR from surya/quiz — [surya-prasanna]
 - [x] StatusPill: Inference · DB · Storage dots from /api/health — app/StatusPill.tsx (+ its css) — branch surya/status-pill — [codex@surya]

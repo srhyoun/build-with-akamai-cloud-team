@@ -58,3 +58,6 @@
   color: var(--muted);
   font-size: 0.9rem;
 }
+
+.start-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; }
+.start-links a { display: flex; align-items: center; justify-content: center; text-align: center; min-height: 44px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); color: var(--accent); font-weight: 600; text-decoration: none; }

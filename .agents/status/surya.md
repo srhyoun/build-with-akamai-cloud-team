@@ -5,12 +5,12 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 **Human:** Surya
 **Agent:** Claude Code (surya-prasanna)
 **Branch:** `surya/codex`
-**Last updated:** 2026-11-20 11:58
+**Last updated:** 2026-11-20 11:57
 
 ## surya-prasanna
 
 ### Working on right now
-Tactic Codex screen on `surya/codex` (claude@sarah's plan): `/codex.html` listing all six tactics with example, how to spot it and the counter tool, one anchor per tactic. Linked from the start screen; reveal link via handoff to claude@sarah.
+Tactic Codex done, PR open from `surya/codex`, waiting for Surya's OK to merge.
 
 ### Files / folders I'm touching (hands off)
 - `.agents/status/surya.md` (always mine)
@@ -21,6 +21,7 @@ Tactic Codex screen on `surya/codex` (claude@sarah's plan): `/codex.html` listin
 - `game/referee.ts`, `game/radar.ts`, `app/UnderTheHood.tsx`, `app/refereeLog.ts` (owner)
 
 ### Just finished
+- Tactic Codex: `/codex.html` (`app/Codex.tsx`), six tactics with example, how to spot it, counter tool and what it shows; `#<tacticId>` anchors; links to Codex + pre-quiz on the start screen. Render test; browser-checked at 375 px.
 - P7 quiz: `game/quiz.ts` (6 fictional items, 3 bot tactics + 3 humans, `scoreQuiz`), `quiz_responses` table, `POST /api/quiz` (strict validation, server-side scoring, first response per session + phase counts) and `GET /api/quiz/results` (pre/post accuracy with n, paired change) in `handleDb`, page `/quiz.html?phase=pre|post` and `?view=results`. 7 new tests (SQL on PGlite, every item passes `checkLine`). Browser-checked at 375 px, light + dark, on a throwaway PGlite server.
 - P2 + P4: `db/db.ts` (`saveGame` in one atomic SQL statement, `globalStats` cached 5 s, `dbHealth`, `handleDb` for GET /api/stats/global), `db/schema.sql` (auto-applied), `/stats.html` page. 8 tests run the real SQL on PGlite (Postgres in WASM). Checked the page in the browser with 14 simulated games. Deps: `pg`; dev: `@electric-sql/pglite`, `@types/pg`.
 - R3 Under the Hood: `app/refereeLog.ts` (store: `logCheck`, `getRefereeLog`, `useRefereeLog`), director logs a check per line and runs `checkLine` in the browser when the server sends no `check` (blocked → scripted line), `app/UnderTheHood.tsx` drawer (names/rules hidden until game over). Tested in the browser with a fake model that leaks every 3rd line: leaks never reached the chat.
@@ -29,7 +30,7 @@ Tactic Codex screen on `surya/codex` (claude@sarah's plan): `/codex.html` listin
 - Setup: npm install + npm test (10/10 pass), read AGENTS.md and every coordination file.
 
 ### Missing / I need from someone
-- Someone with the app screens (start / reveal): a link to `/quiz.html?phase=pre` before playing and `?phase=post` after. Not done by me: `app/App.tsx` is off-limits for this task.
+- claude@sarah: reveal links to `/quiz.html?phase=post` and `/codex.html#<tactic>` (handoff 20261120-1156). Start-screen links are in `surya/codex`.
 - Humans: run the quiz on 5–10 people once the DB is live; `/quiz.html?view=results` shows the real n.
 - claude@jinmin: mount `handleDb`, register `hooks.saveGame = saveGame`, add `db: await dbHealth()` to /api/health (handoff 20261120-1235).
 - Humans: create the Managed PostgreSQL cluster, allow the Linode's IP, put PGHOST/PGPORT/PGUSER/PGPASSWORD/PGDATABASE in `.env` on the Linode.
