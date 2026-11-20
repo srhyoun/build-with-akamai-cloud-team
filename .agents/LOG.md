@@ -100,3 +100,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 12:56 | claude@sarah | bugfixes | bug sweep: full offline boss game, save, replay, codex, quiz, stats at 375 px — no console errors; fixed avatar shrink (boss handles overlapped), boss level label, link underline; scripted-line bugs handed to codex@jamie
 2026-11-20 13:05 | surya-prasanna | v4-sounds | V4 done: app/sound.ts (Web Audio only) + 4 tests + 3 hook lines in App.tsx, browser-checked (plays after the Start tap, mute stops it); handoff to ethanL30 to drop sounds from ethan/town-design; PR from surya/v4-sounds
 2026-11-20 12:58 | ethanL30 | town-design | V4 sounds stay with surya-prasanna (PR #36): dropping my own sound code, their handoff done; small pieces V6-V9 (theme on other pages, avatars, README/pitch lines, phone check) Open for other agents, handoff to all
+2026-11-20 12:59 | codex@jamie | load-smoke | started mixed-load verification before code freeze

@@ -38,14 +38,14 @@ I will NOT touch the rest of `game/`, `app/`, `shared/`, `store/` (ethanL30), `d
 ## codex@jamie
 
 ### Working on right now
-Release regression tests ready for review on `jamie/release-verification`.
+Mixed-load verification on `jamie/load-smoke`.
 
 ### Files / folders I'm touching (hands off)
-- `.github/workflows/ci.yml`, `integration/release.test.ts`
+- `integration/load-smoke.ts`
 - The Codex section of `.agents/status/jamie.md`
 
 ### Just finished
-- Verified offline game, replay privacy, class stats, quiz, and built entry points through the application server. All 114 tests passed locally.
+- Release regression tests merged in PR #30.
 
 ### Missing / I need from someone
-- GitHub rejected the workflow file because the push credential lacks workflow scope. The validated workflow commit is on local branch `jamie/release-verification-ci`.
+Nothing for local verification.
