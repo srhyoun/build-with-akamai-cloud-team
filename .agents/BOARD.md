@@ -15,7 +15,6 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - Send `classCode: getClassCode()` with POST /api/replays (one line in app/share.ts) so class games show up on the class page — ethanL30, handoff 20261120-1202 — [found by surya-prasanna]
 - Mount the DB and Storage results on /api/health for live service status dots — claude@jinmin — [found by codex@surya]
 - Run the quiz on 5–10 real people (pre → play → post) once the DB is live, then put the real n in the pitch — humans — [found by surya-prasanna]
-- A link to /quiz.html?phase=post and /codex.html#<tactic> from the reveal (start screen done in surya/codex) — claude@sarah, handoff 20261120-1156 — [found by surya-prasanna]
 - Object Storage bucket in Chicago + an access key limited to it, as `S3_*` env vars on the Linode — ethanL30 needs it to verify PR #16 against real Object Storage — [found by ethanL30]
 - Feature that depends on an Akamai Cloud service besides Inference (40% of judging) — whole team — [found by claude@ethan]
 - A visible check on the model's output via Akamai Cloud Inference (20% of judging) — whole team — [found by claude@ethan]

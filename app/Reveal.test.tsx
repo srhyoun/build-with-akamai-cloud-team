@@ -23,7 +23,7 @@ describe('Reveal', () => {
     expect(html).toContain('voted out in round 2');
     expect(html.match(/class="bot"/g)).toHaveLength(2);
     expect(html.match(/class="human"/g)).toHaveLength(4);
-    for (const text of ['Roads close in 20 min', 'My cousin says...', '(DM to you)', b0.handle, b1.handle, 'Counter: Source Check', 'save slot']) expect(html).toContain(text);
+    for (const text of ['Roads close in 20 min', 'My cousin says...', '(DM to you)', b0.handle, b1.handle, 'Counter: Source Check', 'save slot', 'href="/codex.html#fake_urgency"', 'href="/quiz.html?phase=post"']) expect(html).toContain(text);
   });
 
   it('says so when no bot post carries a tag', () => {

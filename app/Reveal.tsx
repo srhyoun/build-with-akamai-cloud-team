@@ -63,6 +63,7 @@ export function Reveal({ s, onAgain, children }: { s: GameState; onAgain: () => 
       </section>
 
       {children}
+      <a className="rv-link rv-quiz" href="/quiz.html?phase=post">Take the after-quiz: did you get better at spotting bots? →</a>
       <button className="rv-again" onClick={onAgain}>Play again</button>
     </main>
   );
@@ -75,6 +76,7 @@ function Chip({ t }: { t: TacticId }) {
     <details className="rv-chip">
       <summary>{x.name}</summary>
       <p>e.g. “{x.example}” · Counter: {TOOL_NAMES[x.counter]}</p>
+      <a className="rv-link" href={`/codex.html#${t}`}>How to spot it →</a>
     </details>
   );
 }
