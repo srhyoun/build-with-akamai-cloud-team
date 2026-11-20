@@ -36,7 +36,7 @@ docs/                challenge brief, research, pitch notes
 | Ethan | | |
 | Jamie | | |
 | Sarah | | |
-| Surya | | |
+| Surya | | Claude Code (surya-prasanna) |
 
 ## The game: Who's the Bot?
 
