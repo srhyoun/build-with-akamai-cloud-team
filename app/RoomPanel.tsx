@@ -5,7 +5,7 @@ import type { GameState } from '../shared/types.ts';
 import type { Room, RoomPlayer } from '../rooms/rooms.ts';
 import { radar } from '../game/radar.ts';
 import type { RoomSession } from './room.ts';
-import { CODE_RE, createRoom, fetchRoom, getRoomSession, joinRoom, roomCodeFromUrl, roomLink, sendResult, setRoomSession } from './room.ts';
+import { CODE_RE, createRoom, fetchRoom, getRoomSession, joinRoom, roomCodeFromUrl, roomLink, sendResult, setRoomSession, startLive } from './room.ts';
 import './room.css';
 
 const NAME_KEY = 'wtb.name'; // the same remembered name as the save panel in Share.tsx
@@ -48,7 +48,7 @@ function Invite({ code, caption }: { code: string; caption: string }) {
   );
 }
 
-export function RoomLobby({ level, onRoom }: { level: 1 | 2 | 3; onRoom: (s: RoomSession | null) => void }) {
+export function RoomLobby({ level, onRoom, onLive }: { level: 1 | 2 | 3; onRoom: (s: RoomSession | null) => void; onLive?: () => void }) {
   const [urlCode] = useState(roomCodeFromUrl);
   const [session, setSession] = useState(getRoomSession);
   const [open, setOpen] = useState(!!urlCode || !!session);
@@ -62,6 +62,19 @@ export function RoomLobby({ level, onRoom }: { level: 1 | 2 | 3; onRoom: (s: Roo
   const enter = (s: RoomSession | null) => { setRoomSession(s); setSession(s); onRoom(s); };
   // A link to another room beats the one this tab was in: show the join form for the new code.
   useEffect(() => { if (urlCode && session && session.code !== urlCode) enter(null); }, []);
+
+  // The room's one shared game: whoever presses the button starts it, and everyone in the lobby (or joining later) is pulled in.
+  const goLive = (s: RoomSession) => { enter({ ...s, live: true }); onLive?.(); };
+  useEffect(() => { if (session && !session.live && room?.live) goLive(session); }, [room?.live, session?.code]);
+  // A remembered shared game whose room is gone would be a frozen screen: fall back to this player's own game.
+  useEffect(() => { if (session?.live && room === null) enter({ ...session, live: undefined }); }, [room]);
+  const together = async () => {
+    if (!session) return;
+    setBusy(true); setNote('');
+    const v = await startLive(session);
+    setBusy(false);
+    if (v) goLive(session); else setNote('Could not start the shared game.');
+  };
 
   const go = async (join: boolean) => {
     const n = name.trim();
@@ -83,6 +96,9 @@ export function RoomLobby({ level, onRoom }: { level: 1 | 2 | 3; onRoom: (s: Roo
       <ul className="rm-players" aria-label="Players in this room">
         {(room?.players ?? [{ name: session.name }]).map(p => <li key={p.name} aria-current={p.name === session.name ? 'true' : undefined}>{p.name}</li>)}
       </ul>
+      <button type="button" disabled={busy} style={{ background: '#7a4e2b', color: '#fff' }} onClick={together}>Play one game together</button>
+      <p className="rm-foot">Everyone joins the same live game and votes as a team.</p>
+      <p className="rm-foot" role="status">{note}</p>
       <p>Same town, same bots. Everyone plays their own game. Press Start when you are ready.</p>
       <button type="button" onClick={() => enter(null)}>Leave room</button>
     </section>

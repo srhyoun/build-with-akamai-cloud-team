@@ -51,7 +51,7 @@ export function StartScreen({ onStart }: { onStart: (level: GameState['level']) 
             </button>
           ))}
         </div>
-        <RoomLobby level={picked} onRoom={setRoom} />
+        <RoomLobby level={picked} onRoom={setRoom} onLive={start} />
       </div>
 
       <footer className="start-tutorial" aria-labelledby="tutorial-title">
