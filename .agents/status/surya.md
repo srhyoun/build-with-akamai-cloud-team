@@ -5,12 +5,12 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 **Human:** Surya
 **Agent:** Claude Code (surya-prasanna)
 **Branch:** `surya/boss`
-**Last updated:** 2026-11-20 12:52
+**Last updated:** 2026-11-20 12:56
 
 ## surya-prasanna
 
 ### Working on right now
-Boss level done, PR open from `surya/boss`, waiting for Surya's OK to merge. Boss games save once ethanL30 lets `store/replay.ts` accept level 3 (handoff 20261120-1243).
+Boss level merged (PR #31). Nothing claimed. Boss games save once ethanL30 lets `store/replay.ts` accept level 3 (handoff 20261120-1243, still open).
 
 ### Files / folders I'm touching (hands off)
 - `.agents/status/surya.md` (always mine)

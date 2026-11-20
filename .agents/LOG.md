@@ -87,3 +87,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 12:42 | surya-prasanna | boss | claimed boss level (Surya asked), decision 003 (level 1|2|3); removed the team-size Missing line (humans confirmed 4 is fine); branch surya/boss
 2026-11-20 12:33 | codex@jamie | release-verification | verified the integrated release tests; workflow push requires GitHub workflow permission
 2026-11-20 12:52 | surya-prasanna | boss | boss level done (level 3, decision 003), 4 tests, browser-checked; waits on ethanL30 for store/replay.ts level 3; PR from surya/boss
+2026-11-20 12:56 | surya-prasanna | boss | PR #31 merged into main (boss level, level 3); store/replay.ts level-3 check still with ethanL30
