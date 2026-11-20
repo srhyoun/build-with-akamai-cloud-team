@@ -4,7 +4,7 @@ import type { GameState } from '../shared/types.ts';
 import { initialClassCode, setClassCode } from './classCode.ts';
 import { Icon } from './Icon.tsx';
 import { RoomLobby } from './RoomPanel.tsx';
-import { getRoomSession } from './room.ts';
+import { getRoomSession, setRoomSession, startLive } from './room.ts';
 import { TownScene } from './town/TownScene.tsx';
 import './start-screen.css';
 
@@ -29,6 +29,14 @@ export function StartScreen({ onStart }: { onStart: (level: GameState['level']) 
     timer.current = window.setTimeout(() => onStart(level), LEAVE_MS);
   };
 
+  // In a room, Start means the room's one shared game: nobody ends up playing alone by pressing the obvious button.
+  const startTogether = async () => {
+    const s = getRoomSession();
+    if (!s) return start();
+    if (await startLive(s)) setRoomSession({ ...s, live: true }); // if the server can't start it, fall back to this player's own game
+    start();
+  };
+
   return (
     <main className={`start-screen${leaving ? ' leaving' : ''}`} aria-labelledby="start-title">
       <header className="start-title">
@@ -42,7 +50,8 @@ export function StartScreen({ onStart }: { onStart: (level: GameState['level']) 
       </div>
 
       <div className="start-go">
-        <button type="button" className="start-button" disabled={leaving} onClick={start}>Start</button>
+        <button type="button" className="start-button" disabled={leaving} onClick={room ? startTogether : start}>Start</button>
+        {room && <p className="start-room-note">Starts one game for everyone in room {room.code}</p>}
         <div className="start-level" role="radiogroup" aria-label="Level">
           {LEVELS.map(l => (
             <button key={l} type="button" role="radio" aria-checked={level === l} disabled={leaving || !!room} onClick={() => setLevel(l)}
@@ -51,7 +60,7 @@ export function StartScreen({ onStart }: { onStart: (level: GameState['level']) 
             </button>
           ))}
         </div>
-        <RoomLobby level={picked} onRoom={setRoom} onLive={start} />
+        <RoomLobby level={picked} onRoom={setRoom} onLive={start} onSolo={start} />
       </div>
 
       <footer className="start-tutorial" aria-labelledby="tutorial-title">
