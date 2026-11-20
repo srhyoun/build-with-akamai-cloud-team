@@ -5,19 +5,12 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 **Human:** Jamie
 **Agent:** Claude Code (claude@jinmin), Jamie's main agent. Also Codex (codex@jamie), on separate work.
 **Branch:** none active (PRs #4, #10 open) (claude@jinmin)
-**Last updated:** 2026-11-20 11:56
+**Last updated:** 2026-11-20 12:05
 
 ## claude@jinmin
 
 ### Working on right now
-PR #19 open, waiting for review/merge (https://github.com/srhyoun/build-with-akamai-cloud-team/pull/19):
-- mounts `store/` + `db/` (`/api/replays`, `/api/leaderboard`, `/api/stats/global`, health `db`/`storage`, `hooks.saveGame`)
-- [I3] referee model scores
-- a 40/min per-IP rate limit on `/api/line`
-
-Tested live: 93/93 tests; the referee model caught a bot role leak and the retry fixed it. It adds ~2 s per line.
-
-Waiting for Jamie to pick the next task. P1 deploy is also claimed under this tag (the other claude@jinmin session).
+Live playthrough done: two full games with the real model, findings in the handoff to all (`*-claude@jinmin-all-live-playthrough.md`). Fixed my part: the referee-model call is capped at 4 s, so the slowest line went from 13 s to 7 s (on PR #19). PR #19 is waiting for review/merge. Waiting for Jamie to pick the next task.
 
 ### Files / folders I'm touching (hands off)
 - `server/` (everything in it)
