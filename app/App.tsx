@@ -3,6 +3,7 @@ import type { GameState, Post, ToolId } from '../shared/types.ts';
 import { alive, init, step } from '../game/engine.ts';
 import { PHASE_MS, ROUNDS } from '../game/content.ts';
 import { startDirector } from './director.ts';
+import { useLiveGame } from './live.ts';
 import { VoteResults } from './VoteResults.tsx';
 import { crowdReactions, marksByAuthor } from './reactions.ts';
 import './reactions.css';
@@ -35,12 +36,15 @@ export function App() {
 
 function Game({ onAgain }: { onAgain: () => void }) {
   const level = useContext(GameLevelContext);
-  const [game, dispatch] = useReducer(step, undefined, () => init(getRoomSession()?.seed ?? Date.now() % 1e9, level));
+  const [local, localDispatch] = useReducer(step, undefined, () => init(getRoomSession()?.seed ?? Date.now() % 1e9, level));
+  const live = useLiveGame(getRoomSession()); // a room's shared game, run by the server
+  const game = live?.state ?? local;
+  const dispatch = live?.dispatch ?? localDispatch;
   const ref = useRef(game); ref.current = game;
   const [dmWith, setDmWith] = useState<string | null>(null);
   const [marked, setMarked] = useState<ReadonlySet<string>>(new Set()); // posts the player marked "suspicious"
   const mark = (id: string) => setMarked(m => { const n = new Set(m); if (!n.delete(id)) n.add(id); return n; });
-  useEffect(() => startDirector(() => ref.current, dispatch), []);
+  useEffect(() => getRoomSession()?.live ? undefined : startDirector(() => ref.current, localDispatch), []);
   useGameSounds(game);
   const speaking = useSpeaking(game);
 
@@ -102,6 +106,7 @@ function Game({ onAgain }: { onAgain: () => void }) {
             {alive(s).map(c => <button key={c.id} onClick={() => dispatch({ type: 'vote', target: c.id })}><Crew color={c.color} />{c.handle}{suspects.get(c.id) ? <span className="rx-count" title="Posts you marked suspicious"><Icon name="question" size={13} /> {suspects.get(c.id)}</span> : null}</button>)}
             <button onClick={() => dispatch({ type: 'vote', target: null })}>Skip vote</button>
           </div>
+          {live && <p className="rm-voted">{live.view.voted.length} of {live.view.players.length} players voted. The team's vote is the most common choice.</p>}
         </div>
       )}
 
@@ -137,7 +142,7 @@ function Feed({ s, posts, onCheck, marked, onMark }: { s: GameState; posts: Post
           <li key={p.id} className={`${p.author === 'news' ? 'news' : p.author === 'you' ? 'you' : ''}${marked?.has(p.id) ? ' rx-marked' : ''}`}>
             {c && <Crew color={c.color} />}
             <div>
-              <b>{p.author === 'news' ? 'NEWS' : p.author === 'you' ? 'You' : c?.handle}</b> {p.text}
+              <b>{p.author === 'news' ? 'NEWS' : p.author === 'you' ? 'You' : c?.handle ?? p.author}</b> {p.text}
               {clue && <p className="clue">{clue.text}</p>}
               {onCheck && c && !c.ejected && !clue && <button className="link" onClick={() => onCheck(p.id)}>Source Check</button>}
               {c && marked && <Reactions s={s} p={p} mine={marked.has(p.id)} onMark={onMark} />}

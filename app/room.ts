@@ -1,7 +1,10 @@
 // Client for "Play together" rooms (rooms/). Every call answers null on failure: the game must keep working with no server.
+import type { Command } from '../shared/types.ts';
+import type { LiveView } from '../rooms/live.ts';
 import type { Room } from '../rooms/rooms.ts';
 
-export interface RoomSession { code: string; seed: number; level: 1 | 2 | 3; name: string }
+// live: this player is in the room's one shared game (rooms/live.ts) instead of their own.
+export interface RoomSession { code: string; seed: number; level: 1 | 2 | 3; name: string; live?: boolean }
 
 const KEY = 'wtb-room';
 export const CODE_RE = /^[A-HJ-NP-Z]{4}$/;
@@ -43,5 +46,11 @@ export async function joinRoom(code: string, name: string): Promise<{ room: Room
 export const fetchRoom = (code: string) => json<Room>(`/api/rooms/${code}`);
 export const sendResult = (s: RoomSession, r: { result: 'won' | 'lost'; score: number; infection: number }) =>
   json<Room>(`/api/rooms/${s.code}/result`, { name: s.name, ...r });
+
+// The room's shared live game. `who` is the player's room session (only code and name are sent).
+type Who = Pick<RoomSession, 'code' | 'name'>;
+export const startLive = (s: Who) => json<LiveView>(`/api/rooms/${s.code}/live/start`, { name: s.name });
+export const fetchLive = (s: Who) => json<LiveView>(`/api/rooms/${s.code}/live?name=${encodeURIComponent(s.name)}`);
+export const sendLive = (s: Who, cmd: Command) => json<LiveView>(`/api/rooms/${s.code}/live/cmd`, { name: s.name, cmd });
 
 export const roomLink = (code: string) => `${location.origin}/?room=${code}`;

@@ -3,7 +3,7 @@
 import type { IncomingMessage, ServerResponse } from 'node:http';
 
 export interface RoomPlayer { name: string; joinedAt: number; done: boolean; result?: 'won' | 'lost'; score?: number; infection?: number; finishedAt?: number }
-export interface Room { code: string; seed: number; level: 1 | 2 | 3; createdAt: number; players: RoomPlayer[] }
+export interface Room { code: string; seed: number; level: 1 | 2 | 3; createdAt: number; players: RoomPlayer[]; live?: boolean } // live = the room has one shared game (rooms/live.ts)
 
 const LETTERS = 'ABCDEFGHJKLMNPQRSTUVWXYZ'; // no I or O
 const MAX_BODY = 4096;
@@ -115,6 +115,7 @@ export function createRooms(opts: { now?: () => number; random?: () => number; m
 
   return {
     lineKey, sharedLine,
+    get: (code: string): Room | undefined => rooms.get(code.toUpperCase()),
     async handle(req: IncomingMessage, res: ServerResponse): Promise<boolean> {
       const path = (req.url ?? '').split('?')[0];
       if (path !== '/api/rooms' && !path.startsWith('/api/rooms/')) return false;
@@ -132,5 +133,6 @@ export function createRooms(opts: { now?: () => number; random?: () => number; m
 
 const rooms = createRooms();
 export function handleRooms(req: IncomingMessage, res: ServerResponse): Promise<boolean> { return rooms.handle(req, res); }
+export const getRoom = rooms.get;
 export const roomLineKey = rooms.lineKey;
 export const sharedRoomLine = rooms.sharedLine;
