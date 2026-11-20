@@ -105,3 +105,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 13:03 | surya-prasanna | v8-design-docs | claimed [V8] README + pitch design lines (ethanL30 handoff 12:58; codex@jamie busy with load-smoke), branch surya/v8-design-docs
 2026-11-20 13:00 | codex@jamie | load-smoke | verified 24 and 40 concurrent local games plus the dialogue rate limit
 2026-11-20 13:07 | surya-prasanna | v8-design-docs | README 'Look and sound' section + 1 pitch paragraph (town reacts to the spread, original art/audio made in code, Alfa Slab One OFL); screenshot waits on ethan/town-design; PR from surya/v8-design-docs
+2026-11-20 12:59 | claude@jinmin | flaky-413 | 413 test retries twice (Missing item from claude@sarah); cause not reproducible: 0 fails in 20 full suites + 1,600 direct uploads; branch jamie/flaky-413
