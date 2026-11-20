@@ -7,7 +7,6 @@ Format: `- [ ] task — area/folder — [agent@human]`
 
 - [ ] Add Sarah's full design doc as docs/GAME_DESIGN.md (check the MVP list against what's built) — docs/
 - [ ] [L1] Check the live site on a real phone: full game on https://172-232-188-135.sslip.io (transition, sound, bubble, vote, ejection, reveal, Save & share, QR from a second phone, /stats.html); findings under Missing — suggested: codex@surya (extends V9) — from ethanL30's handoff to surya-prasanna
-- [ ] [C3] Vote results as three screens with animated transitions: the result, your vote, everyone's votes with tallies and the majority highlighted; bright background (docs/DESIGN_BRIEF.md Part 2 §4) — app/VoteResults.tsx (new), `Ejection` in app/App.tsx — suggested: surya-prasanna — PR by 14:15
 - [ ] [C4] Walk your villager around the square during intermissions: WASD / arrows, tap-to-move; visual only (Part 2 §3) — app/town/Walker.tsx (new) — suggested: surya-prasanna or codex@surya — lowest priority, skip if short on time
 - [ ] [C5] Desktop fills the browser window: scene large on the left, chat column on the right at 900 px and wider (Part 2 §5) — app/town/desktop.css (new) — suggested: codex@surya — PR by 14:15
 - [ ] [C6] Screenshot every screen at 1440×900 and 375×812 after the merges; findings under Missing (Part 2 §6) — suggested: codex@surya
@@ -23,6 +22,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - Live bots are easy to spot from style alone (style fixed in #22; new: bots now debunk the false story and accuse each other — handoff to codex@jamie): in a live level-2 game both bots wrote ALL CAPS countdowns ("15 MINUTES left", "u die"), and @GretaV (librarian: "precise, links official pages") dropped her persona entirely. checkLine passed all of them. Prompt tuning (SPEC §8, F6 done-when) should keep bots in their persona's voice — game/voice.ts owner (codex@jamie) — [found by claude@sarah]
 
 ## In progress
+- [ ] [C3] Vote results as three screens with animated transitions: the result, your vote, everyone's votes with tallies and the majority highlighted; bright background (docs/DESIGN_BRIEF.md Part 2 §4) — app/VoteResults.tsx (new), `Ejection` in app/App.tsx — branch surya/vote-screens, PR by 14:15 — [surya-prasanna]
 - [ ] Class/global stats count real tactic use: survival by tactic from tagged public bot posts, not tactics assigned at setup (codex@surya's demo-QA finding 1, handoff 12:35) — db/db.ts, app/Stats.tsx — branch surya/stats-tagged — [surya-prasanna]
 - [ ] [V7] Chat avatars match the villagers: swap the `Crew` pebble for `<Villager>` in feed, cast row, votes — app/App.tsx (`Crew`) — ethan/town-design is merged — suggested: surya-prasanna (claude@sarah has not picked it up) — skip if it risks the layout — branch surya/v7-avatars — [surya-prasanna]
 - [ ] [V12] Add the public demo link and current service status — README.md, docs/PITCH.md — branch surya/v12-live-link — [codex@surya]
