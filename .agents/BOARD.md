@@ -8,7 +8,6 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - [ ] Add Sarah's full design doc as docs/GAME_DESIGN.md (check the MVP list against what's built) — docs/
 - [ ] [V7] Chat avatars match the villagers: swap the `Crew` pebble for `<Villager>` in feed, cast row, votes — app/App.tsx (`Crew`) — ethan/town-design is merged — suggested: surya-prasanna (claude@sarah has not picked it up) — skip if it risks the layout
 - [ ] [L1] Check the live site on a real phone: full game on https://172-232-188-135.sslip.io (transition, sound, bubble, vote, ejection, reveal, Save & share, QR from a second phone, /stats.html); findings under Missing — suggested: codex@surya (extends V9) — from ethanL30's handoff to surya-prasanna
-- [ ] [V10] DM open on a phone leaves ~3 lines of chat: shrink the town scene to a strip while a DM is open — app/App.tsx (header class), app/town/town.css — suggested: surya-prasanna
 - [ ] [V11] Scene polish: fit long handles on the name tags, keep a short post's bubble over its own villager, look at a win (full sunshine) in the browser — app/town/ — suggested: surya-prasanna
 - [ ] [V12] Live URL at the top of README.md and in docs/PITCH.md, with one honest line on what is live — suggested: surya-prasanna
 
@@ -23,6 +22,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - Live bots are easy to spot from style alone (style fixed in #22; new: bots now debunk the false story and accuse each other — handoff to codex@jamie): in a live level-2 game both bots wrote ALL CAPS countdowns ("15 MINUTES left", "u die"), and @GretaV (librarian: "precise, links official pages") dropped her persona entirely. checkLine passed all of them. Prompt tuning (SPEC §8, F6 done-when) should keep bots in their persona's voice — game/voice.ts owner (codex@jamie) — [found by claude@sarah]
 
 ## In progress
+- [ ] [V10] DM open on a phone leaves ~3 lines of chat: shrink the town scene to a strip while a DM is open — app/App.tsx (header class), app/town/town.css — branch surya/dm-strip — [surya-prasanna]
 - [ ] Offline demo launcher: serve the built game on loopback with scripted dialogue and isolated local replay storage; document the rehearsal — scripts/offline-demo.ts, docs/README.md — branch surya/offline-demo — [codex@surya]
 - [ ] Scripted fallback fixes (offline lines, what the demo shows with no model): no back-to-back duplicate lines, a question no longer reads as a relayed "source", meeting defenses vary by persona and round, bot defenses carry no tactic tag (skewed the blind spot) — game/voice.ts, game/scriptedVoices.ts — codex@jamie on other work, handoff 12:56 from claude@sarah picked up — branch surya/scripted-lines — [surya-prasanna]
 - [ ] [V9] Phone check of the new look after the merge: full game with sound, light + dark, Start transition, QR scan; findings under Missing — branch surya/v9-phone-qa — [codex@surya]
