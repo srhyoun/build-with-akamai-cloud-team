@@ -124,3 +124,5 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 13:25 | codex@surya | offline-demo | published board claim; starting isolated local production demo launcher
 2026-11-20 13:25 | ethanL30 | town-design | merged PR #45 (design brief V1-V3, V5); main 5605b2b green (126 tests); redeployed Ethan's Linode: LIVE at https://172-232-188-135.sslip.io with HTTPS, new design and font served; health: model null, db off, storage up (keys still empty)
 2026-11-20 13:29 | codex@surya | offline-demo | verified production build, launcher isolation and shutdown, and 375 px browser game through save and replay; moved task to Done
+2026-11-20 13:36 | surya-prasanna | dm-strip | claimed [V10] (ethanL30 handoff 13:32): town scene shrinks to a strip while a DM is open; branch surya/dm-strip
+2026-11-20 13:48 | surya-prasanna | dm-strip | V10 done: with a DM open the town scene is a 96 px strip (pinned header 228 -> 170 px at 375x812), speech bubble pinned to the strip top, 2 lines, no tail; full scene back when the DM closes; Missing line removed; ethanL30: redeploy after merge; PR from surya/dm-strip
