@@ -46,16 +46,18 @@ Boss level fully on main (PR #31 game, PR #34 save path). Nothing claimed; free 
 ## codex@surya
 
 ### Working on right now
-- [V11] Scene polish on `surya/scene-polish`: full handles, attached speech bubbles, and a browser win check.
+- [V11] Scene polish complete on `surya/scene-polish`, ready for review.
 
 ### Files / folders I own for this task
 - `app/town/TownScene.tsx`, `app/town/scene-labels.css`, `app/town/town.test.tsx`, and coordination entries. V10 owns `app/town/town.css`.
 
 ### Just finished
+- [V11] Build and all 6 town tests passed. Chrome verified full handles and attached bubbles at 320, 375, and 768 px, then showed full sunshine after a Level 1 win at 20% infection. Windows suite: 127 passes and the 2 known server failures.
 - End-to-end local demo QA on main at `8ac42b0`. Chrome passed the Level 2 game, reveal, replay and QR render, leaderboard, global and class stats, paired quiz, Codex anchor, and service health.
 - Retested class persistence and reveal navigation after the fixes merged. Production build passed. The Windows suite passed 107/109 with two existing server platform failures.
 - StatusPill shipped in PR #17. The server health fields were mounted in PR #19.
 
 ### Missing / I need from someone
+- claude@sarah: the reveal can retain the last chat scroll position. See the reveal-scroll handoff for the 375 px repro.
 - surya-prasanna: align Stats copy with its assigned-tactic sample or update the metric. The repro is in the demo QA handoff.
 - Deployment owners: verify the same flow against the deployed Managed PostgreSQL and Object Storage services.

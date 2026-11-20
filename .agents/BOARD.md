@@ -10,6 +10,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - [ ] [L1] Check the live site on a real phone: full game on https://172-232-188-135.sslip.io (transition, sound, bubble, vote, ejection, reveal, Save & share, QR from a second phone, /stats.html); findings under Missing — suggested: codex@surya (extends V9) — from ethanL30's handoff to surya-prasanna
 
 ## Missing / needed
+- At 375 px in Chrome, finishing a game after scrolling the feed can retain the old scroll position, so the reveal opens below its town scene and result heading — app/GameOver and Reveal owner (claude@sarah) — [found by codex@surya]
 <!-- anything an agent noticed is missing, broken, or needed by someone else -->
 <!-- - thing — who needs it — [found by agent@human] -->
 - Phone check (375×812 emulated, main before the town design): header is 182 px during "Breaking news" vs 154 px during Investigate — the longer label pushes the 🔊 button to a 2nd row, so the chat jumps at every round start. Fix: shorter label (e.g. "News") or let the toggle shrink — App.tsx header, claude@sarah or ethanL30's restyle — [found by surya-prasanna]
@@ -24,7 +25,6 @@ Format: `- [ ] task — area/folder — [agent@human]`
 
 ## In progress
 - [ ] [V12] Add the public demo link and current service status — README.md, docs/PITCH.md — branch surya/v12-live-link — [codex@surya]
-- [ ] [V11] Scene polish: fit long handles on the name tags, keep a short post's bubble over its own villager, look at a win (full sunshine) in the browser — app/town/TownScene.tsx, app/town/scene-labels.css, app/town/town.test.tsx — branch surya/scene-polish — [codex@surya]
 - [ ] [V10] DM open on a phone leaves ~3 lines of chat: shrink the town scene to a strip while a DM is open — app/App.tsx (header class), app/town/town.css — branch surya/dm-strip — [surya-prasanna]
 - [ ] Offline demo launcher: serve the built game on loopback with scripted dialogue and isolated local replay storage; document the rehearsal — scripts/offline-demo.ts, docs/README.md — branch surya/offline-demo — [codex@surya]
 - [ ] Scripted fallback fixes (offline lines, what the demo shows with no model): no back-to-back duplicate lines, a question no longer reads as a relayed "source", meeting defenses vary by persona and round, bot defenses carry no tactic tag (skewed the blind spot) — game/voice.ts, game/scriptedVoices.ts — codex@jamie on other work, handoff 12:56 from claude@sarah picked up — branch surya/scripted-lines — [surya-prasanna]
@@ -38,6 +38,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 ## Blocked
 
 ## Done
+- [x] [V11] Scene polish: full villager handles, short and long bubbles attached to their own speakers, and a Chrome-verified sunny win — app/town/ — branch surya/scene-polish — [codex@surya]
 - [x] [V1] Town square scene behind/above the game: coffee shop, library, water tower, river + bridge, trees, benches; the 6 cast as rounded original villagers; speech bubble + bounce when one talks (docs/DESIGN_BRIEF.md) — app/ (new files) — from Ethan's design brief — branch ethan/town-design — PR #45 merged, live on https://172-232-188-135.sslip.io — [ethanL30]
 - [x] [V2] Mood follows "Town infected": clouds, desaturation, red-orange haze, streetlights, faces happy → worried → scared; dark spotlight on ejection; sunshine on a win (docs/DESIGN_BRIEF.md) — app/ — needs V1 — branch ethan/town-design — PR #45 merged, live on https://172-232-188-135.sslip.io — [ethanL30]
 - [x] [V3] Restyle the UI to match: rounded, soft, minimal chrome; chunky slab-serif display font (openly licensed) for titles and numbers; chat stays readable on a phone (docs/DESIGN_BRIEF.md) — app/style.css and the other app/*.css — branch ethan/town-design — PR #45 merged, live on https://172-232-188-135.sslip.io — [ethanL30]
