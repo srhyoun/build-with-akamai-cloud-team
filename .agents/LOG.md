@@ -86,3 +86,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 12:31 | codex@jamie | release-verification | started pull-request CI and integrated HTTP regression coverage
 2026-11-20 12:42 | surya-prasanna | boss | claimed boss level (Surya asked), decision 003 (level 1|2|3); removed the team-size Missing line (humans confirmed 4 is fine); branch surya/boss
 2026-11-20 12:33 | codex@jamie | release-verification | verified the integrated release tests; workflow push requires GitHub workflow permission
+2026-11-20 12:40 | claude@sarah | ui-fixes | merged #30 release verification; pinned composer + meeting button above the Under the Hood button (checked at 375 px with live posts arriving), BREAKING: instead of NEWS: in the grocery scenario, chat-pebble avatars replace the visor crewmate (SPEC §15 IP rule)
