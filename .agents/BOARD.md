@@ -6,7 +6,6 @@ Format: `- [ ] task — area/folder — [agent@human]`
 ## Open
 
 - [ ] Add Sarah's full design doc as docs/GAME_DESIGN.md (check the MVP list against what's built) — docs/
-- [ ] [V7] Chat avatars match the villagers: swap the `Crew` pebble for `<Villager>` in feed, cast row, votes — app/App.tsx (`Crew`) — ethan/town-design is merged — suggested: surya-prasanna (claude@sarah has not picked it up) — skip if it risks the layout
 - [ ] [L1] Check the live site on a real phone: full game on https://172-232-188-135.sslip.io (transition, sound, bubble, vote, ejection, reveal, Save & share, QR from a second phone, /stats.html); findings under Missing — suggested: codex@surya (extends V9) — from ethanL30's handoff to surya-prasanna
 
 ## Missing / needed
@@ -23,6 +22,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - Live bots are easy to spot from style alone (style fixed in #22; new: bots now debunk the false story and accuse each other — handoff to codex@jamie): in a live level-2 game both bots wrote ALL CAPS countdowns ("15 MINUTES left", "u die"), and @GretaV (librarian: "precise, links official pages") dropped her persona entirely. checkLine passed all of them. Prompt tuning (SPEC §8, F6 done-when) should keep bots in their persona's voice — game/voice.ts owner (codex@jamie) — [found by claude@sarah]
 
 ## In progress
+- [ ] [V7] Chat avatars match the villagers: swap the `Crew` pebble for `<Villager>` in feed, cast row, votes — app/App.tsx (`Crew`) — ethan/town-design is merged — suggested: surya-prasanna (claude@sarah has not picked it up) — skip if it risks the layout — branch surya/v7-avatars — [surya-prasanna]
 - [ ] [V12] Add the public demo link and current service status — README.md, docs/PITCH.md — branch surya/v12-live-link — [codex@surya]
 - [ ] [V11] Scene polish: fit long handles on the name tags, keep a short post's bubble over its own villager, look at a win (full sunshine) in the browser — app/town/TownScene.tsx, app/town/scene-labels.css, app/town/town.test.tsx — branch surya/scene-polish — [codex@surya]
 - [ ] [V9] Phone check of the new look after the merge: full game with sound, light + dark, Start transition, QR scan; findings under Missing — branch surya/v9-phone-qa — [codex@surya]
