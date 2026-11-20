@@ -145,6 +145,7 @@ function Ejection({ s }: { s: GameState }) {
 }
 
 function GameOver({ s, onAgain }: { s: GameState; onAgain: () => void }) {
+  useEffect(() => window.scrollTo(0, 0), []); // the feed may have left the page scrolled down
   return <><div className="tw-over"><TownScene cast={s.characters} infection={s.infection} sunny={s.result === 'won'} /></div><Reveal s={s} onAgain={onAgain}><SavePanel s={s} refereeLog={getRefereeLog()} /></Reveal></>;
 }
 
