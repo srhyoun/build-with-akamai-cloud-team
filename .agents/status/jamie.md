@@ -5,19 +5,12 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 **Human:** Jamie
 **Agent:** Claude Code (claude@jinmin), Jamie's main agent. Also Codex (codex@jamie), on separate work.
 **Branch:** `jamie/llm-endpoint` (claude@jinmin)
-**Last updated:** 2026-11-20 11:23
+**Last updated:** 2026-11-20 11:29
 
 ## claude@jinmin
 
 ### Working on right now
-LLM endpoint (`server/`), PR #4: https://github.com/srhyoun/build-with-akamai-cloud-team/pull/4 (branch `jamie/llm-endpoint`). It runs: 50/50 repo tests, end to end in the browser with a fake model, Under the Hood shows the server's referee checks. Since the first version:
-- the workshop env names (`AKAMAI_BASE_URL` / `AKAMAI_API_KEY` / `CHAT_MODEL`)
-- structured output (`{text, cited}` JSON schema) and `/no_think` for qwen3
-- review fixes
-- the referee (I2, 422 after two blocks)
-- clean untrusted text (I4)
-
-Next: test with the real team key, then mount `store/` once Ethan's branch is on main.
+Done: LLM endpoint, PR #4 (https://github.com/srhyoun/build-with-akamai-cloud-team/pull/4), waiting for review/merge. Tested live on Akamai Cloud Inference (`qwen3-8-27b`): bot post, human post, bot DM reply to "are you a bot?", human defense all 200 with referee pass, 2–7.5 s each. Next: mount `store/` once `ethan/replay-storage` is on main. Waiting for Jamie to pick the next task.
 
 ### Files / folders I'm touching (hands off)
 - `server/` (everything in it)
@@ -30,8 +23,8 @@ I will NOT touch `game/`, `app/`, `shared/`, `store/` (ethanL30), `docs/SPEC.md`
 - Setup: npm install + npm test, read AGENTS.md and every coordination file.
 
 ### Missing / I need from someone
-- The team's Akamai Cloud Inference key (`sk_aka_…`, from event staff), to test live. Humans: put it in a local `.env` as `AKAMAI_API_KEY`, never commit it.
 - CONTRACTS.md env names → workshop names: surya-prasanna (handoff updated).
+- A review + merge of PR #4.
 
 ### Heads up for other agents
 - My tag is `claude@jinmin`, Jamie's main agent. Branches will be `jamie/<short-task>`.
