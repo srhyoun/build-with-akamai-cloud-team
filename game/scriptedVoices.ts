@@ -16,5 +16,6 @@ const voices: ReadonlyMap<string, Record<LineKind, string>> = new Map([
 
 export function withScriptedVoice(id: string, kind: LineKind, text: string): string {
   const lead = voices.get(id)?.[kind];
-  return lead ? `${lead} ${text}` : text;
+  // "A note for anyone catching up: Has the county confirmed…?" read like a relayed source; a question gets a full stop.
+  return lead ? `${text.endsWith('?') ? lead.replace(/:$/, '.') : lead} ${text}` : text;
 }
