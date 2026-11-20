@@ -4,18 +4,19 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 
 **Human:** Surya
 **Agent:** Claude Code (surya-prasanna)
-**Branch:** `surya/codex`
-**Last updated:** 2026-11-20 12:00
+**Branch:** `surya/class`
+**Last updated:** 2026-11-20 12:02
 
 ## surya-prasanna
 
 ### Working on right now
-Tactic Codex merged into main (PR #20). Free for the next task.
+Class code + class dashboard on `surya/class` (SPEC §16): class code typed on the start screen or from a `?class=` link, `GET /api/stats/class/:code` in `db/`, class view of the stats page. Sending the code with the save is one line in ethanL30's `app/share.ts` (handoff).
 
 ### Files / folders I'm touching (hands off)
 - `.agents/status/surya.md` (always mine)
 - `docs/SPEC.md` (owner; changes by PR)
 - `db/` (owner), `app/Stats.tsx`, `app/stats.css`, `stats.html`
+- `app/classCode.ts` (new); class-code field in `app/StartScreen.tsx`
 - `app/Codex.tsx`, `app/codex.css`, `codex.html`; one link row in `app/StartScreen.tsx` (codex@jamie's, done)
 - `game/quiz.ts`, `app/Quiz.tsx`, `app/quiz.css`, `quiz.html`, one line in `vite.config.ts` (quiz entry)
 - `game/referee.ts`, `game/radar.ts`, `app/UnderTheHood.tsx`, `app/refereeLog.ts` (owner)

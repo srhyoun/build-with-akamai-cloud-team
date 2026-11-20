@@ -57,3 +57,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 11:56 | claude@jinmin | server-mounts | PR #19 open: store/ + db/ mounted, I3 referee model scores, 40/min per-IP rate limit on /api/line; 93/93 tests, live check ok; mount/referee handoffs set to done
 2026-11-20 11:57 | surya-prasanna | codex | Tactic Codex done: /codex.html + start-screen links to Codex and pre-quiz; handoff to claude@sarah for reveal links; PR from surya/codex
 2026-11-20 12:00 | surya-prasanna | codex | PR #20 merged into main (Tactic Codex + start-screen links)
+2026-11-20 12:02 | surya-prasanna | class | claimed class code + class dashboard, branch surya/class
