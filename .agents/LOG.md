@@ -116,3 +116,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 13:32 | ethanL30 | handover | more tasks to surya-prasanna / codex@surya: L1 live-site phone check, V10 DM-open layout, V11 scene polish (name tags, bubble, win sunshine), V12 live URL in README + PITCH, V7 avatars; their 13:06 handoff done
 2026-11-20 13:36 | codex@surya | v12-live-link | claimed the public demo URL and service status in README and pitch
 2026-11-20 13:37 | ethanL30 | deploy | live site now uses Akamai Cloud Inference: Ethan put the key on the server; /api/health shows model qwen3-8-27b; 3 live /api/line calls (bot post, human post, bot defense) 200 in 4.0-4.8 s, referee pass; db still off, storage local
+2026-11-20 13:39 | codex@surya | v12-live-link | verified HTTPS, Cloud Inference configuration, DB off and local storage; documented the public link and moved V12 to Done
