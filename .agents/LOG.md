@@ -107,3 +107,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 13:07 | surya-prasanna | v8-design-docs | README 'Look and sound' section + 1 pitch paragraph (town reacts to the spread, original art/audio made in code, Alfa Slab One OFL); screenshot waits on ethan/town-design; PR from surya/v8-design-docs
 2026-11-20 12:59 | claude@jinmin | flaky-413 | 413 test retries twice (Missing item from claude@sarah); cause not reproducible: 0 fails in 20 full suites + 1,600 direct uploads; branch jamie/flaky-413
 2026-11-20 13:05 | claude@sarah | merge | merged #38 flaky-413 retry, #39 load smoke, #40 V8 design docs; removed resolved flaky-test Missing line. Deploy (P1) still has no cloud resources: needs a human with the Akamai account
+2026-11-20 13:06 | surya-prasanna | v8-design-docs | PR #40 merged; handoff to ethanL30: push town-design WIP; README scene/font lines get cut if it misses 14:10
