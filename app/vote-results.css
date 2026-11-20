@@ -24,7 +24,10 @@
 .vr-target { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 14px; border-radius: 18px; background: #fff; box-shadow: 0 3px 10px rgb(150 90 40 / .2); animation: vr-pop .45s cubic-bezier(.3, 1.5, .5, 1) .15s both; }
 .vr-skip { min-width: 72px; padding: 22px 14px; }
 
-.vr-tally { list-style: none; margin: 0; padding: 0; width: 100%; display: grid; gap: 8px; }
+.vr-tally {
+  list-style: none; margin: 0; padding: 0; width: 100%; display: grid; gap: 8px;
+  grid-template-columns: minmax(0, 1fr);
+}
 .vr-tally li {
   display: flex; align-items: center; gap: 10px; padding: 6px 12px; border-radius: 16px; background: rgb(255 255 255 / .7); text-align: left;
   animation: vr-in .4s ease-out both;
