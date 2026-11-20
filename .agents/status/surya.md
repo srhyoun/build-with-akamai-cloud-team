@@ -5,12 +5,12 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 **Human:** Surya
 **Agent:** Claude Code (surya-prasanna)
 **Branch:** `surya/class`
-**Last updated:** 2026-11-20 12:02
+**Last updated:** 2026-11-20 12:04
 
 ## surya-prasanna
 
 ### Working on right now
-Class code + class dashboard on `surya/class` (SPEC §16): class code typed on the start screen or from a `?class=` link, `GET /api/stats/class/:code` in `db/`, class view of the stats page. Sending the code with the save is one line in ethanL30's `app/share.ts` (handoff).
+Class dashboard done, PR open from `surya/class`, waiting for Surya's OK to merge.
 
 ### Files / folders I'm touching (hands off)
 - `.agents/status/surya.md` (always mine)
@@ -22,6 +22,7 @@ Class code + class dashboard on `surya/class` (SPEC §16): class code typed on t
 - `game/referee.ts`, `game/radar.ts`, `app/UnderTheHood.tsx`, `app/refereeLog.ts` (owner)
 
 ### Just finished
+- Class dashboard: `app/classCode.ts` (code from the start screen or a `/?class=` link, kept in localStorage), class-code field on the start screen, `GET /api/stats/class/:code` (same stats query filtered by class + avg score + players), `/stats.html?class=7B`. 4 new tests; browser-checked at 375 px with 5 simulated class games.
 - Tactic Codex: `/codex.html` (`app/Codex.tsx`), six tactics with example, how to spot it, counter tool and what it shows; `#<tacticId>` anchors; links to Codex + pre-quiz on the start screen. Render test; browser-checked at 375 px.
 - P7 quiz: `game/quiz.ts` (6 fictional items, 3 bot tactics + 3 humans, `scoreQuiz`), `quiz_responses` table, `POST /api/quiz` (strict validation, server-side scoring, first response per session + phase counts) and `GET /api/quiz/results` (pre/post accuracy with n, paired change) in `handleDb`, page `/quiz.html?phase=pre|post` and `?view=results`. 7 new tests (SQL on PGlite, every item passes `checkLine`). Browser-checked at 375 px, light + dark, on a throwaway PGlite server.
 - P2 + P4: `db/db.ts` (`saveGame` in one atomic SQL statement, `globalStats` cached 5 s, `dbHealth`, `handleDb` for GET /api/stats/global), `db/schema.sql` (auto-applied), `/stats.html` page. 8 tests run the real SQL on PGlite (Postgres in WASM). Checked the page in the browser with 14 simulated games. Deps: `pg`; dev: `@electric-sql/pglite`, `@types/pg`.
@@ -31,11 +32,11 @@ Class code + class dashboard on `surya/class` (SPEC §16): class code typed on t
 - Setup: npm install + npm test (10/10 pass), read AGENTS.md and every coordination file.
 
 ### Missing / I need from someone
+- ethanL30: one line in `app/share.ts` to send `classCode` (handoff 20261120-1202). Until then class games save without a code.
 - claude@sarah: reveal links to `/quiz.html?phase=post` and `/codex.html#<tactic>` (handoff 20261120-1156). Start-screen links are in `surya/codex`.
 - Humans: run the quiz on 5–10 people once the DB is live; `/quiz.html?view=results` shows the real n.
 - claude@jinmin: mount `handleDb`, register `hooks.saveGame = saveGame`, add `db: await dbHealth()` to /api/health (handoff 20261120-1235).
 - Humans: create the Managed PostgreSQL cluster, allow the Linode's IP, put PGHOST/PGPORT/PGUSER/PGPASSWORD/PGDATABASE in `.env` on the Linode.
-- Whoever owns `game/voice.ts`: tactic tags on model lines (BOARD Missing).
 
 ### Heads up for other agents
 - My tag is `surya-prasanna`. Branches will be `surya/<short-task>`.

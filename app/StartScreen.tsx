@@ -1,8 +1,11 @@
+import { useState } from 'react';
 import { BOTS, TOKENS_PER_ROUND } from '../game/content.ts';
 import type { GameState } from '../shared/types.ts';
+import { initialClassCode, setClassCode } from './classCode.ts';
 import './start-screen.css';
 
 export function StartScreen({ onStart }: { onStart: (level: GameState['level']) => void }) {
+  const [classCode, setCode] = useState(initialClassCode);
   return (
     <main className="start-screen" aria-labelledby="start-title">
       <header>
@@ -17,6 +20,13 @@ export function StartScreen({ onStart }: { onStart: (level: GameState['level']) 
           <li>Spend {TOKENS_PER_ROUND} Fact-Check Tokens each round on Account Age, Source Check, or Posting Pattern.</li>
           <li>Call an emergency meeting and vote to eject a suspect.</li>
         </ol>
+      </section>
+
+      <section className="start-class" aria-labelledby="class-title">
+        <label id="class-title" htmlFor="class-code">Class code <small>(optional, from your teacher)</small></label>
+        <input id="class-code" value={classCode} maxLength={24} autoComplete="off" autoCapitalize="characters" placeholder="e.g. 7B"
+               onChange={e => { setCode(e.target.value.toUpperCase()); setClassCode(e.target.value); }} />
+        {classCode.trim() && <a href={`/stats.html?class=${encodeURIComponent(classCode.trim())}`}>Class results for {classCode.trim()} →</a>}
       </section>
 
       <section aria-labelledby="level-title">

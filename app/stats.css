@@ -22,3 +22,10 @@ main.stats { max-width: 1040px; padding: 32px 16px 48px; }
 
 .stats-note { color: var(--muted); font-size: 1.05rem; }
 .stats footer { margin-top: 36px; color: var(--muted); font-size: .9rem; }
+
+.stats section + section { margin-top: 28px; }
+.stats-players { margin: 0; padding: 0 0 0 1.6em; display: flex; flex-direction: column; gap: 6px; font-size: 1.05rem; }
+.stats-players li { padding: 4px 0; border-bottom: 1px solid var(--line); }
+.stats-players li > span:first-child { font-weight: 600; }
+.stats-players li > span + span { color: var(--muted); margin-left: 8px; font-size: .9rem; }
+.stats-players b { float: right; font-variant-numeric: tabular-nums; }
