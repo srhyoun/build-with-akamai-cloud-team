@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { BOTS, PERSONAS } from '../game/content.ts';
 import type { GameState } from '../shared/types.ts';
 import { initialClassCode, setClassCode } from './classCode.ts';
+import { Icon } from './Icon.tsx';
 import { TownScene } from './town/TownScene.tsx';
 import './start-screen.css';
 
@@ -51,9 +52,9 @@ export function StartScreen({ onStart }: { onStart: (level: GameState['level']) 
       <footer className="start-tutorial" aria-labelledby="tutorial-title">
         <h2 id="tutorial-title">How to play</h2>
         <ol>
-          <li><span aria-hidden="true">👀</span><b>Read</b> the town chat</li>
-          <li><span aria-hidden="true">🔍</span><b>Check</b> who you doubt</li>
-          <li><span aria-hidden="true">📣</span><b>Vote</b> the bots out</li>
+          <li><Icon name="eye" size={30} /><b>Read</b> the town chat</li>
+          <li><Icon name="search" size={30} /><b>Check</b> who you doubt</li>
+          <li><Icon name="vote" size={30} /><b>Vote</b> the bots out</li>
         </ol>
         <nav className="start-links" aria-label="Learn more">
           <a href="/howto.html">Full guide</a>

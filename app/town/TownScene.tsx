@@ -5,6 +5,7 @@ import { Villager } from './Villager.tsx';
 import { Walker } from './Walker.tsx';
 import './town.css';
 import './scene-labels.css';
+import './scene-pick.css';
 
 export interface SceneVillager { id: string; handle: string; color: string; ejected?: boolean }
 
@@ -118,9 +119,10 @@ const art = (
   </svg>
 );
 
-export function TownScene({ cast, infection, speaking, view = 'ground', sunny, walk, children }: {
+export function TownScene({ cast, infection, speaking, view = 'ground', sunny, walk, onPick, selected, children }: {
   cast: SceneVillager[]; infection: number; speaking?: { id: string; text: string } | null;
   view?: 'ground' | 'aerial'; sunny?: boolean; walk?: boolean; children?: ReactNode;
+  onPick?: (id: string) => void; selected?: string | null; // tap a villager (pointer shortcut; the cast buttons stay the keyboard path)
 }) {
   const level = sunny ? 0 : clamp(infection, 0, 100);
   const mood = moodOf(level);
@@ -145,7 +147,7 @@ export function TownScene({ cast, infection, speaking, view = 'ground', sunny, w
             return c.ejected
               ? <span key={c.id} className="tw-spot tw-gone" style={{ left: `${x}%`, bottom: `${y}%` }} />
               : (
-                <div key={c.id} className={`tw-spot${i === talker ? ' tw-talking' : ''}`} style={{ left: `${x}%`, bottom: `${y}%`, zIndex: y > 10 ? 1 : 2, animationDelay: `${i * -0.37}s` }}>
+                <div key={c.id} className={`tw-spot${i === talker ? ' tw-talking' : ''}${onPick ? ' tw-pickable' : ''}${c.id === selected ? ' tw-picked' : ''}`} onClick={onPick && (() => onPick(c.id))} style={{ left: `${x}%`, bottom: `${y}%`, zIndex: y > 10 ? 1 : 2, animationDelay: `${i * -0.37}s` }}>
                   <span className="tw-fig"><Villager color={c.color} mood={mood} talking={i === talker} size={46} /></span>
                   <span className="tw-name" data-edge={sceneEdge(x, 15)}>{c.handle}</span>
                 </div>

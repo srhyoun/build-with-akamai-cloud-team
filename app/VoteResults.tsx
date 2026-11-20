@@ -46,7 +46,7 @@ export function VoteResults({ s, start = 0 }: { s: GameState; start?: number }) 
             </>
           ) : (
             <>
-              <div className="vr-empty" aria-hidden="true">🤷</div>
+              <div className="vr-empty" aria-hidden="true">—</div>
               <h2>Nobody was ejected.</h2>
             </>
           )}

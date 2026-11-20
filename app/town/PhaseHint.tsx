@@ -2,10 +2,10 @@
 import type { GameState } from '../../shared/types.ts';
 
 const HINT: Partial<Record<GameState['phase'], (s: GameState) => string>> = {
-  event: () => '📰 News just broke. Read what the town says.',
+  event: () => 'News just broke. Read what the town says.',
   discussion: s => s.tokens > 0
-    ? `💬 Tap a villager to ask them. 🔍 ${s.tokens} check${s.tokens === 1 ? '' : 's'} left. 🚨 Call a meeting to vote.`
-    : '💬 Tap a villager to ask them. 🚨 Call a meeting to vote.',
+    ? `Tap a villager to ask them. ${s.tokens} check${s.tokens === 1 ? '' : 's'} left. Call a meeting to vote.`
+    : 'Tap a villager to ask them. Call a meeting to vote.',
 };
 
 export function PhaseHint({ s }: { s: GameState }) {

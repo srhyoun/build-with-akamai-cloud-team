@@ -9,6 +9,7 @@ import { UnderTheHood } from './UnderTheHood.tsx';
 import { StatusPill } from './StatusPill.tsx';
 import { Reveal } from './Reveal.tsx';
 import { TownMap } from './TownMap.tsx';
+import { Icon } from './Icon.tsx';
 import { PhaseHint } from './town/PhaseHint.tsx';
 import { SavePanel, ShareView } from './Share.tsx';
 import { replayIdFromUrl } from './share.ts';
@@ -48,10 +49,10 @@ function Game({ onAgain }: { onAgain: () => void }) {
   return (
     <main>
       <header className={dmWith ? 'bar dm' : 'bar'}>
-        <TownScene cast={s.characters} infection={s.infection} speaking={speaking} walk={s.phase === 'event'} />
+        <TownScene cast={s.characters} infection={s.infection} speaking={speaking} walk={s.phase === 'event'} selected={dmWith} onPick={id => setDmWith(dmWith === id ? null : id)} />
         <strong>Round {s.round}/{ROUNDS}</strong>
         <span>{PHASE_NAMES[s.phase]} · {Math.floor(secs / 60)}:{String(secs % 60).padStart(2, '0')}</span>
-        <span title="Fact-Check Tokens left this round">🔍 {s.tokens}</span>
+        <span title="Fact-Check Tokens left this round" aria-label={`${s.tokens} Fact-Check Tokens left`}><Icon name="search" /> {s.tokens}</span>
         <SoundToggle />
         <PhaseHint s={s} />
       </header>
@@ -69,7 +70,7 @@ function Game({ onAgain }: { onAgain: () => void }) {
         <section className="panel" aria-label={`DM with ${who(dmWith)!.handle}`}>
           <h2>DM {who(dmWith)!.handle} <small>{who(dmWith)!.bio}</small></h2>
           {(['account_age', 'posting_pattern'] as const).map(t => (
-            <button key={t} disabled={!canInvestigate || who(dmWith)!.ejected} onClick={() => dispatch({ type: 'use_tool', tool: t, target: dmWith })}>🔍 {TOOL_NAMES[t]}</button>
+            <button key={t} disabled={!canInvestigate || who(dmWith)!.ejected} onClick={() => dispatch({ type: 'use_tool', tool: t, target: dmWith })}>{TOOL_NAMES[t]}</button>
           ))}
           <Clues s={s} target={dmWith} />
           <Feed s={s} posts={s.feed.filter(p => p.to === dmWith)} />
@@ -81,13 +82,13 @@ function Game({ onAgain }: { onAgain: () => void }) {
         <Feed s={s} posts={publicFeed} onCheck={canInvestigate ? id => dispatch({ type: 'use_tool', tool: 'source_check', target: id }) : undefined} />
         <div className="actions">
           <Composer placeholder="Post to the town chat…" onSend={text => dispatch({ type: 'post', text })} />
-          {s.phase === 'discussion' && <button className="meeting" onClick={() => dispatch({ type: 'call_meeting' })}>🚨 Call emergency meeting</button>}
+          {s.phase === 'discussion' && <button className="meeting" onClick={() => dispatch({ type: 'call_meeting' })}>Call emergency meeting</button>}
         </div>
       </section>
 
       {s.phase === 'meeting' && (
         <div className="overlay" role="dialog" aria-label="Emergency meeting">
-          <h2>🚨 Emergency meeting · {secs}s</h2>
+          <h2>Emergency meeting · {secs}s</h2>
           <Feed s={s} posts={publicFeed.filter(p => p.at >= s.phaseEndsAt - PHASE_MS.meeting)} />
           <p>Who's the bot?</p>
           <div className="votes">
@@ -116,9 +117,9 @@ function Feed({ s, posts, onCheck }: { s: GameState; posts: Post[]; onCheck?: (i
           <li key={p.id} className={p.author === 'news' ? 'news' : p.author === 'you' ? 'you' : ''}>
             {c && <Crew color={c.color} />}
             <div>
-              <b>{p.author === 'news' ? '📢 NEWS' : p.author === 'you' ? 'You' : c?.handle}</b> {p.text}
-              {clue && <p className="clue">🔍 {clue.text}</p>}
-              {onCheck && c && !c.ejected && !clue && <button className="link" onClick={() => onCheck(p.id)}>🔍 Source Check</button>}
+              <b>{p.author === 'news' ? 'NEWS' : p.author === 'you' ? 'You' : c?.handle}</b> {p.text}
+              {clue && <p className="clue">{clue.text}</p>}
+              {onCheck && c && !c.ejected && !clue && <button className="link" onClick={() => onCheck(p.id)}>Source Check</button>}
             </div>
           </li>
         );
@@ -129,7 +130,7 @@ function Feed({ s, posts, onCheck }: { s: GameState; posts: Post[]; onCheck?: (i
 }
 
 function Clues({ s, target }: { s: GameState; target: string }) {
-  return <>{s.clues.filter(k => k.target === target).map((k, i) => <p key={i} className="clue">🔍 {TOOL_NAMES[k.tool]}: {k.text}</p>)}</>;
+  return <>{s.clues.filter(k => k.target === target).map((k, i) => <p key={i} className="clue"><b>{TOOL_NAMES[k.tool]}:</b> {k.text}</p>)}</>;
 }
 
 function Composer({ placeholder, onSend }: { placeholder: string; onSend: (text: string) => void }) {

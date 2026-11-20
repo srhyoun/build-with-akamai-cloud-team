@@ -11,6 +11,6 @@ describe('Codex', () => {
       expect(html).toContain(t.name);
     }
     expect(html.match(/How to spot it/g)).toHaveLength(Object.keys(TACTICS).length);
-    expect(html.match(/🔍/g)).toHaveLength(Object.keys(TACTICS).length);
+    expect(html.match(/class="codex-tool"/g)).toHaveLength(Object.keys(TACTICS).length);
   });
 });

@@ -33,7 +33,7 @@
 .start-tutorial h2 { margin: 0; font-size: 1.05rem; }
 .start-tutorial ol { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 0; padding: 0; list-style: none; counter-reset: step; }
 .start-tutorial li { display: grid; justify-items: center; gap: 2px; font-size: .92rem; line-height: 1.25; }
-.start-tutorial li span { font-size: 1.7rem; line-height: 1.1; }
+.start-tutorial li svg { color: #7a4e2b; }
 .start-tutorial li b { display: block; }
 .start-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 14px; }
 .start-links a, .start-class a { min-height: 44px; display: inline-flex; align-items: center; padding: 0 8px; color: #2f6a1f; font-weight: 600; }
