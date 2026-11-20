@@ -1,0 +1,79 @@
+@import '@fontsource/alfa-slab-one/400.css';
+
+:root {
+  --display: 'Alfa Slab One', 'Rockwell', 'Roboto Slab', Georgia, serif;
+  --bg: #fdf3e0; --card: #fffaf2; --text: #2b2118; --muted: #5f4e3d; --line: #ead9bd;
+  --accent: #0c645e; --danger: #b3262e; --clue: #fff0c2; --news: #fde3dc;
+  --soft: 0 1px 2px rgba(92, 62, 20, .08), 0 6px 16px rgba(92, 62, 20, .08);
+  --title: #ffc233; --title-edge: #7a3d00;
+}
+/* district names sit on this fill in --text: --danger itself is too dark (light) / too pale (dusk) for them */
+.town-map .reached { fill: #ef8f86; }
+:root[data-mood='sunny'] { --bg: #fff4d9; }
+:root[data-mood='uneasy'] { --bg: #ebe7df; --line: #d9d3c8; }
+:root[data-mood='tense'] { --bg: #f0d4c0; --line: #dbb9a2; }
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1f1b2e; --card: #2a263c; --text: #f4ecdf; --muted: #bdb3c9; --line: #3f3955;
+    --accent: #ffc857; --danger: #ff9a94; --clue: #40351a; --news: #47222a;
+    --soft: 0 1px 2px rgba(0, 0, 0, .3), 0 6px 16px rgba(0, 0, 0, .25);
+    --title-edge: #5c2c00;
+  }
+  :root[data-mood='sunny'] { --bg: #231d33; }
+  :root[data-mood='uneasy'] { --bg: #1c1c22; --line: #3a3a44; }
+  :root[data-mood='tense'] { --bg: #24151a; --line: #4a2c30; }
+  /* the dusk danger is a light coral so it reads as text; anything filled with it needs dark ink */
+  .meeting, .rv-cast li.bot .rv-role, .uth-toggle span { color: #2b0d10; }
+  .town-map .reached { fill: #b3262e; }
+}
+
+h1, h2, .bar strong, .start-levels strong { font-family: var(--display); font-weight: 400; letter-spacing: .02em; }
+h2 small { font-family: system-ui, sans-serif; letter-spacing: 0; }
+h1 {
+  color: var(--title);
+  text-shadow:
+    -2px -2px 0 var(--title-edge), 2px -2px 0 var(--title-edge), -2px 2px 0 var(--title-edge), 2px 2px 0 var(--title-edge),
+    0 -2px 0 var(--title-edge), -2px 0 0 var(--title-edge), 2px 0 0 var(--title-edge),
+    -2px 5px 0 var(--title-edge), 0 5px 0 var(--title-edge), 2px 5px 0 var(--title-edge);
+}
+
+button { border-radius: 14px; }
+.avatar, .panel > button, .votes button, .composer button, .start-levels button { box-shadow: 0 2px 0 var(--line); }
+.panel > button, .votes button, .composer button { padding: 10px 14px; }
+.panel { border-color: transparent; border-radius: 18px; padding: 16px; box-shadow: var(--soft); }
+.feed { gap: 10px; }
+.feed li { border-color: transparent; border-radius: 18px; padding: 10px 14px; font-size: 1rem; color: var(--text); box-shadow: var(--soft); }
+.feed li.you { border-color: var(--accent); }
+.clue { border-radius: 12px; padding: 8px 10px; }
+.composer input { border-radius: 14px; padding: 12px 14px; }
+.meeting { border-radius: 999px; box-shadow: 0 3px 0 #7d151c; }
+.bar { padding: 14px 0 10px; }
+.bar { gap: 6px 8px; }
+.bar strong { font-size: .95rem; }
+/* The phase label gives way before the row wraps, so the sound button stays on this line. */
+.bar > strong + span { flex: 1 1 0; min-width: 0; font-size: .93rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.eject .eject-avatar { animation: none; } /* stay in the spotlight: the old fly-out left the stage empty */
+.eject { background: radial-gradient(ellipse at 50% 0, #2a2540, #0b0a12 70%); }
+.eject p { color: #cbc6da; }
+.eject-stage {
+  place-items: end center;
+  width: min(100%, 20rem);
+  min-height: 12rem;
+  padding-bottom: 28px;
+  border: 0;
+  border-radius: 24px;
+  background:
+    radial-gradient(ellipse 44% 22px at 50% calc(100% - 26px), rgba(255, 236, 170, .6), transparent 75%),
+    conic-gradient(from 160deg at 50% -12%, transparent 0deg, rgba(255, 240, 190, .26) 11deg, rgba(255, 240, 190, .26) 29deg, transparent 40deg),
+    radial-gradient(ellipse at 50% 0, #1c1930, #07060c 75%);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  body, .bar, .actions, .overlay { transition: background-color 1.5s ease; }
+  button { transition: transform .1s ease; }
+  button:active:not(:disabled) { transform: translateY(1px) scale(.98); }
+}
+
+/* The sound toggle (app/sound.ts) sits at the end of the header row. */
+.bar > .sound-toggle { margin-left: auto; width: 44px; min-height: 44px; padding: 0; border-radius: 50%; }

@@ -13,6 +13,9 @@ import { SavePanel, ShareView } from './Share.tsx';
 import { replayIdFromUrl } from './share.ts';
 import { getRefereeLog } from './refereeLog.ts';
 import { SoundToggle, useGameSounds } from './sound.ts';
+import { TownScene } from './town/TownScene.tsx';
+import { Villager } from './town/Villager.tsx';
+import { useSpeaking } from './town/useSpeaking.ts';
 
 export const TOOL_NAMES: Record<ToolId, string> = { account_age: 'Account Age', source_check: 'Source Check', posting_pattern: 'Posting Pattern' };
 const PHASE_NAMES = { event: 'Breaking news', discussion: 'Investigate', meeting: 'Emergency meeting', ejection: 'Ejection', over: 'Game over' };
@@ -31,6 +34,7 @@ function Game({ onAgain }: { onAgain: () => void }) {
   const [dmWith, setDmWith] = useState<string | null>(null);
   useEffect(() => startDirector(() => ref.current, dispatch), []);
   useGameSounds(game);
+  const speaking = useSpeaking(game);
 
   const s = game;
   const who = (id: string) => s.characters.find(c => c.id === id);
@@ -43,12 +47,13 @@ function Game({ onAgain }: { onAgain: () => void }) {
   return (
     <main>
       <header className="bar">
+        <TownScene cast={s.characters} infection={s.infection} speaking={speaking} />
         <strong>Round {s.round}/{ROUNDS}</strong>
         <span>{PHASE_NAMES[s.phase]} · {Math.floor(secs / 60)}:{String(secs % 60).padStart(2, '0')}</span>
         <span title="Fact-Check Tokens left this round">🔍 {s.tokens}</span>
         <SoundToggle />
-        <TownMap infection={s.infection} />
       </header>
+      <TownMap infection={s.infection} />
 
       <nav className="cast" aria-label="Characters">
         {s.characters.map(c => (
@@ -143,7 +148,7 @@ function Ejection({ s }: { s: GameState }) {
       {c ? (
         <>
           <div className="eject-stage" aria-hidden="true">
-            <div className="eject-avatar"><Crew color={c.color} big /></div>
+            <div className="eject-avatar"><Villager color={c.color} mood="tense" size={96} /></div>
           </div>
           <h2>{c.handle} was {e.wasBot ? 'a Bot' : 'not a Bot'}.</h2>
         </>
@@ -155,7 +160,7 @@ function Ejection({ s }: { s: GameState }) {
 }
 
 function GameOver({ s, onAgain }: { s: GameState; onAgain: () => void }) {
-  return <Reveal s={s} onAgain={onAgain}><SavePanel s={s} refereeLog={getRefereeLog()} /></Reveal>;
+  return <><div className="tw-over"><TownScene cast={s.characters} infection={s.infection} sunny={s.result === 'won'} /></div><Reveal s={s} onAgain={onAgain}><SavePanel s={s} refereeLog={getRefereeLog()} /></Reveal></>;
 }
 
 // Our own avatar: a colored "chat pebble" with dot eyes (SPEC §15: no crewmate shapes or visors).
