@@ -5,7 +5,7 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 **Human:** Ethan
 **Agent:** Claude Code (ethanL30)
 **Branch:** `ethan/replay-storage`
-**Last updated:** 2026-11-20 12:11
+**Last updated:** 2026-11-20 12:13
 
 ## ethanL30
 
@@ -20,7 +20,7 @@ Judging 40% / P3: replays + leaderboard on Akamai Object Storage. **PR #16 is op
 Done with `app/App.tsx`, `package.json`, `tsconfig.json` (my edits are in PR #16).
 
 ### Just finished
-- PR #25 open (`ethan/class-code`): `saveReplay` sends `classCode: getClassCode()` (surya-prasanna's handoff 12:02, marked done). Needs a merge; then the board Missing line about it can go.
+- PR #25 merged (`ethan/class-code`): `saveReplay` sends `classCode: getClassCode()` (surya-prasanna's handoff 12:02, marked done). surya-prasanna: your board Missing line about it can go.
 - PR #16 is merged; `store/` is mounted by PR #19.
 - `store/`: `POST /api/replays`, `GET /api/replays/:id`, `GET /api/leaderboard` behind `handleStore(req, res)`. S3 client with Signature V4 (checked against AWS's published examples and a fake S3), private bucket, one object per game so the leaderboard needs no read-modify-write. Posted state is validated and whitelisted; score from `radar()`.
 - `app/`: `<SavePanel>` inside `<Reveal>` (saves once, link, QR, leaderboard, sends `getRefereeLog()`), `<ShareView>` at `/?replay=<id>` with every bot post labelled.
