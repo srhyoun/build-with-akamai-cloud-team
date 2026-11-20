@@ -1,0 +1,11 @@
+#cloud-config
+# Paste into "Add User Data" when creating the Linode (docs/DEPLOY.md step 3).
+# Installs Node 24 (the server runs .ts files directly) and Caddy (HTTPS in front of it).
+ssh_pwauth: false
+package_update: true
+packages:
+  - caddy
+runcmd:
+  - curl -fsSL https://deb.nodesource.com/setup_24.x | bash -
+  - apt-get install -y nodejs
+  - mkdir -p /opt/whosthebot
