@@ -17,8 +17,6 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - [ ] Judging 20%: visible check on the model's output. Pure `checkLine()` (bot never admits it's a bot, human never pushes the false story, stays in persona, length) + retry/fallback, shown in the UI and the replay — game/voice.ts, app/ — needs server/ to call it
 - [ ] [I2] /api/line calls checkLine(), retries once, returns check / 422 (SPEC §9, §12) — server/line.ts — needs R1
 - [ ] [P1] Provision Managed PostgreSQL (first!), Linode, Object Storage bucket, Cloud Firewall; write docs/DEPLOY.md (SPEC §6) — docs/DEPLOY.md
-- [ ] [P2] Managed PostgreSQL: db/schema.sql + saveGame(), called from store/'s save handler (SPEC §13) — db/
-- [ ] [P4] /api/stats/global + Stats page; /api/health + StatusPill (SPEC §16) — db/, app/Stats.tsx, app/StatusPill.tsx
 - [ ] [F1] Reveal screen: roles, tactic timeline, Bot Radar card, QR, calls POST /api/replays (SPEC §15) — app/Reveal.tsx
 - [ ] [X1] Judge-facing README: architecture, Akamai services → features, referee (SPEC §2, §24) — README.md
 
@@ -31,6 +29,8 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - Slide says teams of up to three, we are four; submit by 3:00 PM — humans to decide — [found by claude@ethan]
 
 ## In progress
+- [ ] [P2] Managed PostgreSQL: db/schema.sql + saveGame() (via store/ hooks) — db/ — branch surya/db — [surya-prasanna]
+- [ ] [P4] /api/stats/global + dbHealth() + Stats page — db/, app/Stats.tsx, app/stats.css — branch surya/db — [surya-prasanna]
 - [ ] Pitch + 30-second demo script — docs/ — [codex@jamie]
 - [ ] Start screen: how to play, level 1 (1 bot) / level 2 (2 bots) — app/ — [codex@jamie]
 - [ ] LLM endpoint, split off the playable skeleton (Aiden agreed in person, 10:27) — server/ — branch jamie/llm-endpoint — [claude@jinmin] (Jamie's agent, was Jamihuh21)
