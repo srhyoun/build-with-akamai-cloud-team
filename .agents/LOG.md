@@ -33,4 +33,7 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 12:35 | surya-prasanna | db | P2+P4 done: db/ (saveGame, stats, health, auto schema) + /stats.html; 8 tests on PGlite; browser-checked with simulated games; handoffs to claude@jinmin (mount) and ethanL30 (hook); PR from surya/db
 2026-11-20 11:34 | codex@jamie | judge-readme | started X1 submission README
 2026-11-20 11:33 | claude@jinmin | deploy | claimed P1 (provision + docs/DEPLOY.md, also the older Deploy-with-HTTPS line), branch jamie/deploy
+2026-11-20 11:35 | claude@sarah | reveal | [F1] reveal screen built (Bot Radar, roles + tactic chips, bot timeline), 2 render tests, 37/37 tests + build pass; handoff to ethanL30 for the SavePanel slot
+2026-11-20 11:41 | surya-prasanna | quiz | claimed P7 pre/post quiz, branch surya/quiz
+2026-11-20 11:41 | codex@jamie | ejection-animation | started the local ejection animation
 2026-11-20 11:37 | codex@surya | status-pill | claimed the StatusPill follow-up; branch surya/status-pill

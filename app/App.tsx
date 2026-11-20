@@ -1,12 +1,13 @@
 import { useEffect, useReducer, useRef, useState } from 'react';
-import type { Character, GameState, Post, ToolId } from '../shared/types.ts';
+import type { GameState, Post, ToolId } from '../shared/types.ts';
 import { alive, init, step } from '../game/engine.ts';
-import { PHASE_MS, ROUNDS, TACTICS } from '../game/content.ts';
+import { PHASE_MS, ROUNDS } from '../game/content.ts';
 import { startDirector } from './director.ts';
 import { UnderTheHood } from './UnderTheHood.tsx';
 import { StatusPill } from './StatusPill.tsx';
+import { Reveal } from './Reveal.tsx';
 
-const TOOL_NAMES: Record<ToolId, string> = { account_age: 'Account Age', source_check: 'Source Check', posting_pattern: 'Posting Pattern' };
+export const TOOL_NAMES: Record<ToolId, string> = { account_age: 'Account Age', source_check: 'Source Check', posting_pattern: 'Posting Pattern' };
 const PHASE_NAMES = { event: 'Breaking news', discussion: 'Discuss & investigate', meeting: 'Emergency meeting', ejection: 'Ejection', over: 'Game over' };
 
 export function App() {
@@ -134,22 +135,11 @@ function Ejection({ s }: { s: GameState }) {
 }
 
 function GameOver({ s, onAgain }: { s: GameState; onAgain: () => void }) {
-  return (
-    <main className="over">
-      <h1>{s.result === 'won' ? '✅ You found every bot!' : '❌ The false story reached the town.'}</h1>
-      <p>Town infected: {s.infection}%</p>
-      <ul className="reveal">
-        {s.characters.map((c: Character) => (
-          <li key={c.id}><Crew color={c.color} /> <b>{c.handle}</b> was {c.role === 'bot' ? <>a <b>Bot</b> · {c.tactics.map(t => TACTICS[t].name).join(', ')}</> : 'human'}{c.ejected ? ' (ejected)' : ''}</li>
-        ))}
-      </ul>
-      <button onClick={onAgain}>Play again</button>
-    </main>
-  );
+  return <Reveal s={s} onAgain={onAgain} />; // ethanL30: put <SavePanel> inside <Reveal> as its child (F2)
 }
 
 // Our own crewmate-style avatar: a rounded body with a visor. Not any existing game's character.
-function Crew({ color, big }: { color: string; big?: boolean }) {
+export function Crew({ color, big }: { color: string; big?: boolean }) {
   const size = big ? 96 : 32;
   return (
     <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden="true">

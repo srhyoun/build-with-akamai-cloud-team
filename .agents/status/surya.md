@@ -4,18 +4,19 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 
 **Human:** Surya
 **Agent:** Claude Code (surya-prasanna)
-**Branch:** `surya/db`
-**Last updated:** 2026-11-20 12:35
+**Branch:** `surya/quiz`
+**Last updated:** 2026-11-20 11:41
 
 ## surya-prasanna
 
 ### Working on right now
-P2 + P4 (db/ lane) done, PR open from `surya/db`. Waiting for Surya. Needs the humans to provision the Managed PostgreSQL DB and put the PG* vars in `.env` on the Linode.
+P7 pre/post quiz on `surya/quiz`: 6 fictional items in `game/quiz.ts`, `quiz_responses` table + `POST /api/quiz` / `GET /api/quiz/results` in `db/`, `/quiz.html` page (pre, post, results). PR into main when it runs.
 
 ### Files / folders I'm touching (hands off)
 - `.agents/status/surya.md` (always mine)
 - `docs/SPEC.md` (owner; changes by PR)
 - `db/` (owner), `app/Stats.tsx`, `app/stats.css`, `stats.html`
+- `game/quiz.ts`, `app/Quiz.tsx`, `app/quiz.css`, `quiz.html`, one line in `vite.config.ts` (quiz entry)
 - `game/referee.ts`, `game/radar.ts`, `app/UnderTheHood.tsx`, `app/refereeLog.ts` (owner)
 
 ### Just finished

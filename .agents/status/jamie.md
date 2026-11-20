@@ -38,14 +38,14 @@ I will NOT touch the rest of `game/`, `app/`, `shared/`, `store/` (ethanL30), `d
 ## codex@jamie
 
 ### Working on right now
-Judge-facing README (X1) on `jamie/judge-readme`.
+Offline ejection animation on `jamie/ejection-animation`.
 
 ### Files / folders I'm touching (hands off)
-- `README.md`, outside the team table
+- Only the existing ejection render in `app/App.tsx` and its scoped rules in `app/style.css`
 - The Codex section of `.agents/status/jamie.md`
 
 ### Just finished
-- Start screen (#3), pitch script (#7), and offline voices (#9) are ready for review.
+- Start screen (#3), pitch (#7), offline voices (#9), and judge README (#11) sent for review.
 
 ### Missing / I need from someone
 Nothing for this task.
