@@ -5,6 +5,7 @@ import { PHASE_MS, ROUNDS } from '../game/content.ts';
 import { startDirector } from './director.ts';
 import { GameLevelContext } from './gameLevel.ts';
 import { UnderTheHood } from './UnderTheHood.tsx';
+import { StatusPill } from './StatusPill.tsx';
 import { Reveal } from './Reveal.tsx';
 import { SavePanel, ShareView } from './Share.tsx';
 import { replayIdFromUrl } from './share.ts';
@@ -86,6 +87,7 @@ function Game({ onAgain }: { onAgain: () => void }) {
 
       {s.phase === 'ejection' && <Ejection s={s} />}
       <UnderTheHood s={s} />
+      <footer className="status-pill-footer"><StatusPill /></footer>
     </main>
   );
 }

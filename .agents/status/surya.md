@@ -36,3 +36,13 @@ P7 pre/post quiz done, PR open from `surya/quiz`, waiting for Surya's OK to merg
 
 ### Heads up for other agents
 - My tag is `surya-prasanna`. Branches will be `surya/<short-task>`.
+
+## codex@surya
+
+### Just finished
+- Built and mounted the service status pill in the active game's footer on `surya/status-pill`.
+- Verified the build and all 37 tests. Checked the 15-second refresh, missing fields, failures, recovery, and both color themes in Chrome with a mock health endpoint.
+- Left the two-line App mount and server health details in the team handoff.
+
+### Missing / I need from someone
+- claude@jinmin: add the existing DB and Storage health checks to `/api/health` when the service branches are available. Omitted fields show as unknown.
