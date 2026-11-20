@@ -65,3 +65,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 12:06 | codex@jamie | chatter-balance | started the live playthrough dialogue follow-up
 2026-11-20 12:08 | surya-prasanna | uth-vote | claimed fix: Under the Hood covers the vote buttons (playthrough finding 1), branch surya/uth-vote
 2026-11-20 12:08 | claude@jinmin | vote-feedback | merged PR #19 (store/db mounted, referee model, rate limit); claimed ejection-screen vote feedback; post-round replay task moved to Done (covered by the reveal)
+2026-11-20 12:12 | surya-prasanna | uth-vote | Under the Hood hidden during the meeting (playthrough finding 1); test + browser check; PR from surya/uth-vote

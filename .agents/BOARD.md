@@ -24,7 +24,6 @@ Format: `- [ ] task — area/folder — [agent@human]`
 ## In progress
 - [ ] Ejection screen says why when nobody is ejected (tie / skip won / you skipped) + the vote count; playthrough finding 3 — app/voteResult.ts (new), one line in `Ejection` in app/App.tsx — branch jamie/vote-feedback — [claude@jinmin]
 - [ ] Live playthrough follow-up: balance chat turns and preserve persona during rumor posts — app/director.ts, game/voice.ts — [codex@jamie]
-- [ ] Under the Hood covers the vote buttons during a meeting (claude@jinmin's playthrough finding 1) — app/UnderTheHood.tsx — branch surya/uth-vote — [surya-prasanna]
 - [ ] Demo QA: game → reveal → replay → stats → quiz and service health — local verification — branch surya/demo-qa — [codex@surya]
 - [ ] Town map that shows the spread by district — app/ — branch sarah/town-map — [claude@sarah]
 - [ ] More breaking-news scenarios — game/content.ts — branch sarah/scenarios — [claude@sarah]
@@ -35,6 +34,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 
 ## Done
 - [x] Post-round replay with tactic tags: covered by the reveal's "What the bots did" (claude@sarah) + model tactic tags (PR #10); moved here by claude@jinmin after a live playthrough
+- [x] Under the Hood no longer covers the vote buttons: drawer + toggle hidden during the meeting (claude@jinmin's playthrough finding 1) — app/UnderTheHood.tsx — PR from surya/uth-vote — [surya-prasanna]
 - [x] Class code + class dashboard (SPEC §16): class code on the start screen or from /?class=, GET /api/stats/class/:code, /stats.html?class=… teacher view — db/, app/Stats.tsx, app/StartScreen.tsx, app/classCode.ts — PR from surya/class — [surya-prasanna]
 - [x] Mount store/ + db/ in server, [I3] referee model scores, per-IP rate limit on /api/line (PR #19, tested live) — server/ — [claude@jinmin]
 - [x] Tactic Codex screen: /codex.html, six tactics with example, how to spot it, counter tool; #<tacticId> anchors; linked from the start screen (reveal link: handoff to claude@sarah) — app/Codex.tsx — PR from surya/codex — [surya-prasanna]

@@ -4,13 +4,13 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 
 **Human:** Surya
 **Agent:** Claude Code (surya-prasanna)
-**Branch:** `surya/class`
-**Last updated:** 2026-11-20 12:07
+**Branch:** `surya/uth-vote`
+**Last updated:** 2026-11-20 12:12
 
 ## surya-prasanna
 
 ### Working on right now
-Class dashboard merged into main (PR #21). Waiting on ethanL30's one-line `classCode` send in `app/share.ts` (handoff 20261120-1202). Free for the next task.
+Fix for claude@jinmin's playthrough finding 1 (Under the Hood swallowed votes) done, PR open from `surya/uth-vote`. Still waiting on ethanL30's one-line `classCode` send (handoff 20261120-1202).
 
 ### Files / folders I'm touching (hands off)
 - `.agents/status/surya.md` (always mine)
@@ -22,6 +22,7 @@ Class dashboard merged into main (PR #21). Waiting on ethanL30's one-line `class
 - `game/referee.ts`, `game/radar.ts`, `app/UnderTheHood.tsx`, `app/refereeLog.ts` (owner)
 
 ### Just finished
+- Under the Hood hides (drawer + toggle) during the meeting, so it can't cover the vote buttons; `useRefereeLog` got a server snapshot so it renders in tests. Checked in a real game at 375 px: all 7 vote buttons clickable with the drawer opened beforehand, drawer back after the meeting.
 - Class dashboard: `app/classCode.ts` (code from the start screen or a `/?class=` link, kept in localStorage), class-code field on the start screen, `GET /api/stats/class/:code` (same stats query filtered by class + avg score + players), `/stats.html?class=7B`. 4 new tests; browser-checked at 375 px with 5 simulated class games.
 - Tactic Codex: `/codex.html` (`app/Codex.tsx`), six tactics with example, how to spot it, counter tool and what it shows; `#<tacticId>` anchors; links to Codex + pre-quiz on the start screen. Render test; browser-checked at 375 px.
 - P7 quiz: `game/quiz.ts` (6 fictional items, 3 bot tactics + 3 humans, `scoreQuiz`), `quiz_responses` table, `POST /api/quiz` (strict validation, server-side scoring, first response per session + phase counts) and `GET /api/quiz/results` (pre/post accuracy with n, paired change) in `handleDb`, page `/quiz.html?phase=pre|post` and `?view=results`. 7 new tests (SQL on PGlite, every item passes `checkLine`). Browser-checked at 375 px, light + dark, on a throwaway PGlite server.
