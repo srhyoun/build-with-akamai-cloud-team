@@ -39,31 +39,31 @@ AKAMAI_API_KEY=<team key, sk_aka_…>
 CHAT_MODEL=qwen3-8-27b
 ```
 
-No quotes, no comments after a value. On the Linode, set them in the service's environment (e.g. a systemd `EnvironmentFile=` outside the repo). The startup log says which setting is missing or malformed, never the key itself.
+The first-version names `AKAMAI_INFERENCE_URL` / `_KEY` / `_MODEL` / `_TIMEOUT_MS` still work, but use the workshop names. No quotes, no comments after a value. On the Linode, set them in the service's environment (e.g. a systemd `EnvironmentFile=` outside the repo). The startup log says which setting is missing or malformed, never the key itself.
 
 ## How a line is made
 
 1. The app (`app/director.ts`) posts `{ state, charId, kind, to? }`.
-2. `server/line.ts` checks the body (400 if it isn't a GameState and a known character).
+2. `server/line.ts` checks the body (400 if it isn't a GameState and a known character), then cleans untrusted text: player posts and DMs ≤ 300 chars with no control characters (SPEC §8 rule 8), persona and scenario fields capped too.
 3. `buildPrompt(state, character, kind)` from `game/voice.ts` makes the messages.
 4. `server/inference.ts` calls `<AKAMAI_BASE_URL>/chat/completions` with `max_tokens` 300, temperature 0.9, and **structured output**: `response_format` = the `{ text: string, cited: string | null }` JSON schema (`LINE_SCHEMA` in `server/line.ts`). If the endpoint refuses `response_format` (400/422), it retries once without it and stops sending it for the rest of the process. For Qwen3 models it adds `/no_think`, so the model doesn't spend the token budget thinking.
-5. Output checks before anything reaches the player: an answer cut off by `max_tokens` (`finish_reason: "length"`) is rejected, `<think>` blocks (closed, unclosed or a lone `</think>`) are dropped, `parseLine()` turns the JSON into a `say` Command, an empty line is rejected, and a `cited` of `"null"`/`"none"` is dropped so Source Check can't flag a source nobody cited. Any rejection = 502 = a scripted line for that one turn.
+5. Format checks: an answer cut off by `max_tokens` (`finish_reason: "length"`) or with no text is retried once. `<think>` blocks (closed, unclosed or a lone `</think>`) are dropped, `parseLine()` turns the JSON into a `say` Command, and a `cited` of `"null"`/`"none"` is dropped so Source Check can't flag a source nobody cited.
+6. **Referee** (Judging 20%, decision 002): `checkLine()` from `game/referee.ts` runs on every model line. It blocks a bot confessing, a human pushing the false story, AI/model leaks, banned real-world topics and empty lines, and warns on length and fourth-wall breaks. Blocked → one retry, with a note telling the model what was wrong → blocked again = `422 { check }`. Passed → `200 { ...say, check }`, cut to 220 chars (200 for a defense) if `R_LENGTH` warned. The app shows every `check` in Under the Hood.
 
 | Status | Means | The app then |
 |--------|-------|--------------|
-| 200 | a `say` Command | dispatches it |
+| 200 | a `say` Command plus `check` (the referee's verdict) | logs the check, dispatches the line |
 | 400 | bad request body | uses a scripted line |
+| 422 | `{ check }`: the referee blocked the line twice | logs the check, uses a scripted line |
 | 502 | the model failed, timed out, hit the shared per-minute token budget (429), was cut off, or said nothing | uses a scripted line for this one |
 | 503 | no model configured | uses scripted lines for the rest of the game |
-
-The content check (Judging 20%, `checkLine()` on BOARD.md: bot never admits it's a bot, human never pushes the false story, stays in persona) plugs in at the marked spot in `server/line.ts`, between these format checks and the 200.
 
 Anyone who can reach `/api/line` can spend the team's token budget (up to 300 tokens a call). Fine for the demo; don't leave it up after the event.
 
 ## Adding another API route
 
-`createApp()` in `server/index.ts` routes by path. To add `/api/replays` or `/api/leaderboard` (Ethan's `store/`), add a branch next to `/api/line` that calls the handler.
+`createApp()` in `server/index.ts` routes by path. Ethan's `store/` (`/api/replays`, `/api/leaderboard`) gets mounted with `if (await handleStore(req, res)) return;` before the `/api/` 404 once `ethan/replay-storage` is on main; the `db/` handler the same way.
 
 ## Tests
 
-`server/server.test.ts` (part of `npm test`, 17 tests) uses a fake model endpoint: env names and validation, 400/413/405/502/503, the schema and `/no_think` that go to the model, the response_format fallback, cut-off and thinking-only answers, a real timeout, the key never being logged, static files (HEAD, unreadable file = 500, path traversal), and starting `node server/index.ts` through a symlinked path.
+`server/server.test.ts` (part of `npm test`, 23 tests) uses a fake model endpoint: env names and validation, 400/413/405/502/503, the schema and `/no_think` that go to the model, referee pass / retry-with-reason / 422 / shortening, player-text cleaning, the old env names, the response_format fallback, cut-off and thinking-only answers, a real timeout, the key never being logged, static files (HEAD, unreadable file = 500, path traversal), and starting `node server/index.ts` through a symlinked path.

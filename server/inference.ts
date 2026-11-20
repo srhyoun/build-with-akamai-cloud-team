@@ -13,27 +13,35 @@ type Env = Record<string, string | undefined>;
 const DEFAULT_TIMEOUT_MS = 10_000, MAX_TIMEOUT_MS = 60_000;
 const MAX_TOKENS = 300; // a chat line is ~40 tokens; the per-minute token budget is shared by the whole event account
 
+// Workshop names first; the AKAMAI_INFERENCE_* names from the first version of PR #4 still work.
+const NAMES = { url: ['AKAMAI_BASE_URL', 'AKAMAI_INFERENCE_URL'], key: ['AKAMAI_API_KEY', 'AKAMAI_INFERENCE_KEY'], model: ['CHAT_MODEL', 'AKAMAI_INFERENCE_MODEL'], timeout: ['CHAT_TIMEOUT_MS', 'AKAMAI_INFERENCE_TIMEOUT_MS'] } as const;
+const read = (env: Env, names: readonly string[]) => names.map(n => env[n]?.trim()).find(v => !!v);
+
 // Why there's no usable model, or null when the settings are fine. Never includes the key.
 export function configProblem(env: Env = process.env): string | null {
-  const missing = ['AKAMAI_BASE_URL', 'AKAMAI_API_KEY', 'CHAT_MODEL'].filter(n => !env[n]?.trim());
+  const missing = (['url', 'key', 'model'] as const).filter(k => !read(env, NAMES[k])).map(k => NAMES[k][0]);
   if (missing.length) return `${missing.join(', ')} not set`;
-  if (!/^[\x21-\x7e]+$/.test(env.AKAMAI_API_KEY!.trim())) return 'AKAMAI_API_KEY contains spaces or characters a key cannot have; paste it again';
+  if (!/^[\x21-\x7e]+$/.test(read(env, NAMES.key)!)) return 'AKAMAI_API_KEY contains spaces or characters a key cannot have; paste it again';
   return null;
 }
 
 // null = no model: /api/line answers 503 and the app uses scripted lines.
 export function modelConfig(env: Env = process.env): ModelConfig | null {
   if (configProblem(env)) return null;
-  const base = env.AKAMAI_BASE_URL!.trim().replace(/\/+$/, '');
-  const t = Math.floor(Number(env.CHAT_TIMEOUT_MS));
+  const base = read(env, NAMES.url)!.replace(/\/+$/, '');
+  const t = Math.floor(Number(read(env, NAMES.timeout)));
   return {
     url: base.endsWith('/chat/completions') ? base : `${base}/chat/completions`,
-    key: env.AKAMAI_API_KEY!.trim(),
-    model: env.CHAT_MODEL!.trim(),
+    key: read(env, NAMES.key)!,
+    model: read(env, NAMES.model)!,
     timeoutMs: Number.isFinite(t) && t > 0 ? Math.min(t, MAX_TIMEOUT_MS) : DEFAULT_TIMEOUT_MS,
     structured: true,
   };
 }
+
+// A cut-off or empty answer: worth one retry, unlike an HTTP error or a timeout.
+export const badAnswer = (message: string) => Object.assign(new Error(message), { retry: true });
+export const isBadAnswer = (e: unknown) => !!(e as { retry?: boolean } | null)?.retry;
 
 // Qwen3 thinks before answering unless told not to; a chat line doesn't need it and thinking eats max_tokens.
 function withNoThink(model: string, messages: Message[]): Message[] {
@@ -67,8 +75,8 @@ export async function complete(cfg: ModelConfig, messages: Message[], fetchImpl:
   if (!res.ok) throw new Error(`model answered ${res.status}: ${(await res.text()).slice(0, 300)}`);
   const j = await res.json() as { choices?: { message?: { content?: unknown }; finish_reason?: string }[] };
   const choice = j.choices?.[0];
-  if (choice?.finish_reason === 'length') throw new Error('model answer was cut off (finish_reason "length")');
+  if (choice?.finish_reason === 'length') throw badAnswer('model answer was cut off (finish_reason "length")');
   const text = choice?.message?.content;
-  if (typeof text !== 'string' || !text.trim()) throw new Error('model answer had no text');
+  if (typeof text !== 'string' || !text.trim()) throw badAnswer('model answer had no text');
   return text;
 }
