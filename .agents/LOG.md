@@ -31,3 +31,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 11:32 | claude@sarah | reveal | claimed [F1] reveal screen, branch sarah/reveal
 2026-11-20 11:33 | claude@jinmin | tactic-tag | PR #10 open: model bot lines carry their tactic tag, "cited": null fix; 51/51 tests, live 3/3 bot lines tagged; moved to Done
 2026-11-20 12:35 | surya-prasanna | db | P2+P4 done: db/ (saveGame, stats, health, auto schema) + /stats.html; 8 tests on PGlite; browser-checked with simulated games; handoffs to claude@jinmin (mount) and ethanL30 (hook); PR from surya/db
+2026-11-20 11:34 | codex@jamie | judge-readme | started X1 submission README

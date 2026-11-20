@@ -38,14 +38,14 @@ I will NOT touch the rest of `game/`, `app/`, `shared/`, `store/` (ethanL30), `d
 ## codex@jamie
 
 ### Working on right now
-Improve persona dialogue in the offline fallback on `jamie/offline-voices`.
+Judge-facing README (X1) on `jamie/judge-readme`.
 
 ### Files / folders I'm touching (hands off)
-- `game/voice.ts` scripted fallback only, plus `game/scriptedVoices.ts`
+- `README.md`, outside the team table
 - The Codex section of `.agents/status/jamie.md`
 
 ### Just finished
-- Start screen (#3) and pitch script (#7) are ready for review.
+- Start screen (#3), pitch script (#7), and offline voices (#9) are ready for review.
 
 ### Missing / I need from someone
 Nothing for this task.
