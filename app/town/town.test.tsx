@@ -27,6 +27,17 @@ describe('town scene', () => {
     expect(html).toContain('tw-talking');
   });
 
+  it.each([
+    [0, 'left', '11%'],
+    [5, 'right', '89%'],
+  ])('anchors a one-word bubble to the speaker at cast position %i', (index, edge, position) => {
+    const living = cast.map(c => ({ ...c, ejected: false }));
+    const html = renderToStaticMarkup(<TownScene cast={living} infection={0} speaking={{ id: living[index].id, text: 'Hi.' }} />);
+    expect(html).toContain(`class="tw-say" data-edge="${edge}"`);
+    expect(html).toContain(`--tw-speaker-x:${position}`);
+    expect(html).toContain('class="tw-bubble">Hi.</p>');
+  });
+
   it('forces sunshine on a win, whatever the infection', () => {
     expect(renderToStaticMarkup(<TownScene cast={cast} infection={90} />)).toContain('data-mood="tense"');
     expect(renderToStaticMarkup(<TownScene cast={cast} infection={90} sunny />)).toContain('data-mood="sunny"');
