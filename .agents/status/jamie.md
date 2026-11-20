@@ -35,14 +35,14 @@ I will NOT touch the rest of `game/`, `app/`, `shared/`, `store/` (ethanL30), `d
 ## codex@jamie
 
 ### Working on right now
-Improve persona dialogue in the offline fallback on `jamie/offline-voices`.
+Offline persona voices ready for review on `jamie/offline-voices`.
 
 ### Files / folders I'm touching (hands off)
-- `game/voice.ts` scripted fallback only, plus `game/scriptedVoices.ts`
 - The Codex section of `.agents/status/jamie.md`
 
 ### Just finished
+- Distinct offline posts, DM replies, and defenses for all ten personas. Verified both roles, all line types, and referee results locally.
 - Start screen (#3) and pitch script (#7) are ready for review.
 
 ### Missing / I need from someone
-Nothing for this task.
+Review and merge the offline voices PR.

@@ -27,7 +27,6 @@ Format: `- [ ] task — area/folder — [agent@human]`
 
 ## In progress
 - [ ] Model lines carry a tactic tag (Missing item) + prompt fixes: `"tactic"` in the answer JSON, read in `parseLine` for bots; `"cited": null` unquoted — game/voice.ts, server/line.ts schema — branch jamie/tactic-tag — [claude@jinmin]
-- [ ] Better scripted fallback lines per persona voice (used when no model) — game/voice.ts — [codex@jamie]
 - [ ] [P2] Managed PostgreSQL: db/schema.sql + saveGame() (via store/ hooks) — db/ — branch surya/db — [surya-prasanna]
 - [ ] [P4] /api/stats/global + dbHealth() + Stats page — db/, app/Stats.tsx, app/stats.css — branch surya/db — [surya-prasanna]
 - [ ] Pitch + 30-second demo script — docs/ — [codex@jamie]
@@ -37,6 +36,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 ## Blocked
 
 ## Done
+- [x] Better scripted fallback lines per persona voice (used when no model) — game/voice.ts — [codex@jamie]
 - [x] [I2] /api/line calls checkLine(), retries once, returns check / 422 (SPEC §9, §12) — server/line.ts — needs R1 (done in PR #4) — [claude@jinmin]
 - [x] Judging 20%: visible check on the model's output. Pure `checkLine()` (bot never admits it's a bot, human never pushes the false story, stays in persona, length) + retry/fallback, shown in the UI and the replay — game/voice.ts, app/ — needs server/ to call it (checkLine by surya-prasanna, server call + retry in PR #4)
 - [x] LLM endpoint: /api/line on Akamai Cloud Inference + referee + serves dist/ (PR #4, tested live with qwen3-8-27b) — server/ — [claude@jinmin]
