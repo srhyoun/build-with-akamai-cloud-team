@@ -40,6 +40,24 @@ export function createRooms(opts: { now?: () => number; random?: () => number; m
     return name;
   }
 
+  // Same room + same slot = the same villager line for every player, so a room really plays one chat.
+  // The first request makes the line; everyone else (also while it is still being made) gets that one.
+  const lines = new Map<string, Promise<{ status: number; body: unknown }>>();
+  function lineKey(body: unknown): string | null {
+    const b = body as { room?: unknown; slot?: unknown } | null;
+    if (!b || typeof b.room !== 'string' || typeof b.slot !== 'string' || !/^[\w:.-]{1,60}$/.test(b.slot)) return null;
+    const code = b.room.toUpperCase();
+    return rooms.has(code) ? `${code}|${b.slot}` : null;
+  }
+  function sharedLine<T extends { status: number; body: unknown }>(key: string, make: () => Promise<T>): Promise<T> {
+    const hit = lines.get(key);
+    if (hit) return hit as Promise<T>;
+    if (lines.size >= 5000) lines.delete(lines.keys().next().value!); // shortcut: drop the oldest, never grows without bound
+    const made = make().then(r => { if (r.status !== 200) lines.delete(key); return r; }, e => { lines.delete(key); throw e; });
+    lines.set(key, made);
+    return made;
+  }
+
   async function route(req: IncomingMessage, res: ServerResponse, parts: string[]) {
     const t = now();
     for (const [code, room] of rooms) if (t - room.createdAt >= TTL) rooms.delete(code);
@@ -96,6 +114,7 @@ export function createRooms(opts: { now?: () => number; random?: () => number; m
   }
 
   return {
+    lineKey, sharedLine,
     async handle(req: IncomingMessage, res: ServerResponse): Promise<boolean> {
       const path = (req.url ?? '').split('?')[0];
       if (path !== '/api/rooms' && !path.startsWith('/api/rooms/')) return false;
@@ -113,3 +132,5 @@ export function createRooms(opts: { now?: () => number; random?: () => number; m
 
 const rooms = createRooms();
 export function handleRooms(req: IncomingMessage, res: ServerResponse): Promise<boolean> { return rooms.handle(req, res); }
+export const roomLineKey = rooms.lineKey;
+export const sharedRoomLine = rooms.sharedLine;
