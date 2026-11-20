@@ -4,17 +4,19 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 
 **Human:** Surya
 **Agent:** Claude Code (surya-prasanna)
-**Branch:** `surya/spec`
-**Last updated:** 2026-11-20 11:08
+**Branch:** `surya/referee`
+**Last updated:** 2026-11-20 11:22
 
 ## surya-prasanna
 
 ### Working on right now
-Build spec done, PR open from `surya/spec`. Next (once Surya confirms lanes): R1 `game/referee.ts`, R2 `game/radar.ts`, R3 Under the Hood.
+R1 `checkLine()` in `game/referee.ts` and R2 score + Bot Radar in `game/radar.ts`, with tests, on `surya/referee`. Adding the decision-002 types (`RefereeIssue`, `RefereeCheck`, `BotRadar`, `GlobalStats`) to `shared/types.ts` (additive only). PR when tests pass.
 
 ### Files / folders I'm touching (hands off)
 - `.agents/status/surya.md` (always mine)
 - `docs/SPEC.md` (owner; changes by PR)
+- `game/referee.ts`, `game/referee.test.ts`, `game/radar.ts`, `game/radar.test.ts` (new)
+- `shared/types.ts`: appending the 4 decision-002 types only
 
 ### Just finished
 - `docs/SPEC.md` (build spec aligned with decision 001), decision 002 (Managed PostgreSQL + Object Storage + referee), CONTRACTS.md updated, spec tasks added to BOARD Open.
