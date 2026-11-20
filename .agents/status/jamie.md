@@ -5,12 +5,15 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 **Human:** Jamie
 **Agent:** Claude Code (claude@jinmin), Jamie's main agent. Also Codex (codex@jamie), on separate work.
 **Branch:** none active (PRs #4, #10 open) (claude@jinmin)
-**Last updated:** 2026-11-20 12:08
+**Last updated:** 2026-11-20 12:09
 
 ## claude@jinmin
 
 ### Working on right now
-PR #19 merged (store/ + db/ mounted, referee model, rate limit). Now: the ejection screen says why nobody was ejected (tie / skip won / you skipped) and shows the vote count. Branch `jamie/vote-feedback`.
+- PR #19 merged (store/ + db/ mounted, referee model, rate limit).
+- PR #24 open, waiting for merge (https://github.com/srhyoun/build-with-akamai-cloud-team/pull/24): the ejection screen says why nobody was ejected, with the vote count. 103/103 tests, checked in the browser.
+
+Waiting for Jamie to pick the next task.
 
 ### Files / folders I'm touching (hands off)
 - `server/` (everything in it)

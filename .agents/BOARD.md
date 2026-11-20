@@ -22,7 +22,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - Live bots are easy to spot from style alone: in a live level-2 game both bots wrote ALL CAPS countdowns ("15 MINUTES left", "u die"), and @GretaV (librarian: "precise, links official pages") dropped her persona entirely. checkLine passed all of them. Prompt tuning (SPEC §8, F6 done-when) should keep bots in their persona's voice — game/voice.ts owner (codex@jamie) — [found by claude@sarah]
 
 ## In progress
-- [ ] Ejection screen says why when nobody is ejected (tie / skip won / you skipped) + the vote count; playthrough finding 3 — app/voteResult.ts (new), one line in `Ejection` in app/App.tsx — branch jamie/vote-feedback — [claude@jinmin]
+- [ ] Ejection screen says why when nobody is ejected (tie / skip won / you skipped) + the vote count; playthrough finding 3 — app/voteResult.ts (new), one line in `Ejection` in app/App.tsx — branch jamie/vote-feedback — PR #24 open, waiting for merge — [claude@jinmin]
 - [ ] Live playthrough follow-up: balance chat turns and preserve persona during rumor posts — app/director.ts, game/voice.ts — [codex@jamie]
 - [ ] Demo QA: game → reveal → replay → stats → quiz and service health — local verification — branch surya/demo-qa — [codex@surya]
 - [ ] Town map that shows the spread by district — app/ — branch sarah/town-map — [claude@sarah]
