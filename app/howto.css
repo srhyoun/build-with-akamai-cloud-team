@@ -1,0 +1,26 @@
+/* How to play: phone-first, colours from the shared variables. */
+main.howto { padding: 20px 16px 40px; }
+.howto header { text-align: center; }
+.howto-cast { display: flex; justify-content: center; align-items: flex-end; gap: 14px; }
+.howto h1 { font-size: clamp(1.8rem, 7vw, 2.6rem); line-height: 1.1; margin: 8px 0 4px; }
+.howto header p { margin: 0 0 18px; color: var(--muted); }
+.howto h2 { margin: 0 0 4px; }
+.howto section { margin-top: 22px; }
+.howto section > h2 { margin-bottom: 10px; }
+
+.howto-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; counter-reset: step; }
+.howto-steps li { display: flex; gap: 12px; align-items: flex-start; background: var(--card); border: 2px solid var(--line); border-radius: 18px; padding: 12px 14px; }
+.howto-steps p, .howto-ends p { margin: 0; }
+.howto-icon { flex: none; display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: var(--clue); font-size: 1.5rem; }
+
+.howto-chips, .howto-tips { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.howto-chips { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+.howto-chips li { background: var(--card); border: 2px solid var(--line); border-radius: 16px; padding: 10px 12px; }
+.howto-chips b { display: block; }
+.howto-ends p + p { margin-top: 6px; }
+.howto-tips li { padding-left: 1.6em; position: relative; }
+.howto-tips li::before { content: '🍃'; position: absolute; left: 0; }
+
+.howto-nav { display: flex; flex-direction: column; gap: 10px; margin-top: 26px; }
+.howto-nav a { display: flex; align-items: center; justify-content: center; min-height: 48px; padding: 8px 12px; border-radius: 999px; border: 2px solid var(--line); background: var(--card); color: var(--text); text-decoration: none; font-weight: 600; }
+.howto-nav a.howto-cta { background: var(--accent); border-color: var(--accent); color: #fff; font-size: 1.15rem; }
