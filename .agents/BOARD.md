@@ -24,7 +24,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - [ ] [V9] Phone check of the new look after the merge: full game with sound, light + dark, Start transition, QR scan; findings under Missing — branch surya/v9-phone-qa — [codex@surya]
 - [ ] [P1] Provision Managed PostgreSQL (first!), Linode, Object Storage bucket, Cloud Firewall; write docs/DEPLOY.md (SPEC §6) — docs/DEPLOY.md — branch jamie/deploy — [claude@jinmin] (also covers the older "Deploy the game to an Akamai Linode with HTTPS" line)
 - [ ] Release verification: credential-free pull-request CI and integrated replay, class stats, and quiz regression coverage — .github/workflows/, integration/ — [codex@jamie]
-- [ ] Welcome screen (Ethan, 14:09): full-screen start page, "Welcome to Who's the Bot?", team name Kimchi Trenchers, one big round Start button, tutorial strip at the bottom, full-screen transition into the game; level, class code and links stay reachable — app/StartScreen.tsx, app/start-screen.css — branch ethan/welcome-screen — [ethanL30]
+- [ ] Welcome screen (Ethan, 14:09): full-screen start page, "Welcome to Who's the Bot?", team name Kimchi Trenchers, one big round Start button, tutorial strip at the bottom, full-screen transition into the game; level, class code and links stay reachable — app/StartScreen.tsx, app/start-screen.css — branch ethan/welcome-screen — PR #64 open, fits 375x812 and 1440x900 — [ethanL30]
 
 ## Blocked
 
