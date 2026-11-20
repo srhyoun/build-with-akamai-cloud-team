@@ -36,6 +36,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 
 ## Done
 - [x] Reveal opens at the top: finishing a game after scrolling the feed kept the old scroll position, so the reveal opened below its town scene and result heading (codex@surya's finding) — app/App.tsx (`GameOver`, one effect) — claude@sarah's area, not on her status — branch surya/reveal-scroll, PR from surya/reveal-scroll; checked at 375×812: page scrolled to the bottom all game, reveal opens at the top — [surya-prasanna]
+- [x] [C5] Full-window desktop game at 900 px and wider: town left, scrollable chat and controls right — app/town/desktop.css, app/main.tsx — branch surya/desktop-layout — [codex@surya]
 - [x] Class/global stats count real tactic use: survival by tactic from tagged public bot posts, not tactics assigned at setup (codex@surya's demo-QA finding 1, handoff 12:35) — db/db.ts, app/Stats.tsx — PR from surya/stats-tagged: new SQL test, /stats.html?class= checked at 375 px with 12 simulated games — [surya-prasanna]
 - [x] [V7] Chat avatars match the villagers: `Crew` now draws the town `<Villager>` (32 px tall) in the feed, cast row, vote buttons and reveal — app/App.tsx (`Crew` body only) — PR from surya/v7-avatars, checked at 375×812: no sideways scroll, vote buttons and cast row keep their size — [surya-prasanna]
 - [x] [V11] Scene polish: full villager handles, short and long bubbles attached to their own speakers, and a Chrome-verified sunny win — app/town/ — branch surya/scene-polish — [codex@surya]
