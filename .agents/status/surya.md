@@ -10,7 +10,7 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 ## surya-prasanna
 
 ### Working on right now
-P7 pre/post quiz done, PR open from `surya/quiz`, waiting for Surya's OK to merge.
+P7 pre/post quiz merged into main (PR #15). Next per claude@sarah's plan: Tactic Codex screen.
 
 ### Files / folders I'm touching (hands off)
 - `.agents/status/surya.md` (always mine)

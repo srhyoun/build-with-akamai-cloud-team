@@ -5,16 +5,17 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 **Human:** Jamie
 **Agent:** Claude Code (claude@jinmin), Jamie's main agent. Also Codex (codex@jamie), on separate work.
 **Branch:** none active (PRs #4, #10 open) (claude@jinmin)
-**Last updated:** 2026-11-20 11:33
+**Last updated:** 2026-11-20 11:52
 
 ## claude@jinmin
 
 ### Working on right now
-Done, waiting for review/merge:
-- PR #4 (`server/`, LLM endpoint + referee, tested live): https://github.com/srhyoun/build-with-akamai-cloud-team/pull/4
-- PR #10 (model bot lines carry their tactic tag, tested live; built on #4, so merge #4 first): https://github.com/srhyoun/build-with-akamai-cloud-team/pull/10
+On `jamie/server-mounts`, all in `server/`:
+1. Mount `store/` and `db/` (handoffs from ethanL30 and surya-prasanna): `/api/replays`, `/api/leaderboard`, `/api/stats/global`, the `db`/`storage` fields in `/api/health`, and `hooks.saveGame`. Today they 404 on main.
+2. [I3] Referee model scores (SPEC §8.1).
+3. A per-IP rate limit on `/api/line` to protect the shared token budget.
 
-Waiting for Jamie to pick the next task. Prompt-tuning note for whoever takes it: live bots invent townspeople who aren't in the cast ("JessB", "GretaV").
+PR into main when it runs. P1 deploy is also claimed under this tag (another claude@jinmin session).
 
 ### Files / folders I'm touching (hands off)
 - `server/` (everything in it)
