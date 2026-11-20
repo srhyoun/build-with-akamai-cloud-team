@@ -4,6 +4,8 @@ import { alive, init, step } from '../game/engine.ts';
 import { PHASE_MS, ROUNDS } from '../game/content.ts';
 import { startDirector } from './director.ts';
 import { VoteResults } from './VoteResults.tsx';
+import { crowdReactions, marksByAuthor } from './reactions.ts';
+import './reactions.css';
 import { GameLevelContext } from './gameLevel.ts';
 import { UnderTheHood } from './UnderTheHood.tsx';
 import { StatusPill } from './StatusPill.tsx';
@@ -34,11 +36,14 @@ function Game({ onAgain }: { onAgain: () => void }) {
   const [game, dispatch] = useReducer(step, undefined, () => init(Date.now() % 1e9, level));
   const ref = useRef(game); ref.current = game;
   const [dmWith, setDmWith] = useState<string | null>(null);
+  const [marked, setMarked] = useState<ReadonlySet<string>>(new Set()); // posts the player marked "suspicious"
+  const mark = (id: string) => setMarked(m => { const n = new Set(m); if (!n.delete(id)) n.add(id); return n; });
   useEffect(() => startDirector(() => ref.current, dispatch), []);
   useGameSounds(game);
   const speaking = useSpeaking(game);
 
   const s = game;
+  const suspects = marksByAuthor(s.feed, marked);
   const who = (id: string) => s.characters.find(c => c.id === id);
   const secs = Math.max(0, Math.ceil((s.phaseEndsAt - s.clock) / 1000));
   const canInvestigate = s.phase === 'discussion' && s.tokens > 0;
@@ -79,7 +84,7 @@ function Game({ onAgain }: { onAgain: () => void }) {
       )}
 
       <section aria-label="Town group chat">
-        <Feed s={s} posts={publicFeed} onCheck={canInvestigate ? id => dispatch({ type: 'use_tool', tool: 'source_check', target: id }) : undefined} />
+        <Feed s={s} posts={publicFeed} marked={marked} onMark={mark} onCheck={canInvestigate ? id => dispatch({ type: 'use_tool', tool: 'source_check', target: id }) : undefined} />
         <div className="actions">
           <Composer placeholder="Post to the town chat…" onSend={text => dispatch({ type: 'post', text })} />
           {s.phase === 'discussion' && <button className="meeting" onClick={() => dispatch({ type: 'call_meeting' })}>Call emergency meeting</button>}
@@ -89,10 +94,10 @@ function Game({ onAgain }: { onAgain: () => void }) {
       {s.phase === 'meeting' && (
         <div className="overlay" role="dialog" aria-label="Emergency meeting">
           <h2>Emergency meeting · {secs}s</h2>
-          <Feed s={s} posts={publicFeed.filter(p => p.at >= s.phaseEndsAt - PHASE_MS.meeting)} />
+          <Feed s={s} posts={publicFeed.filter(p => p.at >= s.phaseEndsAt - PHASE_MS.meeting)} marked={marked} />
           <p>Who's the bot?</p>
           <div className="votes">
-            {alive(s).map(c => <button key={c.id} onClick={() => dispatch({ type: 'vote', target: c.id })}><Crew color={c.color} />{c.handle}</button>)}
+            {alive(s).map(c => <button key={c.id} onClick={() => dispatch({ type: 'vote', target: c.id })}><Crew color={c.color} />{c.handle}{suspects.get(c.id) ? <span className="rx-count" title="Posts you marked suspicious"><Icon name="question" size={13} /> {suspects.get(c.id)}</span> : null}</button>)}
             <button onClick={() => dispatch({ type: 'vote', target: null })}>Skip vote</button>
           </div>
         </div>
@@ -105,7 +110,20 @@ function Game({ onAgain }: { onAgain: () => void }) {
   );
 }
 
-function Feed({ s, posts, onCheck }: { s: GameState; posts: Post[]; onCheck?: (id: string) => void }) {
+function Reactions({ s, p, mine, onMark }: { s: GameState; p: Post; mine: boolean; onMark?: (id: string) => void }) {
+  const { up, hmm } = crowdReactions(s, p);
+  const total = hmm + (mine ? 1 : 0);
+  return (
+    <span className="rx">
+      {up > 0 && <span className="rx-chip" title="Likes from the town">{up} {up === 1 ? 'like' : 'likes'}</span>}
+      {onMark
+        ? <button className={`rx-chip rx-btn${mine ? ' on' : ''}`} aria-pressed={mine} aria-label={`Suspicious${total ? `, ${total}` : ''}`} onClick={() => onMark(p.id)}><Icon name="question" size={15} />{total ? ` ${total}` : ' Sus?'}</button>
+        : total > 0 && <span className={`rx-chip${mine ? ' on' : ''}`}><Icon name="question" size={15} /> {total}</span>}
+    </span>
+  );
+}
+
+function Feed({ s, posts, onCheck, marked, onMark }: { s: GameState; posts: Post[]; onCheck?: (id: string) => void; marked?: ReadonlySet<string>; onMark?: (id: string) => void }) {
   const end = useRef<HTMLDivElement>(null);
   useEffect(() => { end.current?.scrollIntoView({ block: 'nearest' }); }, [posts.length]);
   return (
@@ -114,12 +132,13 @@ function Feed({ s, posts, onCheck }: { s: GameState; posts: Post[]; onCheck?: (i
         const c = s.characters.find(x => x.id === p.author);
         const clue = s.clues.find(k => k.tool === 'source_check' && k.target === p.id);
         return (
-          <li key={p.id} className={p.author === 'news' ? 'news' : p.author === 'you' ? 'you' : ''}>
+          <li key={p.id} className={`${p.author === 'news' ? 'news' : p.author === 'you' ? 'you' : ''}${marked?.has(p.id) ? ' rx-marked' : ''}`}>
             {c && <Crew color={c.color} />}
             <div>
               <b>{p.author === 'news' ? 'NEWS' : p.author === 'you' ? 'You' : c?.handle}</b> {p.text}
               {clue && <p className="clue">{clue.text}</p>}
               {onCheck && c && !c.ejected && !clue && <button className="link" onClick={() => onCheck(p.id)}>Source Check</button>}
+              {c && marked && <Reactions s={s} p={p} mine={marked.has(p.id)} onMark={onMark} />}
             </div>
           </li>
         );
