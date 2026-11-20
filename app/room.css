@@ -24,3 +24,5 @@
 
 /* shared live game */
 .rm-voted { margin: 10px 0 0; font-weight: 600; text-align: center; }
+.rm-solo { background: none; border: 0; box-shadow: none; color: #2f6a1f; text-decoration: underline; font-weight: 600; min-height: 44px; }
+.start-room-note { margin: 0; font-weight: 600; color: #3b2a1a; background: rgb(255 246 220 / .85); padding: 4px 12px; border-radius: 999px; }

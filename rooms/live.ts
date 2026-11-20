@@ -53,7 +53,8 @@ export function createLive(opts: { getRoom: (code: string) => Room | undefined; 
   const maxGames = opts.maxGames ?? 12;
   const games = new Map<string, Game>();
 
-  const halt = (g: Game) => { clearInterval(g.timer); g.timer = undefined; g.pending = []; };
+  // A room is live only while its shared game runs: a finished game must not pull new joiners in.
+  const halt = (g: Game) => { clearInterval(g.timer); g.timer = undefined; g.pending = []; g.room.live = false; };
 
   function start(room: Room, seed: number): Game {
     const nextSpeaker = createChatterOrder(random);
