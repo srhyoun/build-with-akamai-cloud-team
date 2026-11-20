@@ -20,7 +20,7 @@ export function Leaderboard({ highlightId, reloadKey }: { highlightId?: string; 
             <li key={e.id} className={e.id === highlightId ? 'sh-me' : undefined} aria-current={e.id === highlightId ? 'true' : undefined}>
               <span className="sh-rank">{i + 1}</span>
               <span className="sh-name">{e.name}</span>
-              <span className="sh-meta">{e.result} · level {e.level}</span>
+              <span className="sh-meta">{e.result} · {e.level === 3 ? 'boss level' : `level ${e.level}`}</span>
               <b>{e.score}</b>
             </li>
           ))}
