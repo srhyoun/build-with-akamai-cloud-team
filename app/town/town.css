@@ -68,4 +68,10 @@
 
 /* In the sticky game header: a full row, short enough that the header stays under ~40% of a phone screen. */
 .bar > .tw-scene { flex: 1 0 100%; max-height: 19vh; min-height: 110px; }
+/* A DM open on a phone: the scene shrinks to a strip so the DM and the chat keep the room (V10). */
+.bar.dm > .tw-scene { max-height: 96px; min-height: 0; }
+/* In the strip a bubble above a back-row villager would leave the top: pin it to the top edge, 2 lines, no tail (the talker hops). */
+.bar.dm .tw-say { top: 6px; bottom: auto !important; }
+.bar.dm .tw-bubble { top: 0; bottom: auto; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+.bar.dm .tw-tail { display: none; }
 .tw-over { max-width: 640px; margin: 0 auto; padding: 16px 16px 0; }

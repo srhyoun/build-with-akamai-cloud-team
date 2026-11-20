@@ -118,6 +118,7 @@ Append only. One line per meaningful action. Newest at the bottom.
 <<<<<<< HEAD
 2026-11-20 13:25 | ethanL30 | town-design | merged PR #45 (design brief V1-V3, V5); main 5605b2b green (126 tests); redeployed Ethan's Linode: LIVE at https://172-232-188-135.sslip.io with HTTPS, new design and font served; health: model null, db off, storage up (keys still empty)
 2026-11-20 13:32 | ethanL30 | handover | more tasks to surya-prasanna / codex@surya: L1 live-site phone check, V10 DM-open layout, V11 scene polish (name tags, bubble, win sunshine), V12 live URL in README + PITCH, V7 avatars; their 13:06 handoff done
+<<<<<<< HEAD
 2026-11-20 13:37 | ethanL30 | deploy | live site now uses Akamai Cloud Inference: Ethan put the key on the server; /api/health shows model qwen3-8-27b; 3 live /api/line calls (bot post, human post, bot defense) 200 in 4.0-4.8 s, referee pass; db still off, storage local
 2026-11-20 13:11 | surya-prasanna | v6-theme-pages | stats/quiz/codex load app/town/theme.css via import.meta.glob (1 line each): build green without the file; with a probe file the theme loads last on all 3 pages; 375 px light/dark check after ethan/town-design merges; PR from surya/v6-theme-pages
 =======
@@ -134,3 +135,7 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 13:25 | ethanL30 | town-design | merged PR #45 (design brief V1-V3, V5); main 5605b2b green (126 tests); redeployed Ethan's Linode: LIVE at https://172-232-188-135.sslip.io with HTTPS, new design and font served; health: model null, db off, storage up (keys still empty)
 2026-11-20 13:29 | codex@surya | offline-demo | verified production build, launcher isolation and shutdown, and 375 px browser game through save and replay; moved task to Done
 >>>>>>> origin/surya/offline-demo
+=======
+2026-11-20 13:36 | surya-prasanna | dm-strip | claimed [V10] (ethanL30 handoff 13:32): town scene shrinks to a strip while a DM is open; branch surya/dm-strip
+2026-11-20 13:48 | surya-prasanna | dm-strip | V10 done: with a DM open the town scene is a 96 px strip (pinned header 228 -> 170 px at 375x812), speech bubble pinned to the strip top, 2 lines, no tail; full scene back when the DM closes; Missing line removed; ethanL30: redeploy after merge; PR from surya/dm-strip
+>>>>>>> origin/surya/dm-strip

@@ -14,6 +14,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 <!-- - thing — who needs it — [found by agent@human] -->
 <<<<<<< HEAD
 - Phone check (375×812 emulated, main before the town design): header is 182 px during "Breaking news" vs 154 px during Investigate — the longer label pushes the 🔊 button to a 2nd row, so the chat jumps at every round start. Fix: shorter label (e.g. "News") or let the toggle shrink — App.tsx header, claude@sarah or ethanL30's restyle — [found by surya-prasanna]
+<<<<<<< HEAD
 - Phone layout: with a DM open, pinned header + DM panel + composer + meeting button leave ~3 lines of public chat visible at 375×812 — worth keeping in mind for the V3 restyle — now Open task [V10], handed back to surya-prasanna — [found by surya-prasanna]
 - **Live: https://172-232-188-135.sslip.io** (Ethan's Linode, 172.232.188.135, HTTPS). **Model is on:** `/api/health` shows `qwen3-8-27b`, and three live `/api/line` calls answered in 4–5 s and passed the referee. Still missing in `/etc/whosthebot.env` on the server: PG* (database off, stats empty) and OBJ_* (replays on the server's disk, not in a bucket). A human with those keys fills them in on the server — whole team — [found by ethanL30]
 =======
@@ -21,6 +22,9 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - Phone layout: with a DM open, pinned header + DM panel + composer + meeting button leave ~3 lines of public chat visible at 375×812 — worth keeping in mind for the V3 restyle — ethanL30 — [found by surya-prasanna]
 - Deployed on Ethan's Linode, https://172-232-188-135.sslip.io (172.232.188.135), but not public yet: (1) Ethan must open TCP 80 + 443 to all sources in the Cloud Firewall, (2) a human with the keys must fill in `/etc/whosthebot.env` on the server (inference key, PG*, OBJ_*) — whole team — [found by ethanL30]
 >>>>>>> origin/surya/header-jump
+=======
+- **Live: https://172-232-188-135.sslip.io** (Ethan's Linode, 172.232.188.135, main at 5605b2b, HTTPS works). Still missing there: the keys in `/etc/whosthebot.env` — inference key (characters are scripted), PG* (database off), OBJ_* (replays on the server's disk, not in a bucket). A human with the keys fills them in on the server — whole team — [found by ethanL30]
+>>>>>>> origin/surya/dm-strip
 - Run the quiz on 5–10 real people (pre → play → post) once the DB is live, then put the real n in the pitch — humans — [found by surya-prasanna]
 - Object Storage bucket in Chicago + an access key limited to it, as `S3_*` env vars on the Linode — ethanL30 needs it to verify PR #16 against real Object Storage — [found by ethanL30]
 - Live bots are easy to spot from style alone (style fixed in #22; new: bots now debunk the false story and accuse each other — handoff to codex@jamie): in a live level-2 game both bots wrote ALL CAPS countdowns ("15 MINUTES left", "u die"), and @GretaV (librarian: "precise, links official pages") dropped her persona entirely. checkLine passed all of them. Prompt tuning (SPEC §8, F6 done-when) should keep bots in their persona's voice — game/voice.ts owner (codex@jamie) — [found by claude@sarah]
@@ -30,7 +34,6 @@ Format: `- [ ] task — area/folder — [agent@human]`
 <<<<<<< HEAD
 - [ ] [V12] Add the public demo link and current service status — README.md, docs/PITCH.md — branch surya/v12-live-link — [codex@surya]
 - [ ] [V11] Scene polish: fit long handles on the name tags, keep a short post's bubble over its own villager, look at a win (full sunshine) in the browser — app/town/TownScene.tsx, app/town/scene-labels.css, app/town/town.test.tsx — branch surya/scene-polish — [codex@surya]
-- [ ] [V10] DM open on a phone leaves ~3 lines of chat: shrink the town scene to a strip while a DM is open — app/App.tsx (header class), app/town/town.css — branch surya/dm-strip — [surya-prasanna]
 - [ ] Offline demo launcher: serve the built game on loopback with scripted dialogue and isolated local replay storage; document the rehearsal — scripts/offline-demo.ts, docs/README.md — branch surya/offline-demo — [codex@surya]
 =======
 >>>>>>> origin/surya/offline-demo
@@ -51,9 +54,13 @@ Format: `- [ ] task — area/folder — [agent@human]`
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 - [x] Offline demo launcher: production build on loopback, scripted dialogue, isolated replays removed on shutdown; docs and browser-verified save and replay — scripts/offline-demo.ts, docs/README.md — branch surya/offline-demo — [codex@surya]
 >>>>>>> origin/surya/offline-demo
+=======
+- [x] [V10] DM open on a phone leaves ~3 lines of chat: shrink the town scene to a strip while a DM is open — app/App.tsx (header class), app/town/town.css — PR from surya/dm-strip: header 228 → 170 px with a DM open at 375×812, bubble pinned inside the strip — [surya-prasanna]
+>>>>>>> origin/surya/dm-strip
 - [x] [V1] Town square scene behind/above the game: coffee shop, library, water tower, river + bridge, trees, benches; the 6 cast as rounded original villagers; speech bubble + bounce when one talks (docs/DESIGN_BRIEF.md) — app/ (new files) — from Ethan's design brief — branch ethan/town-design — PR #45 merged, live on https://172-232-188-135.sslip.io — [ethanL30]
 - [x] [V2] Mood follows "Town infected": clouds, desaturation, red-orange haze, streetlights, faces happy → worried → scared; dark spotlight on ejection; sunshine on a win (docs/DESIGN_BRIEF.md) — app/ — needs V1 — branch ethan/town-design — PR #45 merged, live on https://172-232-188-135.sslip.io — [ethanL30]
 - [x] [V3] Restyle the UI to match: rounded, soft, minimal chrome; chunky slab-serif display font (openly licensed) for titles and numbers; chat stays readable on a phone (docs/DESIGN_BRIEF.md) — app/style.css and the other app/*.css — branch ethan/town-design — PR #45 merged, live on https://172-232-188-135.sslip.io — [ethanL30]
