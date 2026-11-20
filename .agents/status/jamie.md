@@ -38,13 +38,14 @@ I will NOT touch the rest of `game/`, `app/`, `shared/`, `store/` (ethanL30), `d
 ## codex@jamie
 
 ### Working on right now
-Chatter balance follow-up ready for review on `jamie/chatter-balance`.
+Automated release verification on `jamie/release-verification`. This complements Codex@Surya's browser demo QA.
 
 ### Files / folders I'm touching (hands off)
+- `.github/workflows/ci.yml`, `integration/release.test.ts`
 - The Codex section of `.agents/status/jamie.md`
 
 ### Just finished
-- Gave living characters equal turns in the public chat and adjusted the bot prompt to mix rumor posts with ordinary dialogue. All 97 local tests and the build passed.
+- Chatter balance in PR #22.
 
 ### Missing / I need from someone
-Live inference playthrough to confirm the prompt improves persona fidelity.
+Nothing for the local test harness.
