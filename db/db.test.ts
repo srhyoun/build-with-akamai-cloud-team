@@ -5,7 +5,7 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import type { GameState } from '../shared/types.ts';
 import { init } from '../game/engine.ts';
 import { QUIZ } from '../game/quiz.ts';
-import { dbHealth, globalStats, handleDb, parseQuiz, quizResults, saveGame, saveQuiz, toRows, useDb } from './db.ts';
+import { classStats, dbHealth, globalStats, handleDb, parseQuiz, quizResults, saveGame, saveQuiz, toRows, useDb } from './db.ts';
 
 // k right answers (first k items), the rest wrong.
 const answers = (k: number) => QUIZ.map((q, i) => ({ itemId: q.id, guess: i < k ? q.answer : q.answer === 'bot' ? 'human' as const : 'bot' as const, confidence: 3 }));
@@ -81,6 +81,20 @@ describe('with a database', () => {
   });
 
   it('health is up', async () => { expect(await dbHealth()).toBe('up'); });
+
+  it('class stats: only that class (any case), avg score, players by score; unknown class is empty', async () => {
+    await saveGame({ id: 'a', state: finished(3, 1, 'won', 10), classCode: '7b', playerName: 'Ada' });
+    await saveGame({ id: 'b', state: finished(4, null, 'lost', 90), classCode: '7B' });
+    await saveGame({ id: 'c', state: finished(5, 1, 'won', 20), classCode: 'other' });
+    await saveGame({ id: 'd', state: finished(6, 1, 'won', 20) });
+    const c = (await classStats(' 7b ', 1))!;
+    expect(c).toMatchObject({ classCode: '7B', gamesPlayed: 2, winRate: 0.5, avgSpread: 50 });
+    expect(c.players.map(p => p.name)).toEqual(['Ada', null]);
+    expect(c.players[0].score).toBeGreaterThanOrEqual(c.players[1].score);
+    expect(c.avgScore).toBe((c.players[0].score + c.players[1].score) / 2);
+    expect((await globalStats(1))!.gamesPlayed).toBe(4);
+    expect(await classStats('nobody', 1)).toMatchObject({ gamesPlayed: 0, players: [], tactics: [] });
+  });
 });
 
 describe('without a database', () => {
@@ -104,6 +118,9 @@ describe('handleDb', () => {
       expect(ok.status).toBe(200);
       expect((await ok.json()).gamesPlayed).toBeGreaterThanOrEqual(1);
       expect((await fetch(`http://localhost:${port}/api/line`)).status).toBe(404);
+      expect((await (await fetch(`http://localhost:${port}/api/stats/class/MRS%20LEE`)).json()).gamesPlayed).toBe(0);
+      for (const bad of ['', 'x'.repeat(25), '%E0', 'a/b'])
+        expect((await fetch(`http://localhost:${port}/api/stats/class/${bad}`)).status, bad).toBe(400);
       useDb(null);
       expect((await fetch(`http://localhost:${port}/api/stats/global`)).status).toBe(503);
     } finally { srv.close(); }

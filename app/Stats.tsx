@@ -1,8 +1,10 @@
 // Live Tactics Stats (SPEC §16): what fools people, from every finished game in Akamai Managed PostgreSQL.
 // Big-screen page at /stats.html; refreshes every 5 s. Shows real numbers only, always with n.
+// /stats.html?class=7B: the same view for one class, plus average score and the player list (teacher view).
 import { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import type { GlobalStats } from '../shared/types.ts';
+import type { ClassStats } from '../db/db.ts';
 import { TACTICS } from '../game/content.ts';
 import './style.css';
 import './stats.css';
@@ -10,7 +12,8 @@ import './stats.css';
 const MIN_N = 3; // below this a tactic shows "not enough data yet"
 const pct = (x: number) => `${Math.round(x * 100)}%`;
 
-type Load = { stats: GlobalStats; at: number } | { error: string };
+type Load = { stats: GlobalStats | ClassStats; at: number } | { error: string };
+const classCode = new URLSearchParams(location.search).get('class')?.trim() || null;
 
 export function Stats() {
   const [load, setLoad] = useState<Load | null>(null);
@@ -19,7 +22,7 @@ export function Stats() {
     let alive = true;
     const pull = async () => {
       try {
-        const res = await fetch('/api/stats/global');
+        const res = await fetch(classCode ? `/api/stats/class/${encodeURIComponent(classCode)}` : '/api/stats/global');
         const body = await res.json().catch(() => ({}));
         if (alive) setLoad(res.ok ? { stats: body, at: Date.now() } : { error: res.status === 503 ? 'No database connected yet.' : 'Database unavailable right now.' });
       } catch { if (alive) setLoad({ error: 'Server unreachable.' }); }
@@ -32,8 +35,8 @@ export function Stats() {
   return (
     <main className="stats">
       <header>
-        <h1>What fools people?</h1>
-        <p>Live from every game of Who's the Bot? played today.</p>
+        <h1>{classCode ? `Class ${classCode.toUpperCase()}: what fools you?` : 'What fools people?'}</h1>
+        <p>{classCode ? `Live from every game played with class code ${classCode.toUpperCase()}.` : "Live from every game of Who's the Bot? played today."}</p>
       </header>
       {!load ? <p className="stats-note">Loading…</p> : 'error' in load ? <p className="stats-note">{load.error}</p> : <Board s={load.stats} />}
       <footer>Powered by Akamai Managed PostgreSQL{load && 'stats' in load ? ` · updated ${Math.max(0, Math.round((Date.now() - load.at) / 1000))} s ago` : ''}</footer>
@@ -41,8 +44,8 @@ export function Stats() {
   );
 }
 
-function Board({ s }: { s: GlobalStats }) {
-  if (s.gamesPlayed === 0) return <p className="stats-note">No finished games yet. Play one and it shows up here.</p>;
+function Board({ s }: { s: GlobalStats | ClassStats }) {
+  if (s.gamesPlayed === 0) return <p className="stats-note">No finished games yet. Play one{'players' in s ? ' with this class code' : ''} and it shows up here.</p>;
   const enough = s.tactics.filter(t => t.uses >= MIN_N);
   const thin = s.tactics.filter(t => t.uses < MIN_N);
   const top = enough[0];
@@ -51,6 +54,7 @@ function Board({ s }: { s: GlobalStats }) {
       <dl className="stats-tiles">
         <div><dt>Games played</dt><dd>{s.gamesPlayed}</dd></div>
         <div><dt>Players who won</dt><dd>{pct(s.winRate)}</dd></div>
+        {'players' in s && <div><dt>Average score</dt><dd>{Math.round(s.avgScore)}</dd></div>}
         <div><dt>Average town infected</dt><dd>{Math.round(s.avgSpread)}%</dd></div>
         <div><dt>Ejections that hit a real person</dt><dd>{pct(s.humanFalseAccusationRate)}</dd></div>
       </dl>
@@ -77,6 +81,17 @@ function Board({ s }: { s: GlobalStats }) {
         )}
         {thin.length > 0 && <p className="stats-note">Not enough data yet: {thin.map(t => `${t.name} (n = ${t.uses})`).join(', ')}.</p>}
       </section>
+
+      {'players' in s && (
+        <section aria-label="Players">
+          <h2>Players ({s.players.length}{s.players.length === 100 ? ', top 100' : ''})</h2>
+          <ol className="stats-players">
+            {s.players.map((p, i) => (
+              <li key={i}><span>{p.name || 'Anonymous'}</span><span>{p.result === 'won' ? 'found the bots' : 'lost the town'}</span><b>{p.score}</b></li>
+            ))}
+          </ol>
+        </section>
+      )}
     </>
   );
 }
