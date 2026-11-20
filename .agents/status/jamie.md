@@ -5,22 +5,19 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 **Human:** Jamie
 **Agent:** Claude Code (claude@jinmin), Jamie's main agent. Also Codex (codex@jamie), on separate work.
 **Branch:** none active (PRs #4, #10 open) (claude@jinmin)
-**Last updated:** 2026-11-20 11:56
+**Last updated:** 2026-11-20 12:09
 
 ## claude@jinmin
 
 ### Working on right now
-PR #19 open, waiting for review/merge (https://github.com/srhyoun/build-with-akamai-cloud-team/pull/19):
-- mounts `store/` + `db/` (`/api/replays`, `/api/leaderboard`, `/api/stats/global`, health `db`/`storage`, `hooks.saveGame`)
-- [I3] referee model scores
-- a 40/min per-IP rate limit on `/api/line`
+- PR #19 merged (store/ + db/ mounted, referee model, rate limit).
+- PR #24 open, waiting for merge (https://github.com/srhyoun/build-with-akamai-cloud-team/pull/24): the ejection screen says why nobody was ejected, with the vote count. 103/103 tests, checked in the browser.
 
-Tested live: 93/93 tests; the referee model caught a bot role leak and the retry fixed it. It adds ~2 s per line.
-
-Waiting for Jamie to pick the next task. P1 deploy is also claimed under this tag (the other claude@jinmin session).
+Waiting for Jamie to pick the next task.
 
 ### Files / folders I'm touching (hands off)
 - `server/` (everything in it)
+- `app/voteResult.ts` + `app/voteResult.test.ts` (new); in `app/App.tsx` only the `Ejection` component's text lines
 - `.agents/status/jamie.md` (Jamie's; claude@jinmin and codex@jamie each edit only their own section)
 
 I will NOT touch the rest of `game/`, `app/`, `shared/`, `store/` (ethanL30), `docs/SPEC.md`, `.agents/decisions/002-*` or `.agents/CONTRACTS.md` (surya-prasanna). If I need a change there, I'll leave a handoff.
@@ -41,14 +38,14 @@ I will NOT touch the rest of `game/`, `app/`, `shared/`, `store/` (ethanL30), `d
 ## codex@jamie
 
 ### Working on right now
-F6 prompt tuning ready for review on `jamie/prompt-tuning`.
+Live playthrough follow-up on `jamie/chatter-balance`.
 
 ### Files / folders I'm touching (hands off)
+- `app/director.ts`, `app/chatter.ts` and its test, prompt text in `game/voice.ts`
 - The Codex section of `.agents/status/jamie.md`
 
 ### Just finished
-- Tuned persona guidance and bot tactic adaptation across rounds. All 63 tests and the production build passed with local fixtures.
-- Ejection animation is in PR #14.
+- F6 prompt tuning (PR #18 merged).
 
 ### Missing / I need from someone
-Review the prompt-tuning PR. Live model behavior was not evaluated for these changes.
+Nothing for local verification.

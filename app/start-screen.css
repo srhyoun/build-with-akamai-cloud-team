@@ -61,3 +61,9 @@
 
 .start-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; }
 .start-links a { display: flex; align-items: center; justify-content: center; text-align: center; min-height: 44px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); color: var(--accent); font-weight: 600; text-decoration: none; }
+
+.start-class { display: grid; gap: 6px; }
+.start-class label { font-weight: 600; }
+.start-class small { font-weight: 400; color: var(--muted); }
+.start-class input { font: inherit; min-height: 44px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); color: var(--text); text-transform: uppercase; }
+.start-class a { color: var(--accent); min-height: 44px; display: flex; align-items: center; }

@@ -6,25 +6,25 @@ Format: `- [ ] task — area/folder — [agent@human]`
 ## Open
 
 - [ ] Add Sarah's full design doc as docs/GAME_DESIGN.md (check the MVP list against what's built) — docs/
-- [ ] Post-round replay with tactic tags — app/, game/content.ts
 - [ ] Boss level: a bot impersonates a trusted local reporter (handle with one letter changed) — game/
 
 ## Missing / needed
 <!-- anything an agent noticed is missing, broken, or needed by someone else -->
 <!-- - thing — who needs it — [found by agent@human] -->
+- Send `classCode: getClassCode()` with POST /api/replays (one line in app/share.ts) so class games show up on the class page — ethanL30, handoff 20261120-1202 — [found by surya-prasanna]
 - Mount the DB and Storage results on /api/health for live service status dots — claude@jinmin — [found by codex@surya]
 - Run the quiz on 5–10 real people (pre → play → post) once the DB is live, then put the real n in the pitch — humans — [found by surya-prasanna]
 - A link to /quiz.html?phase=post and /codex.html#<tactic> from the reveal (start screen done in surya/codex) — claude@sarah, handoff 20261120-1156 — [found by surya-prasanna]
 - Object Storage bucket in Chicago + an access key limited to it, as `S3_*` env vars on the Linode — ethanL30 needs it to verify PR #16 against real Object Storage — [found by ethanL30]
 - Feature that depends on an Akamai Cloud service besides Inference (40% of judging) — whole team — [found by claude@ethan]
 - A visible check on the model's output via Akamai Cloud Inference (20% of judging) — whole team — [found by claude@ethan]
-- Model lines carry no tactic tag: `buildPrompt` doesn't ask for one and `parseLine` doesn't read one, so the reveal timeline, Bot Radar and tactic stats only see scripted-line tags. Fix: add `"tactic": "one of <bot's tactics> or null"` to the answer JSON and read it in `parseLine` (bots only) — game/voice.ts owner (prompt-tuning task) — [found by surya-prasanna]
 - Slide says teams of up to three, we are four; submit by 3:00 PM — humans to decide — [found by claude@ethan]
 - Live bots are easy to spot from style alone: in a live level-2 game both bots wrote ALL CAPS countdowns ("15 MINUTES left", "u die"), and @GretaV (librarian: "precise, links official pages") dropped her persona entirely. checkLine passed all of them. Prompt tuning (SPEC §8, F6 done-when) should keep bots in their persona's voice — game/voice.ts owner (codex@jamie) — [found by claude@sarah]
 
 ## In progress
+- [ ] Ejection screen says why when nobody is ejected (tie / skip won / you skipped) + the vote count; playthrough finding 3 — app/voteResult.ts (new), one line in `Ejection` in app/App.tsx — branch jamie/vote-feedback — PR #24 open, waiting for merge — [claude@jinmin]
+- [ ] Live playthrough follow-up: balance chat turns and preserve persona during rumor posts — app/director.ts, game/voice.ts — [codex@jamie]
 - [ ] Demo QA: game → reveal → replay → stats → quiz and service health — local verification — branch surya/demo-qa — [codex@surya]
-- [ ] Class code + class dashboard (SPEC §16, P1): class code on the start screen (or ?class= link), GET /api/stats/class/:code, /stats.html?class=… — db/, app/Stats.tsx, app/StartScreen.tsx, new app/classCode.ts — branch surya/class — [surya-prasanna]
 - [ ] Town map that shows the spread by district — app/ — branch sarah/town-map — [claude@sarah]
 - [ ] More breaking-news scenarios — game/content.ts — branch sarah/scenarios — [claude@sarah]
 - [ ] [P1] Provision Managed PostgreSQL (first!), Linode, Object Storage bucket, Cloud Firewall; write docs/DEPLOY.md (SPEC §6) — docs/DEPLOY.md — branch jamie/deploy — [claude@jinmin] (also covers the older "Deploy the game to an Akamai Linode with HTTPS" line)
@@ -33,6 +33,9 @@ Format: `- [ ] task — area/folder — [agent@human]`
 ## Blocked
 
 ## Done
+- [x] Post-round replay with tactic tags: covered by the reveal's "What the bots did" (claude@sarah) + model tactic tags (PR #10); moved here by claude@jinmin after a live playthrough
+- [x] Under the Hood no longer covers the vote buttons: drawer + toggle hidden during the meeting (claude@jinmin's playthrough finding 1) — app/UnderTheHood.tsx — PR from surya/uth-vote — [surya-prasanna]
+- [x] Class code + class dashboard (SPEC §16): class code on the start screen or from /?class=, GET /api/stats/class/:code, /stats.html?class=… teacher view — db/, app/Stats.tsx, app/StartScreen.tsx, app/classCode.ts — PR from surya/class — [surya-prasanna]
 - [x] Mount store/ + db/ in server, [I3] referee model scores, per-IP rate limit on /api/line (PR #19, tested live) — server/ — [claude@jinmin]
 - [x] Tactic Codex screen: /codex.html, six tactics with example, how to spot it, counter tool; #<tacticId> anchors; linked from the start screen (reveal link: handoff to claude@sarah) — app/Codex.tsx — PR from surya/codex — [surya-prasanna]
 - [x] [X1] Judge-facing README: architecture, Akamai services → features, referee (SPEC §2, §24) — README.md — [codex@jamie]

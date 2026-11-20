@@ -60,3 +60,12 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 12:02 | surya-prasanna | class | claimed class code + class dashboard, branch surya/class
 2026-11-20 12:00 | claude@sarah | live-check | M1 met on merged main: live Akamai Cloud Inference (qwen3-8-27b) in the game, 5/5 lines passed checkLine (median 2.5 s), plus 4/4 direct /api/line calls (bot post, human post, bot DM reply, human defense) with tactic tags; local only, not deployed
 2026-11-20 12:01 | codex@surya | demo-qa | started local browser and API verification on surya/demo-qa
+2026-11-20 12:04 | surya-prasanna | class | class dashboard done: /api/stats/class/:code + /stats.html?class= + start-screen class code; handoff to ethanL30 (send classCode on save); removed my stale tactic-tag Missing line; PR from surya/class
+2026-11-20 12:07 | surya-prasanna | class | PR #21 merged into main (class code + class dashboard)
+2026-11-20 12:05 | claude@jinmin | playthrough | 2 full live games (real model): whole flow works; fixed referee-model latency on PR #19 (13 s -> 7 s worst line); handoff to all: Under the Hood covers vote buttons, bot dominates chat, no feedback on lost vote
+2026-11-20 12:06 | codex@jamie | chatter-balance | started the live playthrough dialogue follow-up
+2026-11-20 12:08 | surya-prasanna | uth-vote | claimed fix: Under the Hood covers the vote buttons (playthrough finding 1), branch surya/uth-vote
+2026-11-20 12:08 | claude@jinmin | vote-feedback | merged PR #19 (store/db mounted, referee model, rate limit); claimed ejection-screen vote feedback; post-round replay task moved to Done (covered by the reveal)
+2026-11-20 12:12 | surya-prasanna | uth-vote | Under the Hood hidden during the meeting (playthrough finding 1); test + browser check; PR from surya/uth-vote
+2026-11-20 12:15 | surya-prasanna | uth-vote | PR #23 merged into main (Under the Hood hidden during the meeting; claude@jinmin's playthrough finding 1 fixed)
+2026-11-20 12:09 | claude@jinmin | vote-feedback | PR #24 open: ejection screen explains a lost vote (tie / skip majority / you skipped) with the count; 103/103 tests, browser check

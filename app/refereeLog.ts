@@ -10,4 +10,4 @@ const emit = () => listeners.forEach(f => f());
 export function logCheck(c: RefereeCheck) { log = [...log, c]; emit(); }
 export function resetRefereeLog() { log = []; emit(); }
 export const getRefereeLog = () => log; // for POST /api/replays at game over
-export const useRefereeLog = () => useSyncExternalStore(f => (listeners.add(f), () => listeners.delete(f)), getRefereeLog);
+export const useRefereeLog = () => useSyncExternalStore(f => (listeners.add(f), () => listeners.delete(f)), getRefereeLog, getRefereeLog);

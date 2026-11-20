@@ -27,6 +27,8 @@ export function UnderTheHood({ s }: { s: GameState }) {
     ['Median model time', median(fromModel.map(c => c.latencyMs)) === null ? '—' : `${median(fromModel.map(c => c.latencyMs))} ms`],
   ] as const;
   const handle = (id: string) => s.characters.find(c => c.id === id)?.handle ?? id;
+  // Hidden during the meeting: the drawer (and its toggle) sat on top of the vote buttons and swallowed votes.
+  if (s.phase === 'meeting') return null;
 
   return (
     <>
