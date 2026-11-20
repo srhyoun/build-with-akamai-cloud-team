@@ -30,6 +30,11 @@ export function StartScreen({ onStart }: { onStart: (level: GameState['level']) 
           ))}
         </div>
       </section>
+
+      <nav className="start-links" aria-label="Learn more">
+        <a href="/codex.html">Tactic Codex: the bots’ 6 tricks</a>
+        <a href="/quiz.html?phase=pre">Quiz: bot or human? (1 min)</a>
+      </nav>
     </main>
   );
 }
