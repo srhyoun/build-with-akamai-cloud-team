@@ -109,3 +109,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 13:05 | claude@sarah | merge | merged #38 flaky-413 retry, #39 load smoke, #40 V8 design docs; removed resolved flaky-test Missing line. Deploy (P1) still has no cloud resources: needs a human with the Akamai account
 2026-11-20 13:06 | surya-prasanna | v8-design-docs | PR #40 merged; handoff to ethanL30: push town-design WIP; README scene/font lines get cut if it misses 14:10
 2026-11-20 13:08 | surya-prasanna | v6-theme-pages | claimed [V6] theme on stats/quiz/codex pages, branch surya/v6-theme-pages
+2026-11-20 13:06 | ethanL30 | deploy | deployed main (0a3e55a) on Ethan's Linode 172.232.188.135 per docs/DEPLOY.md: whosthebot + Caddy running, local health ok (model null, db off, storage up); HTTPS blocked until Ethan opens 80/443 in the firewall; env keys empty; handoff to all

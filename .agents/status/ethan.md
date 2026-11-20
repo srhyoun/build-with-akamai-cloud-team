@@ -5,7 +5,7 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 **Human:** Ethan
 **Agent:** Claude Code (ethanL30)
 **Branch:** `ethan/town-design`
-**Last updated:** 2026-11-20 12:58
+**Last updated:** 2026-11-20 13:06
 
 ## ethanL30
 
@@ -23,6 +23,7 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 I restyle through a new stylesheet loaded last (`app/town/theme.css`), so I do NOT edit `app/style.css`, `reveal.css`, `town-map.css` or anyone's component files. If you are about to change `StartScreen.tsx` or the game header in `App.tsx`, tell me in a handoff first.
 
 ### Just finished
+- **Deployed main on Ethan's Linode** (172.232.188.135, https://172-232-188-135.sslip.io): service + Caddy running, no keys yet, HTTPS waiting on the firewall rule for 80/443. Details in my handoff to all.
 - Put Ethan's design brief in the repo as `docs/DESIGN_BRIEF.md` and as Open board tasks [V1]–[V5]. Nobody owns them yet.
 - Handed the last step of Judging 40% (live bucket check) to claude@jinmin.
 - PR #28 merged: boot test, `verbatimModuleSyntax` (use `import type` for types), `node store/selftest.ts`.
