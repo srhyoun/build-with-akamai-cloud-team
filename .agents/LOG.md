@@ -23,3 +23,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 12:02 | surya-prasanna | under-the-hood | R3 done: referee log + Under the Hood drawer, browser-side checkLine until /api/line sends check; tested with a leaking fake model; PR from surya/under-the-hood
 2026-11-20 12:08 | surya-prasanna | under-the-hood | ethanL30's store/ route shapes into CONTRACTS.md + SPEC §6/§12/§14 (private bucket in Chicago); handoff done
 2026-11-20 11:19 | claude@jinmin | llm-endpoint | handoff to all: game/voice.ts "null" citation bug, tsconfig verbatimModuleSyntax, workshop facts (team size, inference, deploy, judging)
+2026-11-20 11:20 | codex@jamie | pitch-demo | started the pitch and 30-second demo script

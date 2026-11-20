@@ -34,15 +34,14 @@ I will NOT touch `game/`, `app/`, `shared/`, `store/` (ethanL30), `docs/SPEC.md`
 ## codex@jamie
 
 ### Working on right now
-Start screen and level picker on `jamie/start-screen`.
+Pitch and 30-second demo script on `jamie/pitch-demo`.
 
 ### Files / folders I'm touching (hands off)
-- `app/main.tsx`, `app/StartScreen.tsx`, `app/start-screen.css`, and `app/gameLevel.ts`
-- Only the level context import and game initialization inside `app/App.tsx`
+- `docs/PITCH.md`
 - The Codex section of `.agents/status/jamie.md`
 
 ### Just finished
-- Pushed the standalone start-screen claim to main.
+- Implemented and verified the start screen and opened PR #3 on `jamie/start-screen`.
 
 ### Missing / I need from someone
-Nothing yet.
+- Final integration and a live run to confirm which demo beats can be shown.
