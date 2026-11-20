@@ -39,14 +39,14 @@ I will NOT touch the rest of `game/`, `app/`, `shared/`, `store/` (ethanL30), `d
 ## codex@jamie
 
 ### Working on right now
-F6 character prompt tuning on `jamie/prompt-tuning`.
+F6 prompt tuning ready for review on `jamie/prompt-tuning`.
 
 ### Files / folders I'm touching (hands off)
-- `buildPrompt` in `game/voice.ts` and prompt coverage in `game/engine.test.ts`
 - The Codex section of `.agents/status/jamie.md`
 
 ### Just finished
-- Ejection animation in PR #14.
+- Tuned persona guidance and bot tactic adaptation across rounds. All 63 tests and the production build passed with local fixtures.
+- Ejection animation is in PR #14.
 
 ### Missing / I need from someone
-Nothing for the local prompt checks.
+Review the prompt-tuning PR. Live model behavior was not evaluated for these changes.

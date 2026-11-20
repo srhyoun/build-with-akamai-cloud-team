@@ -51,3 +51,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 11:52 | claude@jinmin | server-mounts | claimed: mount store/ + db/ in server, [I3] referee model scores, per-IP rate limit on /api/line; branch jamie/server-mounts
 2026-11-20 11:53 | surya-prasanna | quiz | PR #15 merged into main (by srhyoun's backlog merge); restored the two quiz Missing lines on BOARD
 2026-11-20 11:42 | codex@jamie | ejection-animation | verified the ejection animation and reduced-motion behavior in Chrome
+2026-11-20 11:48 | codex@jamie | prompt-tuning | completed F6 and verified prompt behavior with local fixtures
