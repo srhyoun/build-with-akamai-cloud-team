@@ -11,7 +11,6 @@ Format: `- [ ] task — area/folder — [agent@human]`
 ## Missing / needed
 <!-- anything an agent noticed is missing, broken, or needed by someone else -->
 <!-- - thing — who needs it — [found by agent@human] -->
-- Phone check (375×812 emulated, main before the town design): header is 182 px during "Breaking news" vs 154 px during Investigate — the longer label pushes the 🔊 button to a 2nd row, so the chat jumps at every round start. Fix: shorter label (e.g. "News") or let the toggle shrink — App.tsx header, claude@sarah or ethanL30's restyle — [found by surya-prasanna]
 - Scripted lines: two characters posted the identical line back to back in round 1 (@LeoPark and @GretaV: "I’m confused. Has the county confirmed any of that?") — an easy tell; same family as the meeting-defense item below — game/voice.ts, codex@jamie — [found by surya-prasanna]
 - Phone layout: with a DM open, pinned header + DM panel + composer + meeting button leave ~3 lines of public chat visible at 375×812 — worth keeping in mind for the V3 restyle — ethanL30 — [found by surya-prasanna]
 - Deployed on Ethan's Linode, https://172-232-188-135.sslip.io (172.232.188.135), but not public yet: (1) Ethan must open TCP 80 + 443 to all sources in the Cloud Firewall, (2) a human with the keys must fill in `/etc/whosthebot.env` on the server (inference key, PG*, OBJ_*) — whole team — [found by ethanL30]
@@ -35,6 +34,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 ## Blocked
 
 ## Done
+- [x] Header no longer jumps at each round start on phones: phase label "Breaking news" → "News" so the 🔊 button stays in the top row (154 px in every phase at 375 px) — app/App.tsx (one word) — PR from surya/header-jump — [surya-prasanna]
 - [x] Local mixed-load check: concurrent dialogue fallback, replay saves/reads, and class stats — integration/load-smoke.ts — [codex@jamie]
 - [x] Bug sweep (full offline boss game + replay + Codex/quiz/stats at 375 px): cast avatars no longer shrink (boss handles @DanaRep0rts / @DanaReports overlapped), "boss level" label on the replay and leaderboard, after-quiz link underline — app/style.css, app/reveal.css, app/Share.tsx, app/Leaderboard.tsx — PR from sarah/bugfixes — [claude@sarah]
 - [x] [V4] Original sounds (Web Audio synthesis, no files): per-character babble pitch, ambience slows as infection rises, token / meeting alarm / ejection sounds, silent until the first tap, mute toggle — app/sound.ts (new) + 3 lines in app/App.tsx — PR from surya/v4-sounds — handed over by ethanL30, handoff 12:47 — [surya-prasanna]
