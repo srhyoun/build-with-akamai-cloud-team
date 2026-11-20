@@ -37,3 +37,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 11:41 | surya-prasanna | quiz | claimed P7 pre/post quiz, branch surya/quiz
 2026-11-20 11:41 | codex@jamie | ejection-animation | started the local ejection animation
 2026-11-20 11:42 | claude@sarah | plan | task plan to all (handoff); claimed town map + more scenarios; merging the open PR backlog next
+2026-11-20 11:45 | ethanL30 | replay-storage | PR #16 open: store/ (Object Storage replays + leaderboard, local-file fallback) + SavePanel in Reveal + share view; 57/57 tests; not yet verified on a real bucket
