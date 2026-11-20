@@ -146,7 +146,7 @@ export function ShareView({ id }: { id: string }) {
   return (
     <main className="sh-view">
       <h1>{r.playerName || 'A player'} {r.result === 'won' ? 'found every bot' : 'lost the town to the bots'}</h1>
-      <p className="sh-stats">Level {r.level} · Score <b>{r.score}</b> · Town infected {r.infection}%</p>
+      <p className="sh-stats">{r.level === 3 ? 'Boss level' : `Level ${r.level}`} · Score <b>{r.score}</b> · Town infected {r.infection}%</p>
       <p className="sh-callout">{r.radar.headline}</p>
 
       <h2>The cast</h2>
