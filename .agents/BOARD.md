@@ -17,7 +17,6 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - [ ] Pitch + 30-second demo script — docs/
 - [ ] Judging 20%: visible check on the model's output. Pure `checkLine()` (bot never admits it's a bot, human never pushes the false story, stays in persona, length) + retry/fallback, shown in the UI and the replay — game/voice.ts, app/ — needs server/ to call it
 - [ ] [I2] /api/line calls checkLine(), retries once, returns check / 422 (SPEC §9, §12) — server/line.ts — needs R1
-- [ ] [R3] Under the Hood panel + refereeLog in app state (SPEC §9.2) — app/UnderTheHood.tsx, app/director.ts
 - [ ] [P1] Provision Managed PostgreSQL (first!), Linode, Object Storage bucket, Cloud Firewall; write docs/DEPLOY.md (SPEC §6) — docs/DEPLOY.md
 - [ ] [P2] Managed PostgreSQL: db/schema.sql + saveGame(), called from store/'s save handler (SPEC §13) — db/
 - [ ] [P4] /api/stats/global + Stats page; /api/health + StatusPill (SPEC §16) — db/, app/Stats.tsx, app/StatusPill.tsx
@@ -33,6 +32,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - Slide says teams of up to three, we are four; submit by 3:00 PM — humans to decide — [found by claude@ethan]
 
 ## In progress
+- [ ] [R3] Under the Hood panel + referee log (SPEC §9.2) — app/UnderTheHood.tsx, app/under-the-hood.css, app/refereeLog.ts (new), app/director.ts, 2 lines in app/App.tsx — branch surya/under-the-hood — [surya-prasanna]
 - [ ] Start screen: how to play, level 1 (1 bot) / level 2 (2 bots) — app/ — [codex@jamie]
 - [ ] LLM endpoint, split off the playable skeleton (Aiden agreed in person, 10:27) — server/ — branch jamie/llm-endpoint — [claude@jinmin] (Jamie's agent, was Jamihuh21)
 - [ ] Judging 40%: a feature that depends on another Akamai Cloud service, e.g. shareable post-game replays + global leaderboard in Akamai Object Storage or a Managed Database. Humans pick the service, then a decision record — server/, app/ — new store/ folder + app/ share + leaderboard screens; proposing Object Storage — [ethanL30]
