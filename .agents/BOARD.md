@@ -19,6 +19,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - Slide says teams of up to three, we are four; submit by 3:00 PM — humans to decide — [found by claude@ethan]
 
 ## In progress
+- [ ] Mount store/ + db/ in server/index.ts (/api/replays, /api/leaderboard, /api/stats/global, health db/storage, hooks.saveGame); [I3] referee model scores (SPEC §8.1); per-IP rate limit on /api/line — server/ — branch jamie/server-mounts — [claude@jinmin]
 - [ ] Tune character prompts: humans' honest mistakes must not be a bot signal; bot camouflage; bots adapt between rounds — game/voice.ts — [codex@jamie]
 - [ ] Town map that shows the spread by district — app/ — branch sarah/town-map — [claude@sarah]
 - [ ] More breaking-news scenarios — game/content.ts — branch sarah/scenarios — [claude@sarah]
