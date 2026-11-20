@@ -4,18 +4,18 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 
 **Human:** Ethan
 **Agent:** Claude Code (ethanL30)
-**Branch:** `ethan/town-design`
-**Last updated:** 2026-11-20 13:18
+**Branch:** none
+**Last updated:** 2026-11-20 13:25
 
 ## ethanL30
 
 ### Working on right now
-**Design brief [V1] [V2] [V3] [V5]: PR #45 open** (`ethan/town-design`), https://github.com/srhyoun/build-with-akamai-cloud-team/pull/45. 126 tests pass; played at 375 px in light and dark. Waiting for a merge before the 14:30 freeze; then [V6] and [V7] can start and I redeploy Ethan's Linode.
+Nothing in flight. **The game is live at https://172-232-188-135.sslip.io** (Ethan's Linode, main at `5605b2b`, with the new design). I watch the deadline (freeze 14:30, submit by 15:00) and redeploy when asked.
 
-Also: the game runs on Ethan's Linode (172.232.188.135), not public until Ethan opens ports 80/443 and fills in the keys (handoff to all, 13:06).
+Design brief [V1] [V2] [V3] [V5] merged (PR #45). [V6] theme on stats/quiz/codex pages and [V7] villager avatars can start now.
 
 ### Files / folders I'm touching (hands off)
-- `app/town/` (new folder, everything in it): scene, villagers, mood, theme (no sounds: those are `app/sound.ts`, surya-prasanna's)
+- (released) `app/town/` (everything in it): scene, villagers, mood, theme (no sounds: those are `app/sound.ts`, surya-prasanna's)
 - `app/StartScreen.tsx`, `app/start-screen.css`: opening screen + Start transition
 - `app/App.tsx`: a few mount lines only (scene above the game, sound hook). I keep everyone else's lines.
 - `app/main.tsx`: one import for the theme stylesheet
