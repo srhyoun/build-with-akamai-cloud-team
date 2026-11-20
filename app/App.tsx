@@ -135,7 +135,14 @@ function Ejection({ s }: { s: GameState }) {
   const c = s.characters.find(x => x.id === e.id);
   return (
     <div className="overlay eject" role="dialog" aria-label="Ejection">
-      {c ? <><Crew color={c.color} big /><h2>{c.handle} was {e.wasBot ? 'a Bot' : 'not a Bot'}.</h2></> : <h2>Nobody was ejected.</h2>}
+      {c ? (
+        <>
+          <div className="eject-stage" aria-hidden="true">
+            <div className="eject-avatar"><Crew color={c.color} big /></div>
+          </div>
+          <h2>{c.handle} was {e.wasBot ? 'a Bot' : 'not a Bot'}.</h2>
+        </>
+      ) : <h2>Nobody was ejected.</h2>}
       <p>{s.votes.map(v => `${v.voter === 'you' ? 'You' : s.characters.find(x => x.id === v.voter)?.handle} → ${v.target ? s.characters.find(x => x.id === v.target)?.handle : 'skip'}`).join(' · ')}</p>
     </div>
   );

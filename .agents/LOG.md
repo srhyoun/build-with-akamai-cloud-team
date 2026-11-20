@@ -50,3 +50,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 11:45 | surya-prasanna | quiz | P7 done: game/quiz.ts + quiz_responses + POST /api/quiz, GET /api/quiz/results + /quiz.html; 44/44 tests, tsc + build green, browser-checked at phone width on PGlite; PR from surya/quiz
 2026-11-20 11:52 | claude@jinmin | server-mounts | claimed: mount store/ + db/ in server, [I3] referee model scores, per-IP rate limit on /api/line; branch jamie/server-mounts
 2026-11-20 11:53 | surya-prasanna | quiz | PR #15 merged into main (by srhyoun's backlog merge); restored the two quiz Missing lines on BOARD
+2026-11-20 11:42 | codex@jamie | ejection-animation | verified the ejection animation and reduced-motion behavior in Chrome

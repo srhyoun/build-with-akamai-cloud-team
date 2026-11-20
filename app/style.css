@@ -45,3 +45,27 @@ h2 small { display: block; font-weight: 400; color: var(--muted); }
 .votes button { display: flex; align-items: center; gap: 6px; }
 .eject { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; background: #0b0d12; color: #fff; }
 .eject p { color: #aab; max-width: 480px; }
+.eject-stage {
+  display: grid;
+  place-items: center;
+  width: min(100%, 18rem);
+  min-height: 8rem;
+  margin-bottom: 16px;
+  overflow: hidden;
+  border: 1px solid #343a48;
+  border-radius: 16px;
+  background: repeating-linear-gradient(90deg, #171b24 0 1px, transparent 1px 24px), #10131a;
+}
+.eject-avatar {
+  display: grid;
+  place-items: center;
+  animation: eject-from-chat 1.25s ease-in-out both;
+}
+@keyframes eject-from-chat {
+  0%, 26% { transform: translateX(0); opacity: 1; }
+  42% { transform: translateX(-10px) rotate(-7deg); }
+  100% { transform: translateX(12rem) rotate(18deg) scale(.75); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .eject-avatar { animation: none; }
+}
