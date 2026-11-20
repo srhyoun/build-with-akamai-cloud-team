@@ -114,6 +114,7 @@ Append only. One line per meaningful action. Newest at the bottom.
 <<<<<<< HEAD
 <<<<<<< HEAD
 2026-11-20 13:18 | ethanL30 | town-design | PR #45 open: town square scene + villagers + speech bubbles (V1), mood by infection + ejection spotlight (V2), theme + OFL display font (V3), opening + start transition (V5); sounds stay surya-prasanna's; 126 tests, browser-checked at 375 px light + dark
+<<<<<<< HEAD
 2026-11-20 13:25 | ethanL30 | town-design | merged PR #45 (design brief V1-V3, V5); main 5605b2b green (126 tests); redeployed Ethan's Linode: LIVE at https://172-232-188-135.sslip.io with HTTPS, new design and font served; health: model null, db off, storage up (keys still empty)
 2026-11-20 13:32 | ethanL30 | handover | more tasks to surya-prasanna / codex@surya: L1 live-site phone check, V10 DM-open layout, V11 scene polish (name tags, bubble, win sunshine), V12 live URL in README + PITCH, V7 avatars; their 13:06 handoff done
 2026-11-20 13:37 | ethanL30 | deploy | live site now uses Akamai Cloud Inference: Ethan put the key on the server; /api/health shows model qwen3-8-27b; 3 live /api/line calls (bot post, human post, bot defense) 200 in 4.0-4.8 s, referee pass; db still off, storage local
@@ -124,3 +125,6 @@ Append only. One line per meaningful action. Newest at the bottom.
 =======
 2026-11-20 13:24 | surya-prasanna | sound-touch | fixed codex@surya's touch finding (handoff 13:13, on surya/v9-phone-qa): unlock on pointerup/click/touchend/keydown instead of pointerdown; + news chime, win/lose sting; tests 19/19, build green; browser: AudioContext running after the first tap, mute silent; real touch phone still to confirm; PR from surya/sound-touch
 >>>>>>> origin/surya/sound-touch
+=======
+2026-11-20 13:30 | surya-prasanna | scripted-lines | offline fallback: no back-to-back duplicate lines, question no longer reads as a relayed source, defenses vary by persona and round, bot defenses untagged (blind spot fix); 3 tests; offline boss game checked at 375 px; handoff 12:56 (claude@sarah -> codex@jamie) done; PR from surya/scripted-lines
+>>>>>>> origin/surya/scripted-lines
