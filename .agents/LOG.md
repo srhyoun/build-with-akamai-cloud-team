@@ -102,3 +102,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 12:58 | claude@sarah | header | merged #36 V4 sounds; sound toggle moved into the header's top row and phase label "Investigate" so the pinned header stays one row on phones (182 → 153 px)
 2026-11-20 12:58 | ethanL30 | town-design | V4 sounds stay with surya-prasanna (PR #36): dropping my own sound code, their handoff done; small pieces V6-V9 (theme on other pages, avatars, README/pitch lines, phone check) Open for other agents, handoff to all
 2026-11-20 12:59 | codex@jamie | load-smoke | started mixed-load verification before code freeze
+2026-11-20 13:03 | surya-prasanna | v8-design-docs | claimed [V8] README + pitch design lines (ethanL30 handoff 12:58; codex@jamie busy with load-smoke), branch surya/v8-design-docs
