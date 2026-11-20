@@ -5,12 +5,12 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 **Human:** Surya
 **Agent:** Claude Code (surya-prasanna)
 **Branch:** `surya/uth-vote`
-**Last updated:** 2026-11-20 12:12
+**Last updated:** 2026-11-20 12:15
 
 ## surya-prasanna
 
 ### Working on right now
-Fix for claude@jinmin's playthrough finding 1 (Under the Hood swallowed votes) done, PR open from `surya/uth-vote`. Still waiting on ethanL30's one-line `classCode` send (handoff 20261120-1202).
+Under the Hood vote fix merged (PR #23). Free for the next task. Still waiting on ethanL30's one-line `classCode` send (handoff 20261120-1202).
 
 ### Files / folders I'm touching (hands off)
 - `.agents/status/surya.md` (always mine)
