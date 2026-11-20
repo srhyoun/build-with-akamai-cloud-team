@@ -1,0 +1,124 @@
+@media (min-width: 900px) {
+  #root > main:has(> .bar > .tw-scene) {
+    --desktop-gap: clamp(12px, 1.35vw, 24px);
+    --desktop-chat-width: clamp(20rem, 36vw, 38rem);
+
+    position: relative;
+    display: grid;
+    grid-template:
+      ". status" auto
+      ". map" auto
+      ". cast" auto
+      ". dm" minmax(0, auto)
+      ". chat" minmax(8.75rem, 1fr)
+      ". footer" auto
+      / minmax(0, 1fr) var(--desktop-chat-width);
+    gap: 0 var(--desktop-gap);
+    max-width: none;
+    height: 100dvh;
+    padding: var(--desktop-gap);
+    overflow: clip;
+
+    & > .bar {
+      grid-area: status;
+      position: static;
+      z-index: auto;
+      padding: 0 0 8px;
+    }
+
+    /* Keep the scene in the header in the DOM so the mobile layout and reading order stay intact. */
+    & > .bar > .tw-scene {
+      position: absolute;
+      inset: var(--desktop-gap) calc(var(--desktop-chat-width) + 2 * var(--desktop-gap))
+        var(--desktop-gap) var(--desktop-gap);
+      width: auto;
+      min-height: 0;
+      max-height: none;
+      aspect-ratio: auto;
+      container-type: size;
+    }
+
+    /* Extend the sky above the square instead of cropping the buildings in tall windows. */
+    & > .bar .tw-art {
+      background: #7cc8ff;
+    }
+
+    & > .bar .tw-svg {
+      inset-block-start: auto;
+      height: min(100%, 68cqw);
+    }
+
+    & > .town-map {
+      grid-area: map;
+
+      @media (max-height: 720px) {
+        flex-direction: row;
+        align-items: center;
+        gap: 8px;
+
+        & > svg {
+          flex: 1;
+          width: 0;
+          max-height: 34px;
+        }
+
+        & > span {
+          white-space: nowrap;
+        }
+      }
+    }
+
+    & > .cast {
+      grid-area: cast;
+    }
+
+    & > .panel {
+      grid-area: dm;
+      max-height: min(30dvh, 18rem);
+      margin-bottom: 4px;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+
+      @media (max-height: 720px) {
+        max-height: 25dvh;
+      }
+    }
+
+    & > section[aria-label='Town group chat'] {
+      grid-area: chat;
+      display: flex;
+      flex-direction: column;
+
+      & > .feed {
+        flex: 1;
+        min-height: 0;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        scrollbar-gutter: stable;
+        padding: 4px;
+      }
+
+      & .feed-end {
+        scroll-margin-bottom: 0;
+      }
+
+      & > .actions {
+        position: static;
+        flex: none;
+        padding-bottom: 0;
+      }
+    }
+
+    & > .uth-toggle {
+      top: calc(2 * var(--desktop-gap));
+      bottom: auto;
+      left: calc(2 * var(--desktop-gap));
+      right: auto;
+    }
+
+    & > .status-pill-footer {
+      grid-area: footer;
+      margin-top: 8px;
+    }
+  }
+}

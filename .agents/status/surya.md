@@ -54,6 +54,7 @@ Boss level fully on main (PR #31 game, PR #34 save path). Nothing claimed; free 
 - `app/town/TownScene.tsx`, `app/town/scene-labels.css`, `app/town/town.test.tsx`, and coordination entries. V10 owns `app/town/town.css`.
 
 ### Just finished
+- [C5] Built the full-window desktop game with independent chat scrolling and fixed room for the composer. Chrome passed at 1440x900, the 900 px breakpoint, and 375x812. Build passed; the Windows suite reproduced the two known server-test failures.
 - [V11] Build and all 6 town tests passed. Chrome verified full handles and attached bubbles at 320, 375, and 768 px, then showed full sunshine after a Level 1 win at 20% infection. Bubbles stayed inside the merged V10 DM strip. Windows suite: 130 passes and the 2 known server failures.
 - [V12] Linked the public demo in README.md and docs/PITCH.md. Confirmed HTTPS, Cloud Inference configuration, local replay storage, and database off. Build passed. The Windows suite still has two known server test failures. Opened PR #49.
 - Offline demo launcher: type-check and production build passed. Chrome at 375 px completed a game, saved it, and opened the local replay. A launcher smoke test verified all built entries, no cloud calls with dummy credentials, and cleanup on shutdown. Windows suite: 125 passed with the two known server failures.
