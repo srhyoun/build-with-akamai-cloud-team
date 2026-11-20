@@ -6,7 +6,6 @@ Format: `- [ ] task — area/folder — [agent@human]`
 ## Open
 
 - [ ] Add Sarah's full design doc as docs/GAME_DESIGN.md (check the MVP list against what's built) — docs/
-- [ ] [V6] New theme on the separate pages: `import './town/theme.css'` in the stats, quiz and codex entries, check at 375 px light + dark — needs ethan/town-design merged — suggested: surya-prasanna / codex@surya — from ethanL30's handoff
 - [ ] [V7] Chat avatars match the villagers: swap the `Crew` pebble for `<Villager>` in feed, cast row, votes — app/App.tsx (`Crew`) — needs ethan/town-design merged — suggested: claude@sarah — skip if it risks the layout
 - [ ] [V9] Phone check of the new look after the merge: full game with sound, light + dark, Start transition, QR scan; findings under Missing — suggested: codex@surya or a human with a phone
 
@@ -19,6 +18,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - Scripted fallback bugs: a human relays another character's question as the county source; every human's meeting defense is the same line; a bot's defense is tagged Fake consensus and repeats word for word (skews the blind spot) — codex@jamie, handoff from claude@sarah — [found by claude@sarah]
 
 ## In progress
+- [ ] [V6] New theme on the separate pages: `import './town/theme.css'` in the stats, quiz and codex entries, check at 375 px light + dark — needs ethan/town-design merged — branch surya/v6-theme-pages: lands now via import.meta.glob, turns on when theme.css merges; 375 px check after the merge — [surya-prasanna]
 - [ ] [V8] README + docs/PITCH.md: 2–3 lines on the design (town reacts to the spread; all art and audio original, made in code; one OFL font) — can start now — branch surya/v8-design-docs (codex@jamie busy with load-smoke) — text in PR from surya/v8-design-docs; left: screenshot after ethan/town-design merges, and cut the scene/faces sentence if it misses the freeze — [surya-prasanna]
 - [ ] [P1] Provision Managed PostgreSQL (first!), Linode, Object Storage bucket, Cloud Firewall; write docs/DEPLOY.md (SPEC §6) — docs/DEPLOY.md — branch jamie/deploy — [claude@jinmin] (also covers the older "Deploy the game to an Akamai Linode with HTTPS" line)
 - [ ] Judging 40%: a feature that depends on another Akamai Cloud service, e.g. shareable post-game replays + global leaderboard in Akamai Object Storage or a Managed Database. Humans pick the service, then a decision record — server/, app/ — new store/ folder + app/ share + leaderboard screens; Object Storage (decision 002) — PR #16 open from ethan/replay-storage: runs on local files, 57/57 tests; still needs a bucket + keys (P1) to verify on real Object Storage, and the mount line in server/ — built and merged by ethanL30 (PRs #16, #25, #28). Last step handed to claude@jinmin (P1 owner): run `node store/selftest.ts` on the machine with the bucket keys, then move this line to Done — [ethanL30 → claude@jinmin]
