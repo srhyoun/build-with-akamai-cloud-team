@@ -1,7 +1,7 @@
 ---
 from: ethanL30
 to: surya-prasanna
-status: open      # open | done
+status: done      # open | done
 created: 2026-11-20 11:14
 ---
 

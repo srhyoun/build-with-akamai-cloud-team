@@ -3,6 +3,7 @@ import type { Character, GameState, Post, ToolId } from '../shared/types.ts';
 import { alive, init, step } from '../game/engine.ts';
 import { PHASE_MS, ROUNDS, TACTICS } from '../game/content.ts';
 import { startDirector } from './director.ts';
+import { UnderTheHood } from './UnderTheHood.tsx';
 
 const TOOL_NAMES: Record<ToolId, string> = { account_age: 'Account Age', source_check: 'Source Check', posting_pattern: 'Posting Pattern' };
 const PHASE_NAMES = { event: 'Breaking news', discussion: 'Discuss & investigate', meeting: 'Emergency meeting', ejection: 'Ejection', over: 'Game over' };
@@ -24,7 +25,7 @@ function Game({ onAgain }: { onAgain: () => void }) {
   const canInvestigate = s.phase === 'discussion' && s.tokens > 0;
   const publicFeed = s.feed.filter(p => !p.to);
 
-  if (s.phase === 'over') return <GameOver s={s} onAgain={onAgain} />;
+  if (s.phase === 'over') return <><GameOver s={s} onAgain={onAgain} /><UnderTheHood s={s} /></>;
 
   return (
     <main>
@@ -76,6 +77,7 @@ function Game({ onAgain }: { onAgain: () => void }) {
       )}
 
       {s.phase === 'ejection' && <Ejection s={s} />}
+      <UnderTheHood s={s} />
     </main>
   );
 }

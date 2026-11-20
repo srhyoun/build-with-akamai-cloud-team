@@ -1,0 +1,33 @@
+/* Under the Hood drawer. Uses the tokens from style.css, so light and dark both work. */
+.uth-toggle { position: fixed; right: 16px; bottom: 16px; z-index: 20; display: flex; gap: 8px; align-items: center; box-shadow: 0 4px 16px #0003; font-weight: 600; }
+.uth-toggle span { background: var(--accent); color: #fff; border-radius: 999px; padding: 0 8px; font-size: .8rem; line-height: 1.6; }
+
+.uth { position: fixed; z-index: 30; right: 0; bottom: 0; left: 0; max-height: 70vh; overflow-y: auto; background: var(--card); color: var(--text);
+  border-top: 1px solid var(--line); border-radius: 16px 16px 0 0; padding: 16px; box-shadow: 0 -8px 32px #0004; }
+@media (min-width: 900px) { .uth { left: auto; top: 0; width: 420px; max-height: none; border-radius: 0; border-left: 1px solid var(--line); border-top: 0; } }
+.uth header { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; }
+.uth header p { margin: 0; color: var(--muted); font-size: .9rem; }
+.uth header button { min-width: 44px; }
+
+.uth-pipe { list-style: none; display: flex; flex-wrap: wrap; gap: 4px; padding: 0; margin: 12px 0; font: .78rem ui-monospace, SFMono-Regular, Menlo, monospace; }
+.uth-pipe li { border: 1px solid var(--line); border-radius: 6px; padding: 3px 6px; }
+.uth-pipe li + li::before { content: '→ '; color: var(--muted); }
+
+.uth-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 6px; margin: 0 0 10px; }
+.uth-stats div { border: 1px solid var(--line); border-radius: 10px; padding: 6px 8px; }
+.uth-stats dt { font-size: .72rem; color: var(--muted); }
+.uth-stats dd { margin: 0; font-size: 1.15rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+.uth-note { color: var(--muted); font-size: .85rem; margin: 6px 0 10px; }
+.uth-log { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; font: .82rem/1.35 ui-monospace, SFMono-Regular, Menlo, monospace; }
+.uth-row { border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; }
+.uth-row.block { background: color-mix(in srgb, var(--danger) 8%, var(--card)); }
+.uth-line { display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: baseline; }
+.uth-badge { font-weight: 700; }
+.uth-badge.pass { color: #30a46c; }
+.uth-badge.block { color: var(--danger); }
+.uth-badge.scripted { color: #c27c00; }
+.uth-meta { color: var(--muted); margin-left: auto; }
+.uth-issues { margin: 4px 0 0; padding-left: 18px; overflow-wrap: anywhere; }
+.uth-issues .block b { color: var(--danger); }
+.uth-hidden, .uth-scores { margin: 4px 0 0; color: var(--muted); }
