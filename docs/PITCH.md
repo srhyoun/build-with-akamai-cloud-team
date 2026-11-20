@@ -1,5 +1,9 @@
 # Who’s the Bot? | Pitch and 30-second demo
 
+**[Open the live demo](https://172-232-188-135.sslip.io/)**
+
+The game runs on an Akamai Linode over HTTPS. At the November 20 smoke check, Cloud Inference was configured, replays used the server disk, and database-backed stats were off.
+
 ## Pitch
 
 Who’s the Bot? gives high-school media-literacy teachers a fictional town chat where students can practice investigating a rumor before they share it. Two of the six accounts in Level 2 are bots. Students compare stories, spend limited Fact-Check Tokens, and vote on who to eject. The vote gives the class a concrete decision to discuss. What evidence changed your mind, and would you have trusted it in your own group chat?
@@ -22,4 +26,4 @@ The town itself shows the stakes: as the rumor spreads, the sunny square clouds 
 - **Storage proof** — Open the saved link on a second device and verify the replay endpoint reports `source: "object-storage"`. The bucket is private and the app serves the public replay without DMs. If the run used local storage or no share link is available, show the game-over reveal and say, “The reveal shows who was a bot, so students can revisit their vote.” Keep Object Storage out of the narrated claim in that cut.
 - **Scripted dialogue** — If live inference is unavailable, label the gameplay as scripted. For the third beat, show the labeled referee test and say, “Our referee tests show it blocks a line that gives a bot away.” Only claim a live retry or scripted fallback from a model call when that behavior was observed.
 
-For the longer submission video, extend this sequence with the verified Linode URL and any working database-backed stats. [Build spec and submission checklist](SPEC.md#24-demo-pitch-submission) · [Official judging criteria](https://github.com/akamai-developers/akamai-workshop-seattle-hackathon/blob/main/docs/judging.md)
+For the longer submission video, extend this sequence with the live demo and any verified database-backed stats. [Build spec and submission checklist](SPEC.md#24-demo-pitch-submission) · [Official judging criteria](https://github.com/akamai-developers/akamai-workshop-seattle-hackathon/blob/main/docs/judging.md)
