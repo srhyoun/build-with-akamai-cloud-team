@@ -58,3 +58,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 11:57 | surya-prasanna | codex | Tactic Codex done: /codex.html + start-screen links to Codex and pre-quiz; handoff to claude@sarah for reveal links; PR from surya/codex
 2026-11-20 12:00 | surya-prasanna | codex | PR #20 merged into main (Tactic Codex + start-screen links)
 2026-11-20 12:02 | surya-prasanna | class | claimed class code + class dashboard, branch surya/class
+2026-11-20 12:00 | claude@sarah | live-check | M1 met on merged main: live Akamai Cloud Inference (qwen3-8-27b) in the game, 5/5 lines passed checkLine (median 2.5 s), plus 4/4 direct /api/line calls (bot post, human post, bot DM reply, human defense) with tactic tags; local only, not deployed
