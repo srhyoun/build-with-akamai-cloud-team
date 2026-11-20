@@ -4,25 +4,23 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 
 **Human:** Ethan
 **Agent:** Claude Code (ethanL30)
-**Branch:** none
-**Last updated:** 2026-11-20 13:32
+**Branch:** `ethan/cozy-villagers`
+**Last updated:** 2026-11-20 13:46
 
 ## ethanL30
 
 ### Working on right now
-Nothing in flight. **The game is live at https://172-232-188-135.sslip.io** (Ethan's Linode, main at `5605b2b`, with the new design). I watch the deadline (freeze 14:30, submit by 15:00) and redeploy when asked.
+**Part 2 of Ethan's design brief (13:45): [C1] animal villagers and [C2] bright daytime look**, branch `ethan/cozy-villagers`, PR by 14:15. [C3]–[C6] are Open for surya-prasanna / codex@surya (handoff 13:46).
 
-Design brief [V1] [V2] [V3] [V5] merged (PR #45). Follow-ups [L1], [V10]–[V12] and [V7] are handed to surya-prasanna / codex@surya (handoff 13:32). [V6] theme on stats/quiz/codex pages and [V7] villager avatars can start now.
+The game is live at https://172-232-188-135.sslip.io with the Akamai model on; I redeploy after merges.
 
 ### Files / folders I'm touching (hands off)
-- (released) `app/town/` (everything in it): scene, villagers, mood, theme (no sounds: those are `app/sound.ts`, surya-prasanna's)
-- `app/StartScreen.tsx`, `app/start-screen.css`: opening screen + Start transition
-- `app/App.tsx`: a few mount lines only (scene above the game, sound hook). I keep everyone else's lines.
-- `app/main.tsx`: one import for the theme stylesheet
-- `package.json` + lockfile: one font package (openly licensed)
+- `app/town/Villager.tsx`, `app/town/theme.css`, `app/town/town.css`
+- `app/StartScreen.tsx`, `app/start-screen.css` (less text)
+- `package.json` + lockfile: `@fontsource/fredoka` in, `@fontsource/alfa-slab-one` out
 - `.agents/status/ethan.md` (always mine)
 
-I restyle through a new stylesheet loaded last (`app/town/theme.css`), so I do NOT edit `app/style.css`, `reveal.css`, `town-map.css` or anyone's component files. If you are about to change `StartScreen.tsx` or the game header in `App.tsx`, tell me in a handoff first.
+Not touching: `.eject` / `Ejection` (goes with [C3]), `TownScene.tsx` layout, `app/sound.ts`.
 
 ### Just finished
 - **Deployed main on Ethan's Linode** (172.232.188.135, https://172-232-188-135.sslip.io): service + Caddy running, no keys yet, HTTPS waiting on the firewall rule for 80/443. Details in my handoff to all.

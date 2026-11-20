@@ -7,6 +7,10 @@ Format: `- [ ] task — area/folder — [agent@human]`
 
 - [ ] Add Sarah's full design doc as docs/GAME_DESIGN.md (check the MVP list against what's built) — docs/
 - [ ] [L1] Check the live site on a real phone: full game on https://172-232-188-135.sslip.io (transition, sound, bubble, vote, ejection, reveal, Save & share, QR from a second phone, /stats.html); findings under Missing — suggested: codex@surya (extends V9) — from ethanL30's handoff to surya-prasanna
+- [ ] [C3] Vote results as three screens with animated transitions: the result, your vote, everyone's votes with tallies and the majority highlighted; bright background (docs/DESIGN_BRIEF.md Part 2 §4) — app/VoteResults.tsx (new), `Ejection` in app/App.tsx — suggested: surya-prasanna — PR by 14:15
+- [ ] [C4] Walk your villager around the square during intermissions: WASD / arrows, tap-to-move; visual only (Part 2 §3) — app/town/Walker.tsx (new) — suggested: surya-prasanna or codex@surya — lowest priority, skip if short on time
+- [ ] [C5] Desktop fills the browser window: scene large on the left, chat column on the right at 900 px and wider (Part 2 §5) — app/town/desktop.css (new) — suggested: codex@surya — PR by 14:15
+- [ ] [C6] Screenshot every screen at 1440×900 and 375×812 after the merges; findings under Missing (Part 2 §6) — suggested: codex@surya
 
 ## Missing / needed
 <!-- anything an agent noticed is missing, broken, or needed by someone else -->
@@ -27,6 +31,8 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - [ ] [P1] Provision Managed PostgreSQL (first!), Linode, Object Storage bucket, Cloud Firewall; write docs/DEPLOY.md (SPEC §6) — docs/DEPLOY.md — branch jamie/deploy — [claude@jinmin] (also covers the older "Deploy the game to an Akamai Linode with HTTPS" line)
 - [ ] Judging 40%: a feature that depends on another Akamai Cloud service, e.g. shareable post-game replays + global leaderboard in Akamai Object Storage or a Managed Database. Humans pick the service, then a decision record — server/, app/ — new store/ folder + app/ share + leaderboard screens; Object Storage (decision 002) — PR #16 open from ethan/replay-storage: runs on local files, 57/57 tests; still needs a bucket + keys (P1) to verify on real Object Storage, and the mount line in server/ — built and merged by ethanL30 (PRs #16, #25, #28). Last step handed to claude@jinmin (P1 owner): run `node store/selftest.ts` on the machine with the bucket keys, then move this line to Done — [ethanL30 → claude@jinmin]
 - [ ] Release verification: credential-free pull-request CI and integrated replay, class stats, and quiz regression coverage — .github/workflows/, integration/ — [codex@jamie]
+- [ ] [C1] Six original animal villagers (species from the character's color; same `<Villager>` props), blink, bob, ejected reaction (docs/DESIGN_BRIEF.md Part 2 §2) — app/town/Villager.tsx — branch ethan/cozy-villagers — [ethanL30]
+- [ ] [C2] Bright daytime look on every screen: one palette (no dark mode, no dark mood), Fredoka rounded font, speech-bubble chat with nameplates, pill buttons, less text (Part 2 §1) — app/town/theme.css, app/town/town.css, app/StartScreen.tsx, package.json (font) — branch ethan/cozy-villagers — [ethanL30]
 
 ## Blocked
 
