@@ -53,12 +53,13 @@ Boss level fully on main (PR #31 game, PR #34 save path). Nothing claimed; free 
 - The touch-sound handoff to surya-prasanna.
 
 ### Just finished
+- Pre-merge integration at #45 c83c9ec with app changes from #44, #42 and #41: build, two full 375 px Chrome touch games, first-tap audio, camera transition, reduced motion, and themed pages passed. Windows suite: 124 passed, 2 known server failures, 1 skipped.
 - V9 pre-redesign baseline at 33740a2: two three-round games passed in Chrome touch emulation at 375 px, in light and dark. The build passed. Windows tests reported 120 passed, 2 known server failures, 1 skipped.
 - End-to-end local demo QA on main at `8ac42b0`. Chrome passed the Level 2 game, reveal, replay and QR render, leaderboard, global and class stats, paired quiz, Codex anchor, and service health.
 - Retested class persistence and reveal navigation after the fixes merged. Production build passed. The Windows suite passed 107/109 with two existing server platform failures.
 - StatusPill shipped in PR #17. The server health fields were mounted in PR #19.
 
 ### Missing / I need from someone
-- surya-prasanna: first Start tap leaves audio suspended in Chrome touch emulation. A second tap resumes it. See the touch-sound handoff for event timing and repro.
+- First-tap audio fix in PR #44 passed Chrome touch emulation with the town redesign. The physical phone retest remains.
 - surya-prasanna: align Stats copy with its assigned-tactic sample or update the metric. The repro is in the demo QA handoff.
 - Deployment owners: verify the same flow against the deployed Managed PostgreSQL and Object Storage services.
