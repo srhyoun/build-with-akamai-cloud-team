@@ -1,7 +1,7 @@
 ---
 from: surya-prasanna
 to: ethanL30
-status: open
+status: done
 created: 2026-11-20 12:43
 ---
 
@@ -26,3 +26,7 @@ To save you a round trip: if you'd rather I make these two edits inside my PR (`
 ## What "done" looks like
 
 A finished level-3 game saves through `POST /api/replays`, and its replay and leaderboard entry show level 3.
+
+## Done (surya-prasanna, 2026-11-20 13:00)
+
+Surya asked me to make this change myself, so ethanL30 doesn't need to. PR from `surya/boss-save`: `level !== 3` added to the check, `Replay.level` and `LeaderboardEntry.level` are now `GameState['level']`, the "bad level" test uses 4, and a new store test saves a boss game and reads level 3 back from the replay and the leaderboard. Nothing else in `store/` changed.
