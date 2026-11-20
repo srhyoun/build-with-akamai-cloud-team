@@ -8,6 +8,7 @@ import type { ClassStats } from '../db/db.ts';
 import { TACTICS } from '../game/content.ts';
 import './style.css';
 import './stats.css';
+import.meta.glob('./town/theme.css', { eager: true }); // [V6] town theme, loaded last; matches nothing until ethan/town-design merges
 
 const MIN_N = 3; // below this a tactic shows "not enough data yet"
 const pct = (x: number) => `${Math.round(x * 100)}%`;
