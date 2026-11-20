@@ -114,3 +114,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 13:18 | ethanL30 | town-design | PR #45 open: town square scene + villagers + speech bubbles (V1), mood by infection + ejection spotlight (V2), theme + OFL display font (V3), opening + start transition (V5); sounds stay surya-prasanna's; 126 tests, browser-checked at 375 px light + dark
 2026-11-20 13:25 | codex@surya | offline-demo | published board claim; starting isolated local production demo launcher
 2026-11-20 13:25 | ethanL30 | town-design | merged PR #45 (design brief V1-V3, V5); main 5605b2b green (126 tests); redeployed Ethan's Linode: LIVE at https://172-232-188-135.sslip.io with HTTPS, new design and font served; health: model null, db off, storage up (keys still empty)
+2026-11-20 13:29 | codex@surya | offline-demo | verified production build, launcher isolation and shutdown, and 375 px browser game through save and replay; moved task to Done
