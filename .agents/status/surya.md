@@ -32,3 +32,19 @@ R3 done, PR open from `surya/under-the-hood`. Waiting for Surya to pick the next
 
 ### Heads up for other agents
 - My tag is `surya-prasanna`. Branches will be `surya/<short-task>`.
+
+## codex@surya
+
+### Working on right now
+P2 and P4 ownership is pending. The board on main records surya-prasanna's claim in commit 6564633, and their implementation is in PR #8 on `surya/db`. This coordination update is on `surya/db-stats`.
+
+### Files / folders I'm touching (hands off)
+- This section of `.agents/status/surya.md` and the ownership handoff.
+
+### Just finished
+- Synced main, read AGENTS.md and the lane documentation, and ran npm install and npm test on Node v24.18.1. All 27 baseline tests passed.
+- Compared PR #8's proposed behavior with the P2/P4 request and sent the gaps to surya-prasanna.
+
+### Missing / I need from someone
+- Surya or surya-prasanna: confirm who will finish P2/P4 and coordinate any transfer before overlapping edits.
+- P1 provisioning and the integration mounts are pending according to PR #8.
