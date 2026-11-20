@@ -82,38 +82,54 @@ export async function saveGame(input: SaveInput): Promise<boolean> {
 
 // "Survival" = a bot was alive in a round with this tactic assigned and wasn't ejected at that round's end.
 // Uses assigned tactics, not per-post tags, because model lines carry no tag yet.
+// $1 = class code (case-insensitive) or null for every game.
 const STATS = `
-WITH bot_rounds AS (
+WITH g AS (SELECT * FROM games WHERE $1::text IS NULL OR upper(class_code) = upper($1::text)),
+c AS (SELECT characters.* FROM characters JOIN g ON g.id = characters.game_id),
+bot_rounds AS (
   SELECT c.ejected_round, gs.r AS round, unnest(c.tactics) AS tactic
-  FROM characters c JOIN games g ON g.id = c.game_id,
+  FROM c JOIN g ON g.id = c.game_id,
        generate_series(1, COALESCE(c.ejected_round, g.rounds_played)) AS gs(r)
   WHERE c.role = 'bot'
 )
 SELECT
-  (SELECT count(*)::int FROM games) AS games,
-  (SELECT COALESCE(avg((result = 'won')::int), 0)::float FROM games) AS win_rate,
-  (SELECT COALESCE(avg(final_spread), 0)::float FROM games) AS avg_spread,
-  (SELECT COALESCE(avg((role = 'human')::int), 0)::float FROM characters WHERE ejected_round IS NOT NULL) AS false_accusation,
+  (SELECT count(*)::int FROM g) AS games,
+  (SELECT COALESCE(avg((result = 'won')::int), 0)::float FROM g) AS win_rate,
+  (SELECT COALESCE(avg(final_spread), 0)::float FROM g) AS avg_spread,
+  (SELECT COALESCE(avg(score), 0)::float FROM g) AS avg_score,
+  (SELECT COALESCE(avg((role = 'human')::int), 0)::float FROM c WHERE ejected_round IS NOT NULL) AS false_accusation,
   (SELECT COALESCE(json_agg(t ORDER BY t.survival DESC, t.uses DESC), '[]') FROM (
      SELECT tactic, count(*)::int AS uses, avg((ejected_round IS DISTINCT FROM round)::int)::float AS survival
-     FROM bot_rounds GROUP BY tactic) t) AS tactics`;
+     FROM bot_rounds GROUP BY tactic) t) AS tactics,
+  CASE WHEN $1::text IS NULL THEN NULL ELSE (SELECT COALESCE(json_agg(p), '[]') FROM (
+     SELECT player_name AS name, score, result FROM g ORDER BY score DESC, created_at LIMIT 100) p) END AS players`;
 
-let cache: { at: number; stats: GlobalStats } | null = null;
+export interface ClassStats extends GlobalStats { classCode: string; avgScore: number; players: { name: string | null; score: number; result: 'won' | 'lost' }[] }
 
-export async function globalStats(now = Date.now()): Promise<GlobalStats | null> {
-  if (cache && now - cache.at < 5000) return cache.stats;
+const json = (x: unknown) => typeof x === 'string' ? JSON.parse(x) : x;
+let cache: Map<string, { at: number; stats: GlobalStats }> | null = null;
+
+async function stats(code: string | null, now: number): Promise<GlobalStats | ClassStats | null> {
+  const key = code ?? '';
+  const hit = cache?.get(key);
+  if (hit && now - hit.at < 5000) return hit.stats;
   const q = await get();
   if (!q) return null;
-  const [r] = (await q.query(STATS)).rows;
-  const tactics = (typeof r.tactics === 'string' ? JSON.parse(r.tactics) : r.tactics) as { tactic: string; uses: number; survival: number }[];
-  const stats: GlobalStats = {
+  const [r] = (await q.query(STATS, [code])).rows;
+  const tactics = json(r.tactics) as { tactic: string; uses: number; survival: number }[];
+  const out: GlobalStats = {
     gamesPlayed: r.games, winRate: r.win_rate, avgSpread: r.avg_spread, humanFalseAccusationRate: r.false_accusation,
     tactics: tactics.filter(t => t.tactic in TACTICS).map(t => ({ id: t.tactic as TacticId, name: TACTICS[t.tactic as TacticId].name, uses: t.uses, survivalRate: t.survival })),
     updatedAt: new Date(now).toISOString(),
   };
-  cache = { at: now, stats };
-  return stats;
+  const result = code ? { ...out, classCode: code, avgScore: r.avg_score, players: json(r.players) } as ClassStats : out;
+  (cache ??= new Map()).set(key, { at: now, stats: result });
+  return result;
 }
+
+export const globalStats = (now = Date.now()) => stats(null, now) as Promise<GlobalStats | null>;
+// Class codes are stored as typed (store/ trims, ≤ 24 chars); matched case-insensitively.
+export const classStats = (code: string, now = Date.now()) => stats(code.trim().toUpperCase(), now) as Promise<ClassStats | null>;
 
 export async function dbHealth(): Promise<'up' | 'down' | 'off'> {
   try { const q = await get(); if (!q) return 'off'; await q.query('SELECT 1'); return 'up'; } catch { return 'down'; }
@@ -168,11 +184,12 @@ async function readJson(req: IncomingMessage, limit = 8192): Promise<unknown> {
 }
 
 // Mounted by server/index.ts: `if (await handleDb(req, res)) return;`
-// Handles GET /api/stats/global, POST /api/quiz, GET /api/quiz/results.
+// Handles GET /api/stats/global, GET /api/stats/class/:code, POST /api/quiz, GET /api/quiz/results.
 export async function handleDb(req: IncomingMessage, res: ServerResponse): Promise<boolean> {
   const path = new URL(req.url ?? '/', 'http://x').pathname;
   const route = `${req.method} ${path}`;
-  if (route !== 'GET /api/stats/global' && route !== 'POST /api/quiz' && route !== 'GET /api/quiz/results') return false;
+  const classCode = req.method === 'GET' && path.startsWith('/api/stats/class/') ? path.slice('/api/stats/class/'.length) : null;
+  if (classCode === null && route !== 'GET /api/stats/global' && route !== 'POST /api/quiz' && route !== 'GET /api/quiz/results') return false;
   const send = (status: number, body: unknown) => { res.writeHead(status, { 'content-type': 'application/json' }); res.end(JSON.stringify(body)); };
   const off = { error: 'no database configured (set PGHOST… or DATABASE_URL)' };
   try {
@@ -180,6 +197,12 @@ export async function handleDb(req: IncomingMessage, res: ServerResponse): Promi
       const { sessionId, phase, answers } = parseQuiz(await readJson(req));
       const score = await saveQuiz(sessionId, phase, answers);
       send(score ? 200 : 503, score ?? off);
+    } else if (classCode !== null) {
+      let code = '';
+      try { code = decodeURIComponent(classCode).trim(); } catch { /* bad escape: rejected below */ }
+      if (!code || code.length > 24 || code.includes('/')) throw new Error('bad: class code must be 1-24 characters');
+      const body = await classStats(code);
+      send(body ? 200 : 503, body ?? off);
     } else {
       const body = route === 'GET /api/quiz/results' ? await quizResults() : await globalStats();
       send(body ? 200 : 503, body ?? off);
