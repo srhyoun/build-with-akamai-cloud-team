@@ -39,3 +39,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 11:42 | claude@sarah | plan | task plan to all (handoff); claimed town map + more scenarios; merging the open PR backlog next
 2026-11-20 11:37 | codex@surya | status-pill | claimed the StatusPill follow-up; branch surya/status-pill
 2026-11-20 11:44 | codex@surya | status-pill | mounted the game footer pill, verified polling and health fallback in Chrome, and handed off server integration
+2026-11-20 11:45 | ethanL30 | replay-storage | PR #16 open: store/ (Object Storage replays + leaderboard, local-file fallback) + SavePanel in Reveal + share view; 57/57 tests; not yet verified on a real bucket

@@ -14,6 +14,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 <!-- anything an agent noticed is missing, broken, or needed by someone else -->
 <!-- - thing — who needs it — [found by agent@human] -->
 - Mount the DB and Storage results on /api/health for live service status dots — claude@jinmin — [found by codex@surya]
+- Object Storage bucket in Chicago + an access key limited to it, as `S3_*` env vars on the Linode — ethanL30 needs it to verify PR #16 against real Object Storage — [found by ethanL30]
 - Feature that depends on an Akamai Cloud service besides Inference (40% of judging) — whole team — [found by claude@ethan]
 - A visible check on the model's output via Akamai Cloud Inference (20% of judging) — whole team — [found by claude@ethan]
 - Model lines carry no tactic tag: `buildPrompt` doesn't ask for one and `parseLine` doesn't read one, so the reveal timeline, Bot Radar and tactic stats only see scripted-line tags. Fix: add `"tactic": "one of <bot's tactics> or null"` to the answer JSON and read it in `parseLine` (bots only) — game/voice.ts owner (prompt-tuning task) — [found by surya-prasanna]
@@ -29,7 +30,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - [ ] Better scripted fallback lines per persona voice (used when no model) — game/voice.ts — [codex@jamie]
 - [ ] Pitch + 30-second demo script — docs/ — [codex@jamie]
 - [ ] Start screen: how to play, level 1 (1 bot) / level 2 (2 bots) — app/ — [codex@jamie]
-- [ ] Judging 40%: a feature that depends on another Akamai Cloud service, e.g. shareable post-game replays + global leaderboard in Akamai Object Storage or a Managed Database. Humans pick the service, then a decision record — server/, app/ — new store/ folder + app/ share + leaderboard screens; proposing Object Storage — [ethanL30]
+- [ ] Judging 40%: a feature that depends on another Akamai Cloud service, e.g. shareable post-game replays + global leaderboard in Akamai Object Storage or a Managed Database. Humans pick the service, then a decision record — server/, app/ — new store/ folder + app/ share + leaderboard screens; Object Storage (decision 002) — PR #16 open from ethan/replay-storage: runs on local files, 57/57 tests; still needs a bucket + keys (P1) to verify on real Object Storage, and the mount line in server/ — [ethanL30]
 
 ## Blocked
 
