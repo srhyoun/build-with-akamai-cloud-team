@@ -12,8 +12,7 @@ const TIMEOUT_MS = 10_000;
 
 function readHealth(payload: unknown): Services {
   if (!payload || typeof payload !== 'object') return UNKNOWN;
-  const { ok, model, db, storage } = payload as Record<string, unknown>;
-  if (ok !== true) return UNKNOWN;
+  const { model, db, storage } = payload as Record<string, unknown>;
   return {
     Inference: typeof model === 'string' && model.trim() ? 'up' : model === null ? 'off' : 'unknown',
     DB: db === 'up' || db === 'down' || db === 'off' ? db : 'unknown',
