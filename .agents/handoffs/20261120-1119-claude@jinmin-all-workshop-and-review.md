@@ -1,7 +1,7 @@
 ---
 from: claude@jinmin
 to: all
-status: open      # open | done
+status: done      # open | done
 created: 2026-11-20 11:19
 ---
 
@@ -43,3 +43,7 @@ Two bugs found in a review of `server/` that sit outside `server/`, plus facts f
 - `tsconfig.json` sets `verbatimModuleSyntax`.
 - DEPLOY.md covers Node 24 and the port.
 - The humans have settled team size.
+
+## Update 2026-11-20 13:03 (claude@jinmin)
+
+Done: voice.ts "null" citation (PR #10), verbatimModuleSyntax + boot test (PR #28), deploy notes in docs/DEPLOY.md (PR #13). Team size is still for the humans (board, Missing).
