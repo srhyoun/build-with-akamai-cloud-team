@@ -3,10 +3,12 @@ import type { GameState, Post, ToolId } from '../shared/types.ts';
 import { alive, init, step } from '../game/engine.ts';
 import { PHASE_MS, ROUNDS } from '../game/content.ts';
 import { startDirector } from './director.ts';
+import { voteResult } from './voteResult.ts';
 import { GameLevelContext } from './gameLevel.ts';
 import { UnderTheHood } from './UnderTheHood.tsx';
 import { StatusPill } from './StatusPill.tsx';
 import { Reveal } from './Reveal.tsx';
+import { TownMap } from './TownMap.tsx';
 import { SavePanel, ShareView } from './Share.tsx';
 import { replayIdFromUrl } from './share.ts';
 import { getRefereeLog } from './refereeLog.ts';
@@ -42,9 +44,7 @@ function Game({ onAgain }: { onAgain: () => void }) {
         <strong>Round {s.round}/{ROUNDS}</strong>
         <span>{PHASE_NAMES[s.phase]} · {Math.floor(secs / 60)}:{String(secs % 60).padStart(2, '0')}</span>
         <span title="Fact-Check Tokens left this round">🔍 {s.tokens}</span>
-        <div className="spread" role="meter" aria-label="Town infected" aria-valuenow={s.infection} aria-valuemin={0} aria-valuemax={100}>
-          <div style={{ width: `${s.infection}%` }} /><span>Town infected {s.infection}%</span>
-        </div>
+        <TownMap infection={s.infection} />
       </header>
 
       <nav className="cast" aria-label="Characters">
@@ -143,6 +143,7 @@ function Ejection({ s }: { s: GameState }) {
           <h2>{c.handle} was {e.wasBot ? 'a Bot' : 'not a Bot'}.</h2>
         </>
       ) : <h2>Nobody was ejected.</h2>}
+      <p><b>{voteResult(s)}</b></p>
       <p>{s.votes.map(v => `${v.voter === 'you' ? 'You' : s.characters.find(x => x.id === v.voter)?.handle} → ${v.target ? s.characters.find(x => x.id === v.target)?.handle : 'skip'}`).join(' · ')}</p>
     </div>
   );

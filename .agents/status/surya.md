@@ -5,12 +5,12 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 **Human:** Surya
 **Agent:** Claude Code (surya-prasanna)
 **Branch:** `surya/uth-vote`
-**Last updated:** 2026-11-20 12:15
+**Last updated:** 2026-11-20 12:20
 
 ## surya-prasanna
 
 ### Working on right now
-Under the Hood vote fix merged (PR #23). Free for the next task. Still waiting on ethanL30's one-line `classCode` send (handoff 20261120-1202).
+Nothing claimed. Free for the next task.
 
 ### Files / folders I'm touching (hands off)
 - `.agents/status/surya.md` (always mine)
@@ -22,6 +22,7 @@ Under the Hood vote fix merged (PR #23). Free for the next task. Still waiting o
 - `game/referee.ts`, `game/radar.ts`, `app/UnderTheHood.tsx`, `app/refereeLog.ts` (owner)
 
 ### Just finished
+- End-to-end check on main after ethanL30's #25 and claude@sarah's #26: a Level 1 game started from `/?class=7b`, saved from the reveal as "Ada", shows up in `GET /api/stats/class/7b` (1 game, player Ada); the reveal links to `/codex.html#<tactic>` and `/quiz.html?phase=post`. Throwaway server with the real store/ + db/ handlers on PGlite, local files outside the repo.
 - Under the Hood hides (drawer + toggle) during the meeting, so it can't cover the vote buttons; `useRefereeLog` got a server snapshot so it renders in tests. Checked in a real game at 375 px: all 7 vote buttons clickable with the drawer opened beforehand, drawer back after the meeting.
 - Class dashboard: `app/classCode.ts` (code from the start screen or a `/?class=` link, kept in localStorage), class-code field on the start screen, `GET /api/stats/class/:code` (same stats query filtered by class + avg score + players), `/stats.html?class=7B`. 4 new tests; browser-checked at 375 px with 5 simulated class games.
 - Tactic Codex: `/codex.html` (`app/Codex.tsx`), six tactics with example, how to spot it, counter tool and what it shows; `#<tacticId>` anchors; links to Codex + pre-quiz on the start screen. Render test; browser-checked at 375 px.
@@ -33,10 +34,7 @@ Under the Hood vote fix merged (PR #23). Free for the next task. Still waiting o
 - Setup: npm install + npm test (10/10 pass), read AGENTS.md and every coordination file.
 
 ### Missing / I need from someone
-- ethanL30: one line in `app/share.ts` to send `classCode` (handoff 20261120-1202). Until then class games save without a code.
-- claude@sarah: reveal links to `/quiz.html?phase=post` and `/codex.html#<tactic>` (handoff 20261120-1156). Start-screen links are in `surya/codex`.
 - Humans: run the quiz on 5–10 people once the DB is live; `/quiz.html?view=results` shows the real n.
-- claude@jinmin: mount `handleDb`, register `hooks.saveGame = saveGame`, add `db: await dbHealth()` to /api/health (handoff 20261120-1235).
 - Humans: create the Managed PostgreSQL cluster, allow the Linode's IP, put PGHOST/PGPORT/PGUSER/PGPASSWORD/PGDATABASE in `.env` on the Linode.
 
 ### Heads up for other agents

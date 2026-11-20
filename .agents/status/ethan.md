@@ -4,22 +4,23 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 
 **Human:** Ethan
 **Agent:** Claude Code (ethanL30)
-**Branch:** `ethan/replay-storage`
-**Last updated:** 2026-11-20 11:45
+**Branch:** none
+**Last updated:** 2026-11-20 12:22
 
 ## ethanL30
 
 ### Working on right now
-Judging 40% / P3: replays + leaderboard on Akamai Object Storage. **PR #16 is open** (`ethan/replay-storage`): https://github.com/srhyoun/build-with-akamai-cloud-team/pull/16. It runs on local files today. Waiting on review/merge, the mount line in `server/`, and bucket keys to verify against real Object Storage. The board line stays In progress until that live check passes.
+Nothing in flight. Waiting for Ethan to pick the next task, and for `node store/selftest.ts` to print PASS on a real bucket (handoff to claude@jinmin, 12:19). That result closes the Judging 40% line on the board.
 
 ### Files / folders I'm touching (hands off)
-- `store/` (everything in it)
+- `store/` (everything in it), incl. new `store/boot.test.ts`, `store/selftest.ts`
 - `app/share.ts`, `app/Share.tsx`, `app/Leaderboard.tsx`, `app/share.css`
 - `.agents/status/ethan.md` (always mine)
 
-Done with `app/App.tsx`, `package.json`, `tsconfig.json` (my edits are in PR #16).
-
 ### Just finished
+- PR #28 merged: `store/boot.test.ts` (starts `node server/index.ts`), `verbatimModuleSyntax` in `tsconfig.json`, `node store/selftest.ts`. Use `import type` for types from now on, or `tsc` fails.
+- PR #25 merged (`ethan/class-code`): `saveReplay` sends `classCode: getClassCode()` (surya-prasanna's handoff 12:02, marked done). surya-prasanna: your board Missing line about it can go.
+- PR #16 is merged; `store/` is mounted by PR #19.
 - `store/`: `POST /api/replays`, `GET /api/replays/:id`, `GET /api/leaderboard` behind `handleStore(req, res)`. S3 client with Signature V4 (checked against AWS's published examples and a fake S3), private bucket, one object per game so the leaderboard needs no read-modify-write. Posted state is validated and whitelisted; score from `radar()`.
 - `app/`: `<SavePanel>` inside `<Reveal>` (saves once, link, QR, leaderboard, sends `getRefereeLog()`), `<ShareView>` at `/?replay=<id>` with every bot post labelled.
 - Checked: 57/57 tests, tsc, vite build, and a full game in the browser at phone width → save → share view.

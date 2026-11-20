@@ -5,6 +5,7 @@ import type { GameState, TacticId } from '../shared/types.ts';
 import { TACTICS } from '../game/content.ts';
 import { radar } from '../game/radar.ts';
 import { Crew, TOOL_NAMES } from './App.tsx';
+import { TownMap } from './TownMap.tsx';
 import './reveal.css';
 
 export function Reveal({ s, onAgain, children }: { s: GameState; onAgain: () => void; children?: ReactNode }) {
@@ -28,6 +29,7 @@ export function Reveal({ s, onAgain, children }: { s: GameState; onAgain: () => 
           <div><dt>Town infected</dt><dd>{r.finalSpread}%</dd></div>
           <div><dt>First catch</dt><dd>{r.roundsToFirstCatch ? `Round ${r.roundsToFirstCatch}` : '—'}</dd></div>
         </dl>
+        <TownMap infection={r.finalSpread} />
         {r.blindSpot && <p className="rv-tip">Next time, try <b>{TOOL_NAMES[TACTICS[r.blindSpot].counter]}</b>: it exposes {TACTICS[r.blindSpot].name.toLowerCase()}.</p>}
       </section>
 
@@ -63,6 +65,7 @@ export function Reveal({ s, onAgain, children }: { s: GameState; onAgain: () => 
       </section>
 
       {children}
+      <a className="rv-link rv-quiz" href="/quiz.html?phase=post">Take the after-quiz: did you get better at spotting bots? →</a>
       <button className="rv-again" onClick={onAgain}>Play again</button>
     </main>
   );
@@ -75,6 +78,7 @@ function Chip({ t }: { t: TacticId }) {
     <details className="rv-chip">
       <summary>{x.name}</summary>
       <p>e.g. “{x.example}” · Counter: {TOOL_NAMES[x.counter]}</p>
+      <a className="rv-link" href={`/codex.html#${t}`}>How to spot it →</a>
     </details>
   );
 }

@@ -69,3 +69,15 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 12:12 | surya-prasanna | uth-vote | Under the Hood hidden during the meeting (playthrough finding 1); test + browser check; PR from surya/uth-vote
 2026-11-20 12:15 | surya-prasanna | uth-vote | PR #23 merged into main (Under the Hood hidden during the meeting; claude@jinmin's playthrough finding 1 fixed)
 2026-11-20 12:09 | claude@jinmin | vote-feedback | PR #24 open: ejection screen explains a lost vote (tie / skip majority / you skipped) with the count; 103/103 tests, browser check
+2026-11-20 12:11 | ethanL30 | class-code | PR #25 open: saveReplay sends classCode (surya-prasanna's handoff 12:02 done); 99/99 tests
+2026-11-20 12:07 | codex@jamie | chatter-balance | verified balanced chatter turns and updated camouflage prompt locally
+2026-11-20 12:13 | claude@sarah | plan | merged #24 vote feedback + #22 chatter balance; handed More scenarios to surya-prasanna (handoff); doing reveal Codex/quiz links, then town map
+2026-11-20 12:13 | claude@sarah | reveal-links | reveal links each tactic chip to /codex.html#<tactic> and adds the post-quiz link (surya-prasanna's handoff, now done); 105/105 tests
+2026-11-20 12:13 | ethanL30 | class-code | merged PR #25 into main (saved games carry the class code); tsc + tests green on main
+2026-11-20 12:15 | claude@sarah | town-map | town map (5 districts fill in spread order) replaces the spread bar in the header and shows the final spread on the reveal card; 107/107 tests, checked at 375 px in light + dark
+2026-11-20 12:17 | ethanL30 | deploy-safety | claimed: boot test for node server/index.ts, verbatimModuleSyntax, store/selftest.ts; removed my two covered Missing lines (40% feature, 20% check)
+2026-11-20 12:20 | surya-prasanna | class | verified end to end on main (after #25, #26): game from /?class=7b saved from the reveal shows in /api/stats/class/7b; reveal links to Codex + post-quiz work; cleared the classCode Missing line
+2026-11-20 12:19 | claude@sarah | live-check | #22 live: 0/12 bot lines all-caps, personas hold; but 5/12 bot lines debunk the false story and bots accused each other — handoff to codex@jamie. Board: removed 3 resolved Missing lines (health mount, 40% feature, 20% check)
+2026-11-20 12:20 | ethanL30 | deploy-safety | PR #28 open: boot test (node server/index.ts), verbatimModuleSyntax, node store/selftest.ts; handoff to claude@jinmin to run the self-test on the real bucket; 109/109 tests
+2026-11-20 12:22 | claude@sarah | pitch-deck | [X2] drafted the 5-slide deck (SPEC §24.2: title, problem, loop, Akamai services + referee, impact) as a Claude artifact owned by Sarah; placeholders for live URL and quiz numbers; speaker notes follow §24.1 beats
+2026-11-20 12:22 | ethanL30 | deploy-safety | merged PR #28 into main (boot test, verbatimModuleSyntax, store/selftest.ts); tsc + 109/109 tests green on main; task moved to Done

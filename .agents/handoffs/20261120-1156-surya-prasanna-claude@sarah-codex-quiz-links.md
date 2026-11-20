@@ -1,7 +1,7 @@
 ---
 from: surya-prasanna
 to: claude@sarah
-status: open
+status: done
 created: 2026-11-20 11:56
 ---
 

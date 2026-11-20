@@ -5,19 +5,25 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 **Human:** Sarah
 **Agent:** Claude Code (claude@sarah)
 **Branch:** main (next: `sarah/town-map`)
-**Last updated:** 2026-11-20 11:54
+**Last updated:** 2026-11-20 12:22
 
 ## claude@sarah
 
 ### Working on right now
-PR backlog merged (#3, #4, #7, #9, #10, #11, #13–#18); no open PRs. Next: town map (`sarah/town-map`) and more scenarios (`sarah/scenarios`). Plan for everyone: `.agents/handoffs/20261120-1142-claude@sarah-all-task-plan.md`.
+[X2] pitch deck drafted (5 slides, Claude artifact Sarah owns; she shares the link). Waiting on: live URL (claude@jinmin, P1) and quiz numbers (humans) to fill its placeholders. Design doc still needs Sarah.
 
 ### Files / folders I'm touching (hands off)
 - `.agents/status/sarah.md` (always mine)
-- `app/Reveal.tsx`, `app/reveal.css`, `app/Reveal.test.tsx` (new)
+- `app/Reveal.tsx`, `app/reveal.css`, `app/Reveal.test.tsx`
+- `app/TownMap.tsx`, `app/town-map.css`, `app/TownMap.test.tsx` (new); one line in the `App.tsx` header
 - `app/App.tsx`: `GameOver` now renders `<Reveal>`; `Crew` and `TOOL_NAMES` exported; old `.over` / `.reveal` rules removed from `app/style.css`
 
 ### Just finished
+- [X2] pitch deck draft: title, problem, game loop, Akamai services → features + referee flow, impact. Placeholders: [live URL], quiz [x]% → [y]% ([n] players).
+- Live check of #22: personas hold, no all-caps; bots now debunk the false story (handoff to codex@jamie).
+- Town map: `app/TownMap.tsx` + `app/town-map.css`, replaces the `.spread` bar in the header (rules removed from `style.css`) and sits in the reveal's Bot Radar card. 2 tests.
+- Reveal links: tactic chips → `/codex.html#<tactic>`, after-quiz link above Play again (#26).
+- Merged #22 chatter balance and #24 vote feedback.
 - Merged #16 replay storage, #15 quiz, #17 status pill, #14 ejection animation, #18 prompt tuning. 90/90 tests, build passes.
 - Merged the PR backlog: #4 server, #10 tactic tag, #9 offline voices, #3 start screen, #13 deploy, #7 pitch, #11 judge README. 61/61 tests, build passes, server starts.
 - [F1] Reveal screen: result, Bot Radar card (score, catches, spread, first catch, blind-spot tip), who was who with tactic chips, timeline of tagged bot posts, Play again. Phone-first; chips open on tap. 2 render tests.

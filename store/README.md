@@ -60,3 +60,13 @@ hooks.saveGame = saveGame; // (g: SavedGame) => Promise<unknown>; a throw is log
 ```
 
 `SavedGame.state` is the browser's state after a shape check, not a cleaned copy: use query parameters and cap what you store.
+
+## Check a real bucket
+
+On the machine that has the keys in `.env`:
+
+```
+node store/selftest.ts
+```
+
+It writes one small object (`selftest/check.json`), reads it back and lists it, then prints `PASS` or a `FAIL` with a `fix:` line. It prints no keys.
