@@ -61,8 +61,16 @@ export function startDirector(get: () => GameState, dispatch: (c: Command) => vo
       }
     }
     if (s.phase === 'meeting' && last?.phase !== 'meeting') alive(s).forEach((c, i) => speak(c.id, 'defense', undefined, 600 + i * 1200));
-    // The player DMed someone: they answer in the same DM thread.
-    for (const p of s.feed.slice(last?.feed.length ?? s.feed.length)) if (p.author === 'you' && p.to) speak(p.to, 'reply', p.to, 1500 + Math.random() * 2000);
+    for (const p of s.feed.slice(last?.feed.length ?? s.feed.length)) {
+      if (p.author !== 'you') continue;
+      // The player DMed someone: they answer in the same DM thread.
+      if (p.to) { speak(p.to, 'reply', p.to, 1500 + Math.random() * 2000); continue; }
+      // The player posted in the town chat: anyone they @-mention answers (up to 2); with no mention, one villager does.
+      const here = alive(s);
+      const named = here.filter(c => p.text.toLowerCase().includes(c.handle.toLowerCase())).slice(0, 2);
+      const answer = named.length ? named : here.length ? [here[Math.floor(Math.random() * here.length)]] : [];
+      answer.forEach((c, i) => speak(c.id, 'reply', undefined, 1500 + i * 1800 + Math.random() * 1500));
+    }
     last = s;
   }, TICK_MS);
   return () => clearInterval(timer);

@@ -38,7 +38,7 @@ Use the scenario and chat history for incident details. Do not invent new named 
 You may be mistaken, worried, or unsure in good faith. Treat unverified claims as questions or hearsay and correct yourself when new evidence arrives. Give checkable details when asked, and do not invent sources or repeat an unverified rumor as fact.`;
   const recent = s.feed.filter(p => !p.to || p.to === c.id).slice(-15).map(p => `${name(s, p.author)}${p.to ? ' (DM)' : ''}: ${p.text}`).join('\n');
   const ask = kind === 'defense' ? 'An emergency meeting was called. Give a one-line defense that responds to a specific concern.'
-    : kind === 'reply' ? 'The player just DMed you. Reply to them directly.'
+    : kind === 'reply' ? 'The player just messaged you. Reply to them directly.'
     : 'Write your next post in the group chat. React to what others said.';
   return [
     { role: 'system' as const, content: `You are ${c.handle} in a small-town group chat. ${c.bio}. Style: ${c.quirks}. Others here: ${others}.
