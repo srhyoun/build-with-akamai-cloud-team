@@ -122,3 +122,30 @@
     }
   }
 }
+
+/* Laptop fixes (Ethan's screenshot, 1000 x 458): the header spilled past its column, the Under the Hood button sat on the
+   speech bubble, and a short window left the chat only a couple of lines. */
+@media (min-width: 900px) {
+  #root > main:has(> .bar > .tw-scene) {
+    & > * { min-width: 0; }
+    & > .bar { margin: 0; }                         /* the phone header's negative side margins */
+    & > .cast { padding-bottom: 6px; }
+    & > .uth-toggle {                                /* top-right of the scene, clear of bubbles and name tags */
+      left: auto;
+      right: calc(var(--desktop-chat-width) + 3 * var(--desktop-gap));
+    }
+  }
+}
+@media (min-width: 900px) and (max-height: 640px) {
+  #root > main:has(> .bar > .tw-scene) {
+    & > .bar .tw-scene { --tw-vs: 1.05; }           /* smaller villagers so the front row's name tags stay inside */
+    & > .bar > .tw-hint { display: none; }
+    & > .town-map > svg { display: none; }          /* the scene already shows the mood; keep the percentage */
+    & > .cast .avatar { flex-direction: row; min-width: 0; min-height: 36px; padding: 4px 10px; }
+    & > .cast .avatar svg { width: 22px; height: 22px; }
+    & > .panel { max-height: 32dvh; }
+    & > .status-pill-footer { display: none; }
+    /* a DM is open: the meeting button gives its row to the chat (close the DM to call a meeting) */
+    &:has(> .panel) .actions > .meeting { display: none; }
+  }
+}
