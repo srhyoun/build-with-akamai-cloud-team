@@ -27,7 +27,8 @@ export function SavePanel({ s, refereeLog }: { s: GameState; refereeLog?: Refere
     sent.current = true;
     setPhase('saving');
     const r = await saveReplay(s, { refereeLog, playerName, keepalive });
-    if (r) { setSaved(r); setNote(`Saved. Score ${r.score}.`); } else { sent.current = false; setPhase('failed'); }
+    // The link points at the page the player is on: behind a proxy the server's own idea of its origin can be wrong.
+    if (r) { setSaved(r.shareUrl ? { ...r, shareUrl: `${location.origin}/?replay=${r.id}` } : r); setNote(`Saved. Score ${r.score}.`); } else { sent.current = false; setPhase('failed'); }
   };
 
   useEffect(() => {
