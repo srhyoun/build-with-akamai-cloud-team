@@ -1,0 +1,38 @@
+/* Save panel, replay card and leaderboard. Colors come from the variables in style.css. */
+.sh-panel, .sh-board { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 12px; margin: 16px 0; text-align: left; overflow-wrap: anywhere; }
+.sh-panel p, .sh-view p { margin: 8px 0; }
+.sh-score { font-size: 1.2rem; }
+.sh-form label { display: block; margin-bottom: 6px; }
+.sh-form small, .sh-foot, .sh-meta, .sh-cast small { color: var(--muted); font-size: .85rem; }
+.sh-link { display: flex; flex-wrap: wrap; gap: 6px; }
+.sh-link input { flex: 1 1 180px; min-width: 0; min-height: 44px; font: inherit; padding: 10px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); color: var(--text); }
+.sh-qr { display: block; width: 200px; max-width: 100%; margin: 12px auto 0; }
+.sh-qr + .sh-foot { text-align: center; }
+.sh-small { display: block; margin-top: 8px; border: 0; background: none; color: var(--accent); padding: 0; text-decoration: underline; }
+.sh-foot:empty { margin: 0; } /* not display:none: a hidden live region is not announced when its text arrives */
+
+.sh-board ol, .sh-cast, .sh-posts { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.sh-board li { display: flex; align-items: baseline; gap: 8px; padding: 6px 8px; border-radius: 8px; }
+.sh-board li.sh-me { background: var(--clue); outline: 2px solid var(--accent); }
+.sh-rank { flex: none; width: 1.6em; color: var(--muted); font-variant-numeric: tabular-nums; }
+.sh-name { flex: 1; min-width: 0; }
+
+.sh-view { padding-top: 20px; overflow-wrap: anywhere; }
+.sh-view h1 { font-size: 1.5rem; line-height: 1.2; margin: 0 0 4px; }
+.sh-view h2 { margin: 24px 0 8px; }
+.sh-board h2 { margin: 0 0 8px; }
+.sh-callout { background: var(--clue); border-radius: 10px; padding: 10px 12px; font-weight: 600; }
+.sh-cast li, .sh-posts li { display: flex; gap: 8px; align-items: flex-start; }
+.sh-posts li { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 8px 10px; }
+.sh-pebble { flex: none; }
+/* #fff on #b3261e is 6.5:1, the same in light and dark because the chip brings its own background. */
+.sh-chip { display: inline-block; font-size: .75rem; font-weight: 700; line-height: 1.5; padding: 0 7px; border-radius: 10px; border: 1px solid var(--line); color: var(--muted); }
+.sh-bot { background: #b3261e; border-color: #b3261e; color: #fff; }
+.sh-alert { background: var(--news); border-radius: 10px; padding: 8px 10px; font-weight: 600; }
+.sh-stories { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px; margin-bottom: 8px; }
+.sh-stories p { margin: 0; background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 8px; padding: 8px 10px; }
+.sh-stories p.sh-false { border-left-color: var(--danger); }
+.sh-stories b { display: block; font-size: .8rem; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+.sh-eject { font-size: .95rem; }
+.sh-play { display: block; margin: 24px 0 8px; padding: 12px; min-height: 44px; border-radius: 10px; background: #2f4fc4; color: #fff; text-align: center; font-weight: 600; text-decoration: none; }
+.sh-play:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }

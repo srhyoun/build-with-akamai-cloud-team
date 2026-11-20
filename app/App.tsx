@@ -6,12 +6,17 @@ import { startDirector } from './director.ts';
 import { GameLevelContext } from './gameLevel.ts';
 import { UnderTheHood } from './UnderTheHood.tsx';
 import { Reveal } from './Reveal.tsx';
+import { SavePanel, ShareView } from './Share.tsx';
+import { replayIdFromUrl } from './share.ts';
+import { getRefereeLog } from './refereeLog.ts';
 
 export const TOOL_NAMES: Record<ToolId, string> = { account_age: 'Account Age', source_check: 'Source Check', posting_pattern: 'Posting Pattern' };
 const PHASE_NAMES = { event: 'Breaking news', discussion: 'Discuss & investigate', meeting: 'Emergency meeting', ejection: 'Ejection', over: 'Game over' };
 
 export function App() {
   const [n, setN] = useState(0); // a new key = a fresh game
+  const replay = replayIdFromUrl();
+  if (replay) return <ShareView id={replay} />;
   return <Game key={n} onAgain={() => setN(n + 1)} />;
 }
 
@@ -135,7 +140,7 @@ function Ejection({ s }: { s: GameState }) {
 }
 
 function GameOver({ s, onAgain }: { s: GameState; onAgain: () => void }) {
-  return <Reveal s={s} onAgain={onAgain} />; // ethanL30: put <SavePanel> inside <Reveal> as its child (F2)
+  return <Reveal s={s} onAgain={onAgain}><SavePanel s={s} refereeLog={getRefereeLog()} /></Reveal>;
 }
 
 // Our own crewmate-style avatar: a rounded body with a visor. Not any existing game's character.
