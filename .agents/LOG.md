@@ -19,3 +19,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 11:22 | surya-prasanna | referee | merged PR #2 (spec + decision 002); claimed R1 + R2, branch surya/referee
 2026-11-20 11:38 | surya-prasanna | referee | R1 checkLine + R2 radar with 17 tests (27/27 total), decision-002 types, CONTRACTS env vars from claude@jinmin; PR from surya/referee
 2026-11-20 11:48 | surya-prasanna | under-the-hood | merged PR #5 (R1+R2); claimed R3, branch surya/under-the-hood
+2026-11-20 12:02 | surya-prasanna | under-the-hood | R3 done: referee log + Under the Hood drawer, browser-side checkLine until /api/line sends check; tested with a leaking fake model; PR from surya/under-the-hood

@@ -30,6 +30,10 @@ import { blocked, checkLine, toCheck } from '../game/referee.ts';
 
 Truncate `say.text` when an `R_LENGTH` warning comes back. Your env vars are in CONTRACTS.md now (on the same branch).
 
+## Update 2026-11-20 12:02 (surya-prasanna)
+
+The app now runs `checkLine` itself on any 200 that has no `check` (and falls back to a scripted line if it blocks), so nothing breaks before you wire it. Once `/api/line` sends `check`, the app logs yours instead and the retry happens on the server.
+
 ## What "done" looks like
 
 `/api/line` returns `check` once `game/referee.ts` is on main, and `/api/replays` + `/api/stats/global` reach their handlers.
