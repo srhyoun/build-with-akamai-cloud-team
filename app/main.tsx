@@ -5,6 +5,7 @@ import { App } from './App.tsx';
 import { StartScreen } from './StartScreen.tsx';
 import { GameLevelContext } from './gameLevel.ts';
 import './style.css';
+import './town/theme.css';
 
 function GameEntry() {
   const [level, setLevel] = useState<GameState['level'] | null>(null);

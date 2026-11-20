@@ -1,27 +1,37 @@
 .start-screen {
   display: grid;
-  gap: 24px;
-  padding-top: clamp(32px, 8vh, 88px);
+  gap: 16px;
+  padding-top: 12px;
+}
+
+.start-hero { border-radius: 18px; box-shadow: var(--soft, none); transform-origin: 50% 0; }
+
+.start-screen.leaving .start-hero { transform: scale(1.06); }
+.start-screen.leaving > :not(.start-hero) { opacity: 0; pointer-events: none; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .start-hero { transition: transform 1.2s cubic-bezier(.2, .7, .2, 1); }
+  .start-screen > :not(.start-hero) { transition: opacity .5s ease; }
 }
 
 .start-screen h1 {
   margin: 0;
-  font-size: clamp(2.25rem, 9vw, 3.5rem);
-  line-height: 1.05;
-  letter-spacing: -0.04em;
+  font-size: clamp(1.9rem, 8.4vw, 3.4rem);
+  line-height: 1.15;
+  text-wrap: balance;
 }
 
 .start-screen header p {
   max-width: 36ch;
-  margin: 12px 0 0;
+  margin: 10px 0 0;
   color: var(--muted);
 }
 
 .start-rules {
   padding: 16px;
-  border: 1px solid var(--line);
-  border-radius: 14px;
+  border-radius: 18px;
   background: var(--card);
+  box-shadow: var(--soft, none);
 }
 
 .start-rules ol {
@@ -45,7 +55,7 @@
 .start-levels button {
   display: grid;
   gap: 2px;
-  padding: 12px;
+  padding: 14px;
   text-align: start;
   border-color: var(--accent);
 }
@@ -60,11 +70,11 @@
 }
 
 .start-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; }
-.start-links a { display: flex; align-items: center; justify-content: center; text-align: center; min-height: 44px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); color: var(--accent); font-weight: 600; text-decoration: none; }
+.start-links a { display: flex; align-items: center; justify-content: center; text-align: center; min-height: 44px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--card); color: var(--accent); font-weight: 600; text-decoration: none; }
 
 .start-class { display: grid; gap: 6px; }
 .start-class label { font-weight: 600; }
 .start-class small { font-weight: 400; color: var(--muted); }
-.start-class input { font: inherit; min-height: 44px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); color: var(--text); text-transform: uppercase; }
+.start-class input { font: inherit; min-height: 44px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 14px; background: var(--card); color: var(--text); text-transform: uppercase; }
 .start-class a { color: var(--accent); min-height: 44px; display: flex; align-items: center; }
 .start-levels .start-boss { grid-column: 1 / -1; }
