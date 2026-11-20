@@ -154,3 +154,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 14:04 | ethanL30 | how-to-play | claimed: How to play page + per-phase hint line in the game; branch ethan/how-to-play
 2026-11-20 14:07 | ethanL30 | deploy | redeployed main c58c71b (adds codex@surya's desktop layout via #60): live, health model on, db up, storage up
 2026-11-20 14:07 | ethanL30 | how-to-play | PR #62 open: /howto.html, PhaseHint line in the header, and the theme import moved last on codex/quiz/stats (they stayed dark in OS dark mode); tsc + tests + build green, checked at 375 px
+2026-11-20 14:08 | ethanL30 | how-to-play | merged PR #62; main 6e88651 green (138 tests); redeployed: live site has /howto.html, the phase hint line, laptop layout, animal villagers; health model on, db up, storage up, leaderboard from object-storage
