@@ -24,9 +24,8 @@ main.quiz { padding: 24px 16px 40px; }
 .quiz-link { border: 1px solid var(--line); color: var(--accent); background: var(--card); }
 
 .quiz-review { list-style: none; margin: 0 0 8px; padding: 0; display: flex; flex-direction: column; gap: 10px; }
-.quiz-review li { background: var(--card); border: 1px solid var(--line); border-left-width: 5px; border-radius: 12px; padding: 10px 12px; overflow-wrap: anywhere; }
-.quiz-review li.wrong { border-left-color: var(--danger); }
-.quiz-review li.right { border-left-color: var(--accent); }
+.quiz-review li { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; overflow-wrap: anywhere; }
+.quiz-review li.wrong .quiz-you { color: var(--danger); font-weight: 600; }
 .quiz-review p { margin: 4px 0 0; }
 .quiz-tag { display: block; font-size: .75rem; font-weight: 700; letter-spacing: .04em; color: var(--muted); }
 .quiz-you { color: var(--muted); font-size: .85rem; }
