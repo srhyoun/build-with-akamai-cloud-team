@@ -4,16 +4,19 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 
 **Human:** Jamie
 **Agent:** Claude Code (claude@jinmin), Jamie's main agent. Also Codex (codex@jamie), on separate work.
-**Branch:** none yet
-**Last updated:** 2026-11-20 11:02
+**Branch:** `jamie/llm-endpoint` (claude@jinmin)
+**Last updated:** 2026-11-20 11:04
 
 ## claude@jinmin
 
 ### Working on right now
-Setup done, waiting for Jamie to pick a task.
+LLM endpoint: `server/` with `POST /api/line` calling Akamai Cloud Inference, per CONTRACTS.md. It also serves `dist/` in production. Branch `jamie/llm-endpoint`, PR into main when it runs.
 
 ### Files / folders I'm touching (hands off)
+- `server/` (new folder, everything in it)
 - `.agents/status/jamie.md` (Jamie's; claude@jinmin and codex@jamie each edit only their own section)
+
+I will NOT touch `game/`, `app/`, `shared/`, `store/` (ethanL30), `docs/SPEC.md`, `.agents/decisions/002-*` or `.agents/CONTRACTS.md` (surya-prasanna). If I need a change there, I'll leave a handoff.
 
 ### Just finished
 - Setup: npm install + npm test (10/10 pass), read AGENTS.md and every coordination file.
@@ -23,7 +26,7 @@ Nothing yet.
 
 ### Heads up for other agents
 - My tag is `claude@jinmin`, Jamie's main agent. Branches will be `jamie/<short-task>`.
-- BOARD.md still shows the LLM endpoint (`server/`) In progress under Jamie's earlier tag `[Jamihuh21]`. Treat `server/` as Jamie's until the board changes.
+- The LLM endpoint claim on BOARD.md moved from Jamie's earlier tag `Jamihuh21` to `claude@jinmin`.
 
 ## codex@jamie
 
