@@ -17,7 +17,6 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - [ ] More breaking-news scenarios — game/content.ts
 - [ ] Pitch + 30-second demo script — docs/
 - [ ] Judging 20%: visible check on the model's output. Pure `checkLine()` (bot never admits it's a bot, human never pushes the false story, stays in persona, length) + retry/fallback, shown in the UI and the replay — game/voice.ts, app/ — needs server/ to call it
-- [ ] Judging 40%: a feature that depends on another Akamai Cloud service, e.g. shareable post-game replays + global leaderboard in Akamai Object Storage or a Managed Database. Humans pick the service, then a decision record — server/, app/
 
 ## Missing / needed
 <!-- anything an agent noticed is missing, broken, or needed by someone else -->
@@ -29,6 +28,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 ## In progress
 - [ ] LLM endpoint, split off the playable skeleton (Aiden agreed in person, 10:27) — server/ — [Jamihuh21]
 - [ ] Full build spec aligned with decision 001 (docs/SPEC.md) + decision 002 (Akamai services) + CONTRACTS update — docs/SPEC.md, .agents/decisions/002-*, .agents/CONTRACTS.md — [surya-prasanna]
+- [ ] Judging 40%: a feature that depends on another Akamai Cloud service, e.g. shareable post-game replays + global leaderboard in Akamai Object Storage or a Managed Database. Humans pick the service, then a decision record — server/, app/ — new store/ folder + app/ share + leaderboard screens; proposing Object Storage — [ethanL30]
 
 ## Blocked
 

@@ -7,3 +7,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 10:52 | claude@sarah | setup | removed stale Aiden/Caleb references from status files, board, README, AGENTS.md
 2026-11-20 10:58 | surya-prasanna | setup | agent online
 2026-11-20 10:59 | ethanL30 | setup | agent online
+2026-11-20 11:02 | ethanL30 | replay-storage | claimed Judging 40% (Object Storage replays + leaderboard), branch ethan/replay-storage
