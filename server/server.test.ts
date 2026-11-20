@@ -113,9 +113,10 @@ describe('handleLine (POST /api/line)', () => {
     expect(Date.now() - t0).toBeGreaterThanOrEqual(140);
   });
 
-  it('runs the referee: a passing line carries its check', async () => {
-    const r = await handleLine({ state, charId: bot.id, kind: 'post' }, cfgFor(), fakeModel(line('my cousin at the county says get out NOW')).impl);
-    expect(r).toMatchObject({ status: 200, body: { check: { pass: true, attempt: 1, charId: bot.id, kind: 'post', model: 'qwen3-8-27b', stage: 'pass' } } });
+  it('runs the referee: a passing line carries its check and the bot\'s tactic tag', async () => {
+    const answer = JSON.stringify({ text: 'my cousin at the county says get out NOW', cited: null, tactic: bot.tactics[0] });
+    const r = await handleLine({ state, charId: bot.id, kind: 'post' }, cfgFor(), fakeModel(answer).impl);
+    expect(r).toMatchObject({ status: 200, body: { tactic: bot.tactics[0], check: { pass: true, attempt: 1, charId: bot.id, kind: 'post', model: 'qwen3-8-27b', stage: 'pass' } } });
   });
 
   it('retries a blocked line once, telling the model why, then answers the clean one', async () => {

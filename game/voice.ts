@@ -31,16 +31,23 @@ What the player has done so far: checked ${s.clues.map(k => name(s, k.target)).j
     { role: 'system' as const, content: `You are ${c.handle} in a small-town group chat. ${c.bio}. Style: ${c.quirks}. Others here: ${others}.
 ${role}
 Never say you are an AI or a bot. Keep it to 1–2 short sentences, like a real chat message.
-Answer with JSON only: {"text": "...", "cited": "a source you cite, or null"}` },
+Answer with JSON only: {"text": "...", "cited": "the source you cite" or null, "tactic": ${c.role === 'bot' ? `the tactic this line uses, one of ${c.tactics.map(t => `"${t}"`).join(', ')}` : 'null'}}` },
     { role: 'user' as const, content: `Chat so far:\n${recent}\n\n${ask}` },
   ];
 }
 
+const NO_SOURCE = /^(null|none|n\/a|no source|nothing)?$/i; // models write "null" as a string
+
 // Turns the model's raw answer into a say command. Falls back to the raw text if it isn't JSON.
 export function parseLine(s: GameState, c: Character, raw: string, to?: string): Say {
-  let text = raw.trim(), cited: string | null = null;
-  try { const j = JSON.parse(raw.slice(raw.indexOf('{'), raw.lastIndexOf('}') + 1)); text = String(j.text ?? text); cited = j.cited ? String(j.cited) : null; } catch { /* plain text answer */ }
-  return { type: 'say', author: c.id, text, to, source: cited ? { cited, verdict: verdict(c, s) } : undefined };
+  let text = raw.trim(), cited: string | null = null, tactic: Say['tactic'];
+  try {
+    const j = JSON.parse(raw.slice(raw.indexOf('{'), raw.lastIndexOf('}') + 1));
+    text = String(j.text ?? text);
+    cited = j.cited && !NO_SOURCE.test(String(j.cited).trim()) ? String(j.cited) : null;
+    tactic = c.role === 'bot' && c.tactics.includes(j.tactic) ? j.tactic : undefined; // only a bot's own tactics tag a post
+  } catch { /* plain text answer */ }
+  return { type: 'say', author: c.id, text, to, source: cited ? { cited, verdict: verdict(c, s) } : undefined, tactic };
 }
 
 // shortcut: canned lines so the game runs with no model; replace with model output once server/ has a key.

@@ -20,8 +20,8 @@ export const LINE_SCHEMA: JsonSchema = {
   name: 'chat_line',
   schema: {
     type: 'object',
-    properties: { text: { type: 'string' }, cited: { type: ['string', 'null'] } },
-    required: ['text', 'cited'],
+    properties: { text: { type: 'string' }, cited: { type: ['string', 'null'] }, tactic: { type: ['string', 'null'] } },
+    required: ['text', 'cited', 'tactic'],
     additionalProperties: false,
   },
 };
@@ -63,10 +63,10 @@ export const stripThinking = (raw: string) => raw
   .replace(/<think>[\s\S]*$/i, '')
   .trim();
 
-const NO_SOURCE = /^(null|none|n\/a|no source|nothing)?$/i; // the prompt shows `"cited": "… or null"`, so models write "null"
+const NO_SOURCE = /^(null|none|n\/a|no source|nothing)?$/i; // models still sometimes write "null" as a string
 const shorten = (t: string, max: number) => t.length <= max ? t : `${t.slice(0, max - 1).replace(/\s+\S*$/, '')}…`;
 
-// One model answer, format-checked: JSON parsed into a say command, no empty line, no fake "null" source.
+// One model answer, format-checked: JSON parsed into a say command (with the bot's tactic tag), no empty line, no fake "null" source.
 async function ask(cfg: ModelConfig, messages: Message[], req: LineRequest, fetchImpl: typeof fetch): Promise<Say> {
   const say = parseLine(req.state, req.c, stripThinking(await complete(cfg, messages, fetchImpl, LINE_SCHEMA)), req.to);
   if (!say.text.trim()) throw badAnswer('model answer had no text');
