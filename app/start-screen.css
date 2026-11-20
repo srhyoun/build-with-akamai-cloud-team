@@ -1,35 +1,57 @@
-.start-screen { display: grid; gap: 16px; padding-top: 12px; text-align: center; }
-
-.start-hero { border-radius: 18px; box-shadow: var(--soft, none); transform-origin: 50% 0; }
-
-.start-screen.leaving .start-hero { transform: scale(1.06); }
-.start-screen.leaving > :not(.start-hero) { opacity: 0; pointer-events: none; }
-
-@media (prefers-reduced-motion: no-preference) {
-  .start-hero { transition: transform 1.2s cubic-bezier(.2, .7, .2, 1); }
-  .start-screen > :not(.start-hero) { transition: opacity .5s ease; }
+/* Welcome screen: fills the window. Sky above, grass below, the town in the middle, one Start button, the tutorial at the bottom. */
+#root > main.start-screen {
+  max-width: none; min-height: 100dvh; margin: 0; padding: 18px 16px 20px;
+  display: grid; grid-template-rows: auto minmax(0, 1fr) auto auto; justify-items: center; align-items: center; gap: 10px;
+  text-align: center; overflow: hidden;
+  background: linear-gradient(#bfe4ff 0%, #e6f5ff 46%, #c4eaa2 46%, #a9db85 100%);
 }
 
-.start-screen h1 { margin: 0; font-size: clamp(1.9rem, 8.4vw, 3.4rem); line-height: 1.15; text-wrap: balance; }
-.start-screen header p { margin: 6px 0 0; color: var(--muted); }
+.start-title { display: grid; justify-items: center; gap: 2px; }
+.start-welcome { margin: 0; font-weight: 600; font-size: clamp(1rem, 3.6vw, 1.5rem); color: #5a3a1c; }
+/* cream letters with a wood-brown edge; our own lettering */
+.start-screen h1 {
+  margin: 0; font-size: clamp(2.3rem, min(11vw, 9dvh), 5.5rem); line-height: 1.05; font-weight: 700; text-wrap: balance; color: #fff6dc;
+  text-shadow: 0 3px 0 #7a4e2b, 3px 0 0 #7a4e2b, -3px 0 0 #7a4e2b, 0 -3px 0 #7a4e2b, 2px 2px 0 #7a4e2b, -2px 2px 0 #7a4e2b, 2px -2px 0 #7a4e2b, -2px -2px 0 #7a4e2b, 0 8px 0 rgb(90 58 28 / .35);
+}
+.start-team { margin: 8px 0 0; padding: 4px 16px; border-radius: 999px; background: #fff6dc; border: 2px solid #7a4e2b; color: #3b2a1a; font-size: clamp(.95rem, 3.2vw, 1.25rem); transform: rotate(-2deg); }
 
-.start-rules { display: flex; justify-content: center; gap: 8px; margin: 0; padding: 0; list-style: none; }
-.start-rules li { display: grid; justify-items: center; flex: 1; max-width: 9rem; padding: 8px; border: 2px solid var(--line); border-radius: 18px; background: var(--card); font-weight: 600; }
-.start-rules span { font-size: 1.6rem; line-height: 1.2; }
+.start-hero { width: min(100%, 820px, 42dvh); transform-origin: 50% 50%; }
 
-.start-levels { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
-.start-levels button { display: grid; justify-items: center; padding: 10px 6px 12px; }
-.start-levels button:hover { background: #b4e89a; }
-.start-levels strong { font-size: 2rem; line-height: 1; }
-.start-levels span { font-size: .9rem; }
-/* dark ink on coral: 7:1 */
-.start-levels .start-boss, .start-levels .start-boss:hover { background: #ff9d8a; color: #4a1a10; border-color: #c9604c; }
-.start-levels .start-boss:hover { background: #ffb3a3; }
+.start-go { display: grid; justify-items: center; gap: 12px; }
+#root .start-button {
+  width: clamp(108px, min(30vw, 14dvh), 168px); aspect-ratio: 1; border-radius: 50%; padding: 0;
+  background: #7fd15c; color: #173d0c; border: 4px solid #3f7d2c; border-bottom-width: 10px;
+  font-size: clamp(1.6rem, 6vw, 2.2rem); font-weight: 700; box-shadow: 0 10px 24px rgb(63 125 44 / .35);
+}
+#root .start-button:hover { background: #93e070; }
+#root .start-button:active { border-bottom-width: 4px; transform: translateY(6px); }
+.start-level { display: flex; gap: 6px; padding: 4px; border-radius: 999px; background: rgb(255 246 220 / .85); }
+#root .start-level button { min-height: 44px; padding: 6px 16px; border: 2px solid transparent; border-radius: 999px; background: none; color: #3b2a1a; font-weight: 600; box-shadow: none; }
+#root .start-level button[aria-checked='true'] { background: #fff; border-color: #7a4e2b; }
 
-.start-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
-.start-links a { display: flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; padding: 8px 12px; border: 2px solid var(--line); border-bottom-width: 3px; border-radius: 999px; background: var(--card); color: var(--accent); font-weight: 600; text-decoration: none; }
+.start-tutorial { width: min(100%, 820px); padding: 12px 14px; border-radius: 22px; background: #fff8e8; border: 3px solid #7a4e2b; color: #3b2a1a; display: grid; gap: 4px; }
+.start-tutorial h2 { margin: 0; font-size: 1.05rem; }
+.start-tutorial ol { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 0; padding: 0; list-style: none; counter-reset: step; }
+.start-tutorial li { display: grid; justify-items: center; gap: 2px; font-size: .92rem; line-height: 1.25; }
+.start-tutorial li svg { color: #7a4e2b; }
+.start-tutorial li b { display: block; }
+.start-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 14px; }
+.start-links a, .start-class a { min-height: 44px; display: inline-flex; align-items: center; padding: 0 8px; color: #2f6a1f; font-weight: 600; }
+.start-class summary { cursor: pointer; min-height: 44px; display: inline-flex; align-items: center; font-weight: 600; }
+.start-class label { margin-right: 8px; }
+.start-class input { font: inherit; width: 8rem; min-height: 44px; padding: 8px 14px; border: 2px solid #7a4e2b; border-radius: 999px; background: #fff; color: #3b2a1a; text-align: center; text-transform: uppercase; }
 
-.start-class { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 6px 10px; }
-.start-class label { font-weight: 600; }
-.start-class input { font: inherit; width: 8rem; min-height: 44px; padding: 8px 14px; border: 2px solid var(--line); border-radius: 999px; background: var(--card); color: var(--text); text-align: center; text-transform: uppercase; }
-.start-class a { color: var(--accent); min-height: 44px; display: flex; align-items: center; }
+/* Start: the whole screen pushes in toward the square and fades into the game. */
+.start-screen.leaving { pointer-events: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .start-button { animation: start-pulse 2.4s ease-in-out infinite; }
+  .start-screen.leaving { animation: start-leave 1.2s cubic-bezier(.4, 0, .2, 1) both; transform-origin: 50% 45%; }
+  .start-screen.leaving .start-title, .start-screen.leaving .start-go, .start-screen.leaving .start-tutorial { transition: opacity .35s ease; opacity: 0; }
+}
+@keyframes start-pulse { 50% { transform: scale(1.05); } }
+@keyframes start-leave { 60% { opacity: 1; } to { transform: scale(1.6); opacity: 0; } }
+
+@media (max-height: 700px) {
+  #root > main.start-screen { gap: 8px; padding-top: 10px; }
+  .start-tutorial li { font-size: .85rem; }
+}

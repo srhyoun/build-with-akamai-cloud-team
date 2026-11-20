@@ -1,72 +1,74 @@
 import { useEffect, useRef, useState } from 'react';
-import { Icon } from './Icon.tsx';
 import { BOTS, PERSONAS } from '../game/content.ts';
 import type { GameState } from '../shared/types.ts';
 import { initialClassCode, setClassCode } from './classCode.ts';
+import { Icon } from './Icon.tsx';
 import { TownScene } from './town/TownScene.tsx';
 import './start-screen.css';
 
 const DEMO_CAST = PERSONAS.slice(0, 6).map(p => ({ id: p.handle.slice(1).toLowerCase(), handle: p.handle, color: p.color }));
-const GLIDE_MS = 1200;
+const LEAVE_MS = 1200;
+const LEVELS = [1, 2, 3] as const;
+const levelLabel = (l: GameState['level']) => l === 3 ? 'Boss' : `${BOTS[l]} ${BOTS[l] === 1 ? 'bot' : 'bots'}`;
 
 export function StartScreen({ onStart }: { onStart: (level: GameState['level']) => void }) {
   const [classCode, setCode] = useState(initialClassCode);
+  const [level, setLevel] = useState<GameState['level']>(1);
   const [leaving, setLeaving] = useState(false);
   const timer = useRef<number | undefined>(undefined);
   useEffect(() => () => clearTimeout(timer.current), []);
 
-  const start = (level: GameState['level']) => {
+  const start = () => {
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) return onStart(level);
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setLeaving(true);
-    timer.current = window.setTimeout(() => onStart(level), GLIDE_MS);
+    timer.current = window.setTimeout(() => onStart(level), LEAVE_MS);
   };
 
   return (
     <main className={`start-screen${leaving ? ' leaving' : ''}`} aria-labelledby="start-title">
+      <header className="start-title">
+        <p className="start-welcome">Welcome to</p>
+        <h1 id="start-title">Who's the Bot?</h1>
+        <p className="start-team">by <b>Kimchi Trenchers</b></p>
+      </header>
+
       <div className="start-hero">
         <TownScene view={leaving ? 'ground' : 'aerial'} cast={DEMO_CAST} infection={0} />
       </div>
 
-      <header>
-        <h1 id="start-title">Who's the Bot?</h1>
-        <p>Spot the bots. Save the town.</p>
-      </header>
-
-      <ul className="start-rules" aria-label="How to play">
-        <li><Icon name="eye" size={28} />Read</li>
-        <li><Icon name="search" size={28} />Check</li>
-        <li><Icon name="vote" size={28} />Vote</li>
-      </ul>
-
-      <section aria-labelledby="level-title">
-        <h2 id="level-title">Play</h2>
-        <div className="start-levels">
-          {([1, 2, 3] as const).map(level => {
-            const label = level === 3 ? 'Boss level' : `${BOTS[level]} ${BOTS[level] === 1 ? 'bot' : 'bots'}`;
-            return (
-              <button key={level} type="button" className={level === 3 ? 'start-boss' : undefined} disabled={leaving} onClick={() => start(level)}
-                      aria-label={level === 3 ? `Boss level: ${BOTS[3]} bots, one poses as the town reporter` : `Level ${level}: ${label}`}>
-                <strong aria-hidden="true">{level === 3 ? '★' : level}</strong>
-                <span>{label}</span>
-              </button>
-            );
-          })}
+      <div className="start-go">
+        <button type="button" className="start-button" disabled={leaving} onClick={start}>Start</button>
+        <div className="start-level" role="radiogroup" aria-label="Level">
+          {LEVELS.map(l => (
+            <button key={l} type="button" role="radio" aria-checked={level === l} disabled={leaving} onClick={() => setLevel(l)}
+                    aria-label={l === 3 ? `Boss level: ${BOTS[3]} bots, one poses as the town reporter` : `Level ${l}: ${levelLabel(l)}`}>
+              {levelLabel(l)}
+            </button>
+          ))}
         </div>
-      </section>
+      </div>
 
-      <section className="start-class">
-        <label htmlFor="class-code">Class code</label>
-        <input id="class-code" value={classCode} maxLength={24} autoComplete="off" autoCapitalize="characters" placeholder="7B"
-               onChange={e => { setCode(e.target.value.toUpperCase()); setClassCode(e.target.value); }} />
-        {classCode.trim() && <a href={`/stats.html?class=${encodeURIComponent(classCode.trim())}`}>Results for {classCode.trim()} →</a>}
-      </section>
-
-      <nav className="start-links" aria-label="Learn more">
-        <a href="/howto.html"><Icon name="compass" size={22} />How to play</a>
-        <a href="/codex.html"><Icon name="book" size={22} />Codex</a>
-        <a href="/quiz.html?phase=pre"><Icon name="question" size={22} />Quiz</a>
-      </nav>
+      <footer className="start-tutorial" aria-labelledby="tutorial-title">
+        <h2 id="tutorial-title">How to play</h2>
+        <ol>
+          <li><Icon name="eye" size={30} /><b>Read</b> the town chat</li>
+          <li><Icon name="search" size={30} /><b>Check</b> who you doubt</li>
+          <li><Icon name="vote" size={30} /><b>Vote</b> the bots out</li>
+        </ol>
+        <nav className="start-links" aria-label="Learn more">
+          <a href="/howto.html">Full guide</a>
+          <a href="/codex.html">Codex</a>
+          <a href="/quiz.html?phase=pre">Quiz</a>
+        </nav>
+        <details className="start-class" open={!!classCode}>
+          <summary>Class code</summary>
+          <label htmlFor="class-code">From your teacher</label>
+          <input id="class-code" value={classCode} maxLength={24} autoComplete="off" autoCapitalize="characters" placeholder="7B"
+                 onChange={e => { setCode(e.target.value.toUpperCase()); setClassCode(e.target.value); }} />
+          {classCode.trim() && <a href={`/stats.html?class=${encodeURIComponent(classCode.trim())}`}>Results for {classCode.trim()} →</a>}
+        </details>
+      </footer>
     </main>
   );
 }
