@@ -15,7 +15,7 @@ import { getRefereeLog } from './refereeLog.ts';
 import { SoundToggle, useGameSounds } from './sound.ts';
 
 export const TOOL_NAMES: Record<ToolId, string> = { account_age: 'Account Age', source_check: 'Source Check', posting_pattern: 'Posting Pattern' };
-const PHASE_NAMES = { event: 'Breaking news', discussion: 'Discuss & investigate', meeting: 'Emergency meeting', ejection: 'Ejection', over: 'Game over' };
+const PHASE_NAMES = { event: 'Breaking news', discussion: 'Investigate', meeting: 'Emergency meeting', ejection: 'Ejection', over: 'Game over' };
 
 export function App() {
   const [n, setN] = useState(0); // a new key = a fresh game
@@ -46,8 +46,8 @@ function Game({ onAgain }: { onAgain: () => void }) {
         <strong>Round {s.round}/{ROUNDS}</strong>
         <span>{PHASE_NAMES[s.phase]} · {Math.floor(secs / 60)}:{String(secs % 60).padStart(2, '0')}</span>
         <span title="Fact-Check Tokens left this round">🔍 {s.tokens}</span>
-        <TownMap infection={s.infection} />
         <SoundToggle />
+        <TownMap infection={s.infection} />
       </header>
 
       <nav className="cast" aria-label="Characters">
