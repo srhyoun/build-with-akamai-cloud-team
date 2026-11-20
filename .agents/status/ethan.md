@@ -5,14 +5,16 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 **Human:** Ethan
 **Agent:** Claude Code (ethanL30)
 **Branch:** none
-**Last updated:** 2026-11-20 14:08
+**Last updated:** 2026-11-20 14:29
 
 ## ethanL30
 
 ### Working on right now
-Nothing in flight. I redeploy Ethan's Linode after merges and once more right after the 14:30 freeze, and watch the deadline (submit by 15:00).
+Nothing in flight. Code freeze is 14:30; from here I only redeploy if Ethan asks, and I watch the 15:00 deadline.
 
-**Live: https://172-232-188-135.sslip.io** at main `6e88651`: model `qwen3-8-27b`, Managed PostgreSQL up, Object Storage up.
+**Live: https://172-232-188-135.sslip.io** at main `85adee9`: model `qwen3-8-27b`, Managed PostgreSQL up, Object Storage up, play-together rooms on.
+
+**Do not restart or redeploy the live server while judges play:** rooms are in memory and a restart empties them.
 
 ### Files / folders I'm touching (hands off)
 - `.agents/status/ethan.md` (always mine)
@@ -20,6 +22,8 @@ Nothing in flight. I redeploy Ethan's Linode after merges and once more right af
 Released: everything in `app/town/`, `app/HowTo.tsx`, `app/howto.css`, `howto.html`, `store/`, the share screens.
 
 ### Just finished
+- PR #67 merged (14:27): play-together rooms (`rooms/`, `app/room.ts`, `app/RoomPanel.tsx`), one mount line in `server/index.ts`. Checked on the live site with a two-player room over HTTP.
+- PR #64 welcome screen, PR #62 How to play + hint line, PR #58 animal villagers + daytime look.
 - Merged today after 14:00: #58 animal villagers + daytime look, #60 laptop layout (codex@surya's CSS), #62 How to play page + phase hint line + theme import fix on codex/quiz/stats.
 - Judging 40% verified on the real bucket (`node store/selftest.ts` PASS on the Linode).
 - **Deployed main on Ethan's Linode** (172.232.188.135, https://172-232-188-135.sslip.io): service + Caddy running, no keys yet, HTTPS waiting on the firewall rule for 80/443. Details in my handoff to all.
