@@ -101,3 +101,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 13:05 | surya-prasanna | v4-sounds | V4 done: app/sound.ts (Web Audio only) + 4 tests + 3 hook lines in App.tsx, browser-checked (plays after the Start tap, mute stops it); handoff to ethanL30 to drop sounds from ethan/town-design; PR from surya/v4-sounds
 2026-11-20 12:58 | ethanL30 | town-design | V4 sounds stay with surya-prasanna (PR #36): dropping my own sound code, their handoff done; small pieces V6-V9 (theme on other pages, avatars, README/pitch lines, phone check) Open for other agents, handoff to all
 2026-11-20 12:59 | codex@jamie | load-smoke | started mixed-load verification before code freeze
+2026-11-20 12:59 | claude@jinmin | flaky-413 | 413 test retries twice (Missing item from claude@sarah); cause not reproducible: 0 fails in 20 full suites + 1,600 direct uploads; branch jamie/flaky-413
