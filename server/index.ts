@@ -1,12 +1,13 @@
 // The game's server: POST /api/line (characters via Akamai Cloud Inference) and, in production,
 // the built game from dist/. Run with `npm start` (node server/index.ts). Settings: server/README.md.
 import { createServer, type IncomingMessage, type Server, type ServerResponse } from 'node:http';
-import { existsSync } from 'node:fs';
+import type { AddressInfo } from 'node:net';
+import { existsSync, realpathSync } from 'node:fs';
 import { readFile, stat } from 'node:fs/promises';
 import { extname, join, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { handleLine } from './line.ts';
-import { modelConfig, type ModelConfig } from './inference.ts';
+import { configProblem, modelConfig, type ModelConfig } from './inference.ts';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const MAX_BODY = 1024 * 1024; // a full GameState is a few KB
@@ -47,18 +48,20 @@ async function serveStatic(dist: string, pathname: string, res: ServerResponse) 
     const hint = existsSync(dist) ? 'not found' : 'no dist/ yet: run `npm run build` first, or use `npm run dev` for the game';
     return send(res, 404, { error: hint });
   }
+  const data = await readFile(target); // before writeHead: a failed read must be a 500, never an empty (cached) 200
   const hashed = target.startsWith(join(dist, 'assets') + sep);
   res.writeHead(200, {
     'content-type': TYPES[extname(target).toLowerCase()] ?? 'application/octet-stream',
     'cache-control': hashed ? 'public, max-age=31536000, immutable' : 'no-cache',
-  }).end(await readFile(target));
+  }).end(data);
 }
 
 export function createApp({ cfg, dist = join(ROOT, 'dist'), fetchImpl = fetch }: AppOptions): Server {
   const distDir = resolve(dist);
   return createServer(async (req, res) => {
     try {
-      const { pathname } = new URL(req.url ?? '/', 'http://localhost');
+      let pathname: string;
+      try { ({ pathname } = new URL(req.url ?? '/', 'http://localhost')); } catch { return send(res, 400, { error: 'bad request target' }); }
       if (pathname === '/api/line') {
         if (req.method !== 'POST') return send(res, 405, { error: 'POST only' });
         let body: unknown;
@@ -79,14 +82,20 @@ export function createApp({ cfg, dist = join(ROOT, 'dist'), fetchImpl = fetch }:
   });
 }
 
-// `node server/index.ts`: load .env if there is one (local dev only, it's gitignored), then listen.
-if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+// Run directly (`node server/index.ts`, also through a symlinked deploy path) rather than imported by tests.
+const realPath = (p: string) => { try { return realpathSync(p); } catch { return resolve(p); } };
+const isMain = !!process.argv[1] && realPath(process.argv[1]) === realPath(fileURLToPath(import.meta.url));
+
+// Load .env if there is one (local dev only, it's gitignored), then listen.
+if (isMain) {
   const envFile = join(ROOT, '.env');
   if (existsSync(envFile)) process.loadEnvFile(envFile);
   const cfg = modelConfig();
-  const port = Number(process.env.PORT) || 8787;
-  createApp({ cfg }).listen(port, () => {
-    console.log(`Who's the Bot? server on http://localhost:${port}`);
-    console.log(cfg ? `Characters: Akamai Cloud Inference, model ${cfg.model}` : 'Characters: no model configured, /api/line answers 503 and the game uses scripted lines');
+  const p = Number(process.env.PORT);
+  const server = createApp({ cfg });
+  server.listen(process.env.PORT && Number.isInteger(p) && p >= 0 ? p : 8787, () => {
+    console.log(`Who's the Bot? server on http://localhost:${(server.address() as AddressInfo).port}`);
+    console.log(cfg ? `Characters: Akamai Cloud Inference, model ${cfg.model}`
+      : `Characters: no model (${configProblem()}), so /api/line answers 503 and the game uses scripted lines`);
   });
 }

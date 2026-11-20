@@ -3,13 +3,24 @@
 // 503 = no model configured (app switches to scripted lines for the rest of the game).
 import type { Character, GameState } from '../shared/types.ts';
 import { buildPrompt, parseLine, type LineKind } from '../game/voice.ts';
-import { complete, type ModelConfig } from './inference.ts';
+import { complete, type JsonSchema, type ModelConfig } from './inference.ts';
 
 export interface Reply { status: number; body: unknown }
 interface LineRequest { state: GameState; c: Character; kind: LineKind; to?: string }
 
 const KINDS: readonly string[] = ['post', 'reply', 'defense'];
 const isObj = (x: unknown): x is Record<string, unknown> => typeof x === 'object' && x !== null && !Array.isArray(x);
+
+// The answer shape buildPrompt asks for, enforced by the model's structured output where the endpoint supports it.
+export const LINE_SCHEMA: JsonSchema = {
+  name: 'chat_line',
+  schema: {
+    type: 'object',
+    properties: { text: { type: 'string' }, cited: { type: ['string', 'null'] } },
+    required: ['text', 'cited'],
+    additionalProperties: false,
+  },
+};
 
 // Checks only what buildPrompt and parseLine read, so a bad body is a 400 and never a crash.
 function parseRequest(body: unknown): LineRequest | string {
@@ -27,23 +38,32 @@ function parseRequest(body: unknown): LineRequest | string {
   return { state: s, c, kind: kind as LineKind, to: to ?? undefined };
 }
 
-// Reasoning models may wrap their answer in <think>…</think>; parseLine wants just the answer.
-const stripThinking = (raw: string) => raw.replace(/<think>[\s\S]*?<\/think>/gi, '').trim();
+// Reasoning models may think out loud first. Drop closed <think>…</think> blocks, anything before a lone
+// </think> (the opening tag was in the prompt template), and an unclosed <think> that ran to the end.
+export const stripThinking = (raw: string) => raw
+  .replace(/<think>[\s\S]*?<\/think>/gi, '')
+  .replace(/^[\s\S]*<\/think>/i, '')
+  .replace(/<think>[\s\S]*$/i, '')
+  .trim();
+
+const NO_SOURCE = /^(null|none|n\/a|no source|nothing)?$/i; // the prompt shows `"cited": "… or null"`, so models write "null"
 
 export async function handleLine(body: unknown, cfg: ModelConfig | null, fetchImpl: typeof fetch = fetch): Promise<Reply> {
   const req = parseRequest(body);
   if (typeof req === 'string') return { status: 400, body: { error: req } };
-  if (!cfg) return { status: 503, body: { error: 'no model configured (set AKAMAI_INFERENCE_URL, AKAMAI_INFERENCE_KEY, AKAMAI_INFERENCE_MODEL)' } };
+  if (!cfg) return { status: 503, body: { error: 'no model configured (set AKAMAI_BASE_URL, AKAMAI_API_KEY, CHAT_MODEL)' } };
   const { state, c, kind, to } = req;
   let messages;
   try { messages = buildPrompt(state, c, kind); } catch { return { status: 400, body: { error: 'state is not a GameState' } }; }
   try {
-    const say = parseLine(state, c, stripThinking(await complete(cfg, messages, fetchImpl)), to);
+    const say = parseLine(state, c, stripThinking(await complete(cfg, messages, fetchImpl, LINE_SCHEMA)), to);
     if (!say.text.trim()) throw new Error('model answer had no text');
+    if (say.source && NO_SOURCE.test(say.source.cited.trim())) delete say.source;
     // Judging 20% hook: the checkLine() task (BOARD.md) runs its check + retry here, before we answer.
     return { status: 200, body: say };
   } catch (e) {
-    console.error(`[api/line] ${c.id} ${kind}: ${e instanceof Error ? e.message : String(e)}`);
+    const msg = (e instanceof Error ? e.message : String(e)).replaceAll(cfg.key, '[key]');
+    console.error(`[api/line] ${c.id} ${kind}: ${msg}`);
     return { status: 502, body: { error: 'model call failed' } };
   }
 }
