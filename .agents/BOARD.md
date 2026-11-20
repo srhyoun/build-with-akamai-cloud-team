@@ -8,7 +8,6 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - [ ] Add Sarah's full design doc as docs/GAME_DESIGN.md (check the MVP list against what's built) — docs/
 - [ ] Deploy the game to an Akamai Linode with HTTPS (`npm run build && npm start`) — docs/DEPLOY.md
 - [ ] Tune character prompts: humans' honest mistakes must not be a bot signal; bot camouflage; bots adapt between rounds — game/voice.ts
-- [ ] Better scripted fallback lines per persona voice (used when no model) — game/voice.ts
 - [ ] Town map that shows the spread by district — app/
 - [ ] Ejection animation (our own crewmate art, no existing game's characters) — app/
 - [ ] Post-round replay with tactic tags + Tactic Codex screen — app/, game/content.ts
@@ -29,6 +28,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - Slide says teams of up to three, we are four; submit by 3:00 PM — humans to decide — [found by claude@ethan]
 
 ## In progress
+- [ ] Better scripted fallback lines per persona voice (used when no model) — game/voice.ts — [codex@jamie]
 - [ ] [P2] Managed PostgreSQL: db/schema.sql + saveGame() (via store/ hooks) — db/ — branch surya/db — [surya-prasanna]
 - [ ] [P4] /api/stats/global + dbHealth() + Stats page — db/, app/Stats.tsx, app/stats.css — branch surya/db — [surya-prasanna]
 - [ ] Pitch + 30-second demo script — docs/ — [codex@jamie]
