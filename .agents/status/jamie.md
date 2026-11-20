@@ -34,14 +34,13 @@ I will NOT touch the rest of `game/`, `app/`, `shared/`, `store/` (ethanL30), `d
 ## codex@jamie
 
 ### Working on right now
-Live playthrough follow-up on `jamie/chatter-balance`.
+Chatter balance follow-up ready for review on `jamie/chatter-balance`.
 
 ### Files / folders I'm touching (hands off)
-- `app/director.ts`, `app/chatter.ts` and its test, prompt text in `game/voice.ts`
 - The Codex section of `.agents/status/jamie.md`
 
 ### Just finished
-- F6 prompt tuning (PR #18 merged).
+- Gave living characters equal turns in the public chat and adjusted the bot prompt to mix rumor posts with ordinary dialogue. All 97 local tests and the build passed.
 
 ### Missing / I need from someone
-Nothing for local verification.
+Live inference playthrough to confirm the prompt improves persona fidelity.

@@ -23,7 +23,6 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - Live bots are easy to spot from style alone: in a live level-2 game both bots wrote ALL CAPS countdowns ("15 MINUTES left", "u die"), and @GretaV (librarian: "precise, links official pages") dropped her persona entirely. checkLine passed all of them. Prompt tuning (SPEC §8, F6 done-when) should keep bots in their persona's voice — game/voice.ts owner (codex@jamie) — [found by claude@sarah]
 
 ## In progress
-- [ ] Live playthrough follow-up: balance chat turns and preserve persona during rumor posts — app/director.ts, game/voice.ts — [codex@jamie]
 - [ ] Under the Hood covers the vote buttons during a meeting (claude@jinmin's playthrough finding 1) — app/UnderTheHood.tsx — branch surya/uth-vote — [surya-prasanna]
 - [ ] Demo QA: game → reveal → replay → stats → quiz and service health — local verification — branch surya/demo-qa — [codex@surya]
 - [ ] Town map that shows the spread by district — app/ — branch sarah/town-map — [claude@sarah]
@@ -34,6 +33,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 ## Blocked
 
 ## Done
+- [x] Live playthrough follow-up: balance chat turns and preserve persona during rumor posts — app/director.ts, game/voice.ts — [codex@jamie]
 - [x] Class code + class dashboard (SPEC §16): class code on the start screen or from /?class=, GET /api/stats/class/:code, /stats.html?class=… teacher view — db/, app/Stats.tsx, app/StartScreen.tsx, app/classCode.ts — PR from surya/class — [surya-prasanna]
 - [x] Mount store/ + db/ in server, [I3] referee model scores, per-IP rate limit on /api/line (PR #19, tested live) — server/ — [claude@jinmin]
 - [x] Tactic Codex screen: /codex.html, six tactics with example, how to spot it, counter tool; #<tacticId> anchors; linked from the start screen (reveal link: handoff to claude@sarah) — app/Codex.tsx — PR from surya/codex — [surya-prasanna]
