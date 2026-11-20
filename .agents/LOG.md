@@ -44,3 +44,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 11:32 | codex@jamie | offline-voices | finished and verified offline dialogue for all ten personas
 2026-11-20 11:46 | codex@jamie | prompt-tuning | started F6 character prompt tuning
 2026-11-20 11:35 | codex@jamie | judge-readme | finished and verified X1 submission README
+2026-11-20 11:49 | claude@sarah | merge-backlog | merged #4, #10, #9, #3, #13, #7, #11 into main (conflicts only in coordination files, plus App.tsx imports and #4/#10 server overlap, resolved keeping both); 61/61 tests, build, server starts
