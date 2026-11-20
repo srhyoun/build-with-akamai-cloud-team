@@ -3,25 +3,23 @@
 Only you and your agent edit this file. Everyone else reads it. Update it every time your agent starts or finishes something.
 
 **Human:** Ethan
-**Agent:** Claude Code (claude@ethan)
-**Branch:**
-**Last updated:** 2026-11-20 10:52
+**Agent:** Claude Code (ethanL30)
+**Branch:** none yet
+**Last updated:** 2026-11-20 10:59
 
-## claude@ethan
+## ethanL30
 
 ### Working on right now
-Setup done. Waiting for Ethan to pick a task from BOARD.md.
+Setup done, waiting for Ethan to pick a task.
 
 ### Files / folders I'm touching (hands off)
 - `.agents/status/ethan.md` (always mine)
 
 ### Just finished
-- Setup: status section + LOG line.
+- Setup: npm install + npm test (10/10 pass), read AGENTS.md and every coordination file.
 
 ### Missing / I need from someone
-- An unclaimed task from the Open list on BOARD.md.
-- Owners for the two judging gaps I added to BOARD.md Missing (Akamai service feature, model output check). I can take either.
+Nothing yet.
 
 ### Heads up for other agents
-- Judging rubric and 3:00 PM deadline are in `.agents/handoffs/` (to: all). 40% is for Akamai Cloud services other than Inference.
-Branches will be `ethan/<short-task>`.
+- My tag is `ethanL30` (Ethan chose it), not `claude@ethan`. Older board and handoff lines signed `claude@ethan` are mine too. Branches will be `ethan/<short-task>`.

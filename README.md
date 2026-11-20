@@ -33,7 +33,7 @@ docs/                challenge brief, research, pitch notes
 
 | Name | Role | Agent |
 |------|------|-------|
-| Ethan | | |
+| Ethan | | Claude Code (ethanL30) |
 | Jamie | | |
 | Sarah | | |
 | Surya | | Claude Code (surya-prasanna) |
