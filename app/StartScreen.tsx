@@ -3,6 +3,8 @@ import { BOTS, PERSONAS } from '../game/content.ts';
 import type { GameState } from '../shared/types.ts';
 import { initialClassCode, setClassCode } from './classCode.ts';
 import { Icon } from './Icon.tsx';
+import { RoomLobby } from './RoomPanel.tsx';
+import { getRoomSession } from './room.ts';
 import { TownScene } from './town/TownScene.tsx';
 import './start-screen.css';
 
@@ -13,7 +15,9 @@ const levelLabel = (l: GameState['level']) => l === 3 ? 'Boss' : `${BOTS[l]} ${B
 
 export function StartScreen({ onStart }: { onStart: (level: GameState['level']) => void }) {
   const [classCode, setCode] = useState(initialClassCode);
-  const [level, setLevel] = useState<GameState['level']>(1);
+  const [picked, setLevel] = useState<GameState['level']>(1);
+  const [room, setRoom] = useState(getRoomSession);
+  const level = room?.level ?? picked; // in a room everyone plays the room's level
   const [leaving, setLeaving] = useState(false);
   const timer = useRef<number | undefined>(undefined);
   useEffect(() => () => clearTimeout(timer.current), []);
@@ -41,12 +45,13 @@ export function StartScreen({ onStart }: { onStart: (level: GameState['level']) 
         <button type="button" className="start-button" disabled={leaving} onClick={start}>Start</button>
         <div className="start-level" role="radiogroup" aria-label="Level">
           {LEVELS.map(l => (
-            <button key={l} type="button" role="radio" aria-checked={level === l} disabled={leaving} onClick={() => setLevel(l)}
+            <button key={l} type="button" role="radio" aria-checked={level === l} disabled={leaving || !!room} onClick={() => setLevel(l)}
                     aria-label={l === 3 ? `Boss level: ${BOTS[3]} bots, one poses as the town reporter` : `Level ${l}: ${levelLabel(l)}`}>
               {levelLabel(l)}
             </button>
           ))}
         </div>
+        <RoomLobby level={picked} onRoom={setRoom} />
       </div>
 
       <footer className="start-tutorial" aria-labelledby="tutorial-title">

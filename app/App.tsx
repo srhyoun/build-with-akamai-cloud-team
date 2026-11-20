@@ -15,6 +15,8 @@ import { Icon } from './Icon.tsx';
 import { PhaseHint } from './town/PhaseHint.tsx';
 import { SavePanel, ShareView } from './Share.tsx';
 import { replayIdFromUrl } from './share.ts';
+import { RoomBoard } from './RoomPanel.tsx';
+import { getRoomSession } from './room.ts';
 import { getRefereeLog } from './refereeLog.ts';
 import { SoundToggle, useGameSounds } from './sound.ts';
 import { TownScene } from './town/TownScene.tsx';
@@ -33,7 +35,7 @@ export function App() {
 
 function Game({ onAgain }: { onAgain: () => void }) {
   const level = useContext(GameLevelContext);
-  const [game, dispatch] = useReducer(step, undefined, () => init(Date.now() % 1e9, level));
+  const [game, dispatch] = useReducer(step, undefined, () => init(getRoomSession()?.seed ?? Date.now() % 1e9, level));
   const ref = useRef(game); ref.current = game;
   const [dmWith, setDmWith] = useState<string | null>(null);
   const [marked, setMarked] = useState<ReadonlySet<string>>(new Set()); // posts the player marked "suspicious"
@@ -168,7 +170,7 @@ function Ejection({ s }: { s: GameState }) {
 
 function GameOver({ s, onAgain }: { s: GameState; onAgain: () => void }) {
   useEffect(() => window.scrollTo(0, 0), []); // the feed may have left the page scrolled down
-  return <><div className="tw-over"><TownScene cast={s.characters} infection={s.infection} sunny={s.result === 'won'} /></div><Reveal s={s} onAgain={onAgain}><SavePanel s={s} refereeLog={getRefereeLog()} /></Reveal></>;
+  return <><div className="tw-over"><TownScene cast={s.characters} infection={s.infection} sunny={s.result === 'won'} /></div><Reveal s={s} onAgain={onAgain}><><RoomBoard s={s} /><SavePanel s={s} refereeLog={getRefereeLog()} /></></Reveal></>;
 }
 
 // Avatars are the town's own villagers, so the chat matches the scene (SPEC §15: original art).
