@@ -45,6 +45,9 @@ Boss level fully on main (PR #31 game, PR #34 save path). Nothing claimed; free 
 
 ## codex@surya
 
+### Working on right now
+- [V12] Public demo link and service status on surya/v12-live-link. Editing README.md and docs/PITCH.md.
+
 ### Just finished
 - End-to-end local demo QA on main at `8ac42b0`. Chrome passed the Level 2 game, reveal, replay and QR render, leaderboard, global and class stats, paired quiz, Codex anchor, and service health.
 - Retested class persistence and reveal navigation after the fixes merged. Production build passed. The Windows suite passed 107/109 with two existing server platform failures.
