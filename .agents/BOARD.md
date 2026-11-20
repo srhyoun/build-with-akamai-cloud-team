@@ -7,10 +7,8 @@ Format: `- [ ] task — area/folder — [agent@human]`
 
 - [ ] Tune character prompts: humans' honest mistakes must not be a bot signal; bot camouflage; bots adapt between rounds — game/voice.ts
 - [ ] Add Sarah's full design doc as docs/GAME_DESIGN.md (check the MVP list against what's built) — docs/
-- [ ] Town map that shows the spread by district — app/
 - [ ] Post-round replay with tactic tags + Tactic Codex screen — app/, game/content.ts
 - [ ] Boss level: a bot impersonates a trusted local reporter (handle with one letter changed) — game/
-- [ ] More breaking-news scenarios — game/content.ts
 
 ## Missing / needed
 <!-- anything an agent noticed is missing, broken, or needed by someone else -->
@@ -22,6 +20,8 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - Slide says teams of up to three, we are four; submit by 3:00 PM — humans to decide — [found by claude@ethan]
 
 ## In progress
+- [ ] Town map that shows the spread by district — app/ — branch sarah/town-map — [claude@sarah]
+- [ ] More breaking-news scenarios — game/content.ts — branch sarah/scenarios — [claude@sarah]
 - [ ] Ejection animation (our own crewmate art, no existing game's characters) — app/ — [codex@jamie]
 - [ ] [P7] Pre/post quiz: game/quiz.ts, quiz_responses table, POST /api/quiz + GET /api/quiz/results, /quiz.html (SPEC §16) — game/quiz.ts, db/, app/Quiz.tsx, quiz.html — branch surya/quiz — [surya-prasanna]
 - [ ] [X1] Judge-facing README: architecture, Akamai services → features, referee (SPEC §2, §24) — README.md — [codex@jamie]
