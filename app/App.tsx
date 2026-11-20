@@ -4,6 +4,7 @@ import { alive, init, step } from '../game/engine.ts';
 import { PHASE_MS, ROUNDS, TACTICS } from '../game/content.ts';
 import { startDirector } from './director.ts';
 import { UnderTheHood } from './UnderTheHood.tsx';
+import { StatusPill } from './StatusPill.tsx';
 
 const TOOL_NAMES: Record<ToolId, string> = { account_age: 'Account Age', source_check: 'Source Check', posting_pattern: 'Posting Pattern' };
 const PHASE_NAMES = { event: 'Breaking news', discussion: 'Discuss & investigate', meeting: 'Emergency meeting', ejection: 'Ejection', over: 'Game over' };
@@ -78,6 +79,7 @@ function Game({ onAgain }: { onAgain: () => void }) {
 
       {s.phase === 'ejection' && <Ejection s={s} />}
       <UnderTheHood s={s} />
+      <footer className="status-pill-footer"><StatusPill /></footer>
     </main>
   );
 }
