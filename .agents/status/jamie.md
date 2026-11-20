@@ -38,14 +38,14 @@ I will NOT touch the rest of `game/`, `app/`, `shared/`, `store/` (ethanL30), `d
 ## codex@jamie
 
 ### Working on right now
-Offline ejection animation on `jamie/ejection-animation`.
+Ejection animation ready for review on `jamie/ejection-animation`.
 
 ### Files / folders I'm touching (hands off)
-- Only the existing ejection render in `app/App.tsx` and its scoped rules in `app/style.css`
 - The Codex section of `.agents/status/jamie.md`
 
 ### Just finished
-- Start screen (#3), pitch (#7), offline voices (#9), and judge README (#11) sent for review.
+- Added the avatar exit animation and verified normal motion, reduced motion, and no ejection in Chrome. All 37 tests and the production build passed.
+- Earlier PRs: start screen (#3), pitch (#7), offline voices (#9), and judge README (#11).
 
 ### Missing / I need from someone
-Nothing for this task.
+Review and merge the ejection animation PR.

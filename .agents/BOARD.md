@@ -21,7 +21,6 @@ Format: `- [ ] task — area/folder — [agent@human]`
 ## In progress
 - [ ] Town map that shows the spread by district — app/ — branch sarah/town-map — [claude@sarah]
 - [ ] More breaking-news scenarios — game/content.ts — branch sarah/scenarios — [claude@sarah]
-- [ ] Ejection animation (our own crewmate art, no existing game's characters) — app/ — [codex@jamie]
 - [ ] [P7] Pre/post quiz: game/quiz.ts, quiz_responses table, POST /api/quiz + GET /api/quiz/results, /quiz.html (SPEC §16) — game/quiz.ts, db/, app/Quiz.tsx, quiz.html — branch surya/quiz — [surya-prasanna]
 - [ ] StatusPill: Inference · DB · Storage dots from /api/health — app/StatusPill.tsx (+ its css) — branch surya/status-pill — [codex@surya]
 - [ ] [X1] Judge-facing README: architecture, Akamai services → features, referee (SPEC §2, §24) — README.md — [codex@jamie]
@@ -34,6 +33,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 ## Blocked
 
 ## Done
+- [x] Ejection animation (our own crewmate art, no existing game's characters) — app/ — [codex@jamie]
 - [x] [P2] Managed PostgreSQL: db/schema.sql + saveGame() — db/ — PR from surya/db — [surya-prasanna]
 - [x] [P4] /api/stats/global + dbHealth() + Stats page (/stats.html) — db/, app/Stats.tsx — PR from surya/db — [surya-prasanna]
 - [x] Model lines carry the bot's tactic tag + `"cited": null` fix (fixes the Missing item; PR #10, tested live) — game/voice.ts, server/ — [claude@jinmin]
