@@ -2,6 +2,7 @@
 import type { Character, Command, GameState } from '../shared/types.ts';
 import { TACTICS } from './content.ts';
 import { alive, rng } from './engine.ts';
+import { withScriptedVoice } from './scriptedVoices.ts';
 
 export type LineKind = 'post' | 'reply' | 'defense';
 export type Say = Extract<Command, { type: 'say' }>;
@@ -43,16 +44,17 @@ export function parseLine(s: GameState, c: Character, raw: string, to?: string):
   return { type: 'say', author: c.id, text, to, source: cited ? { cited, verdict: verdict(c, s) } : undefined };
 }
 
-// shortcut: canned lines so the game runs with no model; replace with model output once server/ has a key.
+// Offline play uses the same persona for a character in either role.
 export function scriptedLine(s: GameState, c: Character, kind: LineKind, to?: string): Say {
   const r = rng(s.seed + s.feed.length * 31 + c.id.length);
   const round = s.scenario.rounds[s.round - 1];
   const target = s.characters.find(o => o.id === c.frameTarget);
-  const typo = (t: string) => r() < 0.3 ? t.replace(/the /, 'teh ') : t;
+  const speak = (text: string, tactic?: Say['tactic']) =>
+    say(c, withScriptedVoice(c.id, kind, text), to, tactic);
   if (c.role === 'bot') {
     const tactic = c.tactics[Math.floor(r() * c.tactics.length)];
-    if (kind === 'reply') return say(c, typo(`lol no. I just don't want anyone getting hurt. ${target ? `why aren't you asking ${target.handle}?` : ''}`), to);
-    if (kind === 'defense') return say(c, typo(`I've lived here 20 years, I'm just trying to keep people safe. ${target ? `Ask ${target.handle} why they're so calm.` : ''}`), to, tactic);
+    if (kind === 'reply') return speak(target ? `I’d ask ${target.handle} why they’re so sure everything is fine.` : 'I’d take the warning seriously.');
+    if (kind === 'defense') return speak(target ? `I’m trying to keep people safe. Ask ${target.handle} what they’ve checked.` : 'I’m trying to keep people safe.', tactic);
     const lines: Record<string, string> = {
       fake_urgency: `${round.falseStory} SHARE NOW before it gets taken down`,
       invented_insider: `My cousin at the county office says: ${round.falseStory}`,
@@ -62,18 +64,18 @@ export function scriptedLine(s: GameState, c: Character, kind: LineKind, to?: st
       fake_consensus: `Everyone I know already left. ${round.falseStory}`,
     };
     const cites = tactic === 'fake_urgency' || tactic === 'fake_consensus';
-    return { ...say(c, typo(lines[tactic]), to, tactic), source: cites ? { cited: 'a "County Alerts" screenshot', verdict: verdict(c, s) } : undefined };
+    return { ...speak(lines[tactic] ?? round.falseStory, tactic), source: cites ? { cited: 'a "County Alerts" screenshot', verdict: verdict(c, s) } : undefined };
   }
-  if (kind === 'reply') return say(c, typo(oneOf(r, [`no?? I'm just trying to figure out what's real`, `huh? I only know what the county posted`, `not a bot lol. are YOU?`])), to);
-  if (kind === 'defense') return say(c, typo(`I've been sharing what the county actually said! Check my posts.`), to);
+  if (kind === 'reply') return speak(oneOf(r, ['What did the county actually say?', 'I only know what the county posted.', 'Did they give you a source?']));
+  if (kind === 'defense') return speak('Check what I shared against the county update.');
   const lines = [
-    `County page says ${round.truth.toLowerCase()}`,
+    `County page says: ${round.truth}`,
     `wait is this real? anyone have a link?`,
-    `${round.truth} at least that's what my neighbor said`,
-    `ok I'm confused. who is saying the whole town has to leave??`,
+    `I heard this from a neighbor: ${round.truth}`,
+    'I’m confused. Has the county confirmed any of that?',
   ];
   const line = lines[Math.floor(r() * lines.length)];
-  return { ...say(c, typo(line), to), source: line.startsWith('County') ? { cited: 'the county website', verdict: verdict(c, s) } : undefined };
+  return { ...speak(line), source: line.startsWith('County') ? { cited: 'the county website', verdict: verdict(c, s) } : undefined };
 }
 
 const oneOf = (r: () => number, xs: string[]) => xs[Math.floor(r() * xs.length)];
