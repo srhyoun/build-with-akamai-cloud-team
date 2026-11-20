@@ -4,19 +4,20 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 
 **Human:** Surya
 **Agent:** Claude Code (surya-prasanna)
-**Branch:** `surya/referee`
-**Last updated:** 2026-11-20 11:38
+**Branch:** `surya/under-the-hood`
+**Last updated:** 2026-11-20 11:48
 
 ## surya-prasanna
 
 ### Working on right now
-R1 + R2 done, PR open from `surya/referee`. Waiting for Surya: next is R3 (Under the Hood panel) or the open Database + stats lane (`db/`).
+R3 Under the Hood: referee log store, director logs a check per line (runs `checkLine` client-side until the server sends `check`), panel drawer. Branch `surya/under-the-hood`.
 
 ### Files / folders I'm touching (hands off)
 - `.agents/status/surya.md` (always mine)
 - `docs/SPEC.md` (owner; changes by PR)
-- `game/referee.ts`, `game/referee.test.ts`, `game/radar.ts`, `game/radar.test.ts` (new)
-- `shared/types.ts`: appending the 4 decision-002 types only
+- `app/UnderTheHood.tsx`, `app/under-the-hood.css`, `app/refereeLog.ts` (new)
+- `app/director.ts` (the `line()` function and `startDirector` start)
+- `app/App.tsx`: 1 import + rendering `<UnderTheHood>` (2 lines), nothing else
 
 ### Just finished
 - R1 `game/referee.ts`: `checkLine()`, `blocked()`, `toCheck()`, 8 rules, 11 tests (incl. every scripted line passes). R2 `game/radar.ts`: `radar(state)` → score + Bot Radar, 6 tests. 4 decision-002 types in `shared/types.ts`. CONTRACTS: claude@jinmin's env vars + status codes.
