@@ -5,12 +5,12 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 **Human:** Surya
 **Agent:** Claude Code (surya-prasanna)
 **Branch:** `surya/boss`
-**Last updated:** 2026-11-20 12:42
+**Last updated:** 2026-11-20 12:52
 
 ## surya-prasanna
 
 ### Working on right now
-Boss level (level 3) on `surya/boss`, decision 003: one of the 2 bots poses as the town reporter (`@DanaRep0rts` vs the real `@DanaReports`). Touches `shared/types.ts` (level 1|2|3), `game/engine.ts` `init`, `game/content.ts`, `app/StartScreen.tsx`. `store/replay.ts` needs to accept level 3: handoff to ethanL30.
+Boss level done, PR open from `surya/boss`, waiting for Surya's OK to merge. Boss games save once ethanL30 lets `store/replay.ts` accept level 3 (handoff 20261120-1243).
 
 ### Files / folders I'm touching (hands off)
 - `.agents/status/surya.md` (always mine)
@@ -23,6 +23,7 @@ Boss level (level 3) on `surya/boss`, decision 003: one of the 2 bots poses as t
 - `game/referee.ts`, `game/radar.ts`, `app/UnderTheHood.tsx`, `app/refereeLog.ts` (owner)
 
 ### Just finished
+- Boss level (level 3, decision 003): `REPORTER` + `IMPOSTOR` personas, `init(seed, 3)` always makes the impostor a bot and the real reporter human, impostor's Account Age reads "Joined 2 days ago · same name and photo as @DanaReports", impostor frames the real reporter. Levels 1 and 2 unchanged (same games per seed). 4 tests; played in the browser.
 - 3 more scenarios (boil-water notice, south-side blackout, Main St grocery closing), 3 rounds each, escalating. Tests over every scenario: unique ids, no banned terms, every seed range reaches each one, scripted lines pass the referee, a human repeating the false story is caught (that caught one wording bug). Seen in the browser: a boil-water game with scripted lines.
 - End-to-end check on main after ethanL30's #25 and claude@sarah's #26: a Level 1 game started from `/?class=7b`, saved from the reveal as "Ada", shows up in `GET /api/stats/class/7b` (1 game, player Ada); the reveal links to `/codex.html#<tactic>` and `/quiz.html?phase=post`. Throwaway server with the real store/ + db/ handlers on PGlite, local files outside the repo.
 - Under the Hood hides (drawer + toggle) during the meeting, so it can't cover the vote buttons; `useRefereeLog` got a server snapshot so it renders in tests. Checked in a real game at 375 px: all 7 vote buttons clickable with the drawer opened beforehand, drawer back after the meeting.
@@ -36,6 +37,7 @@ Boss level (level 3) on `surya/boss`, decision 003: one of the 2 bots poses as t
 - Setup: npm install + npm test (10/10 pass), read AGENTS.md and every coordination file.
 
 ### Missing / I need from someone
+- ethanL30: `store/replay.ts` must accept level 3 (handoff 20261120-1243).
 - Humans: run the quiz on 5–10 people once the DB is live; `/quiz.html?view=results` shows the real n.
 - Humans: create the Managed PostgreSQL cluster, allow the Linode's IP, put PGHOST/PGPORT/PGUSER/PGPASSWORD/PGDATABASE in `.env` on the Linode.
 

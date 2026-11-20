@@ -1,7 +1,7 @@
 // Pure game engine: init(seed, level) → state, step(state, command) → new state.
 // No I/O, no Date.now, no Math.random: same seed + same commands = same game.
 import type { Character, Command, GameState, Post, TacticId, Vote } from '../shared/types.ts';
-import { BOTS, CAST_SIZE, PERSONAS, PHASE_MS, ROUNDS, SCENARIOS, SPREAD, TACTICS, TOKENS_PER_ROUND } from './content.ts';
+import { BOTS, CAST_SIZE, IMPOSTOR, PERSONAS, REPORTER, PHASE_MS, ROUNDS, SCENARIOS, SPREAD, TACTICS, TOKENS_PER_ROUND } from './content.ts';
 
 export function rng(seed: number) { // mulberry32
   let a = seed >>> 0;
@@ -13,10 +13,12 @@ const shuffle = <T,>(r: () => number, xs: T[]) => { const a = [...xs]; for (let 
 export const alive = (s: GameState) => s.characters.filter(c => !c.ejected);
 export const aliveBots = (s: GameState) => alive(s).filter(c => c.role === 'bot');
 
-export function init(seed: number, level: 1 | 2 = 2): GameState {
+export function init(seed: number, level: GameState['level'] = 2): GameState {
   const r = rng(seed);
-  const cast = shuffle(r, PERSONAS).slice(0, CAST_SIZE);
-  const botIdx = new Set(shuffle(r, cast.map((_, i) => i)).slice(0, BOTS[level]));
+  const boss = level === 3; // decision 003: the impostor is always one of the two bots, the real reporter always human
+  const cast = boss ? shuffle(r, [REPORTER, IMPOSTOR, ...shuffle(r, PERSONAS).slice(0, CAST_SIZE - 2)]) : shuffle(r, PERSONAS).slice(0, CAST_SIZE);
+  const others = cast.map((_, i) => i).filter(i => cast[i] !== REPORTER && cast[i] !== IMPOSTOR);
+  const botIdx = new Set(boss ? [cast.indexOf(IMPOSTOR), pick(r, others)] : shuffle(r, cast.map((_, i) => i)).slice(0, BOTS[level]));
   const tacticPool = (Object.keys(TACTICS) as TacticId[]).filter(t => BOTS[level] > 1 || t !== 'coordinated_amplification');
   const characters: Character[] = cast.map((p, i) => ({
     ...p, id: p.handle.slice(1).toLowerCase(), role: botIdx.has(i) ? 'bot' : 'human',
@@ -24,7 +26,7 @@ export function init(seed: number, level: 1 | 2 = 2): GameState {
     ejected: false, clues: { account_age: '', posting_pattern: '' },
   }));
   const humans = characters.filter(c => c.role === 'human');
-  const newcomer = pick(r, humans); // one honest new account, so Account Age alone never proves a bot
+  const newcomer = pick(r, humans.filter(h => h.handle !== REPORTER.handle)); // one honest new account, so Account Age alone never proves a bot
   for (const c of characters) {
     if (c.role === 'bot') {
       c.frameTarget = pick(r, humans).id;
@@ -39,6 +41,12 @@ export function init(seed: number, level: 1 | 2 = 2): GameState {
       c.clues.account_age = c === newcomer ? `Joined 2 months ago · ${40 + Math.floor(r() * 60)} followers (new in town)` : `Joined ${2012 + Math.floor(r() * 10)} · ${100 + Math.floor(r() * 900)} followers`;
       c.clues.posting_pattern = `Mixed posts: ${pick(r, ['school pickups', 'the farmers market', 'a lost cat', 'road work', 'the high school game'])}, ${pick(r, ['weather', 'local food', 'a town meeting', 'jokes'])}. Normal hours.`;
     }
+  }
+  const real = characters.find(c => c.handle === REPORTER.handle), fake = characters.find(c => c.handle === IMPOSTOR.handle);
+  if (real && fake) {
+    real.clues.account_age = `Joined 2013 · ${(3000 + Math.floor(r() * 900)).toLocaleString('en-US')} followers · the town paper's reporter`;
+    fake.clues.account_age = `Joined 2 days ago · ${12 + Math.floor(r() * 30)} followers · same name and photo as ${REPORTER.handle}`;
+    fake.frameTarget = real.id; // the impostor tries to get the real reporter voted out
   }
   const scenario = SCENARIOS[Math.floor(r() * SCENARIOS.length)];
   return {

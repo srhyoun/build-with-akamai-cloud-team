@@ -20,6 +20,7 @@ The interfaces between parts of the game. Agents must not break these without a 
 ## Shared data formats
 
 - `GameState`, `Character`, `Post`, `Clue`, `Ejection`, `Scenario`: see `shared/types.ts`.
+- `GameState.level`: `1 | 2 | 3`; 3 = boss level (decision 003): 2 bots, one poses as the town reporter (`IMPOSTOR` vs the real `REPORTER` in `game/content.ts`). Replays and the leaderboard carry level 3 once `store/replay.ts` accepts it.
 - Character `role` and `tactics` are hidden: the UI shows them only after ejection or game over.
 - `Post.to` set = a DM between the player and that character (both directions use the character's id).
 - Model answers: JSON `{"text": "...", "cited": "source or null"}`; `parseLine()` turns it into a `say` command and fills the Source Check verdict.
