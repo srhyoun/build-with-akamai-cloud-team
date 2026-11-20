@@ -1,0 +1,12 @@
+/* Phone keyboard open (the chat or DM composer has focus): give the screen to the conversation.
+   The town scene, hint, meeting button and floating buttons come back when the keyboard closes. */
+@media (max-width: 899px) {
+  body:has(.composer:focus-within) .bar > .tw-scene,
+  body:has(.composer:focus-within) .bar > .tw-hint,
+  body:has(.composer:focus-within) .actions > .meeting,
+  body:has(.composer:focus-within) .uth-toggle,
+  body:has(.composer:focus-within) .status-pill-footer { display: none; }
+  body:has(.composer:focus-within) .bar { padding-top: 8px; padding-bottom: 6px; }
+  body:has(.composer:focus-within) .actions { padding-bottom: 6px; }
+  body:has(.composer:focus-within) .composer { margin: 6px 0; }
+}

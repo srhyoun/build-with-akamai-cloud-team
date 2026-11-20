@@ -4,6 +4,7 @@ import { alive, init, step } from '../game/engine.ts';
 import { PHASE_MS, ROUNDS } from '../game/content.ts';
 import { startDirector } from './director.ts';
 import { useLiveGame } from './live.ts';
+import './keyboard.css';
 import { VoteResults } from './VoteResults.tsx';
 import { crowdReactions, marksByAuthor } from './reactions.ts';
 import './reactions.css';
@@ -164,7 +165,7 @@ function Composer({ placeholder, onSend }: { placeholder: string; onSend: (text:
   return (
     <form className="composer" onSubmit={e => { e.preventDefault(); if (text.trim()) { onSend(text.trim()); setText(''); } }}>
       <input value={text} onChange={e => setText(e.target.value)} placeholder={placeholder} aria-label={placeholder} maxLength={280} />
-      <button>Send</button>
+      <button onMouseDown={e => e.preventDefault()}>Send</button>{/* keep focus in the input: the phone keyboard stays open and the layout doesn't jump mid-tap */}
     </form>
   );
 }
