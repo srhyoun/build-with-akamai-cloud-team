@@ -1,8 +1,9 @@
-import { useEffect, useReducer, useRef, useState } from 'react';
+import { useContext, useEffect, useReducer, useRef, useState } from 'react';
 import type { Character, GameState, Post, ToolId } from '../shared/types.ts';
 import { alive, init, step } from '../game/engine.ts';
 import { PHASE_MS, ROUNDS, TACTICS } from '../game/content.ts';
 import { startDirector } from './director.ts';
+import { GameLevelContext } from './gameLevel.ts';
 
 const TOOL_NAMES: Record<ToolId, string> = { account_age: 'Account Age', source_check: 'Source Check', posting_pattern: 'Posting Pattern' };
 const PHASE_NAMES = { event: 'Breaking news', discussion: 'Discuss & investigate', meeting: 'Emergency meeting', ejection: 'Ejection', over: 'Game over' };
@@ -13,7 +14,8 @@ export function App() {
 }
 
 function Game({ onAgain }: { onAgain: () => void }) {
-  const [game, dispatch] = useReducer(step, undefined, () => init(Date.now() % 1e9));
+  const level = useContext(GameLevelContext);
+  const [game, dispatch] = useReducer(step, undefined, () => init(Date.now() % 1e9, level));
   const ref = useRef(game); ref.current = game;
   const [dmWith, setDmWith] = useState<string | null>(null);
   useEffect(() => startDirector(() => ref.current, dispatch), []);
