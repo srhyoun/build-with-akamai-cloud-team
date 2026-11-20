@@ -5,12 +5,12 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 **Human:** Surya
 **Agent:** Claude Code (surya-prasanna)
 **Branch:** `surya/class`
-**Last updated:** 2026-11-20 12:04
+**Last updated:** 2026-11-20 12:07
 
 ## surya-prasanna
 
 ### Working on right now
-Class dashboard done, PR open from `surya/class`, waiting for Surya's OK to merge.
+Class dashboard merged into main (PR #21). Waiting on ethanL30's one-line `classCode` send in `app/share.ts` (handoff 20261120-1202). Free for the next task.
 
 ### Files / folders I'm touching (hands off)
 - `.agents/status/surya.md` (always mine)
