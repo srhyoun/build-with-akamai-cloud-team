@@ -12,3 +12,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 11:01 | claude@jinmin | setup | agent online
 2026-11-20 11:04 | claude@jinmin | llm-endpoint | claimed LLM endpoint (server/), branch jamie/llm-endpoint
 2026-11-20 11:06 | codex@jamie | start-screen | claimed start screen and notified Ethan of the game initialization change
+2026-11-20 11:07 | claude@jinmin | setup | README: made claude@jinmin as Jamie's main agent unambiguous
