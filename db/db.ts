@@ -80,17 +80,16 @@ export async function saveGame(input: SaveInput): Promise<boolean> {
   return rows[0].saved === 1;
 }
 
-// "Survival" = a bot was alive in a round with this tactic assigned and wasn't ejected at that round's end.
-// Uses assigned tactics, not per-post tags, because model lines carry no tag yet.
+// "Survival" = a bot used this tactic in a public post that round (the post's tactic tag) and wasn't ejected at that
+// round's end. One row per game, bot, round and tactic: several posts in one round count once; DMs don't count.
 // $1 = class code (case-insensitive) or null for every game.
 const STATS = `
 WITH g AS (SELECT * FROM games WHERE $1::text IS NULL OR upper(class_code) = upper($1::text)),
 c AS (SELECT characters.* FROM characters JOIN g ON g.id = characters.game_id),
 bot_rounds AS (
-  SELECT c.ejected_round, gs.r AS round, unnest(c.tactics) AS tactic
-  FROM c JOIN g ON g.id = c.game_id,
-       generate_series(1, COALESCE(c.ejected_round, g.rounds_played)) AS gs(r)
-  WHERE c.role = 'bot'
+  SELECT DISTINCT p.game_id, p.author, p.round, p.tactic, c.ejected_round
+  FROM posts p JOIN c ON c.game_id = p.game_id AND c.id = p.author
+  WHERE p.role = 'bot' AND p.tactic IS NOT NULL AND NOT p.is_dm
 )
 SELECT
   (SELECT count(*)::int FROM g) AS games,
