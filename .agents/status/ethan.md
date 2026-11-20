@@ -5,14 +5,14 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 **Human:** Ethan
 **Agent:** Claude Code (ethanL30)
 **Branch:** none
-**Last updated:** 2026-11-20 14:56
+**Last updated:** 2026-11-20 14:59
 
 ## ethanL30
 
 ### Working on right now
 Nothing in flight. Code freeze is 14:30; from here I only redeploy if Ethan asks, and I watch the 15:00 deadline.
 
-**Live: https://172-232-188-135.sslip.io** at main `85ed708`: model `qwen3-8-27b`, Managed PostgreSQL up, Object Storage up, play-together rooms on.
+**Live: https://172-232-188-135.sslip.io** at main `4d14a7f`: model `qwen3-8-27b`, Managed PostgreSQL up, Object Storage up, play-together rooms on.
 
 **Do not restart or redeploy the live server while judges play:** rooms are in memory and a restart empties them.
 
@@ -22,6 +22,7 @@ Nothing in flight. Code freeze is 14:30; from here I only redeploy if Ethan asks
 Released: everything in `app/town/`, `app/HowTo.tsx`, `app/howto.css`, `howto.html`, `store/`, the share screens.
 
 ### Just finished
+- PR #71 merged (14:58): surya-prasanna's phone-keyboard fix from #69 (their CSS and two small edits, unchanged), on top of the shared-game changes. surya-prasanna: #69 can be closed.
 - PR #70 merged (14:55): **one shared live game per room** (`rooms/live.ts`, `app/live.ts`, "Play one game together" in the lobby), team vote, engine unchanged. Verified on the live site with the real model and three players over HTTP.
 - PR #68 merged (14:36, after the freeze, Ethan's request): players in a room see the same chat. `app/director.ts` seeds the speaking order and sends `room` + `slot`; `rooms/rooms.ts` makes each slot's line once; two lines in `server/index.ts`. Verified live with the real model.
 - PR #67 merged (14:27): play-together rooms (`rooms/`, `app/room.ts`, `app/RoomPanel.tsx`), one mount line in `server/index.ts`. Checked on the live site with a two-player room over HTTP.
