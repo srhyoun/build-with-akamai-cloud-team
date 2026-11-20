@@ -11,11 +11,8 @@ Format: `- [ ] task — area/folder — [agent@human]`
 ## Missing / needed
 <!-- anything an agent noticed is missing, broken, or needed by someone else -->
 <!-- - thing — who needs it — [found by agent@human] -->
-<<<<<<< HEAD
-=======
 - Phone check (375×812 emulated, main before the town design): header is 182 px during "Breaking news" vs 154 px during Investigate — the longer label pushes the 🔊 button to a 2nd row, so the chat jumps at every round start. Fix: shorter label (e.g. "News") or let the toggle shrink — App.tsx header, claude@sarah or ethanL30's restyle — [found by surya-prasanna]
 - Phone layout: with a DM open, pinned header + DM panel + composer + meeting button leave ~3 lines of public chat visible at 375×812 — worth keeping in mind for the V3 restyle — now Open task [V10], handed back to surya-prasanna — [found by surya-prasanna]
->>>>>>> d14175f
 - **Live: https://172-232-188-135.sslip.io** (Ethan's Linode, 172.232.188.135, HTTPS). **Model is on:** `/api/health` shows `qwen3-8-27b`, and three live `/api/line` calls answered in 4–5 s and passed the referee. Still missing in `/etc/whosthebot.env` on the server: PG* (database off, stats empty) and OBJ_* (replays on the server's disk, not in a bucket). A human with those keys fills them in on the server — whole team — [found by ethanL30]
 - Deployed on Ethan's Linode, https://172-232-188-135.sslip.io (172.232.188.135), but not public yet: (1) Ethan must open TCP 80 + 443 to all sources in the Cloud Firewall, (2) a human with the keys must fill in `/etc/whosthebot.env` on the server (inference key, PG*, OBJ_*) — whole team — [found by ethanL30]
 - **Live: https://172-232-188-135.sslip.io** (Ethan's Linode, 172.232.188.135, main at 5605b2b, HTTPS works). Still missing there: the keys in `/etc/whosthebot.env` — inference key (characters are scripted), PG* (database off), OBJ_* (replays on the server's disk, not in a bucket). A human with the keys fills them in on the server — whole team — [found by ethanL30]
@@ -35,18 +32,11 @@ Format: `- [ ] task — area/folder — [agent@human]`
 ## Blocked
 
 ## Done
-<<<<<<< HEAD
 - [x] [V8] README + docs/PITCH.md: 2–3 lines on the design (town reacts to the spread; all art and audio original, made in code; one OFL font) — can start now — branch surya/v8-design-docs (codex@jamie busy with load-smoke) — text in PR from surya/v8-design-docs; left: screenshot after ethan/town-design merges, and cut the scene/faces sentence if it misses the freeze — [surya-prasanna] (PR #40 merged)
 - [x] [V6] New theme on the separate pages: `import './town/theme.css'` in the stats, quiz and codex entries, check at 375 px light + dark — needs ethan/town-design merged — branch surya/v6-theme-pages: lands now via import.meta.glob, turns on when theme.css merges; 375 px check after the merge — [surya-prasanna] (PR #41 merged)
 - [x] Offline demo launcher: production build on loopback, scripted dialogue, isolated replays removed on shutdown; docs and browser-verified save and replay — scripts/offline-demo.ts, docs/README.md — branch surya/offline-demo — [codex@surya]
 - [x] [V10] DM open on a phone leaves ~3 lines of chat: shrink the town scene to a strip while a DM is open — app/App.tsx (header class), app/town/town.css — PR from surya/dm-strip: header 228 → 170 px with a DM open at 375×812, bubble pinned inside the strip — [surya-prasanna]
 - [x] [V12] Add the public demo link and verified service status — README.md, docs/PITCH.md — branch surya/v12-live-link — [codex@surya]
-=======
-- [x] [V12] Add the public demo link and verified service status — README.md, docs/PITCH.md — branch surya/v12-live-link — [codex@surya]
-- [x] Offline demo launcher: production build on loopback, scripted dialogue, isolated replays removed on shutdown; docs and browser-verified save and replay — scripts/offline-demo.ts, docs/README.md — branch surya/offline-demo — [codex@surya]
-- [x] Offline demo launcher: production build on loopback, scripted dialogue, isolated replays removed on shutdown; docs and browser-verified save and replay — scripts/offline-demo.ts, docs/README.md — branch surya/offline-demo — [codex@surya]
-- [x] [V10] DM open on a phone leaves ~3 lines of chat: shrink the town scene to a strip while a DM is open — app/App.tsx (header class), app/town/town.css — PR from surya/dm-strip: header 228 → 170 px with a DM open at 375×812, bubble pinned inside the strip — [surya-prasanna]
->>>>>>> d14175f
 - [x] [V1] Town square scene behind/above the game: coffee shop, library, water tower, river + bridge, trees, benches; the 6 cast as rounded original villagers; speech bubble + bounce when one talks (docs/DESIGN_BRIEF.md) — app/ (new files) — from Ethan's design brief — branch ethan/town-design — PR #45 merged, live on https://172-232-188-135.sslip.io — [ethanL30]
 - [x] [V2] Mood follows "Town infected": clouds, desaturation, red-orange haze, streetlights, faces happy → worried → scared; dark spotlight on ejection; sunshine on a win (docs/DESIGN_BRIEF.md) — app/ — needs V1 — branch ethan/town-design — PR #45 merged, live on https://172-232-188-135.sslip.io — [ethanL30]
 - [x] [V3] Restyle the UI to match: rounded, soft, minimal chrome; chunky slab-serif display font (openly licensed) for titles and numbers; chat stays readable on a phone (docs/DESIGN_BRIEF.md) — app/style.css and the other app/*.css — branch ethan/town-design — PR #45 merged, live on https://172-232-188-135.sslip.io — [ethanL30]
