@@ -5,7 +5,7 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 **Human:** Ethan
 **Agent:** Claude Code (ethanL30)
 **Branch:** `ethan/replay-storage`
-**Last updated:** 2026-11-20 11:02
+**Last updated:** 2026-11-20 11:14
 
 ## ethanL30
 
@@ -14,8 +14,9 @@ Judging 40%: a feature that depends on another Akamai Cloud service. Shareable p
 
 ### Files / folders I'm touching (hands off)
 - `store/` (new top-level folder, everything in it): the Object Storage client, the `/api/replays` + `/api/leaderboard` request handler, tests, README with env var names
-- `app/share.ts`, `app/Share.tsx`, `app/Leaderboard.tsx` (new files)
-- `app/App.tsx`: only the game-over screen and the `?replay=<id>` entry point. If you have an app/ task, tell me and I'll keep my edit to a few lines.
+- `app/share.ts`, `app/Share.tsx`, `app/Leaderboard.tsx`, `app/share.css` (new files)
+- `package.json` + lockfile: one added dependency (`qrcode-generator`); `tsconfig.json`: `"store"` added to `include`
+- `app/App.tsx`: three lines only: one import, the `?replay=<id>` entry in `App()`, and one `<SavePanel>` line in `GameOver`. codex@jamie: no change to the replay URL, your bypass plan works.
 - `.agents/status/ethan.md` (always mine)
 
 I will NOT touch `server/` (Jamihuh21), `.agents/CONTRACTS.md`, `.agents/decisions/002-*`, `docs/SPEC.md` (surya-prasanna), `shared/types.ts`, `game/`.
@@ -24,9 +25,10 @@ I will NOT touch `server/` (Jamihuh21), `.agents/CONTRACTS.md`, `.agents/decisio
 - Setup: npm install + npm test (10/10 pass), read AGENTS.md and every coordination file.
 
 ### Missing / I need from someone
-- Jamihuh21: one line in `server/index.ts` to mount my handler (handoff coming with the exact line).
-- surya-prasanna: decision 002 should name the service. I'm building on Object Storage unless 002 says otherwise (handoff coming with the routes for CONTRACTS.md).
-- A human: an Object Storage bucket + access key on the team's Akamai account, set as env vars on the Linode. Without them the handler falls back to local files so dev and tests still run.
+- claude@jinmin: mount `handleStore` in `server/index.ts` after my PR merges (handoff 11:15, exact two lines inside).
+- surya-prasanna: put my route shapes in CONTRACTS.md (handoff 11:15).
+- A human: an Object Storage bucket in **Chicago** + an access key limited to it, set as `S3_*` env vars on the Linode (board task P1). Until then `store/` saves to local files, so dev and tests run.
 
 ### Heads up for other agents
 - My tag is `ethanL30` (Ethan chose it), not `claude@ethan`. Older board and handoff lines signed `claude@ethan` are mine too. Branches are `ethan/<short-task>`.
+- F1 owner (Reveal screen): don't build the save + QR yourself. Mount `<SavePanel s={state} />` from `app/Share.tsx`; it saves the game, shows the share link, the QR and the leaderboard.

@@ -5,40 +5,43 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 **Human:** Jamie
 **Agent:** Claude Code (claude@jinmin), Jamie's main agent. Also Codex (codex@jamie), on separate work.
 **Branch:** `jamie/llm-endpoint` (claude@jinmin)
-**Last updated:** 2026-11-20 11:04
+**Last updated:** 2026-11-20 11:10
 
 ## claude@jinmin
 
 ### Working on right now
-LLM endpoint: `server/` with `POST /api/line` calling Akamai Cloud Inference, per CONTRACTS.md. It also serves `dist/` in production. Branch `jamie/llm-endpoint`, PR into main when it runs.
+LLM endpoint (`server/`), PR #4 open: https://github.com/srhyoun/build-with-akamai-cloud-team/pull/4 (branch `jamie/llm-endpoint`). It runs: 19/19 tests, and the game shows model lines through a fake OpenAI-compatible endpoint. Still to do: test with a real Akamai Cloud Inference key. The board line stays In progress until then.
 
 ### Files / folders I'm touching (hands off)
-- `server/` (new folder, everything in it)
+- `server/` (everything in it)
 - `.agents/status/jamie.md` (Jamie's; claude@jinmin and codex@jamie each edit only their own section)
 
 I will NOT touch `game/`, `app/`, `shared/`, `store/` (ethanL30), `docs/SPEC.md`, `.agents/decisions/002-*` or `.agents/CONTRACTS.md` (surya-prasanna). If I need a change there, I'll leave a handoff.
 
 ### Just finished
-- Setup: npm install + npm test (10/10 pass), read AGENTS.md and every coordination file.
+- `server/`: `POST /api/line` → Akamai Cloud Inference (`buildPrompt` → model → `parseLine`), `GET /api/health`, serves `dist/` in production. Env vars and status codes are in `server/README.md`.
+- Setup: npm install + npm test, read AGENTS.md and every coordination file.
 
 ### Missing / I need from someone
-Nothing yet.
+- An Akamai Cloud Inference endpoint URL, key and model name, to test live (humans: put them in a local `.env`, never commit them).
+- Env var names in CONTRACTS.md: handoff to surya-prasanna.
 
 ### Heads up for other agents
 - My tag is `claude@jinmin`, Jamie's main agent. Branches will be `jamie/<short-task>`.
-- The LLM endpoint claim on BOARD.md moved from Jamie's earlier tag `Jamihuh21` to `claude@jinmin`.
+- `/api/line` answers 400 / 502 / 503 exactly as the director already handles. `checkLine()` (Judging 20%) plugs in at the marked spot in `server/line.ts`; tell me when it lands and I'll call it.
+- ethanL30: for `/api/replays` + `/api/leaderboard`, see my handoff. One import plus one branch in `server/index.ts`, and I'll add it.
 
 ## codex@jamie
 
 ### Working on right now
-Start screen ready for review on `jamie/start-screen`.
+Pitch and 30-second demo script on `jamie/pitch-demo`.
 
 ### Files / folders I'm touching (hands off)
+- `docs/PITCH.md`
 - The Codex section of `.agents/status/jamie.md`
 
 ### Just finished
-- Added the how-to-play screen and level picker. Replay URLs bypass the picker.
-- Tests and production build passed. Verified both bot counts in Chrome at phone width.
+- Implemented and verified the start screen and opened PR #3 on `jamie/start-screen`.
 
 ### Missing / I need from someone
-Review and merge the start-screen PR.
+- Final integration and a live run to confirm which demo beats can be shown.
