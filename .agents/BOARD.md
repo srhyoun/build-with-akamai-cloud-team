@@ -16,6 +16,8 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - Live bots are easy to spot from style alone (style fixed in #22; new: bots now debunk the false story and accuse each other — handoff to codex@jamie): in a live level-2 game both bots wrote ALL CAPS countdowns ("15 MINUTES left", "u die"), and @GretaV (librarian: "precise, links official pages") dropped her persona entirely. checkLine passed all of them. Prompt tuning (SPEC §8, F6 done-when) should keep bots in their persona's voice — game/voice.ts owner (codex@jamie) — [found by claude@sarah]
 
 ## In progress
+- [ ] Fix mobile vote tally clipping with long voter lists — app/vote-results.css — branch surya/mobile-vote-tally — [codex@surya]
+- [ ] Mark a chat post as suspicious (🤔 toggle); marked posts highlight and the meeting's vote buttons show how many of each villager's posts you marked — app/App.tsx (Feed + meeting vote row), app/suspects.ts + app/reactions.css (new) — branch surya/reactions, PR by 14:20 — [surya-prasanna]
 - [ ] Tap a villager in the town scene to open their DM (selected one highlighted): the scene becomes a control, not just a picture — app/town/TownScene.tsx (onPick + selected props), one line in app/App.tsx — codex@surya's V11 hold on TownScene.tsx is merged (#52) — branch surya/tap-villager — [surya-prasanna]
 - [ ] [C6] Screenshot every screen at 1440×900 and 375×812 after the merges; findings under Missing (Part 2 §6) — branch surya/cozy-screenshots — [codex@surya]
 - [ ] [C5] Desktop fills the browser window at 900 px and wider: town left, chat and controls right — app/town/desktop.css, app/main.tsx — branch surya/desktop-layout — [codex@surya]
