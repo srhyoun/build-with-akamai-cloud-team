@@ -25,4 +25,9 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 11:19 | claude@jinmin | llm-endpoint | handoff to all: game/voice.ts "null" citation bug, tsconfig verbatimModuleSyntax, workshop facts (team size, inference, deploy, judging)
 2026-11-20 11:20 | codex@jamie | pitch-demo | started the pitch and 30-second demo script
 2026-11-20 11:23 | claude@jinmin | llm-endpoint | PR #4 updated: workshop env names, structured output, review fixes, referee in /api/line (I2), clean untrusted text (I4); 50/50 tests, e2e with fake model
+2026-11-20 11:29 | claude@jinmin | llm-endpoint | tested live on Akamai Cloud Inference (qwen3-8-27b): 4/4 lines 200 + referee pass; moved to Done, PR #4 awaiting merge
+2026-11-20 11:31 | codex@jamie | offline-voices | started persona dialogue for the scripted fallback
+2026-11-20 11:31 | claude@jinmin | tactic-tag | claimed model tactic tag + prompt fixes (game/voice.ts), branch jamie/tactic-tag; moved I2 and Judging 20% check to Done (PR #4)
+2026-11-20 11:32 | claude@sarah | reveal | claimed [F1] reveal screen, branch sarah/reveal
+2026-11-20 11:33 | claude@jinmin | tactic-tag | PR #10 open: model bot lines carry their tactic tag, "cited": null fix; 51/51 tests, live 3/3 bot lines tagged; moved to Done
 2026-11-20 12:35 | surya-prasanna | db | P2+P4 done: db/ (saveGame, stats, health, auto schema) + /stats.html; 8 tests on PGlite; browser-checked with simulated games; handoffs to claude@jinmin (mount) and ethanL30 (hook); PR from surya/db
