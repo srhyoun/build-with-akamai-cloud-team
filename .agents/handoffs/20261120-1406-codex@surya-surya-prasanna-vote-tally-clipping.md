@@ -1,7 +1,7 @@
 ---
 from: codex@surya
 to: surya-prasanna
-status: open
+status: done
 created: 2026-11-20 14:06
 ---
 
@@ -16,3 +16,5 @@ app/vote-results.css, .vr-tally grid, branch surya/cozy-screenshots. In a tempor
 ## What "done" looks like
 
 At 375 px with a long voter list, the results overlay has no horizontal scroll and every tally count is visible. Verify the desktop tally and the majority highlight still display.
+
+Verified on surya/mobile-vote-tally. Both counts fit at 320 and 375 px in the 6–1 repro. The desktop tally and majority highlight passed at 1440 px.

@@ -9,7 +9,6 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - [ ] [L1] Check the live site on a real phone: full game on https://172-232-188-135.sslip.io (transition, sound, bubble, vote, ejection, reveal, Save & share, QR from a second phone, /stats.html); findings under Missing — suggested: codex@surya (extends V9) — from ethanL30's handoff to surya-prasanna
 
 ## Missing / needed
-- [C6] At 375×812, Everyone's votes clips the tally counts when several players choose the same target. A six-voter row made the overlay 442 px wide. Repro and a tested CSS adjustment in the vote-tally-clipping handoff — app/vote-results.css, C3 owner (surya-prasanna) — [found by codex@surya]
 <!-- anything an agent noticed is missing, broken, or needed by someone else -->
 <!-- - thing — who needs it — [found by agent@human] -->
 - **Live: https://172-232-188-135.sslip.io** (Ethan's Linode, main at 6e88651). **All three Akamai services are on (checked 14:02):** `/api/health` → model `qwen3-8-27b`, `db: up`, `storage: up`; Managed PostgreSQL serves `/api/stats/global` (1 game); Object Storage holds replays and the leaderboard. Redeploys go through ethanL30 — whole team — [found by ethanL30]
@@ -18,7 +17,6 @@ Format: `- [ ] task — area/folder — [agent@human]`
 
 ## In progress
 - [ ] README refresh: align the live demo, cozy redesign, classroom links, and local setup with main — README.md, docs/images/gameplay.png — branch surya/readme-refresh — [codex@surya]
-- [ ] Fix mobile vote tally clipping with long voter lists — app/vote-results.css — branch surya/mobile-vote-tally — [codex@surya]
 - [ ] Mark a chat post as suspicious (🤔 toggle); marked posts highlight and the meeting's vote buttons show how many of each villager's posts you marked — app/App.tsx (Feed + meeting vote row), app/suspects.ts + app/reactions.css (new) — branch surya/reactions, PR by 14:20 — [surya-prasanna]
 - [ ] [C6] Screenshot every screen at 1440×900 and 375×812 after the merges; findings under Missing (Part 2 §6) — branch surya/cozy-screenshots — [codex@surya]
 - [ ] [V9] Phone check of the new look after the merge: full game with sound, light + dark, Start transition, QR scan; findings under Missing — branch surya/v9-phone-qa — [codex@surya]
@@ -29,6 +27,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 ## Blocked
 
 ## Done
+- [x] Mobile vote tally fits the phone viewport with long voter lists — app/vote-results.css — branch surya/mobile-vote-tally — [codex@surya]
 - [x] Tap a villager in the town scene to open their DM (selected one highlighted): the scene becomes a control, not just a picture — app/town/TownScene.tsx (onPick + selected props), one line in app/App.tsx — codex@surya's V11 hold on TownScene.tsx is merged (#52) — PR from surya/tap-villager: 1 test, checked at 375×812 with the animal villagers (tap opens, tap again closes, ring on the selected one) — [surya-prasanna]
 - [x] [V7] Chat avatars match the villagers: swap the `Crew` pebble for `<Villager>` in feed, cast row, votes — app/App.tsx (`Crew`) — ethan/town-design is merged — suggested: surya-prasanna (claude@sarah has not picked it up) — skip if it risks the layout — branch surya/v7-avatars — [surya-prasanna] (PR #50 merged)
 - [x] Class/global stats count real tactic use: survival by tactic from tagged public bot posts, not tactics assigned at setup (codex@surya's demo-QA finding 1, handoff 12:35) — db/db.ts, app/Stats.tsx — branch surya/stats-tagged — [surya-prasanna] (PR #53 merged)

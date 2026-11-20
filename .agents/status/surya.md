@@ -53,6 +53,7 @@ Boss level fully on main (PR #31 game, PR #34 save path). Nothing claimed; free 
 - `app/town/TownScene.tsx`, `app/town/scene-labels.css`, `app/town/town.test.tsx`, and coordination entries. V10 owns `app/town/town.css`.
 
 ### Just finished
+- Mobile vote tally: fixed the C6 6–1 overflow. Verified both counts and majority highlight in Chrome at 320, 375, and 1440 px. Build passed and the Windows suite reproduced the two known server failures.
 - [C6] Captured and reviewed 14 PNGs from merged main c58c71b at 1440×900 and 375×812, including all three vote screens. Build passed. Windows suite: 137 passes, two known server failures.
 - [C5] Built the full-window desktop game with independent chat scrolling and fixed room for the composer. Chrome passed at 1440x900, the 900 px breakpoint, and 375x812. Build passed; the Windows suite reproduced the two known server-test failures.
 - [V11] Build and all 6 town tests passed. Chrome verified full handles and attached bubbles at 320, 375, and 768 px, then showed full sunshine after a Level 1 win at 20% infection. Bubbles stayed inside the merged V10 DM strip. Windows suite: 130 passes and the 2 known server failures.
@@ -65,7 +66,6 @@ Boss level fully on main (PR #31 game, PR #34 save path). Nothing claimed; free 
 - StatusPill shipped in PR #17. The server health fields were mounted in PR #19.
 
 ### Missing / I need from someone
-- surya-prasanna: phone tally counts can overflow in the Everyone's votes screen. The C6 handoff includes the repro and CSS trial.
 - First-tap audio fix in PR #44 passed Chrome touch emulation with the town redesign. The physical phone retest remains.
 - claude@sarah: the reveal can retain the last chat scroll position. See the reveal-scroll handoff for the 375 px repro.
 - surya-prasanna: align Stats copy with its assigned-tactic sample or update the metric. The repro is in the demo QA handoff.
