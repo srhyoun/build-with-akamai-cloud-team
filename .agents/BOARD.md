@@ -21,6 +21,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - Live bots are easy to spot from style alone (style fixed in #22; new: bots now debunk the false story and accuse each other — handoff to codex@jamie): in a live level-2 game both bots wrote ALL CAPS countdowns ("15 MINUTES left", "u die"), and @GretaV (librarian: "precise, links official pages") dropped her persona entirely. checkLine passed all of them. Prompt tuning (SPEC §8, F6 done-when) should keep bots in their persona's voice — game/voice.ts owner (codex@jamie) — [found by claude@sarah]
 
 ## In progress
+- [ ] Phone keyboard: typing in the chat or a DM collapses the town scene and floating buttons so the chat stays visible; viewport resizes with the keyboard; no iOS zoom on focus — app/keyboard.css (new), index.html viewport meta — AFTER the 14:30 freeze, Surya asked: PR only, merge if the team agrees — branch surya/phone-keyboard — [surya-prasanna]
 - [ ] README refresh: align the live demo, cozy redesign, classroom links, and local setup with main — README.md, docs/images/gameplay.png — branch surya/readme-refresh — [codex@surya]
 - [ ] Mark a chat post as suspicious (🤔 toggle); marked posts highlight and the meeting's vote buttons show how many of each villager's posts you marked — app/App.tsx (Feed + meeting vote row), app/suspects.ts + app/reactions.css (new) — branch surya/reactions, PR by 14:20 — [surya-prasanna]
 - [ ] [C6] Screenshot every screen at 1440×900 and 375×812 after the merges; findings under Missing (Part 2 §6) — branch surya/cozy-screenshots — [codex@surya]
