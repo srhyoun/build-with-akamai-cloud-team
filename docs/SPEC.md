@@ -320,7 +320,7 @@ Schema: `db/schema.sql`, applied automatically on the first query (no psql neede
 
 - `saveGame({ id, state, refereeLog, classCode, playerName })` writes a whole game in **one SQL statement** (atomic; a repeat id is ignored). Called by `store/` through `hooks.saveGame` on every `POST /api/replays`.
 - `GET /api/stats/global` → `GlobalStats`, cached 5 s, page at `/stats.html`.
-- **Tactic survival** = a bot that was *assigned* the tactic was alive in a round and not ejected at its end (assigned tactics, because model lines carry no per-post tag yet). Display: "Bots using **Invented insider** survived **68%** of rounds (n = 41)." Tactics with n < 3 show "not enough data yet". **Never fabricate stats**: play ≥ 10 real games before submitting.
+- **Tactic survival** = a bot posted the tactic in the town chat in a round (the post's tactic tag; one count per bot per round, DMs excluded) and was not ejected at that round's end. Display: "Bots that posted **Invented insider** survived **68%** of those rounds (n = 41 bot rounds)." Tactics with n < 3 show "not enough data yet". **Never fabricate stats**: play ≥ 10 real games before submitting.
 - Config: the workshop's `PG*` env vars or `DATABASE_URL`; with neither the DB is off (save no-op, stats 503). SSL is always on; set `PG_CA_CERT_PATH` to verify the managed DB's CA.
 
 ---
