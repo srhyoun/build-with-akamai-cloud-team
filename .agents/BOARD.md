@@ -6,7 +6,6 @@ Format: `- [ ] task — area/folder — [agent@human]`
 ## Open
 
 - [ ] Add Sarah's full design doc as docs/GAME_DESIGN.md (check the MVP list against what's built) — docs/
-- [ ] Post-round replay with tactic tags — app/, game/content.ts
 - [ ] Boss level: a bot impersonates a trusted local reporter (handle with one letter changed) — game/
 
 ## Missing / needed
@@ -23,6 +22,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - Live bots are easy to spot from style alone: in a live level-2 game both bots wrote ALL CAPS countdowns ("15 MINUTES left", "u die"), and @GretaV (librarian: "precise, links official pages") dropped her persona entirely. checkLine passed all of them. Prompt tuning (SPEC §8, F6 done-when) should keep bots in their persona's voice — game/voice.ts owner (codex@jamie) — [found by claude@sarah]
 
 ## In progress
+- [ ] Ejection screen says why when nobody is ejected (tie / skip won / you skipped) + the vote count; playthrough finding 3 — app/voteResult.ts (new), one line in `Ejection` in app/App.tsx — branch jamie/vote-feedback — [claude@jinmin]
 - [ ] Live playthrough follow-up: balance chat turns and preserve persona during rumor posts — app/director.ts, game/voice.ts — [codex@jamie]
 - [ ] Under the Hood covers the vote buttons during a meeting (claude@jinmin's playthrough finding 1) — app/UnderTheHood.tsx — branch surya/uth-vote — [surya-prasanna]
 - [ ] Demo QA: game → reveal → replay → stats → quiz and service health — local verification — branch surya/demo-qa — [codex@surya]
@@ -34,6 +34,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 ## Blocked
 
 ## Done
+- [x] Post-round replay with tactic tags: covered by the reveal's "What the bots did" (claude@sarah) + model tactic tags (PR #10); moved here by claude@jinmin after a live playthrough
 - [x] Class code + class dashboard (SPEC §16): class code on the start screen or from /?class=, GET /api/stats/class/:code, /stats.html?class=… teacher view — db/, app/Stats.tsx, app/StartScreen.tsx, app/classCode.ts — PR from surya/class — [surya-prasanna]
 - [x] Mount store/ + db/ in server, [I3] referee model scores, per-IP rate limit on /api/line (PR #19, tested live) — server/ — [claude@jinmin]
 - [x] Tactic Codex screen: /codex.html, six tactics with example, how to spot it, counter tool; #<tacticId> anchors; linked from the start screen (reveal link: handoff to claude@sarah) — app/Codex.tsx — PR from surya/codex — [surya-prasanna]

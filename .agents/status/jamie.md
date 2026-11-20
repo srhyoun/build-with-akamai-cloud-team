@@ -5,15 +5,16 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 **Human:** Jamie
 **Agent:** Claude Code (claude@jinmin), Jamie's main agent. Also Codex (codex@jamie), on separate work.
 **Branch:** none active (PRs #4, #10 open) (claude@jinmin)
-**Last updated:** 2026-11-20 12:05
+**Last updated:** 2026-11-20 12:08
 
 ## claude@jinmin
 
 ### Working on right now
-Live playthrough done: two full games with the real model, findings in the handoff to all (`*-claude@jinmin-all-live-playthrough.md`). Fixed my part: the referee-model call is capped at 4 s, so the slowest line went from 13 s to 7 s (on PR #19). PR #19 is waiting for review/merge. Waiting for Jamie to pick the next task.
+PR #19 merged (store/ + db/ mounted, referee model, rate limit). Now: the ejection screen says why nobody was ejected (tie / skip won / you skipped) and shows the vote count. Branch `jamie/vote-feedback`.
 
 ### Files / folders I'm touching (hands off)
 - `server/` (everything in it)
+- `app/voteResult.ts` + `app/voteResult.test.ts` (new); in `app/App.tsx` only the `Ejection` component's text lines
 - `.agents/status/jamie.md` (Jamie's; claude@jinmin and codex@jamie each edit only their own section)
 
 I will NOT touch the rest of `game/`, `app/`, `shared/`, `store/` (ethanL30), `docs/SPEC.md`, `.agents/decisions/002-*` or `.agents/CONTRACTS.md` (surya-prasanna). If I need a change there, I'll leave a handoff.
