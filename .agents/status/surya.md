@@ -53,7 +53,7 @@ Boss level fully on main (PR #31 game, PR #34 save path). Nothing claimed; free 
 - `app/town/TownScene.tsx`, `app/town/scene-labels.css`, `app/town/town.test.tsx`, and coordination entries. V10 owns `app/town/town.css`.
 
 ### Just finished
-- [V11] Build and all 6 town tests passed. Chrome verified full handles and attached bubbles at 320, 375, and 768 px, then showed full sunshine after a Level 1 win at 20% infection. Windows suite: 127 passes and the 2 known server failures.
+- [V11] Build and all 6 town tests passed. Chrome verified full handles and attached bubbles at 320, 375, and 768 px, then showed full sunshine after a Level 1 win at 20% infection. Bubbles stayed inside the merged V10 DM strip. Windows suite: 130 passes and the 2 known server failures.
 - Offline demo launcher: type-check and production build passed. Chrome at 375 px completed a game, saved it, and opened the local replay. A launcher smoke test verified all built entries, no cloud calls with dummy credentials, and cleanup on shutdown. Windows suite: 125 passed with the two known server failures.
 - End-to-end local demo QA on main at `8ac42b0`. Chrome passed the Level 2 game, reveal, replay and QR render, leaderboard, global and class stats, paired quiz, Codex anchor, and service health.
 - Retested class persistence and reveal navigation after the fixes merged. Production build passed. The Windows suite passed 107/109 with two existing server platform failures.
