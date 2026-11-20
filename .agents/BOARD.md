@@ -12,7 +12,6 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - [ ] Town map that shows the spread by district — app/
 - [ ] Ejection animation (our own crewmate art, no existing game's characters) — app/
 - [ ] Post-round replay with tactic tags + Tactic Codex screen — app/, game/content.ts
-- [ ] Start screen: how to play, level 1 (1 bot) / level 2 (2 bots) — app/
 - [ ] Boss level: a bot impersonates a trusted local reporter (handle with one letter changed) — game/
 - [ ] More breaking-news scenarios — game/content.ts
 - [ ] Pitch + 30-second demo script — docs/
@@ -35,7 +34,8 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - Slide says teams of up to three, we are four; submit by 3:00 PM — humans to decide — [found by claude@ethan]
 
 ## In progress
-- [ ] LLM endpoint, split off the playable skeleton (Aiden agreed in person, 10:27) — server/ — branch jamie/llm-endpoint — [claude@jinmin] (Jamie's agent, was claude@jinmin)
+- [ ] Start screen: how to play, level 1 (1 bot) / level 2 (2 bots) — app/ — [codex@jamie]
+- [ ] LLM endpoint, split off the playable skeleton (Aiden agreed in person, 10:27) — server/ — branch jamie/llm-endpoint — [claude@jinmin] (Jamie's agent, was Jamihuh21)
 - [ ] Judging 40%: a feature that depends on another Akamai Cloud service, e.g. shareable post-game replays + global leaderboard in Akamai Object Storage or a Managed Database. Humans pick the service, then a decision record — server/, app/ — new store/ folder + app/ share + leaderboard screens; proposing Object Storage — [ethanL30]
 
 ## Blocked
@@ -45,4 +45,4 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - [x] Fill in README with the game (Who's the Bot?) — README.md
 - [x] Choose stack, write decision record 001 — .agents/decisions/
 - [x] Define module contracts (game ↔ app ↔ server) — .agents/CONTRACTS.md
-- [x] Playable skeleton: pure engine, prompts + scripted characters, chat UI (server/ split off to claude@jinmin) — shared/, game/, app/
+- [x] Playable skeleton: pure engine, prompts + scripted characters, chat UI (server/ split off to Jamihuh21) — shared/, game/, app/

@@ -12,9 +12,10 @@ The full build spec is in `docs/SPEC.md` (PR from `surya/spec`), adapted to Sara
 Lanes (SPEC §19):
 - claude@jinmin — Inference: `/api/line`, referee call + retry, mount lines for `store/` and `db/`. (claimed)
 - ethanL30 — Object Storage: `/api/replays`, share view, QR, leaderboard. (claimed) Please make your save handler call `saveGame()` from `db/` once it exists, and send the final route shapes so I can update CONTRACTS.md.
-- **open, proposed codex@jamie** — Database + stats: `db/schema.sql`, `saveGame()`, `/api/stats/global`, `/api/health`, `app/Stats.tsx` (board tasks P2, P4).
+- **open** (Surya's agent can take it after R1/R2) — Database + stats: `db/schema.sql`, `saveGame()`, `/api/stats/global`, `/api/health`, `app/Stats.tsx` (board tasks P2, P4).
 - surya-prasanna — Referee & reveal logic: `game/referee.ts`, `game/radar.ts`, Under the Hood panel (R1–R3).
-- claude@sarah — Frontend & content: reveal, start screen, map, scenarios, prompt tuning (F1, F3–F6).
+- codex@jamie — Start screen + level picker. (claimed)
+- claude@sarah — Frontend & content: reveal, map, scenarios, prompt tuning (F1, F4–F6).
 - **open** — Deploy: Linode + Caddy + `.env`, `docs/DEPLOY.md` (P1, P5).
 
 ## Context (files, branches, commits)

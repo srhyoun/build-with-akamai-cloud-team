@@ -14,7 +14,7 @@ The interfaces between parts of the game. Agents must not break these without a 
 | Score + Bot Radar (pure) | `game/radar.ts` | surya-prasanna | read by app (reveal) and server (`/api/replays`) |
 | Model server | `server/` (`index.ts`, `line.ts`) | claude@jinmin | Akamai Cloud Inference; imports `buildPrompt` / `parseLine` from `game/voice.ts`, `checkLine` from `game/referee.ts` |
 | Replays + share (Object Storage) | `store/`, `app/share.ts`, `app/Share.tsx`, `app/Leaderboard.tsx` | ethanL30 | Object Storage; handler mounted by one line in `server/index.ts` (decision 002) |
-| Game rows + stats (Managed PostgreSQL) | `db/`, `app/Stats.tsx` | open (proposed: codex@jamie) | Managed PostgreSQL; `saveGame()` called from `store/`'s save handler; stats handler mounted in `server/index.ts` |
+| Game rows + stats (Managed PostgreSQL) | `db/`, `app/Stats.tsx` | open | Managed PostgreSQL; `saveGame()` called from `store/`'s save handler; stats handler mounted in `server/index.ts` |
 | App: director (clock, who speaks when) + UI | `app/` | | engine via Commands, server via `/api/line` |
 
 ## Shared data formats

@@ -488,9 +488,10 @@ db/                            Managed PostgreSQL: schema.sql, saveGame(), /api/
 |---|---|---|
 | **Inference** | claude@jinmin (Jamie) — claimed | `server/`, inference client, calling `checkLine` + retry, referee-model call (P1), inference env vars |
 | **Object Storage (40%)** | ethanL30 (Ethan) — claimed | `store/`, `app/share.ts`, `app/Share.tsx`, `app/Leaderboard.tsx`, the game-over → save → QR hook in `app/App.tsx` |
-| **Database + stats (40%)** | open — proposed: codex@jamie (Jamie's second agent, idle) | `db/`, `app/Stats.tsx`, `app/StatusPill.tsx`; P1 class view + quiz |
+| **Database + stats (40%)** | open — proposed: Surya's agent after R1/R2, or whoever frees up first | `db/`, `app/Stats.tsx`, `app/StatusPill.tsx`; P1 class view + quiz |
 | **Referee & Reveal logic (20%)** | surya-prasanna (Surya) | `game/referee.ts`, `game/radar.ts` + tests, `app/UnderTheHood.tsx`, decision 002, this spec |
-| **Frontend & Content** | claude@sarah (Sarah) | `app/App.tsx` (except Ethan's game-over hook), `app/Reveal.tsx`, start screen, map, `game/content.ts`, prompt tuning in `game/voice.ts` |
+| **Start screen** | codex@jamie (Jamie's second agent) — claimed | start screen + level picker in `app/` |
+| **Frontend & Content** | claude@sarah (Sarah) | `app/App.tsx` (except Ethan's game-over hook and codex@jamie's start screen), `app/Reveal.tsx`, map, `game/content.ts`, prompt tuning in `game/voice.ts` |
 | **Deploy** | open — whoever has the Akamai account open | Linode + Caddy + `.env`, `docs/DEPLOY.md` |
 
 Cross-lane edits go through a handoff.
@@ -532,7 +533,7 @@ Cross-lane edits go through a handoff.
 |---|---|---|
 | F1 | Reveal screen + Bot Radar card + QR (calls `POST /api/replays` at `over`) | demo-ready reveal |
 | F2 | Reveal shows Ethan's share/QR component (coordinate the `App.tsx` game-over edit with ethanL30) | QR visible on reveal |
-| F3 | Start screen (existing board task) | level pick works |
+| F3 | Start screen — claimed by codex@jamie | level pick works |
 | F4 | Docs: Sarah's design doc → `docs/GAME_DESIGN.md` (existing board task) | — |
 | F5 (P1) | Town map, Codex, more scenarios (Cedar Falls), 3 more tactics | — |
 | F6 | Prompt tuning in `voice.ts` (existing board task), against §8 rules | two playtests where nobody spots bots from style alone |

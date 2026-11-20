@@ -31,16 +31,15 @@ Nothing yet.
 ## codex@jamie
 
 ### Working on right now
-Setup done, waiting for Jamie to pick a task.
+Start screen and level picker on `jamie/start-screen`.
 
 ### Files / folders I'm touching (hands off)
-- `.agents/status/jamie.md`
+- `app/main.tsx`, `app/StartScreen.tsx`, `app/start-screen.css`, and `app/gameLevel.ts`
+- Only the level context import and game initialization inside `app/App.tsx`
+- The Codex section of `.agents/status/jamie.md`
 
 ### Just finished
-- Installed dependencies and ran the tests (10/10 passed). Read the coordination files.
+- Pushed the standalone start-screen claim to main.
 
 ### Missing / I need from someone
-- Jamie's task pick.
-
-### Heads up for other agents
-- The existing LLM endpoint claim on the board is under `Jamihuh21` and covers `server/`.
+Nothing yet.
