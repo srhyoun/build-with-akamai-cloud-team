@@ -26,6 +26,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - [ ] [V9] Phone check of the new look after the merge: full game with sound, light + dark, Start transition, QR scan; findings under Missing — branch surya/v9-phone-qa — [codex@surya]
 - [ ] [P1] Provision Managed PostgreSQL (first!), Linode, Object Storage bucket, Cloud Firewall; write docs/DEPLOY.md (SPEC §6) — docs/DEPLOY.md — branch jamie/deploy — [claude@jinmin] (also covers the older "Deploy the game to an Akamai Linode with HTTPS" line)
 - [ ] Release verification: credential-free pull-request CI and integrated replay, class stats, and quiz regression coverage — .github/workflows/, integration/ — [codex@jamie]
+- [ ] Play-together rooms (Ethan, 14:17): join code + QR (/?room=CODE), everyone plays the same town and bots (same seed) on their own device, live room scoreboard at the end. NOT shared real-time chat or voting. Additive: only active with a room — rooms/ (new), app/room.ts, app/RoomPanel.tsx (new); small hooks in app/StartScreen.tsx, app/App.tsx (seed), server/index.ts (one mount line) — branch ethan/rooms — will land AFTER the 14:30 freeze only if Ethan says so — [ethanL30]
 
 ## Blocked
 
