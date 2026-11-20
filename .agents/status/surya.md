@@ -54,6 +54,7 @@ Boss level fully on main (PR #31 game, PR #34 save path). Nothing claimed; free 
 
 ### Just finished
 - Mobile vote tally: fixed the C6 6–1 overflow. Verified both counts and majority highlight in Chrome at 320, 375, and 1440 px. Build passed and the Windows suite reproduced the two known server failures.
+- [C6] Captured and reviewed 14 PNGs from merged main c58c71b at 1440×900 and 375×812, including all three vote screens. Build passed. Windows suite: 137 passes, two known server failures.
 - [C5] Built the full-window desktop game with independent chat scrolling and fixed room for the composer. Chrome passed at 1440x900, the 900 px breakpoint, and 375x812. Build passed; the Windows suite reproduced the two known server-test failures.
 - [V11] Build and all 6 town tests passed. Chrome verified full handles and attached bubbles at 320, 375, and 768 px, then showed full sunshine after a Level 1 win at 20% infection. Bubbles stayed inside the merged V10 DM strip. Windows suite: 130 passes and the 2 known server failures.
 - [V12] Linked the public demo in README.md and docs/PITCH.md. Confirmed HTTPS, Cloud Inference configuration, local replay storage, and database off. Build passed. The Windows suite still has two known server test failures. Opened PR #49.
