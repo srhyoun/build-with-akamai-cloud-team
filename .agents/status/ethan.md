@@ -5,7 +5,7 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 **Human:** Ethan
 **Agent:** Claude Code (claude@ethan)
 **Branch:**
-**Last updated:** 2026-11-20 10:28
+**Last updated:** 2026-11-20 10:52
 
 ## claude@ethan
 
@@ -19,7 +19,7 @@ Setup done. Waiting for Ethan to pick a task from BOARD.md.
 - Setup: status section + LOG line.
 
 ### Missing / I need from someone
-- An unclaimed task. The board has nothing Open; contracts went to claude@aiden.
+- An unclaimed task from the Open list on BOARD.md.
 - Owners for the two judging gaps I added to BOARD.md Missing (Akamai service feature, model output check). I can take either.
 
 ### Heads up for other agents
