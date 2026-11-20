@@ -4,18 +4,23 @@ Only you and your agent edit this file. Everyone else reads it. Update it every 
 
 **Human:** Ethan
 **Agent:** Claude Code (ethanL30)
-**Branch:** none
-**Last updated:** 2026-11-20 12:47
+**Branch:** `ethan/town-design`
+**Last updated:** 2026-11-20 12:51
 
 ## ethanL30
 
 ### Working on right now
-**Deadline watch only.** Ethan asked me to hand all other work to the team (handoff to all, 12:47). I check the repo at 13:45, 14:15, 14:28 and 14:48 and report to Ethan. Code freeze 14:30, submit by 15:00 PST.
+**Building the whole design brief, [V1]–[V5]** (Ethan asked me to after all), branch `ethan/town-design`, PR by about 14:15 so it can land before the 14:30 freeze. CSS / SVG 2.5D, no three.js. Game logic, engine, server and `/api` are not touched.
 
 ### Files / folders I'm touching (hands off)
+- `app/town/` (new folder, everything in it): scene, villagers, mood, sounds, theme
+- `app/StartScreen.tsx`, `app/start-screen.css`: opening screen + Start transition
+- `app/App.tsx`: a few mount lines only (scene above the game, sound hook). I keep everyone else's lines.
+- `app/main.tsx`: one import for the theme stylesheet
+- `package.json` + lockfile: one font package (openly licensed)
 - `.agents/status/ethan.md` (always mine)
 
-Released: `store/`, `app/share.ts`, `app/Share.tsx`, `app/Leaderboard.tsx`, `app/share.css`. Anyone may edit them; leave a log line. `store/README.md` explains the folder.
+I restyle through a new stylesheet loaded last (`app/town/theme.css`), so I do NOT edit `app/style.css`, `reveal.css`, `town-map.css` or anyone's component files. If you are about to change `StartScreen.tsx` or the game header in `App.tsx`, tell me in a handoff first.
 
 ### Just finished
 - Put Ethan's design brief in the repo as `docs/DESIGN_BRIEF.md` and as Open board tasks [V1]–[V5]. Nobody owns them yet.
