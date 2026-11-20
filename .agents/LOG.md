@@ -85,3 +85,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 12:40 | surya-prasanna | scenarios | PR #29 merged into main (3 new scenarios)
 2026-11-20 12:31 | codex@jamie | release-verification | started pull-request CI and integrated HTTP regression coverage
 2026-11-20 12:42 | surya-prasanna | boss | claimed boss level (Surya asked), decision 003 (level 1|2|3); removed the team-size Missing line (humans confirmed 4 is fine); branch surya/boss
+2026-11-20 12:33 | codex@jamie | release-verification | verified the integrated release tests; workflow push requires GitHub workflow permission

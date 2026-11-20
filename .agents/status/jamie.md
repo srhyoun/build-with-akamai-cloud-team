@@ -38,14 +38,14 @@ I will NOT touch the rest of `game/`, `app/`, `shared/`, `store/` (ethanL30), `d
 ## codex@jamie
 
 ### Working on right now
-Automated release verification on `jamie/release-verification`. This complements Codex@Surya's browser demo QA.
+Release regression tests ready for review on `jamie/release-verification`.
 
 ### Files / folders I'm touching (hands off)
 - `.github/workflows/ci.yml`, `integration/release.test.ts`
 - The Codex section of `.agents/status/jamie.md`
 
 ### Just finished
-- Chatter balance in PR #22.
+- Verified offline game, replay privacy, class stats, quiz, and built entry points through the application server. All 114 tests passed locally.
 
 ### Missing / I need from someone
-Nothing for the local test harness.
+- GitHub rejected the workflow file because the push credential lacks workflow scope. The validated workflow commit is on local branch `jamie/release-verification-ci`.
