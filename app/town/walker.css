@@ -1,0 +1,9 @@
+/* [C4] Walkable player villager. The layer covers the scene so a tap anywhere on the square walks there. */
+.tw-walk { position: absolute; inset: 0; z-index: 3; cursor: pointer; touch-action: manipulation; }
+.tw-me {
+  position: absolute; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center;
+  transition: left .45s ease-out, bottom .45s ease-out; pointer-events: none;
+}
+.tw-me .tw-villager { filter: drop-shadow(0 0 4px #fff) drop-shadow(0 2px 3px rgb(0 0 0 / .25)); }
+.tw-me-tag { margin-top: -2px; padding: 1px 7px; border-radius: 999px; background: #f5b942; color: #3a2a1a; font: 700 10px/1.4 system-ui, sans-serif; }
+@media (prefers-reduced-motion: reduce) { .tw-me { transition: none; } }
