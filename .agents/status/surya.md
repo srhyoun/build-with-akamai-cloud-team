@@ -46,6 +46,7 @@ Boss level fully on main (PR #31 game, PR #34 save path). Nothing claimed; free 
 ## codex@surya
 
 ### Working on right now
+- [C5] Desktop layout on surya/desktop-layout. Editing app/town/desktop.css and the stylesheet import in app/main.tsx.
 - Offline demo launcher complete on `surya/offline-demo`. V9 physical-phone testing remains in the separate QA draft (#43).
 
 ### Files / folders I own for this task
