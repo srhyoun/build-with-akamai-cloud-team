@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { Icon } from './Icon.tsx';
 import { BOTS, PERSONAS } from '../game/content.ts';
 import type { GameState } from '../shared/types.ts';
 import { initialClassCode, setClassCode } from './classCode.ts';
@@ -33,9 +34,9 @@ export function StartScreen({ onStart }: { onStart: (level: GameState['level']) 
       </header>
 
       <ul className="start-rules" aria-label="How to play">
-        <li><span aria-hidden="true">👀</span>Read</li>
-        <li><span aria-hidden="true">🔍</span>Check</li>
-        <li><span aria-hidden="true">📣</span>Vote</li>
+        <li><Icon name="eye" size={28} />Read</li>
+        <li><Icon name="search" size={28} />Check</li>
+        <li><Icon name="vote" size={28} />Vote</li>
       </ul>
 
       <section aria-labelledby="level-title">
@@ -62,8 +63,8 @@ export function StartScreen({ onStart }: { onStart: (level: GameState['level']) 
       </section>
 
       <nav className="start-links" aria-label="Learn more">
-        <a href="/codex.html"><span aria-hidden="true">📖</span>Codex</a>
-        <a href="/quiz.html?phase=pre"><span aria-hidden="true">❓</span>Quiz</a>
+        <a href="/codex.html"><Icon name="book" size={22} />Codex</a>
+        <a href="/quiz.html?phase=pre"><Icon name="question" size={22} />Quiz</a>
       </nav>
     </main>
   );

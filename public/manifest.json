@@ -1,0 +1,12 @@
+{
+  "name": "Who's the Bot?",
+  "short_name": "Who's the Bot",
+  "description": "Find the bots in the town group chat before their false story spreads.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f6f4ef",
+  "theme_color": "#2f4fc4",
+  "icons": [{ "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+}
