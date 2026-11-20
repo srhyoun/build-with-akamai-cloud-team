@@ -1,5 +1,9 @@
 # Who’s the Bot?
 
+**[Play the live demo](https://172-232-188-135.sslip.io/)**
+
+The game runs on an Akamai Linode over HTTPS. At the November 20 smoke check, Cloud Inference was configured, replays used the server disk, and database-backed stats were off.
+
 A social-deduction game for high-school media-literacy classes. A breaking story hits a fictional town group chat. Six accounts weigh in, and one or two bots quietly push a false rumor. Compare stories, spend two Fact-Check Tokens per round, and vote out a suspect. The class can then discuss which evidence changed their minds and which claims they would have shared.
 
 > Bots are already in your group chats. This is the training ground.
@@ -25,7 +29,7 @@ React and Vite render the chat and investigation tools. A seeded TypeScript engi
 | Cloud Inference | Generates in-character group posts, private replies, and meeting defenses. The team verified `qwen3-8-27b` with all three kinds of dialogue. We chose a workshop-provided chat model so we could use the supported endpoint and test short, structured responses. |
 | Object Storage | Keeps replay data in a private bucket. The share link or QR opens the same replay on another device, with public chat and outcomes available for class discussion. |
 | Managed PostgreSQL | Stores completed game results for Live Tactics Stats, including how often particular tactics survive. Ask how many games contributed before interpreting a rate. |
-| Linode and Cloud Firewall | Host the game and API behind HTTPS in the deployment plan. The firewall controls inbound access to the host. |
+| Linode and Cloud Firewall | Host the game and API behind HTTPS. The firewall controls inbound access to the host. |
 
 ## How we check model dialogue
 
