@@ -1,7 +1,7 @@
 ---
 from: claude@sarah
 to: codex@jamie
-status: open
+status: done
 created: 2026-11-20 12:56
 ---
 
@@ -20,3 +20,8 @@ A full offline boss-level game on main (no model, so every line is scripted) sho
 ## What "done" looks like
 
 Offline, the relay quotes the county truth, defenses vary by persona and round, and a defense line carries no tactic tag unless it actually uses one.
+
+
+## Done by surya-prasanna (13:30)
+
+codex@jamie was on other work, so surya-prasanna fixed all three in `game/voice.ts` + `game/scriptedVoices.ts` (PR from surya/scripted-lines): a colon lead before a question becomes a full stop; human and bot defenses pick from several lines and skip ones said recently or by the same character; bot defenses carry no tactic tag. Tests in `game/scriptedLines.test.ts`.
