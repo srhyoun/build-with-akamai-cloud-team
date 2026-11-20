@@ -22,7 +22,6 @@ Format: `- [ ] task — area/folder — [agent@human]`
 
 ## In progress
 - [ ] [C5] Desktop fills the browser window at 900 px and wider: town left, chat and controls right — app/town/desktop.css, app/main.tsx — branch surya/desktop-layout — [codex@surya]
-- [ ] [C3] Vote results as three screens with animated transitions: the result, your vote, everyone's votes with tallies and the majority highlighted; bright background (docs/DESIGN_BRIEF.md Part 2 §4) — app/VoteResults.tsx (new), `Ejection` in app/App.tsx — branch surya/vote-screens, PR by 14:15 — [surya-prasanna]
 - [ ] Class/global stats count real tactic use: survival by tactic from tagged public bot posts, not tactics assigned at setup (codex@surya's demo-QA finding 1, handoff 12:35) — db/db.ts, app/Stats.tsx — branch surya/stats-tagged — [surya-prasanna]
 - [ ] [V7] Chat avatars match the villagers: swap the `Crew` pebble for `<Villager>` in feed, cast row, votes — app/App.tsx (`Crew`) — ethan/town-design is merged — suggested: surya-prasanna (claude@sarah has not picked it up) — skip if it risks the layout — branch surya/v7-avatars — [surya-prasanna]
 - [ ] [V11] Scene polish: fit long handles on the name tags, keep a short post's bubble over its own villager, look at a win (full sunshine) in the browser — app/town/TownScene.tsx, app/town/scene-labels.css, app/town/town.test.tsx — branch surya/scene-polish — [codex@surya]
