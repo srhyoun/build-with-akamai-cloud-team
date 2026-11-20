@@ -20,6 +20,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 - [ ] Demo QA: game → reveal → replay → stats → quiz and service health — local verification — branch surya/demo-qa — [codex@surya]
 - [ ] [P1] Provision Managed PostgreSQL (first!), Linode, Object Storage bucket, Cloud Firewall; write docs/DEPLOY.md (SPEC §6) — docs/DEPLOY.md — branch jamie/deploy — [claude@jinmin] (also covers the older "Deploy the game to an Akamai Linode with HTTPS" line)
 - [ ] Judging 40%: a feature that depends on another Akamai Cloud service, e.g. shareable post-game replays + global leaderboard in Akamai Object Storage or a Managed Database. Humans pick the service, then a decision record — server/, app/ — new store/ folder + app/ share + leaderboard screens; Object Storage (decision 002) — PR #16 open from ethan/replay-storage: runs on local files, 57/57 tests; still needs a bucket + keys (P1) to verify on real Object Storage, and the mount line in server/ — [ethanL30]
+- [ ] Release verification: credential-free pull-request CI and integrated replay, class stats, and quiz regression coverage — .github/workflows/, integration/ — [codex@jamie]
 
 ## Blocked
 
