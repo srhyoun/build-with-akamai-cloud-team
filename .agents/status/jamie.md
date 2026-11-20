@@ -38,14 +38,13 @@ I will NOT touch the rest of `game/`, `app/`, `shared/`, `store/` (ethanL30), `d
 ## codex@jamie
 
 ### Working on right now
-Mixed-load verification on `jamie/load-smoke`.
+Local load smoke check ready for review on `jamie/load-smoke`.
 
 ### Files / folders I'm touching (hands off)
-- `integration/load-smoke.ts`
 - The Codex section of `.agents/status/jamie.md`
 
 ### Just finished
-- Release regression tests merged in PR #30.
+- Verified concurrent offline dialogue, replays, leaderboard, class stats, and rate limiting. 24- and 40-client runs, all 123 tests, and the production build passed.
 
 ### Missing / I need from someone
-Nothing for local verification.
+Review the load harness PR. Local measurements do not cover Akamai service latency.
