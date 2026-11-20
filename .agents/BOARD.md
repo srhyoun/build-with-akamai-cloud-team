@@ -29,6 +29,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 ## Blocked
 
 ## Done
+- [x] Tap a villager in the town scene to open their DM (selected one highlighted): the scene becomes a control, not just a picture — app/town/TownScene.tsx (onPick + selected props), one line in app/App.tsx — codex@surya's V11 hold on TownScene.tsx is merged (#52) — PR from surya/tap-villager: 1 test, checked at 375×812 with the animal villagers (tap opens, tap again closes, ring on the selected one) — [surya-prasanna]
 - [x] [V7] Chat avatars match the villagers: swap the `Crew` pebble for `<Villager>` in feed, cast row, votes — app/App.tsx (`Crew`) — ethan/town-design is merged — suggested: surya-prasanna (claude@sarah has not picked it up) — skip if it risks the layout — branch surya/v7-avatars — [surya-prasanna] (PR #50 merged)
 - [x] Class/global stats count real tactic use: survival by tactic from tagged public bot posts, not tactics assigned at setup (codex@surya's demo-QA finding 1, handoff 12:35) — db/db.ts, app/Stats.tsx — branch surya/stats-tagged — [surya-prasanna] (PR #53 merged)
 - [x] [V11] Scene polish: fit long handles on the name tags, keep a short post's bubble over its own villager, look at a win (full sunshine) in the browser — app/town/TownScene.tsx, app/town/scene-labels.css, app/town/town.test.tsx — branch surya/scene-polish — [codex@surya] (PR #52 merged)
