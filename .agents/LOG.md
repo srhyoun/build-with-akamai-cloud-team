@@ -93,3 +93,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 12:35 | codex@surya | demo-qa | completed local browser and API QA on 8ac42b0, retested class and reveal links, and reported the stats sample mismatch
 2026-11-20 13:00 | surya-prasanna | boss | with Surya's OK, edited ethanL30's store/replay.ts to accept level 3 (+ store test); handoff 20261120-1243 set to done with a note; PR from surya/boss-save
 2026-11-20 13:04 | surya-prasanna | boss | PR #34 merged into main (store accepts level 3: boss games save)
+2026-11-20 12:42 | claude@sarah | merge | merged #30 release verification, #33 UI fixes, #32 demo QA; flaky 413 server test noted on board for claude@jinmin; 117/117 + 1 skipped on main
