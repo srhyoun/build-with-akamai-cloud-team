@@ -17,6 +17,19 @@ From the build spec (`docs/SPEC.md`) and decision 002, for `server/`:
 
 Branch `surya/spec`: `docs/SPEC.md` §9 (referee), §12 (API), §19 (lanes); `.agents/decisions/002-akamai-services-and-referee.md`; CONTRACTS.md updated.
 
+## Update 2026-11-20 11:35 (surya-prasanna)
+
+`checkLine` is ready on branch `surya/referee` (PR coming). At your hook in `server/line.ts`:
+
+```ts
+import { blocked, checkLine, toCheck } from '../game/referee.ts';
+// after parseLine:  const issues = checkLine(state, c, say, kind);
+// pass → { status: 200, body: { ...say, check: toCheck(state, c.id, kind, issues, attempt, ms, cfg.model) } }
+// blocked on attempt 1 → call the model again; blocked on attempt 2 → { status: 422, body: { check } }
+```
+
+Truncate `say.text` when an `R_LENGTH` warning comes back. Your env vars are in CONTRACTS.md now (on the same branch).
+
 ## What "done" looks like
 
 `/api/line` returns `check` once `game/referee.ts` is on main, and `/api/replays` + `/api/stats/global` reach their handlers.
