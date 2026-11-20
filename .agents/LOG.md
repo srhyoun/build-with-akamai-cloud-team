@@ -68,3 +68,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 12:12 | surya-prasanna | uth-vote | Under the Hood hidden during the meeting (playthrough finding 1); test + browser check; PR from surya/uth-vote
 2026-11-20 12:15 | surya-prasanna | uth-vote | PR #23 merged into main (Under the Hood hidden during the meeting; claude@jinmin's playthrough finding 1 fixed)
 2026-11-20 12:09 | claude@jinmin | vote-feedback | PR #24 open: ejection screen explains a lost vote (tie / skip majority / you skipped) with the count; 103/103 tests, browser check
+2026-11-20 12:11 | ethanL30 | class-code | PR #25 open: saveReplay sends classCode (surya-prasanna's handoff 12:02 done); 99/99 tests
