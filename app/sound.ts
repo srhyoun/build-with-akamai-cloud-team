@@ -3,7 +3,7 @@
 import { createElement, useEffect, useRef, useState } from 'react';
 import type { GameState } from '../shared/types.ts';
 
-export type SoundEvent = { kind: 'babble'; who: string; syllables: number } | { kind: 'token' | 'alarm' | 'eject' };
+export type SoundEvent = { kind: 'babble'; who: string; syllables: number } | { kind: 'token' | 'alarm' | 'eject' | 'news' | 'won' | 'lost' };
 
 /** Base pitch (Hz) per character, stable for an id: 220–520 Hz. */
 export function pitchFor(id: string): number {
@@ -20,11 +20,13 @@ export function soundEvents(prev: GameState, next: GameState): SoundEvent[] {
   const out: SoundEvent[] = [];
   const ids = new Set(next.characters.map(c => c.id));
   for (const p of next.feed.slice(prev.feed.length)) {
-    if (ids.has(p.author)) out.push({ kind: 'babble', who: p.author, syllables: Math.min(6, Math.max(2, Math.ceil(p.text.length / 20))) });
+    if (p.author === 'news') out.push({ kind: 'news' });
+    else if (ids.has(p.author)) out.push({ kind: 'babble', who: p.author, syllables: Math.min(6, Math.max(2, Math.ceil(p.text.length / 20))) });
   }
   if (next.tokens < prev.tokens) out.push({ kind: 'token' });
   if (next.phase !== prev.phase && next.phase === 'meeting') out.push({ kind: 'alarm' });
   if (next.phase !== prev.phase && next.phase === 'ejection') out.push({ kind: 'eject' });
+  if (next.result && !prev.result) out.push({ kind: next.result });
   return out;
 }
 
@@ -53,7 +55,8 @@ export function unlock() {
 }
 
 // Listen from module load so the Start-screen tap (before the game mounts) already unlocks audio.
-if (typeof addEventListener === 'function') for (const t of ['pointerdown', 'keydown']) addEventListener(t, unlock);
+// Touch only grants user activation on pointerup/click/touchend (not pointerdown), so listen there too; unlock() resumes a suspended context each time.
+if (typeof addEventListener === 'function') for (const t of ['pointerup', 'click', 'touchend', 'keydown']) addEventListener(t, unlock);
 
 /** One enveloped oscillator note. */
 function tone(freq: number, start: number, dur: number, type: OscillatorType, vol: number, endFreq = freq) {
@@ -84,6 +87,12 @@ export function play(e: SoundEvent) {
       tone(880, t, 0.08, 'sine', 0.12); tone(1320, t + 0.07, 0.12, 'sine', 0.1);
     } else if (e.kind === 'alarm') {
       for (let i = 0; i < 3; i++) tone(660, t + i * 0.3, 0.22, 'square', 0.05, 440);
+    } else if (e.kind === 'news') {
+      tone(784, t, 0.15, 'sine', 0.1); tone(587, t + 0.14, 0.25, 'sine', 0.1); // two-note "ding-dong"
+    } else if (e.kind === 'won') {
+      [523, 659, 784, 1047].forEach((f, i) => tone(f, t + i * 0.12, 0.3, 'triangle', 0.1)); // rising major arpeggio
+    } else if (e.kind === 'lost') {
+      [392, 370, 311, 262].forEach((f, i) => tone(f, t + i * 0.22, 0.4, 'triangle', 0.08)); // sinking minor line
     } else {
       tone(392, t, 0.9, 'sawtooth', 0.06, 98); // falling whoosh-down
     }
