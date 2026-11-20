@@ -12,6 +12,7 @@ import { TownMap } from './TownMap.tsx';
 import { SavePanel, ShareView } from './Share.tsx';
 import { replayIdFromUrl } from './share.ts';
 import { getRefereeLog } from './refereeLog.ts';
+import { SoundToggle, useGameSounds } from './sound.ts';
 
 export const TOOL_NAMES: Record<ToolId, string> = { account_age: 'Account Age', source_check: 'Source Check', posting_pattern: 'Posting Pattern' };
 const PHASE_NAMES = { event: 'Breaking news', discussion: 'Discuss & investigate', meeting: 'Emergency meeting', ejection: 'Ejection', over: 'Game over' };
@@ -29,6 +30,7 @@ function Game({ onAgain }: { onAgain: () => void }) {
   const ref = useRef(game); ref.current = game;
   const [dmWith, setDmWith] = useState<string | null>(null);
   useEffect(() => startDirector(() => ref.current, dispatch), []);
+  useGameSounds(game);
 
   const s = game;
   const who = (id: string) => s.characters.find(c => c.id === id);
@@ -45,6 +47,7 @@ function Game({ onAgain }: { onAgain: () => void }) {
         <span>{PHASE_NAMES[s.phase]} · {Math.floor(secs / 60)}:{String(secs % 60).padStart(2, '0')}</span>
         <span title="Fact-Check Tokens left this round">🔍 {s.tokens}</span>
         <TownMap infection={s.infection} />
+        <SoundToggle />
       </header>
 
       <nav className="cast" aria-label="Characters">
