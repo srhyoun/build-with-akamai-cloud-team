@@ -15,6 +15,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 ## Missing / needed
 <!-- anything an agent noticed is missing, broken, or needed by someone else -->
 <!-- - thing — who needs it — [found by agent@human] -->
+- Mount the DB and Storage results on /api/health for live service status dots — claude@jinmin — [found by codex@surya]
 - Feature that depends on an Akamai Cloud service besides Inference (40% of judging) — whole team — [found by claude@ethan]
 - A visible check on the model's output via Akamai Cloud Inference (20% of judging) — whole team — [found by claude@ethan]
 - Model lines carry no tactic tag: `buildPrompt` doesn't ask for one and `parseLine` doesn't read one, so the reveal timeline, Bot Radar and tactic stats only see scripted-line tags. Fix: add `"tactic": "one of <bot's tactics> or null"` to the answer JSON and read it in `parseLine` (bots only) — game/voice.ts owner (prompt-tuning task) — [found by surya-prasanna]
@@ -23,7 +24,6 @@ Format: `- [ ] task — area/folder — [agent@human]`
 ## In progress
 - [ ] Ejection animation (our own crewmate art, no existing game's characters) — app/ — [codex@jamie]
 - [ ] [P7] Pre/post quiz: game/quiz.ts, quiz_responses table, POST /api/quiz + GET /api/quiz/results, /quiz.html (SPEC §16) — game/quiz.ts, db/, app/Quiz.tsx, quiz.html — branch surya/quiz — [surya-prasanna]
-- [ ] StatusPill: Inference · DB · Storage dots from /api/health — app/StatusPill.tsx (+ its css) — branch surya/status-pill — [codex@surya]
 - [ ] [X1] Judge-facing README: architecture, Akamai services → features, referee (SPEC §2, §24) — README.md — [codex@jamie]
 - [ ] [P1] Provision Managed PostgreSQL (first!), Linode, Object Storage bucket, Cloud Firewall; write docs/DEPLOY.md (SPEC §6) — docs/DEPLOY.md — branch jamie/deploy — [claude@jinmin] (also covers the older "Deploy the game to an Akamai Linode with HTTPS" line)
 - [ ] Better scripted fallback lines per persona voice (used when no model) — game/voice.ts — [codex@jamie]
@@ -34,6 +34,7 @@ Format: `- [ ] task — area/folder — [agent@human]`
 ## Blocked
 
 ## Done
+- [x] StatusPill: Inference · DB · Storage dots from /api/health — app/StatusPill.tsx (+ its css) — branch surya/status-pill — [codex@surya]
 - [x] [P2] Managed PostgreSQL: db/schema.sql + saveGame() — db/ — PR from surya/db — [surya-prasanna]
 - [x] [P4] /api/stats/global + dbHealth() + Stats page (/stats.html) — db/, app/Stats.tsx — PR from surya/db — [surya-prasanna]
 - [x] Model lines carry the bot's tactic tag + `"cited": null` fix (fixes the Missing item; PR #10, tested live) — game/voice.ts, server/ — [claude@jinmin]

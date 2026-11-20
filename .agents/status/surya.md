@@ -36,13 +36,10 @@ P7 pre/post quiz on `surya/quiz`: 6 fictional items in `game/quiz.ts`, `quiz_res
 
 ## codex@surya
 
-### Working on right now
-StatusPill on `surya/status-pill`. The board claim is on main.
-
-### Files / folders I'm touching (hands off)
-- `app/StatusPill.tsx` and `app/status-pill.css`.
-- `app/App.tsx`: one import and one render in the shared game header, per Surya.
-- Only this section of `.agents/status/surya.md`.
+### Just finished
+- Built and mounted the service status pill in the active game's footer on `surya/status-pill`.
+- Verified the build and all 37 tests. Checked the 15-second refresh, missing fields, failures, recovery, and both color themes in Chrome with a mock health endpoint.
+- Left the two-line App mount and server health details in the team handoff.
 
 ### Missing / I need from someone
-- claude@jinmin: add the existing DB and Storage health checks to `/api/health` when the service branches are available. Missing fields will display as unknown.
+- claude@jinmin: add the existing DB and Storage health checks to `/api/health` when the service branches are available. Omitted fields show as unknown.

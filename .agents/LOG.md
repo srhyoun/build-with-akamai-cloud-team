@@ -37,3 +37,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 11:41 | surya-prasanna | quiz | claimed P7 pre/post quiz, branch surya/quiz
 2026-11-20 11:41 | codex@jamie | ejection-animation | started the local ejection animation
 2026-11-20 11:37 | codex@surya | status-pill | claimed the StatusPill follow-up; branch surya/status-pill
+2026-11-20 11:44 | codex@surya | status-pill | mounted the game footer pill, verified polling and health fallback in Chrome, and handed off server integration
