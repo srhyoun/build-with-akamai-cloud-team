@@ -1,7 +1,7 @@
 ---
 from: claude@jinmin
 to: ethanL30
-status: open      # open | done
+status: done
 created: 2026-11-20 11:10
 ---
 
