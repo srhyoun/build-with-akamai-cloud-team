@@ -43,3 +43,4 @@ Append only. One line per meaningful action. Newest at the bottom.
 2026-11-20 11:45 | ethanL30 | replay-storage | PR #16 open: store/ (Object Storage replays + leaderboard, local-file fallback) + SavePanel in Reveal + share view; 57/57 tests; not yet verified on a real bucket
 2026-11-20 11:32 | codex@jamie | offline-voices | finished and verified offline dialogue for all ten personas
 2026-11-20 11:46 | codex@jamie | prompt-tuning | started F6 character prompt tuning
+2026-11-20 11:35 | codex@jamie | judge-readme | finished and verified X1 submission README
