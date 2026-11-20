@@ -39,13 +39,15 @@ const SCHEMA: JsonSchema = {
 };
 
 export interface ModelVerdict { issues: RefereeIssue[]; scores: NonNullable<RefereeCheck['scores']> }
+// Under game load the endpoint slows down; a referee verdict isn't worth more than 4 s of a line's delay.
+const REFEREE_TIMEOUT_MS = 4000;
 const clamp = (n: unknown) => Math.min(5, Math.max(1, Math.round(Number(n)) || 1));
 
 // null = the referee call failed; the caller keeps the rules-only verdict.
 export async function refereeModel(cfg: ModelConfig, s: GameState, c: Character, say: Say, kind: LineKind, fetchImpl: typeof fetch): Promise<ModelVerdict | null> {
   const r = s.scenario.rounds[s.round - 1];
   try {
-    const raw = await complete(cfg, [
+    const raw = await complete({ ...cfg, timeoutMs: Math.min(cfg.timeoutMs, REFEREE_TIMEOUT_MS) }, [
       { role: 'system', content: PROMPT },
       { role: 'user', content: `ROLE: ${c.role}\nTRUTH: ${r.truth}\nFALSE STORY: ${r.falseStory}\nKIND: ${kind}\nLINE: ${say.text}` },
     ], fetchImpl, SCHEMA);
