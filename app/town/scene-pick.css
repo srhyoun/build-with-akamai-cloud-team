@@ -1,0 +1,7 @@
+/* Tap a villager in the square to DM them; the one you're talking to gets a ring. */
+.tw-pickable .tw-fig, .tw-pickable .tw-name { cursor: pointer; }
+.tw-pickable .tw-fig { transition: transform .15s ease-out; }
+.tw-pickable:hover .tw-fig, .tw-pickable:active .tw-fig { transform: translateY(-3px) scale(1.06); }
+.tw-picked .tw-fig { filter: drop-shadow(0 0 0 #fff) drop-shadow(0 0 5px #ffd25e) drop-shadow(0 0 2px #ffd25e); }
+.tw-picked .tw-name { outline: 2px solid #ffd25e; }
+@media (prefers-reduced-motion: reduce) { .tw-pickable .tw-fig { transition: none; } }
